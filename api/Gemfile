@@ -1,0 +1,5 @@
+eval(File.read(File.dirname(__FILE__) + '/../common_geocms_dependencies.rb'))
+
+gem 'geocms_core', :path => "../core"
+
+gemspec
