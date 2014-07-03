@@ -1,0 +1,29 @@
+$navbarLinkColor: white;
+$navbarText: white;
+$navbarBrandColor: white;
+$navbarLinkColorHover: #D4EBFA;
+$sansFontFamily: 'Segoe UI', Helvetica, Arial, sans-serif;
+$linkColor: $oxford_blue;
+@import "bootstrap";
+.breadcrumb {
+  li {
+    line-height: 14px;
+  }
+
+  .divider {
+    padding: 0 5px;
+    color: #CCC;  
+  }
+}
+
+
+.m-btn-group .m-btn.first {
+  margin-left: 0;
+}
+.control-buttons .m-btn.first {
+  margin-left: 0;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+

@@ -1,0 +1,98 @@
+#map {
+  background: white;
+  position: absolute;
+  top: 0px;
+  left: $hudsize;
+  right: 0px;
+  bottom: 0px;
+  width: auto;
+  height: auto;
+  @include box-sizing(border-box);
+  transition: left 300ms;
+  -webkit-transition: left 300ms;
+  -moz-transition: left 300ms;
+
+  &.no-hud {
+    left: 0;
+    .leaflet-control-zoom {
+      left: 10px;
+    }
+  }
+}
+
+// LEAFLET OVERRIDES
+.leaflet-top, .leaflet-bottom {
+  z-index: 800;
+}
+
+.leaflet-bottom.leaflet-left {
+  right: 0;
+  z-index: 999;
+  .features-infos {
+    max-height: 150px;
+    overflow: auto;
+    width: 100%;
+    height: auto;
+    display: none;
+    background: white;
+    margin-left: 0;
+    margin-bottom: 0;
+    border-top: 1px solid #E6E6E6;
+  }
+}
+
+.leaflet-control-zoom a:hover {
+  text-decoration: none;
+}
+
+// LEGENDE
+
+.leaflet-legend {
+  padding: 6px 8px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 60px;
+  left: 385px;
+  line-height: 20px;
+  .inner-legend {
+    overflow: auto;
+    resize: both;
+    width: auto;
+    height: 250px;
+  }
+  .modal-header {
+    cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    padding: 5px 9px;
+  }
+  h4 {
+    margin: 0 0 5px;
+    color: #777;
+  }
+}
+
+// TOOLS
+
+.leaflet-control-draw {
+  display: none;
+}
+
+// POPUP
+
+.leaflet-popup-content-wrapper {
+  @include border-radius(0);
+}
+
+leaflet-popup-content {
+  padding: 3px 3px 0;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  padding: 4px 2px 0 0;
+}
+
+.leaflet-popup-content p {
+  margin: 9px 0;
+}

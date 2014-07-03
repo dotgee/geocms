@@ -1,0 +1,123 @@
+.form-signin {
+  max-width: 475px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  @include border-radius(5px);
+  .form-signin-heading, .checkbox {
+    margin-bottom: 10px;
+  }
+  h1 {
+    margin-bottom: 40px;
+  }
+}
+
+.signup {
+  float: left;
+  padding: 12px 0 0;
+  p {
+    margin: 4px 0 0;
+  }
+  a {
+    @include unstyled-link;
+    @include link-colors(#008DDE, #0CA7FF, #0CA7FF);
+  }
+}
+
+.form-actions {
+  background-color: white;
+  border-top: none;
+  padding: 4px 20px 11px;
+}
+
+input.input-light {
+  border: 0;
+  border-bottom: 1px solid #CCC;
+  background-color: transparent !important;
+  @include box-shadow(none);
+  @include border-radius(0);
+  line-height: 22px;
+  font-size: 14px;
+  -webkit-appearance: none;
+}
+
+input:-webkit-autofill {
+  background-color: rgba(135, 206, 255, .3) !important;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px #F4F4F4 inset;
+    -webkit-text-fill-color: #313131;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px  #F4F4F4 inset;
+    -webkit-text-fill-color: #313131;
+}
+
+.label-light {
+  font-size: 12px;
+  font-weight: 400;
+  color: #848484;
+  text-transform: uppercase;
+}
+
+.modal {
+  .control-label {
+    width: 100px;
+  }
+  &.form-modal {
+    .modal-body {
+      max-height: 600px;
+    }
+  }
+}
+
+// LEFT NAVBAR - INFOS
+
+#infos {
+  form {
+    margin: 20px 10px 0; 
+  }
+  label {
+    width: auto;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.input-position {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  &.first {
+    margin-left: 0px;
+  }
+}
+
+#context_zoom {
+  width: 20px;
+}
+
+.input-mini {
+  width: 53px;
+}
+
+select.cke_dialog_ui_input_select {
+  height: auto !important;
+}
+
+.layers-search {
+  .m-wrap.search-input {
+    border: 1px solid #DADADA;
+    border-right: none;
+  }
+  .m-btn {
+    border: {
+      top: 1px solid #DADADA;
+      right:1px solid #DADADA;
+      bottom: 1px solid #DADADA;
+    }
+    padding: 7px 14px 8px;
+  }
+}

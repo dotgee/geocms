@@ -1,0 +1,57 @@
+.table-backend {
+  th {
+    color: #CCC;
+    font-weight: bold;
+  }
+  td {
+    vertical-align: middle;
+    line-height: 23px;
+    &.default {
+      color: #666;
+      font-style: italic;
+    }
+    .m-btn-group {
+      margin-right: 20px;
+    }
+    .m-btn {
+      margin-top: 0;
+    }
+    .m-btn-group .m-btn {
+      float: none;
+    }
+    .icon-layer-blue {
+      margin-top: 5px;
+      margin-right: 5px;
+    }
+    .icon-folder {
+      margin-top: 4px;
+      margin-right: 5px;
+    }
+    a {
+      @include link-colors(#3788C0, #3C4E5A)
+    }
+  }
+  &.categories-index {
+    span.left-space {
+      padding: 0 24px;
+    }
+  }
+}
+
+.table-import {
+  h3 {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    line-height: 25px;
+  }
+  small {
+    color: #888;
+  }
+  .infos {
+    margin-top: 10px;
+  }
+  .import {
+    vertical-align: middle;
+  }
+}

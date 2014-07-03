@@ -1,0 +1,38 @@
+.control-buttons{
+  margin-top: 2px;
+  a{
+    cursor: pointer;
+    margin-top: 0;
+    padding: 4px 0px;
+  }
+  .m-btn {
+    // @include background-image(linear-gradient(top, #EEE, #E4E4E4));
+    min-width: 35px;
+    margin: 0 2px;
+    &:first-child {
+      @include border-radius(4px 0 0 4px);
+    }
+    &:last-child {
+      @include border-radius(0 4px 4px 0);
+    }
+  }
+}
+
+.from-map {
+  margin-top: 37px;
+  margin-left: 10px;
+  float: left;
+}
+
+.m-btn {
+  font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.import-btn {
+  i {
+    margin-top: 3px;
+  }
+}

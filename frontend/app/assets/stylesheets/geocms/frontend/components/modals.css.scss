@@ -1,0 +1,51 @@
+// WAIT MODAL
+
+.wait-modal {
+  text-align: center;
+}
+
+
+// SHARE MODAL
+
+#share-modal {
+  @include border-radius(0px);
+  background : #F8F8F8;
+  .modal-header {
+    border-bottom: 1px solid #E3E3E3;
+  }
+  .copy {
+    float: right;
+    margin: 3px;
+  }
+  .sharable {
+    float: left;
+    width: 100%;
+  }
+  .copy-code {
+    display: block;
+    height: 28px;
+    border: 1px solid #CDCDCD;
+    background: white;
+  }
+}
+
+.share-link {
+  float: left;
+  width: 430px;
+  height: 17px;
+  margin: 6px 0 0 7px;
+  border: none;
+  font: normal 13px "Helvetica",Arial;
+  color: #333333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#metadata-modal {
+  width: 730px;
+}
+
+iframe {
+  border: none;
+}

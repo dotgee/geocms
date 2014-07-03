@@ -1,0 +1,20 @@
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -143px;
+}
+
+#push, footer {
+  height: 126px;
+}
+
+footer {
+  background: $oxford_blue;
+  padding-top: 20px;
+  font-size: 12px;
+  color: #9EA7B1;
+  img {
+    margin-bottom: 20px;
+  }
+}

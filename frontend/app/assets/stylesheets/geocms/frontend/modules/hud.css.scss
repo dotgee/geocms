@@ -1,0 +1,209 @@
+// LEFT NAVBAR
+
+.hud {
+  color: $oxford_blue;
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  bottom: 0px;
+  width: $hudsize;
+  background: #F8F8F8;
+  border-right: 2px solid #DDD;
+  transition: left 300ms;
+  -moz-transition: left 300ms;
+  -webkit-transition: left 300ms;
+  @include box-sizing(border-box);
+  .tab-content {
+    position: absolute;
+    top: 105px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    overflow-y: auto;
+  }
+}
+
+// LEFT NAVBAR - SAVE AND SHARE
+.buttons-placeholder {
+  height: 47px;
+}
+
+.map-controls {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.m-btn.geovisu {
+  margin-left: 15px;
+  padding: 8px 12px 9px;
+  i {
+    margin-top: 3px;
+  }
+}
+
+// LEFT NAVBAR - TABS
+#hud-tab {
+  li {
+    margin-left: 0;
+    width: 50%;
+    a {
+      border-right: none;
+      border-left: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      @include border-radius(0px);
+      margin-right: 0;
+      text-align: center;
+      @include unstyled-link;
+    }
+    &:first-child {
+      a {
+        border-left: none;
+      }
+    }
+  }
+}
+
+// LEFT NAVBAR - CONTROLS
+
+#ctrls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #E6E6E6;
+  z-index: 50;
+  .m-btn {
+    margin-top: 0;
+    padding: 14px 24px;
+    &:last-child {
+      padding: 14px 23px 14px 24px;
+    }
+  }
+}
+
+// LEFT NAVBAR - TABS - LAYERS
+
+#layers {
+  .cart-item-controls {
+    // visibility: hidden;
+  }
+  label {
+    margin-bottom: 2px;
+  }
+  .layer-visibility {
+    margin-top: -1px;
+    margin-right: 5px;
+  }
+  .grippy {
+    display: inline-block;
+    background: url("grippy.png") repeat-y right;
+    height: 45px;
+    width: 10px;
+    vertical-align: top;
+    margin-right: 4px;
+    cursor: move;
+  }
+  .right-infos {
+    display: inline-block;
+    width: 290px;
+    .title {
+      @include ellipsis;
+    }
+  }
+  .control-buttons {
+    margin-left: -2px;
+    a:hover {
+      background: none;
+    }
+  }
+  .dimensionable {
+    height: 50px;
+  }
+  .dimensions-list {
+    // @include column-count(3);
+    // li.active {
+    //   font-weight: bold;
+    //   font-size: 13px;
+    //   color: #0072BB;
+    // }
+    width: 155px;
+    float: left;
+    margin: 5px 6px 0 9px;
+    .ui-slider .ui-slider-handle {
+      width: 10px;
+    }
+  }
+  .wrap-dates {
+    font-size: 11px;
+  }
+  .dimension-value {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 40px;
+    font-weight: bold;
+    margin-top: 1px;
+  }
+  .opacity-controler {
+    margin-top: 5px;
+    width: 285px;
+    i {
+      float: left;
+      cursor: pointer;
+      margin-top: -2px;
+    }
+    .icon-plus {
+      margin-left: 2px;
+    }
+  }
+}
+
+#layer-list {
+  label {
+    font-size: 13px;
+  }
+  padding: {
+    left: 0;
+    right: 0;
+  }
+  > li {
+    padding: {
+      top: 5px;
+      bottom: 5px;
+      left: 2px;
+    }
+    border-bottom: 1px solid #eee;
+    &.sortable-placeholder {
+      border: 1px dashed #CCC;
+      background: none;
+      height: 45px;
+    }
+  }
+}
+
+//  LEFT NAVBAR - TABS - LAYERS - ADD BUTTON
+
+.add-layer {
+  background: white;
+  height: 38px;
+  padding: 0 15px;
+  span {
+    line-height: 35px;
+  }
+  .layer-button {
+    padding: 5px 10px;
+    height: 20px;
+    background: #B4C2CC;
+    @include border-radius(3px);
+    [class^="icon-"] {
+      margin-top: 2px;
+    }
+    .icon-layer {
+      background-position: bottom;
+      margin-top: 4px;
+    }
+    &:hover {
+      background: $oxford_blue;
+    }
+  }
+}

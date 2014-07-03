@@ -1,0 +1,111 @@
+#catalog {
+  padding-bottom: 30px;
+  background: white;
+  position: fixed;
+  bottom: 0px;
+  left: 335px;
+  right: 0px;
+  top: 50px;
+  overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity .35s, z-index .35s;
+  -moz-transition: opacity .35s, z-index .35s;
+  -webkit-transition: opacity .35s, z-index .35s;
+  &.active {
+    visibility: visible;
+    z-index: 1100;
+    background: rgba(248, 248, 248, .90);
+    opacity: 1;
+  }
+  .btn-close {
+    margin: 20px;
+    position: fixed;
+    top: 63px;
+    right: 0px;
+    padding: 3px 9px 3px 10px;
+    &.close {
+      color: white;
+      text-shadow: none;
+      @include opacity(100);
+    }
+  }
+  .page-header {
+    margin-bottom: 15px;
+  }
+  h1 {
+    margin-left: 40px;
+    text-transform: none;
+  }
+  .breadcrumb {
+    border: 1px solid #DADADA;
+  }
+  .media {
+    background: white;
+    cursor: pointer;
+    border: 1px solid #DADADA;
+    @include not-selectable;
+    h4 {
+      cursor: pointer;
+      font-weight: 500;
+      color: $oxford_blue;
+      [class^="icon-"] {
+        margin: 4px 0 3px;
+      }
+    }
+    .media-wrapper {
+      padding: 5px;
+      overflow: hidden;
+      zoom: 1;
+    }
+    .image-link {
+      background: #F2EFE9;
+      border: 1px solid #D8D5D0;
+      height: 64px;
+      width: 64px;
+    }
+    .added {
+      @include box-shadow(inset 0 1px 6px rgba(0, 0, 0, 0.25));
+      @include background-image(linear-gradient(top, #EEE, #DDD));
+    }
+  }
+}
+
+// CATALOG - CATEGORIES
+
+#categories {
+  // margin: {
+  //   right: 50px;
+  //   left: 50px;
+  // }
+  .back {
+    margin-bottom: 10px;
+    margin-top: 0;
+    @include not-selectable;
+  }
+  a.category {
+    width: 100%;
+    display: block;
+    background-color: white;
+    @include border-radius(5px);
+    margin-bottom: 5px;
+    height: 20px;
+    padding: 5px;
+  }
+}
+
+.source {
+  color: #B4B4B4;
+  margin: -6px 0 1px;
+}
+
+.media.layer {
+  float: left;
+  width: 48%;
+  margin-left: 1%;
+  margin-top: 15px;
+  .description {
+    @include ellipsis;
+  }
+}

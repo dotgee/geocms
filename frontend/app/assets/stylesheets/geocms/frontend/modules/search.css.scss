@@ -1,0 +1,20 @@
+.search-container {
+  background: #F4F4F4;
+  padding: 10px 40px;
+
+  form {
+    margin-bottom: 0;
+  }
+  .input-append {
+    .search-query {
+      @include border-radius(4px 0 0 4px);
+    }
+    .m-btn {
+      margin-top: 1px;
+      padding: 6px 14px 5px;
+      border: 1px solid #CCC;
+      border-left: none;
+      @include border-radius(0 4px 4px 0);
+    }
+  }
+}
