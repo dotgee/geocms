@@ -37,7 +37,7 @@ module Geocms
   		                      .order("geocms_dimensions.value") }
 
 
-    delegate :wms, to: :data_source, prefix: true
+    delegate :wms, :wms_version, :not_internal, :ogc, :name, to: :data_source, prefix: true
 
     # INSTANCE METHODS
 

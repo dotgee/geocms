@@ -1,0 +1,36 @@
+doctype 5
+html(lang="en" ng-app="geocms")
+  head
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    title== content_for?(:title) ? yield(:title) : "GeoCMS"
+    meta content="" name="description"
+    meta content="width=device-width" name="viewport"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
+    = stylesheet_link_tag "geocms/application"
+    /[if lt IE 9]
+      / = stylesheet_link_tag "leaflet/leaflet.ie"
+    = csrf_meta_tags
+  body.fullscreen class=(yield :body_class)
+    #progress
+      dt
+      dd
+    .navbar
+      .navbar-inner
+        .container
+          ul.nav.nav-branding
+            li= link_to "", :class => "brand" do
+              = @current_tenant.logo_image_tag
+              li= link_to "#", :class => "brand brand-context" do
+                = "#{current_tenant.name}"
+                = " | #{yield(:context_name)}" if content_for?(:context_name)
+          .top-menu
+            = link_to (t "maps"), ""
+            - if logged_in?
+              = link_to "Admin", ""
+    div ui-view=""
+    == yield
+
+    = javascript_include_tag "geocms/application"
+    == yield :javascripts

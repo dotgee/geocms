@@ -6,6 +6,7 @@ Geocms::Api::Engine.routes.draw do
         get "search", on: :collection
         get "bbox", on: :member
       end
+      resources :contexts
       resources :categories
     end
   end
