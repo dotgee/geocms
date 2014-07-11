@@ -1,7 +1,7 @@
 [class^="icon-"] {
   margin-top: 0;
   &.icon-layer {
-    background: url("layers.png") no-repeat;
+    background: image-url("layers.png") no-repeat;
     width: 12px;
     height: 10px;
     margin-top: 3px;
@@ -11,24 +11,24 @@
     }
   }
   &.icon-layer-blue {
-    background: url("icon-layer.png") no-repeat;
+    background: image-url("icon-layer.png") no-repeat;
     width: 14px;
     height: 10px;
   }
   &.icon-folder {
-    background: url("icon-folder.png") no-repeat;
+    background: image-url("icon-folder.png") no-repeat;
     width: 14px;
     height: 13px;
   }
   &.icon-throbber {
-    background: url("throbber.svg") no-repeat;
+    background: image-url("throbber.svg") no-repeat;
     width: 16px;
     height: 16px;
   }
   &.icon-geovisu {
-    background: url("geovisu.png") no-repeat;
+    background: image-url("geovisu.png") no-repeat;
   }
   &.icon-clock {
-    background: url("icon-clock.png") no-repeat;
+    background: image-url("icon-clock.png") no-repeat;
   }
 }

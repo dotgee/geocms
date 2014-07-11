@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cartographont';
-  src: url('cartographont.eot?22543208');
-  src: url('cartographont.eot?22543208#iefix') format('embedded-opentype'),
-       url('cartographont.woff?22543208') format('woff'),
-       url('cartographont.ttf?22543208') format('truetype'),
-       url('cartographont.svg?22543208#cartographont') format('svg');
+  src: asset-url('cartographont.eot?22543208', font);
+  src: asset-url('cartographont.eot?22543208#, fontiefix', font) format('embedded-opentype'),
+       asset-url('cartographont.woff?22543208', font) format('woff'),
+       asset-url('cartographont.ttf?22543208', font) format('truetype'),
+       asset-url('cartographont.svg?22543208#cartographont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
