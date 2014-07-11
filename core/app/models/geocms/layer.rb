@@ -1,18 +1,18 @@
 require "curb"
 module Geocms
   class Layer < ActiveRecord::Base
-    include Geocms::Concerns::Searchable
+    # include Geocms::Concerns::Searchable
     extend FriendlyId
     friendly_id :title, use: [:slugged, :finders]
 
     # ELASTICSEARCH MAPPING
 
-    define_mapping do
-      indexes :id,           :index    => :not_analyzed
-      indexes :title,        :analyzer => 'french_analyzer', :boost => 10
-      indexes :name,         :analyzer => 'french_analyzer'
-      indexes :description,  :analyzer => 'snowball'
-    end
+    # define_mapping do
+    #   indexes :id,           :index    => :not_analyzed
+    #   indexes :title,        :analyzer => 'french_analyzer', :boost => 10
+    #   indexes :name,         :analyzer => 'french_analyzer'
+    #   indexes :description,  :analyzer => 'snowball'
+    # end
 
     # RELATIONSHIPS
 

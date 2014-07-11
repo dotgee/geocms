@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "cancan"
   s.add_dependency "rolify"
   s.add_dependency "rgeo"
-  s.add_dependency "tire"
+  # s.add_dependency "tire"
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"
   

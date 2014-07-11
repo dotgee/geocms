@@ -11,7 +11,7 @@ require "ancestry"
 require "acts_as_list"
 require "kaminari"
 require "rgeo"
-require "tire"
+# require "tire"
 require "rolify"
 
 require "protected_attributes"
