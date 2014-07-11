@@ -1,30 +1,34 @@
+$main-color: #1570a6 !default;
+$button-color: #4d90fe !default;
+$darken-button-color: darken($button-color, 5) !default;
+
 // Blues
-$oxford_blue: #3C4E5A;
-$boston_blue: #3887BE;
-$outer_space: #28353D;
+$oxford_blue: #3C4E5A !default;
+$boston_blue: #3887BE !default;
+$outer_space: #28353D !default;
 
 // Light blue
-$peter_river: #3498DB;
-$belize_hole: #2980B9;
+$peter_river: #3498DB !default;
+$belize_hole: #2980B9 !default;
 
 // Deep blue
-$wet_asphalt: #34495E;
-$midnight_blue: #2C3E50;
+$wet_asphalt: #34495E !default;
+$midnight_blue: #2C3E50 !default;
 
 // Light grey
-$clouds: #ECF0F1;
-$silver: #BDC3C7;
+$clouds: #ECF0F1 !default;
+$silver: #BDC3C7 !default;
 
-$mercury: #e4e4e4;
+$mercury: #e4e4e4 !default;
 
 // Dark grey
-$concrete: #95A5A6;
-$absestos: #7F8C8D;
+$concrete: #95A5A6 !default;
+$absestos: #7F8C8D !default;
 
 // Red
-$alizarin: #E74C3C;
-$pomegranate: #C0392B;
+$alizarin: #E74C3C !default;
+$pomegranate: #C0392B !default;
 
 // Green
-$emerland: #2ECC71;
-$nephritis: #27AE60;
+$emerland: #2ECC71 !default;
+$nephritis: #27AE60 !default;

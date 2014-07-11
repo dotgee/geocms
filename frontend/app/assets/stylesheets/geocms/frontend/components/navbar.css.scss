@@ -13,7 +13,7 @@
 }
 
 .navbar-inner {
-  background: #1570a6;
+  background: $main-color;
   @include border-radius(0px);
   @include background-image(none);
   filter: none;

@@ -10,9 +10,13 @@ layerModule.service "layerService", ["mapService", (ms) ->
     else
       layer._tilelayer.setOpacity(0.9)
 
-  layerService.remove = (layer, context) ->
+  layerService.setOpacity = (ev, ui) ->
+    index = $(ui.handle).parent().data("index")
+    ms.layers[index].layer._tilelayer.setOpacity(ui.value)
+
+  layerService.remove = (layer) ->
     ms.container.removeLayer(layer._tilelayer)
-    context.layers.splice(context.layers.indexOf(layer), 1)
+    ms.layers.splice(ms.layers.indexOf(layer), 1)
 
   layerService.centerOn = (layer) ->
     bbox =  new L.LatLngBounds(

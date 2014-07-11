@@ -291,7 +291,7 @@ textarea {
 }
 .m-btn:focus {
   /* Blue border on button focus. */
-  border-color: #4D90FE;
+  border-color: $button-color;
 }
 /* overrides extra padding on button elements in Firefox */
 .m-btn::-moz-focus-inner {
@@ -307,7 +307,7 @@ textarea {
 
 .m-btn.blue-stripe
 {
-  border-left: 3px solid #3887be;
+  border-left: 3px solid $button-color;
 }
 
 .m-btn.purple-stripe
@@ -405,15 +405,15 @@ textarea {
 {
   color: white;  
   text-shadow: none;  
-  background-color: #4d90fe;
-  background-image: -moz-linear-gradient(top, #3887be, #3788C0);
-  background-image: -ms-linear-gradient(top, #3887be, #3788C0);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3887be), to(#3788C0));
-  background-image: -webkit-linear-gradient(top, #3887be, #3788C0);
-  background-image: -o-linear-gradient(top, #3887be, #3788C0);
-  background-image: linear-gradient(top, #3887be, #3788C0);
+  background-color: $button-color;
+  background-image: -moz-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -ms-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($button-color), to($darken-button-color));
+  background-image: -webkit-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -o-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: linear-gradient(top, $button-color, $darken-button-color);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3887be', endColorstr='#3788C0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-color', endColorstr='#3788C0', GradientType=0);
 }
 .m-btn.blue:hover, 
 .m-btn.blue:focus, 
@@ -421,29 +421,29 @@ textarea {
 .m-btn.blue.active,
 .m-btn.blue[disabled],
 .m-btn.blue.disabled {  
-  background-color: #0072bb;
-  background-image: -moz-linear-gradient(top, #0072bb, #0072bb);
-  background-image: -ms-linear-gradient(top, #0072bb, #0072bb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0072bb), to(#0072bb));
-  background-image: -webkit-linear-gradient(top, #0072bb, #0072bb);
-  background-image: -o-linear-gradient(top, #0072bb, #0072bb);
-  background-image: linear-gradient(top, #0072bb, #0072bb);
+  background-color: $darken-button-color;
+  background-image: -moz-linear-gradient(top, $darken-button-color, $darken-button-color);
+  background-image: -ms-linear-gradient(top, $darken-button-color, $darken-button-color);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($darken-button-color), to($darken-button-color));
+  background-image: -webkit-linear-gradient(top, $darken-button-color, $darken-button-color);
+  background-image: -o-linear-gradient(top, $darken-button-color, $darken-button-color);
+  background-image: linear-gradient(top, $darken-button-color, $darken-button-color);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0072bb', endColorstr='#0072bb', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$darken-button-color', endColorstr='$darken-button-color', GradientType=0);
 }
 
 .m-btn.blue:active,
 .m-btn.blue.active
 {
-  background-color: #4d90fe;
-  background-image: -moz-linear-gradient(top, #4d90fe, #0072bb);
-  background-image: -ms-linear-gradient(top, #4d90fe, #0072bb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#0072bb));
-  background-image: -webkit-linear-gradient(top, #4d90fe, #0072bb);
-  background-image: -o-linear-gradient(top, #4d90fe, #0072bb);
-  background-image: linear-gradient(top, #4d90fe, #0072bb);
+  background-color: $button-color;
+  background-image: -moz-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -ms-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($button-color), to($darken-button-color));
+  background-image: -webkit-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: -o-linear-gradient(top, $button-color, $darken-button-color);
+  background-image: linear-gradient(top, $button-color, $darken-button-color);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d90fe', endColorstr='#0072bb', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-color', endColorstr='$darken-button-color', GradientType=0);
 
 }
 /*  Green */

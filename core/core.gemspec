@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.1.1"
+  s.add_dependency "rails", ">= 4.0.0"
+  s.add_dependency "compass-rails"
+  s.add_dependency "bootstrap-sass", "~> 2.2.2"
   s.add_dependency "acts_as_tenant", '~> 0.3.5'
   s.add_dependency "friendly_id"
   s.add_dependency "ancestry"

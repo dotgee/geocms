@@ -22,14 +22,14 @@
     .tab-pane id="infos"
       a.m-btn.mini.blue.from-map = t "context.from_map"
     .tab-pane.active id="layers"
-      .add-layer
+      .add-layer ng-click="openCatalog()"
         span = t "add_a_new_layer"
-        = link_to "#", :class => "m-btn mini blue icn-only pull-right" do
+        a class="m-btn mini blue icn-only pull-right" 
           i.icon-plus.icon-white
           |&nbsp;
           i.icon-layer
       ul.nav.nav-list#layer-list
-        li ng-repeat="layer in context.layers" ng-include="'/templates/layers/cart_item.html'"
+        li ng-repeat="cl in contexts_layers" ng-include="'/templates/layers/cart_item.html'"
 
   .m-btn-group#ctrls
     button.m-btn.first.icn-only.legend data-toggle="button" rel="tooltip" data-original-title=t("context.controls.legend")

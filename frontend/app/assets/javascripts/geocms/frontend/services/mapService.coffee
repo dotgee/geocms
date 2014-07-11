@@ -9,41 +9,45 @@ mapModule.service "mapService", [() ->
   mapService.crs = null
 
   mapService.createMap = (id, lat, lng, zoom) ->
-    options = 
-      crs: @crs
+    # options = 
+    #   crs: @crs
+    options = {}
     @container = new L.Map(id, options).setView([lat, lng], zoom)
     
   mapService.addBaseLayer = () ->
-    L.tileLayer.wms("http://osm.geobretagne.fr/gwc01/service/wms", {
-      layers: "osm:google",
-      format: 'image/png',
-      transparent: true,
-      continuousWorld: true,
-      unloadInvisibleTiles: false,
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://geobretagne.fr/accueil/">GeoBretagne</a>'
-    }).addTo(@container)
-
+    # L.tileLayer.wms("http://osm.geobretagne.fr/gwc01/service/wms", {
+    #   layers: "osm:google",
+    #   format: 'image/png',
+    #   transparent: true,
+    #   continuousWorld: true,
+    #   unloadInvisibleTiles: false,
+    #   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+    #     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    #     'Imagery © <a href="http://geobretagne.fr/accueil/">GeoBretagne</a>'
+    # }).addTo(@container)
+    mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/impeyal.map-el9s7flv/{z}/{x}/{y}.png', {
+        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    })
+    mapboxTiles.addTo(@container)
   mapService.initLayers = () ->
     # console.log(@layers)
-    _.each @layers, (layer) ->
+    _.each @layers, (cl) ->
       # console.log layer
-      mapService.addLayer(layer)
+      mapService.addLayer(cl)
 
-  mapService.addLayer = (layer) ->
-    # console.log @container
-    layer._tilelayer = L.tileLayer.wms layer.data_source_wms,
-      layers: layer.name,
+  mapService.addLayer = (cl) ->
+    cl.layer._tilelayer = L.tileLayer.wms cl.layer.data_source_wms,
+      layers: cl.layer.name,
       format: 'image/png',
       transparent: true,
-      version: layer.data_source_wms_version,
-      styles: layer.default_style || '',
+      version: cl.layer.data_source_wms_version,
+      styles: cl.layer.default_style || '',
       continuousWorld: true,
-      tiled: layer.tiled,
+      tiled: cl.layer.tiled,
       maxZoom: 24,
       minZoom: 3
-    layer._tilelayer.addTo(@container)
+      opacity: (cl.opacity / 100)
+    cl.layer._tilelayer.addTo(@container)
 
   mapService.defineProj = (crs) ->
     scale = (zoom) ->

@@ -1,9 +1,11 @@
 geocms = angular.module( 'geocms', [
   'ui.router'
   'restangular'
+  'ui.slider'
   'geocms.contexts'
   'geocms.map'
   'geocms.layer'
+  'geocms.catalog'
 ])
 
 geocms.config [

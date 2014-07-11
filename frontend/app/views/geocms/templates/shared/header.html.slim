@@ -1,0 +1,13 @@
+.navbar
+  .navbar-inner
+    .container
+      ul.nav.nav-branding
+        li= link_to "", :class => "brand" do
+          = @current_tenant.logo_image_tag
+          li= link_to "#", :class => "brand brand-context" do
+            = "#{current_tenant.name}"
+            = " | #{yield(:context_name)}" if content_for?(:context_name)
+      .top-menu
+        = link_to (t "maps"), ""
+        - if logged_in?
+          = link_to "Admin", ""

@@ -1,14 +1,14 @@
 module Geocms
   class Context < ActiveRecord::Base
     acts_as_tenant(:account)
-    has_many :contexts_layers, :dependent => :destroy
-    has_many :layers, -> { uniq }, :through => :contexts_layers
+    has_many :contexts_layers, -> { order(:position) }, :dependent => :destroy
+    has_many :layers, :through => :contexts_layers
     mount_uploader :preview, Geocms::ContextPictureUploader
 
     attr_accessible :maxx, :maxy, :minx, :miny, :name, :zoom, :description, :center_lng,
-  		  :center_lat, :layer_ids, :uuid, :contexts_layers_attributes, :preview
+  		  :center_lat, :layer_ids, :uuid, :contexts_layers_attributes, :preview, :account_id
     accepts_nested_attributes_for :contexts_layers
-    before_create :generate_uuid
+    after_create :generate_uuid
 
     after_save :generate_preview
 
@@ -35,6 +35,7 @@ module Geocms
       str = self.account.subdomain
       str.gsub!("-", "")
       self.uuid = str+"-"+(0...8).map{65.+(rand(26)).chr.downcase}.join
+      save
     end
 
     def bbox

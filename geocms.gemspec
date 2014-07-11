@@ -1,5 +1,5 @@
 # encoding: UTF-8
-version = File.read(File.expand_path('../SPREE_VERSION',__FILE__)).strip
+version = File.read(File.expand_path('../GEOCMS_VERSION',__FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'geocms_core', version
   s.add_dependency 'geocms_api', version
-  s.add_dependency 'geocms_backend', version
+#  s.add_dependency 'geocms_backend', version
   s.add_dependency 'geocms_frontend', version
 end
