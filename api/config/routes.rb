@@ -1,4 +1,4 @@
-Geocms::Api::Engine.routes.draw do
+Geocms::Core::Engine.add_routes do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
