@@ -1,0 +1,45 @@
+.page-header
+  h1 Listing Data Sources
+
+
+table.table.table-striped.table-backend
+  thead
+    tr
+      th Name
+      th width="40px"
+      th width="40px"
+      th width="40px"
+  tbody
+    - @data_sources.each do |not_internal, data_sources|
+      tr
+        td
+          b= not_internal ? "Sources externes" : "Sources internes"
+        td
+        td
+        td
+      - data_sources.each do |data_source|
+        tr
+          td = data_source.name
+          td
+            = link_to [:import, :backend, data_source], :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t("datasource.import") do
+              i.icon-download.icon-white
+          td
+            = link_to edit_backend_data_source_path(data_source), :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+              i.icon-pencil.icon-white
+          td
+            = link_to [:backend, data_source], :confirm => 'Are you sure?', :method => :delete, :class => "m-btn mini red icn-only" do
+              i.icon-trash.icon-white
+br
+= link_to t("datasource.new"), new_backend_data_source_path, :class => "m-btn blue"
+
+.modal.wait-modal.hide.fade.in
+  .modal-body
+    = image_tag "throbber.svg"
+    br
+    = t("data_source.wait")
+
+= content_for :javascripts do
+  javascript:
+    $(".import-btn").click(function(e) {
+      $(".wait-modal").modal();
+    })

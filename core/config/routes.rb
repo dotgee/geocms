@@ -1,2 +1,1 @@
-Geocms::Core::Engine.routes.draw do
-end
+Geocms::Core::Engine.draw_routes

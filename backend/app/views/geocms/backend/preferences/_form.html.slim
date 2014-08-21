@@ -1,0 +1,22 @@
+.row-fluid
+  .span6
+    = form_tag [:backend, :preferences], {:method => :put, :class => "form-horizontal"} do |f|
+      h4   Carte
+      .form-inputs
+        - Account.prefs.keys.each do |p|
+          .control-group
+            = label_tag p, p.to_s.humanize, :class => "control-label"
+            .controls
+              = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value
+      .control-group
+        .controls
+          = submit_tag t(:edit), :class => "m-btn blue"
+  .span6
+    h4   Compte
+    = simple_form_for ActsAsTenant.current_tenant, { :url => backend_preferences_path, :method => :put, :html => { :class => "form-horizontal" } } do |f|
+      = image_tag f.object.logo if f.object.logo?
+      = f.input :name
+      = f.input :logo
+      .control-group
+        .controls
+          = f.submit t(:edit), :class => "m-btn blue"

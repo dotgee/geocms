@@ -1,0 +1,15 @@
+.page-header
+  h1= "#{ActsAsTenant.current_tenant.name} - Categories"
+
+table.table.table-striped.categories-index.table-backend
+  thead
+    tr
+      th Name
+      th width="40px"
+      th width="40px"
+      th width="40px"
+  tbody
+    = nested_categories(@categories)
+
+br
+= link_to t("category.new_root"), geocms.new_backend_category_path, :class => "m-btn blue"

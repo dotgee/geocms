@@ -1,0 +1,24 @@
+.page-header
+  h1 Listing preferences
+
+table.table.table-striped
+  thead
+    tr
+      th Center lng
+      th Center lat
+      th Zoom
+      th
+      th
+      th
+  tbody
+    - @preferences.each do |preference|
+      tr
+        td = preference.center_lng
+        td = preference.center_lat
+        td = preference.zoom
+        td = link_to 'Show', [:backend, preference]
+        td = link_to 'Edit', edit_backend_preference_path(preference)
+        td = link_to 'Destroy', [:backend, preference], :confirm => 'Are you sure?', :method => :delete
+br
+
+= link_to 'New Preference', new_backend_preference_path

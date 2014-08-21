@@ -1,0 +1,10 @@
+tr
+  td
+    i.icon-layer-blue
+    = link_to layer.title, [:edit, :backend, layer]
+  td
+    = link_to [:edit, :backend, layer], :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+      i.icon-pencil.icon-white
+  td
+    = link_to (@category ? [:backend, @category, layer] : [:backend, layer]), :confirm => 'Are you sure?', :method => :delete, :class => "m-btn red icn-only mini" do
+      i.icon-trash.icon-white

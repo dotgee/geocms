@@ -1,0 +1,19 @@
+.container-fluid.container-infos
+  h1= t("maps")
+.row-thumbnails
+  ul.thumbnails
+    - @contexts.each do |context|
+      li.span3.fixed-layout
+        .thumbnail.unbordered
+          .placeholder
+            - if context.preview?
+              = image_tag context.preview
+          = link_to [:edit, :backend, context], :class => "thumbnail-link" do
+            .caption
+              h4 = context.name
+              p= context.description
+          .m-btn-group.thumbnails-control
+            = link_to [:refresh_preview, :backend, context], :class => "m-btn icn-only mini" do
+              i.icon-refresh.icon-white
+            = link_to [:backend, context], :confirm => "Are you sure ?", :method => :delete, :class => "m-btn icn-only mini" do
+              i.icon-trash.icon-white

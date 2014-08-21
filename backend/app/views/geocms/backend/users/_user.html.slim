@@ -1,0 +1,10 @@
+tr
+  td= user.username
+  td= user.email
+  td= user.created_at.strftime("%d/%m/%Y")
+  td
+    = link_to [:edit, :backend, user], :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+      i.icon-pencil.icon-white
+  td
+    = link_to [:backend, user], :confirm => 'Are you sure?', :method => :delete, :class => "m-btn red icn-only mini" do
+      i.icon-trash.icon-white

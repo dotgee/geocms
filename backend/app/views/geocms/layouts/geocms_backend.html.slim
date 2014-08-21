@@ -1,0 +1,52 @@
+doctype 5
+html(lang="en")
+  head
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    title== content_for?(:title) ? yield(:title) : "DotGeoCMS - Backend"
+    meta content="" name="description"
+    meta content="width=device-width" name="viewport"
+    = csrf_meta_tags
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
+    = stylesheet_link_tag "geocms/application"
+    = stylesheet_link_tag "geocms/backend"
+    = yield :stylesheets
+    = yield(:js_header)
+  body.backend
+
+    #wrap
+      .navbar.backend
+        .navbar-inner
+          .container
+            ul.nav
+              li= link_to backend_root_path, :class => "brand" do
+               = logo_for_tenant
+              / - if logged_in?
+              li= link_to t("menu.categories"), backend_categories_path
+              li= link_to t("maps"), backend_contexts_path
+              li= link_to t("menu.data_sources"), backend_data_sources_path
+              li= link_to t("menu.users"), backend_users_path
+              li= link_to t("menu.preferences"), edit_backend_preferences_path
+              li= link_to t("menu.accounts"), backend_accounts_path
+            - if logged_in?
+              ul.nav.pull-right
+                li= link_to t("menu.logout"), logout_path
+      - if logged_in?
+        .search-container
+          form class="form-search navbar-form-search" action="#{backend_search_path}" method="get"
+            .input-append
+              input.span6 type="text" class="input-medium search-query" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
+              button.m-btn
+                i.icon-search
+      #page
+        .container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
+          /== render "layouts/messages"
+          == yield
+          #push
+    /== render "layouts/footer"
+    javascript:
+      var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
+/    = include_gon
+    = javascript_include_tag "geocms/backend"
+    == yield :javascripts

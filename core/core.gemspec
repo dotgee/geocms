@@ -22,7 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency "sprockets", "~> 2.11.0"
   s.add_dependency "compass-rails"
   s.add_dependency "bootstrap-sass", "~> 2.2.2"
-  s.add_dependency "acts_as_tenant", '~> 0.3.5'
+  s.add_dependency 'draper', '~> 1.3'
+  s.add_dependency "acts_as_tenant", '~> 0.3.6'
   s.add_dependency "friendly_id"
   s.add_dependency "ancestry"
   s.add_dependency "acts_as_list", "~> 0.4.0"
@@ -31,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "cancan"
   s.add_dependency "rolify"
   s.add_dependency "rgeo"
+  s.add_dependency "curb"
   # s.add_dependency "tire"
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"

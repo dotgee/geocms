@@ -21,4 +21,5 @@ require "cancan"
 
 require 'geocms/core/version'
 require 'geocms/core/engine'
+require 'geocms/core/routes'
 require 'geocms/preferences'

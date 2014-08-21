@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Account:
+  = @preference.account_id
+p
+  strong Center lng:
+  = @preference.center_lng
+p
+  strong Center lat:
+  = @preference.center_lat
+p
+  strong Zoom:
+  = @preference.zoom
+
+= link_to 'Edit', edit_backend_preference_path(@preference)
+'|
+= link_to 'Back', backend_preferences_path

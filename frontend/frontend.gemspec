@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   #s.add_dependency "compass-rails", "~> 1.1.2"
   s.add_dependency "slim-rails"
   #s.add_dependency 'bootstrap-sass', '~> 2.2.2.0'
-  s.add_dependency 'draper', '~> 1.3'
 
   s.add_dependency 'rails-assets-jquery', "< 2.0.0"
   s.add_dependency 'rails-assets-lodash', "2.4.1"

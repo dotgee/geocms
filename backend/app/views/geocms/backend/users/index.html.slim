@@ -1,0 +1,24 @@
+.page-header
+  h1 = t("users.index")
+
+table.table.table-striped.table-users
+  thead
+    tr
+      th Username
+      th Email
+      th Joined on
+      th width="40px"
+      th width="40px"
+  tbody
+    - @users.each do |u|
+      == render u
+br
+- if can? :create, User
+  = text_field_tag :user, nil, :placeholder => "Choisir un collaborateur", :class => "input-add-colaborator", :style => "width: 400px;"
+  button.m-btn.btn-add-colaborator.blue= t("add")
+  br
+  br
+  = link_to t("users.new"), [:new, :backend, :user], class: "m-btn"
+
+= content_for :javascripts do
+  = javascript_include_tag "backend/typeahead"

@@ -1,0 +1,14 @@
+.page-header
+  h1 Résultat de la recherche
+table.table.table-striped.table-backend
+  thead
+    tr
+      th Title
+      th
+      th
+      th
+  tbody
+    - @layers.each do |layer|
+      == render layer
+
+= paginate @layers

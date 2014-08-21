@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @layer.name
+p
+  strong Title:
+  = @layer.title
+p
+  strong Description:
+  = @layer.description
+
+= image_tag @layer.thumbnail.url
+
+= link_to 'Edit', [:edit, :backend, @category, @layer]
+'|
+= link_to 'Back', [:backend, @category]

@@ -1,0 +1,27 @@
+.page-header
+  h1= "#{t("backend.layers_imported_from").html_safe} #{@data_source.name}"
+
+.alert.alert-success.hide#layer-import
+  a.close data-dismiss="alert" ×
+  = t("layer.imported_successfully")
+
+table.table.table-striped.table-import
+  thead
+    tr
+      th= t(:name)
+      th
+  tbody#import-layers
+
+#modal-form.modal.hide.fade
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h3= t("layer.create")
+  .modal-body
+  .modal-footer
+    a.m-btn data-dismiss="modal" aria-hidden="true" = t("cancel")
+    a.m-btn.blue#save href="#" = t("confirm")
+
+#data-source-id.hide data-id=@data_source.id
+
+= content_for :javascripts do
+  = javascript_include_tag "backend/import"

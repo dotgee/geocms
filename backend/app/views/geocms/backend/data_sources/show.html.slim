@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @data_source.name
+p
+  strong Wms:
+  = @data_source.wms
+p
+  strong Wfs:
+  = @data_source.wfs
+p
+  strong Csw:
+  = @data_source.csw
+p
+  strong Ogc:
+  = @data_source.ogc
+
+= link_to 'Edit', edit_backend_data_source_path(@data_source)
+'|
+= link_to 'Back', backend_data_sources_path

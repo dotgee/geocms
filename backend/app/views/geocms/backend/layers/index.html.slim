@@ -1,0 +1,18 @@
+.page-header
+  h1= "#{ActsAsTenant.current_tenant.name} #{@category.name} - Layers"
+
+= link_to 'New Layer', [:new, :backend, @category, :layer], :class => "m-btn pull-right"
+.clearfix
+= paginate @layers
+table.table.table-striped
+  thead
+    tr
+      th Title
+      th
+      th
+      th
+  tbody
+    - @layers.each do |layer|
+      == render layer
+br
+

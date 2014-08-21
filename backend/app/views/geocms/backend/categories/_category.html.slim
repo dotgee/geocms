@@ -1,0 +1,17 @@
+tr
+  td
+    - category.depth.times do |hey|
+      span.left-space
+    .m-btn-group
+      = move_link geocms.move_backend_category_path(category, direction: "down"), "down", category.last?
+      = move_link geocms.move_backend_category_path(category, direction: "up"), "up", category.first?
+    span.name class="depth-#{category.depth}" = link_to category.name, geocms.backend_category_path(category)
+  td
+    = link_to geocms.new_backend_category_path(parent_id: category.id), class: "m-btn icn-only mini blue", rel: "tooltip", "data-original-title" => t(:add_child) do
+      i.icon-plus.icon-white
+  td
+    = link_to geocms.edit_backend_category_path(category) , class: "m-btn blue mini icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
+      i.icon-pencil.icon-white
+  td
+    = link_to geocms.backend_category_path(category), confirm: 'Are you sure?', method: :delete , class: "m-btn red icn-only mini" do
+      i.icon-trash.icon-white
