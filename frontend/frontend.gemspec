@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'geocms_core', version
   s.add_dependency 'geocms_api', version
   
-  s.add_dependency "sass-rails"
+  s.add_dependency "sass-rails", '~> 4.0.0'
+  s.add_dependency "coffee-rails", '~> 4.0.0'
   #s.add_dependency "compass-rails", "~> 1.1.2"
   s.add_dependency "slim-rails"
   #s.add_dependency 'bootstrap-sass', '~> 2.2.2.0'

@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 4.0.0"
+  s.add_dependency "sprockets", "~> 2.11.0"
   s.add_dependency "compass-rails"
   s.add_dependency "bootstrap-sass", "~> 2.2.2"
   s.add_dependency "acts_as_tenant", '~> 0.3.5'
