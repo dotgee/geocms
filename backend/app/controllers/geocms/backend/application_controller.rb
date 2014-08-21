@@ -11,7 +11,7 @@ module Geocms
       protect_from_forgery
 
       set_current_tenant_by_subdomain(Geocms::Account, :subdomain)
-      # before_filter :require_login
+      before_filter :require_login
 
       private
       def not_authenticated

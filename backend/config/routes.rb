@@ -1,7 +1,13 @@
 Geocms::Core::Engine.add_routes do
-  
+
+  get "logout" => "backend/sessions#destroy", :as => "logout"
+  get "login" => "backend/sessions#new", :as => "login"
+  resources :users, :only => [:new, :create]
+
   namespace :backend do
     root :to => "categories#index"
+    
+    resources :sessions, :only => [:new, :create, :destroy]
 
     get "search", :to => "search#search"
 

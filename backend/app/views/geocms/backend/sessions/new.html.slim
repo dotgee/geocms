@@ -1,0 +1,25 @@
+= content_for :container_class, "no-color"
+
+= form_tag backend_sessions_path, :method => :post, :class => "form-signin" do
+  h1.lightweight Sign in to dotgeocms
+  .control-group
+    = label_tag :username, "Username or email : ", :class => "control-label label-light"
+    .controls
+      = text_field_tag :username, params[:username], :class => "input-light input-block-level "
+
+  .control-group
+    = label_tag :password, "Password :", :class => "control-label label-light"
+    .controls
+      = password_field_tag :password, nil, :class => "input-light input-block-level"
+
+  .control-group
+    .controls
+      = label_tag :remember_me, nil, :class => "checkbox" do
+        |Remember me
+        = check_box_tag :remember_me, 1, params[:remember_me]
+  .form-actions.white
+    .signup
+      / p
+      /   |Don't have a dotgeocms account?
+      /   = link_to "Create one now.", root_path
+    = submit_tag "Sign in", :class => "m-btn blue pull-right"
