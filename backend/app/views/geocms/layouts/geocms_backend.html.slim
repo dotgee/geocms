@@ -22,13 +22,13 @@ html(lang="en")
             ul.nav
               li= link_to backend_root_path, :class => "brand" do
                = logo_for_tenant
-              / - if logged_in?
-              li= link_to t("menu.categories"), backend_categories_path
-              li= link_to t("maps"), backend_contexts_path
-              li= link_to t("menu.data_sources"), backend_data_sources_path
-              li= link_to t("menu.users"), backend_users_path
-              li= link_to t("menu.preferences"), edit_backend_preferences_path
-              li= link_to t("menu.accounts"), backend_accounts_path
+              - if logged_in?
+                li= link_to t("menu.categories"), backend_categories_path
+                li= link_to t("maps"), backend_contexts_path
+                li= link_to t("menu.data_sources"), backend_data_sources_path
+                li= link_to t("menu.users"), backend_users_path
+                li= link_to t("menu.preferences"), edit_backend_preferences_path
+                li= link_to t("menu.accounts"), backend_accounts_path
             - if logged_in?
               ul.nav.pull-right
                 li= link_to t("menu.logout"), logout_path
@@ -41,10 +41,10 @@ html(lang="en")
                 i.icon-search
       #page
         .container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
-          /== render "layouts/messages"
+          == render "/geocms/layouts/messages"
           == yield
           #push
-    /== render "layouts/footer"
+    == render "/geocms/layouts/footer"
     javascript:
       var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
 /    = include_gon
