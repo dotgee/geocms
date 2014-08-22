@@ -8,3 +8,16 @@
       button.m-btn.icn-only#search href="#"
         i.icon-search
     .clearfix
+    ul.breadcrumb
+      li ng-click="catalog.goToRoot()"
+        i.icon-home
+        span.divider
+          |/
+      li ng-repeat="category in catalog.categoryTree"
+        a ng-click="catalog.getCategory(category)"
+          |{{category.name}}
+        span.divider
+          |/
+    .row-fluid#catalog-categories
+      .media ng-repeat="category in catalog.categories" ng-include="'/templates/catalog/category.html'")
+      .media ng-repeat="layer in catalog.layers" ng-include="'/templates/catalog/layer.html'")

@@ -11,6 +11,7 @@
 
 #= require ./services/layerService
 #= require ./services/mapService
+#= require ./services/catalogService
 #= require ./catalog/catalog
 #= require ./contexts/contexts
 #= require ./geocms

@@ -2,6 +2,7 @@ catalog = angular.module "geocms.catalog", [
   'ui.router'
   'restangular'
   'geocms.map'
+  'geocms.catalogserv'
 ]
 
 catalog.config [ 
@@ -21,7 +22,15 @@ catalog.config [
 ]
 
 catalog.controller "CatalogController", [
-  "$scope",
-  ($scope) ->
-    console.log "hello"  
+  "$rootScope",
+  "Restangular",
+  "catalogService"
+  ($rootScope, Restangular, Catalog) ->
+    $rootScope.catalog = new Catalog() unless $rootScope.catalog?
+    if $rootScope.catalog.currentCategory?
+      $rootScope.catalog.getCategory($rootScope.catalog.currentCategory)
+    else
+      $rootScope.catalog.roots()
+      
+
 ]
