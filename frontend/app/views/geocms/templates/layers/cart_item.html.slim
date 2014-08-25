@@ -1,28 +1,28 @@
 .grippy
 .right-infos
-  label.title for="{{cl.layer.name}}"
-    input type="checkbox" class="layer-visibility" id="{{cl.layer.name}}" ng-checked="cl.layer._tilelayer.options.opacity > 0" ng-click="ls.toggleVisibility(cl.layer)"
-    a title="{{cl.layer.title}}" class="unstyled"  ng-click="ls.toggleVisibility(cl.layer)"
-      |{{cl.layer.title}}
-  p.source ng-if="cl.layer.data_source_name"
+  label.title for="{{layer.name}}"
+    input type="checkbox" class="layer-visibility" id="{{layer.name}}" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="ls.toggleVisibility(layer)"
+    a title="{{layer.title}}" class="unstyled"  ng-click="ls.toggleVisibility(layer)"
+      |{{layer.title}}
+  p.source ng-if="layer.data_source_name"
     |Source :
-    a href="{{cl.layer.data_source_ogc}}" target="_blank" 
-      |{{cl.layer.data_source_name}}
+    a href="{{layer.data_source_ogc}}" target="_blank"
+      |{{layer.data_source_name}}
   .cart-item-controls
     .m-btn-group.control-buttons
       a.m-btn.mini.first.query data-toggle='button' rel='tooltip' data-original-title='Interroger'
         i.carticon-info
-      a.m-btn.mini.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="controlOpacity = !controlOpacity; watchOpacity(cl.layer)" ng-class="{active: controlOpacity}"
+      a.m-btn.mini.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="controlOpacity = !controlOpacity; watchOpacity(layer)" ng-class="{active: controlOpacity}"
         i.carticon-adjust
-      a.m-btn.mini.center rel='tooltip' data-original-title='Centrer' ng-click="ls.centerOn(cl.layer)"
+      a.m-btn.mini.center rel='tooltip' data-original-title='Centrer' ng-click="ls.centerOn(layer)"
         i.carticon-target
-      a.m-btn.mini.toggle-dimension data-toggle='button' rel='tooltip' data-original-title='Temporalité' ng-class="{disabled: !cl.layer.dimension}"
+      a.m-btn.mini.toggle-dimension data-toggle='button' rel='tooltip' data-original-title='Temporalité' ng-class="{disabled: !layer.dimension}"
         i.carticon-clock
-      a.m-btn.mini.metadata-iframe rel='tooltip' data-original-title='Métadonnées' ng-class="{disabled: !cl.layer.metadata_url}"
+      a.m-btn.mini.metadata-iframe rel='tooltip' data-original-title='Métadonnées' ng-class="{disabled: !layer.metadata_url}"
         i.carticon-vcard
-      a.m-btn.mini rel='tooltip' data-original-title='Télécharger' target='_blank' ng-class="{disabled: cl.layer.data_source_not_internal}"
+      a.m-btn.mini rel='tooltip' data-original-title='Télécharger' target='_blank' ng-class="{disabled: layer.data_source_not_internal}"
         i.carticon-download 
-      a.m-btn.mini.remove rel='tooltip' data-original-title='Supprimer' ng-click="ls.remove(cl.layer)"
+      a.m-btn.mini.remove rel='tooltip' data-original-title='Supprimer' ng-click="ls.remove(layer)"
         i.carticon-trash
   .opacity-controler ng-show="controlOpacity"
-    div ui-slider="{orientation: 'horizontal', slide: ls.setOpacity}"  ng-model="cl.layer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"
+    div ui-slider="{orientation: 'horizontal', slide: ls.setOpacity}"  ng-model="layer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"

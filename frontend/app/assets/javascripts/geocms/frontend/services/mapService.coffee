@@ -31,23 +31,23 @@ mapModule.service "mapService", [() ->
     mapboxTiles.addTo(@container)
   mapService.initLayers = () ->
     # console.log(@layers)
-    _.each @layers, (cl) ->
+    _.each @layers, (layer) ->
       # console.log layer
-      mapService.addLayer(cl)
+      mapService.addLayer(layer)
 
-  mapService.addLayer = (cl) ->
-    cl.layer._tilelayer = L.tileLayer.wms cl.layer.data_source_wms,
-      layers: cl.layer.name,
+  mapService.addLayer = (layer) ->
+    layer._tilelayer = L.tileLayer.wms layer.data_source_wms,
+      layers: layer.name,
       format: 'image/png',
       transparent: true,
-      version: cl.layer.data_source_wms_version,
-      styles: cl.layer.default_style || '',
+      version: layer.data_source_wms_version,
+      styles: layer.default_style || '',
       continuousWorld: true,
-      tiled: cl.layer.tiled,
+      tiled: layer.tiled,
       maxZoom: 24,
-      minZoom: 3
-      opacity: (cl.opacity / 100)
-    cl.layer._tilelayer.addTo(@container)
+      minZoom: 3,
+      opacity: (layer.opacity / 100)
+    layer._tilelayer.addTo(@container)
 
   mapService.defineProj = (crs) ->
     scale = (zoom) ->

@@ -7,7 +7,7 @@ module Geocms
                 :data_source_ogc, :data_source_name, :bbox
 
     def bbox
-      object.boundingbox(current_tenant)
+      object.boundingbox(scope)
     end
 
   end

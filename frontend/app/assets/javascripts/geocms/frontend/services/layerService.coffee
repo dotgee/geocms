@@ -1,29 +1,30 @@
 layerModule = angular.module "geocms.layer", ["geocms.map"]
 
-layerModule.service "layerService", ["mapService", (ms) ->
-  
-  layerService = {}
+layerModule.service "layerService",
+  [ "mapService", (ms) ->
 
-  layerService.toggleVisibility = (layer) ->
-    if layer._tilelayer.options.opacity > 0
-      layer._tilelayer.setOpacity(0)
-    else
-      layer._tilelayer.setOpacity(0.9)
+    layerService = {}
 
-  layerService.setOpacity = (ev, ui) ->
-    index = $(ui.handle).parent().data("index")
-    ms.layers[index].layer._tilelayer.setOpacity(ui.value)
+    layerService.toggleVisibility = (layer) ->
+      if layer._tilelayer.options.opacity > 0
+        layer._tilelayer.setOpacity(0)
+      else
+        layer._tilelayer.setOpacity(0.9)
 
-  layerService.remove = (layer) ->
-    ms.container.removeLayer(layer._tilelayer)
-    ms.layers.splice(ms.layers.indexOf(layer), 1)
+    layerService.setOpacity = (ev, ui) ->
+      index = $(ui.handle).parent().data("index")
+      ms.layers[index]._tilelayer.setOpacity(ui.value)
 
-  layerService.centerOn = (layer) ->
-    bbox =  new L.LatLngBounds(
-                new L.LatLng layer.bbox[0], layer.bbox[1]
-              , new L.LatLng layer.bbox[2], layer.bbox[3]
-            )
-    ms.container.fitBounds(bbox)
+    layerService.remove = (layer) ->
+      ms.container.removeLayer(layer._tilelayer)
+      ms.layers.splice(ms.layers.indexOf(layer), 1)
 
-  layerService
-]
+    layerService.centerOn = (layer) ->
+      bbox =  new L.LatLngBounds(
+                  new L.LatLng layer.bbox[0], layer.bbox[1]
+                , new L.LatLng layer.bbox[2], layer.bbox[3]
+              )
+      ms.container.fitBounds(bbox)
+
+    layerService
+  ]
