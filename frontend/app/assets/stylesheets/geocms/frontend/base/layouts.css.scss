@@ -44,7 +44,7 @@ body.fullscreen{
 }
 
 .row-thumbnails {
-  background: image-url("tiny_grid.png");
+  background: asset-url("geocms/tiny_grid.png");
   border-top: 5px solid rgba(235, 235, 235, 0.55);
   ul.thumbnails {
     padding: 20px 20px 0;
@@ -100,7 +100,7 @@ body.fullscreen{
     background: rgba(0, 8, 16, 0.8);
     &:first-child {
       @include border-radius(3px 0px 0px 0px);
-    } 
+    }
   }
 }
 

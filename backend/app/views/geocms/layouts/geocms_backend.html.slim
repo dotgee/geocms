@@ -47,6 +47,5 @@ html(lang="en")
     == render "/geocms/layouts/footer"
     javascript:
       var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
-/    = include_gon
     = javascript_include_tag "geocms/backend"
     == yield :javascripts

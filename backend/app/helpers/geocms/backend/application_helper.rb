@@ -1,7 +1,7 @@
 module Geocms
   module Backend::ApplicationHelper
     def logo_for_tenant(tenant = current_tenant)
-      url = (tenant && tenant.logo?) ? tenant.logo : "dotgeocms.png"
+      url = (tenant && tenant.logo?) ? tenant.logo : "geocms/dotgeocms.png"
       image_tag url
     end
 
@@ -14,7 +14,7 @@ module Geocms
     end
 
     def breadcrumb_for_category(category = nil, admin = false)
-      tpl = admin ? "parts/backend_breadcrumb" : "parts/breadcrumb"
+      tpl = admin ? "geocms/parts/backend_breadcrumb" : "geocms/parts/breadcrumb"
       render tpl, :category => category
     end
   end

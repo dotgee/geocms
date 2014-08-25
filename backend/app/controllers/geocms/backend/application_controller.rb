@@ -5,7 +5,7 @@ module Geocms
       # self.responder = ApplicationResponder
       respond_to :html, :json
 
-     
+
       layout 'geocms/layouts/geocms_backend'
 
       protect_from_forgery
@@ -19,13 +19,13 @@ module Geocms
       end
 
       def set_locale
-          session[:locale] = params[:locale] if params[:locale]
-          session[:locale] ||= :fr
-          I18n.locale = session[:locale]
+        session[:locale] = params[:locale] if params[:locale]
+        session[:locale] ||= :fr
+        I18n.locale = session[:locale]
       end
 
       def current_ability
-        @current_ability ||= Ability.new(current_user, current_tenant)
+        @current_ability ||= Geocms::Ability.new(current_user, current_tenant)
       end
 
       rescue_from CanCan::AccessDenied do |exception|
