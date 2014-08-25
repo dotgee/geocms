@@ -1,6 +1,6 @@
 catalogModule = angular.module "geocms.catalogserv", ["restangular"]
 
-catalogModule.service "catalogService", ["Restangular", (Restangular) ->
+catalogModule.service "catalogService", ["Restangular", "$state", (Restangular, $state) ->
   
   Catalog = ->
     @currentCategory = null
@@ -34,10 +34,14 @@ catalogModule.service "catalogService", ["Restangular", (Restangular) ->
     return
 
   Catalog::goToRoot = ->
+    @close() if @categoryTree.length == 0
     @categoryTree = []
     @layers = []
     @categories = []
     @roots()
+
+  Catalog::close = ->
+    $state.go "^"
 
   Catalog
 ]
