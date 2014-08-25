@@ -48,7 +48,7 @@ module Geocms
           url ||= ENV["HOST_URL"]
           return true if url.nil?
           #return true if preview? and !force
-          ContextPreviewWorker.perform_async(self, url)
+          Geocms::ContextPreviewWorker.perform_async(self, url)
         end
       end
   end

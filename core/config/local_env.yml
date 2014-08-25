@@ -1,0 +1,4 @@
+MONO_ACCOUNT: 'true'
+SUBDOMAIN: 'www'
+PREFIX: ''
+HOST_URL: 'http://0.0.0.0:3000'
