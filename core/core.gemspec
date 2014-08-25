@@ -29,14 +29,14 @@ Gem::Specification.new do |s|
   s.add_dependency "acts_as_list", "~> 0.4.0"
   s.add_dependency 'carrierwave', '~> 0.10.0'
   s.add_dependency "rmagick", '~> 2.13.2'
-  s.add_dependency "cancan"
+  s.add_dependency "cancancan"
   s.add_dependency "rolify"
   s.add_dependency "rgeo"
   s.add_dependency "curb"
   # s.add_dependency "tire"
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"
-  
+
   # Rails 4 compatibility
   s.add_dependency 'protected_attributes'
 end

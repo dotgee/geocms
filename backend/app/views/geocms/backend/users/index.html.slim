@@ -11,9 +11,9 @@ table.table.table-striped.table-users
       th width="40px"
   tbody
     - @users.each do |u|
-      == render u
+      == render "user", user: u
 br
-- if can? :create, User
+- if can? :create, Geocms::User
   = text_field_tag :user, nil, :placeholder => "Choisir un collaborateur", :class => "input-add-colaborator", :style => "width: 400px;"
   button.m-btn.btn-add-colaborator.blue= t("add")
   br

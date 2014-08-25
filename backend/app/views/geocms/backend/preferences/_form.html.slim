@@ -3,7 +3,7 @@
     = form_tag [:backend, :preferences], {:method => :put, :class => "form-horizontal"} do |f|
       h4   Carte
       .form-inputs
-        - Account.prefs.keys.each do |p|
+        - Geocms::Account.prefs.keys.each do |p|
           .control-group
             = label_tag p, p.to_s.humanize, :class => "control-label"
             .controls

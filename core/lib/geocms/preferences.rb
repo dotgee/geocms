@@ -27,7 +27,7 @@ module Geocms::Preferences
   end
 
   def write_preference(name, value)
-    p = self.preferences.find_or_create_by_name(name)
+    p = self.preferences.where(name: name).first_or_create
     p.update_attribute(:value, value)
   end
 

@@ -1,7 +1,7 @@
 module Geocms
   module Backend
     class AccountsController < Geocms::Backend::ApplicationController
-      load_and_authorize_resource
+      load_and_authorize_resource class: "Geocms::Account"
 
       def index
         @accounts = Account.all

@@ -1,6 +1,5 @@
 module Geocms
   module Core
-
   end
 end
 
@@ -17,7 +16,7 @@ require "rolify"
 require "protected_attributes"
 
 require "sorcery"
-require "cancan"
+require "cancancan"
 
 require 'geocms/core/version'
 require 'geocms/core/engine'

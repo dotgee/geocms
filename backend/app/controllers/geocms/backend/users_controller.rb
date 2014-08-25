@@ -1,7 +1,7 @@
 module Geocms
   module Backend
     class UsersController < Geocms::Backend::ApplicationController
-      load_and_authorize_resource
+      load_and_authorize_resource class: "Geocms::User"
 
       def index
         @users = current_tenant.users
