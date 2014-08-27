@@ -7,7 +7,7 @@ module Geocms
     end
 
     def show
-      @category = Category.find params[:id]
+      @category = Category.includes(layers: [:data_source]).find params[:id]
       respond_with @category
     end
 
