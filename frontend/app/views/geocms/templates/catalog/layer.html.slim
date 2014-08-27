@@ -1,4 +1,4 @@
-.media-wrapper.media-layer ng-class="{layer.onMap: added}"
+.media-wrapper.media-layer ng-class="{added: catalog.isOnCart(layer.id, cart)}" ng-init="added=false" ng-click="catalog.addToCart(layer.id, cart); added = !added"
   a.pull-left.image-link
     img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64' ng-if="false"
   .media-body

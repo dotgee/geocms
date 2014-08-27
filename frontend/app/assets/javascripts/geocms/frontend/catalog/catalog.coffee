@@ -23,14 +23,11 @@ catalog.config [
 
 catalog.controller "CatalogController", [
   "$rootScope",
-  "Restangular",
   "catalogService"
-  ($rootScope, Restangular, Catalog) ->
+  ($rootScope, Catalog) ->
     $rootScope.catalog = new Catalog() unless $rootScope.catalog?
     if $rootScope.catalog.currentCategory?
       $rootScope.catalog.getCategory($rootScope.catalog.currentCategory)
     else
       $rootScope.catalog.roots()
-      
-
 ]

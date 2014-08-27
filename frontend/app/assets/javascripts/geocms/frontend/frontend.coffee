@@ -9,7 +9,7 @@
 #= require ./vendor/jquery-ui-custom.min
 #= require ./vendor/ui-slider
 
-#= require ./services/layerService
+#= require ./services/cartService
 #= require ./services/mapService
 #= require ./services/catalogService
 #= require ./catalog/catalog

@@ -29,13 +29,9 @@ mapModule.service "mapService", [() ->
         attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
     })
     mapboxTiles.addTo(@container)
-  mapService.initLayers = () ->
-    # console.log(@layers)
-    _.each @layers, (layer) ->
-      # console.log layer
-      mapService.addLayer(layer)
 
   mapService.addLayer = (layer) ->
+    layer.opacity = 90 unless layer.opacity?
     layer._tilelayer = L.tileLayer.wms layer.data_source_wms,
       layers: layer.name,
       format: 'image/png',
@@ -48,7 +44,9 @@ mapModule.service "mapService", [() ->
       minZoom: 3,
       opacity: (layer.opacity / 100)
     layer._tilelayer.addTo(@container)
-
+    layer.onMap = true
+    layer
+  
   mapService.defineProj = (crs) ->
     scale = (zoom) ->
       return 1 / (4891.96875 / Math.pow(2, zoom))

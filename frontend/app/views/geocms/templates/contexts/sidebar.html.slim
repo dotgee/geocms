@@ -29,7 +29,7 @@
           |&nbsp;
           i.icon-layer
       ul.nav.nav-list#layer-list
-        li ng-repeat="layer in contexts_layers" ng-include="'/templates/layers/cart_item.html'"
+        li ng-repeat="layer in cart.layers" ng-include="'/templates/layers/cart_item.html'"
 
   .m-btn-group#ctrls
     button.m-btn.first.icn-only.legend data-toggle="button" rel="tooltip" data-original-title=t("context.controls.legend")

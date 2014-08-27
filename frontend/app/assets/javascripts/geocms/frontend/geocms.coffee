@@ -4,7 +4,7 @@ geocms = angular.module( 'geocms', [
   'ui.slider'
   'geocms.contexts'
   'geocms.map'
-  'geocms.layer'
+  'geocms.cart'
   'geocms.catalogserv'
   'geocms.catalog'
 ])

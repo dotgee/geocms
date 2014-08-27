@@ -1,8 +1,8 @@
 .grippy
 .right-infos
   label.title for="{{layer.name}}"
-    input type="checkbox" class="layer-visibility" id="{{layer.name}}" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="ls.toggleVisibility(layer)"
-    a title="{{layer.title}}" class="unstyled"  ng-click="ls.toggleVisibility(layer)"
+    input type="checkbox" class="layer-visibility" id="{{layer.name}}" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
+    a title="{{layer.title}}" class="unstyled"  ng-click="cart.toggleVisibility(layer)"
       |{{layer.title}}
   p.source ng-if="layer.data_source_name"
     |Source :
@@ -14,7 +14,7 @@
         i.carticon-info
       a.m-btn.mini.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="controlOpacity = !controlOpacity; watchOpacity(layer)" ng-class="{active: controlOpacity}"
         i.carticon-adjust
-      a.m-btn.mini.center rel='tooltip' data-original-title='Centrer' ng-click="ls.centerOn(layer)"
+      a.m-btn.mini.center rel='tooltip' data-original-title='Centrer' ng-click="cart.centerOn(layer)"
         i.carticon-target
       a.m-btn.mini.toggle-dimension data-toggle='button' rel='tooltip' data-original-title='Temporalité' ng-class="{disabled: !layer.dimension}"
         i.carticon-clock
@@ -22,7 +22,7 @@
         i.carticon-vcard
       a.m-btn.mini rel='tooltip' data-original-title='Télécharger' target='_blank' ng-class="{disabled: layer.data_source_not_internal}"
         i.carticon-download 
-      a.m-btn.mini.remove rel='tooltip' data-original-title='Supprimer' ng-click="ls.remove(layer)"
+      a.m-btn.mini.remove rel='tooltip' data-original-title='Supprimer' ng-click="cart.remove(layer)"
         i.carticon-trash
   .opacity-controler ng-show="controlOpacity"
-    div ui-slider="{orientation: 'horizontal', slide: ls.setOpacity}"  ng-model="layer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"
+    div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="layer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"

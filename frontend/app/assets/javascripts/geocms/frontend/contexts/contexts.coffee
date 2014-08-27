@@ -2,7 +2,7 @@ contexts = angular.module "geocms.contexts", [
   'ui.router'
   'restangular'
   'geocms.map'
-  'geocms.layer'
+  'geocms.cart'
 ]
 
 contexts.config [ 
@@ -27,7 +27,7 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["$scope", "mapService", ($scope, mapService) ->
+            controller: ["mapService", (mapService) ->
               context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               mapService.addBaseLayer()
@@ -42,10 +42,10 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["$scope", "mapService", "data", ($scope, mapService, data) ->
+            controller: ["mapService", "data", "$rootScope", (mapService, data, $root) ->
               mapService.createMap("map", data.context.center_lat, data.context.center_lng, data.context.zoom)
               mapService.addBaseLayer()
-              mapService.initLayers()
+              $root.cart.addSeveral(data.contexts_layers)
             ]
         resolve: 
           data: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
@@ -54,18 +54,17 @@ contexts.config [
 ]
 
 contexts.controller "ContextsController", [
-  "$scope"
+  "$rootScope"
   "$state"
   "data"
   "mapService"
-  "layerService"
+  "cartService"
 
-  ($scope, $state, data, mapService, layerService) ->
+  ($root, $state, data, mapService, Cart) ->
     
-    $scope.ls = layerService
-    $scope.contexts_layers = mapService.layers = data.contexts_layers
+    $root.cart = new Cart() unless $root.cart?
 
-    $scope.openCatalog = () ->
+    $root.openCatalog = () ->
       if ($state.current.name.indexOf('catalog') > -1) then $state.go "^" else $state.go ".catalog"
 
 ]

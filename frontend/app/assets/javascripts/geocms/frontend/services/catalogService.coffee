@@ -1,47 +1,58 @@
-catalogModule = angular.module "geocms.catalogserv", ["restangular"]
+catalogModule = angular.module "geocms.catalogserv", ["restangular", "geocms.cart"]
 
-catalogModule.service "catalogService", ["Restangular", "$state", (Restangular, $state) ->
-  
-  Catalog = ->
-    @currentCategory = null
-    @categoryTree = []
-    @categories = []
-    @layers = []
-    return
+catalogModule.service "catalogService", 
+[
+  "Restangular",
+  "$state",
+  (Restangular, $state) ->
+    
+    Catalog = ->
+      @currentCategory = null
+      @categoryTree = []
+      @categories = []
+      @layers = []
+      return
 
-  Catalog::getCategory = (category) ->
-    return if @currentCategory == category
-    @currentCategory = category
-    @breadcrumb(category)
-    that = this
-    Restangular.one("categories", category.id).get().then (category) ->
-      that.categories = category.children
-      that.layers = category.layers
-    return
+    Catalog::getCategory = (category) ->
+      return if @currentCategory == category
+      @currentCategory = category
+      @breadcrumb(category)
+      that = this
+      Restangular.one("categories", category.id).get().then (category) ->
+        that.categories = category.children
+        that.layers = category.layers
+      return
 
-  Catalog::roots = ->
-    that = this
-    Restangular.all("categories").getList().then (categories) ->
-      that.categories = categories
-    return
+    Catalog::addToCart = (id, cart) ->
+      if @isOnCart(id, cart) then cart.remove(cart.get(id)) else cart.add(id)
+      return
 
-  Catalog::breadcrumb = (category) ->
-    index = @categoryTree.indexOf(category)
-    if index > -1
-      @categoryTree.splice(index+1, Number.MAX_VALUE)
-    else
-      @categoryTree.push category
-    return
+    Catalog::isOnCart = (id, cart) ->
+      if _.findWhere(cart.layers, {id: id}) then true else false 
 
-  Catalog::goToRoot = ->
-    @close() if @categoryTree.length == 0
-    @categoryTree = []
-    @layers = []
-    @categories = []
-    @roots()
+    Catalog::roots = ->
+      that = this
+      Restangular.all("categories").getList().then (categories) ->
+        that.categories = categories
+      return
 
-  Catalog::close = ->
-    $state.go "^"
+    Catalog::breadcrumb = (category) ->
+      index = @categoryTree.indexOf(category)
+      if index > -1
+        @categoryTree.splice(index+1, Number.MAX_VALUE)
+      else
+        @categoryTree.push category
+      return
 
-  Catalog
+    Catalog::goToRoot = ->
+      @close() if @categoryTree.length == 0
+      @categoryTree = []
+      @layers = []
+      @categories = []
+      @roots()
+
+    Catalog::close = ->
+      $state.go "^"
+
+    Catalog
 ]
