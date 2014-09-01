@@ -1,0 +1,17 @@
+fr:
+  folders: Dossier
+  folder:
+    created_at: Créé le
+    name: Nom
+    new: Nouveau dossier
+    visibility: Public
+  simple_form:
+    labels:
+      folder:
+        name: Nom
+        visibility: Public
+  helpers:
+    submit:
+      folder:
+        create: Créer
+        update: Mettre à jour

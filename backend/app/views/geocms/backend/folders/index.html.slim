@@ -1,0 +1,22 @@
+.page-header
+  h1= t("folders")
+
+table.table.table-striped
+  thead
+    tr
+      th= t("folder.name")
+      th= t("folder.visibility")
+      th= t("folder.created_at")
+      th
+  tbody
+    - @folders.each do |folder|
+      tr
+        td= folder.name
+        td= folder.visibility
+        td= folder.created_at.strftime("%d/%m/%Y")
+        td
+          = link_to [:edit, :backend, folder], class: "m-btn mini blue icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
+            i.icon-pencil.icon-white
+          = link_to [:backend, folder], confirm: "Are you sure ?", method: :delete, class: "m-btn red icn-only mini" do
+            i.icon-trash.icon-white
+= link_to t("folder.new"), [:new, :backend, :folder], class: "m-btn blue"

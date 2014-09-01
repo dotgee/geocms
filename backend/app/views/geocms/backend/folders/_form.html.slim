@@ -1,0 +1,4 @@
+= simple_form_for [:backend, @folder] do |f|
+  = f.input :name
+  = f.input :visibility, as: :boolean
+  = f.submit class: "m-btn blue"

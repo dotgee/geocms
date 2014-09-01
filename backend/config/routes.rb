@@ -6,7 +6,7 @@ Geocms::Core::Engine.add_routes do
 
   namespace :backend do
     root :to => "categories#index"
-    
+
     resources :sessions, :only => [:new, :create, :destroy]
 
     get "search", :to => "search#search"
@@ -50,6 +50,10 @@ Geocms::Core::Engine.add_routes do
       member do
         get 'refresh_preview'
       end
+    end
+
+    resources :folders do
+
     end
 
   end

@@ -10,7 +10,7 @@ html(lang="en")
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
     = stylesheet_link_tag "geocms/application"
-    = stylesheet_link_tag "geocms/backend"
+    = stylesheet_link_tag "geocms/backend/backend"
     = yield :stylesheets
     = yield(:js_header)
   body.backend
@@ -24,7 +24,7 @@ html(lang="en")
                = logo_for_tenant
               - if logged_in?
                 li= link_to t("menu.categories"), backend_categories_path
-                li= link_to t("maps"), backend_contexts_path
+                li= link_to t("maps"), backend_folders_path
                 li= link_to t("menu.data_sources"), backend_data_sources_path
                 li= link_to t("menu.users"), backend_users_path
                 li= link_to t("menu.preferences"), edit_backend_preferences_path
