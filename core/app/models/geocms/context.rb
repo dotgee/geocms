@@ -12,6 +12,7 @@ module Geocms
     after_create :generate_uuid
 
     after_save :generate_preview
+    after_save :set_default
 
     default_scope -> { order("created_at DESC") }
 
@@ -51,6 +52,10 @@ module Geocms
           #return true if preview? and !force
           Geocms::ContextPreviewWorker.perform_async(self, url)
         end
+      end
+
+      def set_default
+        Context.where('id != ?', id).update_all(by_default: false) if by_default
       end
   end
 end
