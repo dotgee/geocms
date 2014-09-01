@@ -11,7 +11,7 @@ table.table.table-striped
   tbody
     - @folders.each do |folder|
       tr
-        td= folder.name
+        td= link_to folder.name, [:backend, folder]
         td= folder.visibility
         td= folder.created_at.strftime("%d/%m/%Y")
         td

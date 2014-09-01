@@ -19,6 +19,7 @@ module Geocms
         can :read, :all
         can :new, Context
         can :share, Context
+        can :save, Context, folder: { owner: user }
       end
 
       # Global admin can do everything
