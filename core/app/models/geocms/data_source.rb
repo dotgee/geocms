@@ -15,7 +15,6 @@ module Geocms
       layers
     end
 
-    attr_accessible :csw, :name, :ogc, :wfs, :wms, :rest, :not_internal
     validates_presence_of :name, :ogc, :wms
   end
 end

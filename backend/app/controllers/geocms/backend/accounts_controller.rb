@@ -14,7 +14,7 @@ module Geocms
       end
 
       def create
-        @account = Account.new(params[:account])
+        @account = Account.new(account_params)
         @account.save
         respond_with [:backend, :accounts]
       end
@@ -24,6 +24,11 @@ module Geocms
         @account.destroy
         respond_with [:backend, :accounts]
       end
+
+      private
+        def account_params
+          params.require(:account).permit(PermittedAttributes.account_attributes)
+        end
     end
   end
 end

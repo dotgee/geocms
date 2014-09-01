@@ -38,6 +38,4 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari"
   s.add_dependency "sidekiq"
 
-  # Rails 4 compatibility
-  s.add_dependency 'protected_attributes'
 end

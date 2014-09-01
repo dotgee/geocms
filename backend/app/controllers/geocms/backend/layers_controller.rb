@@ -35,7 +35,7 @@ module Geocms
       def create
         dimension_values = params.delete(:dimension_values)
         bbox = params.delete(:bbox)
-        @layer = Layer.new(params[:layer].reject{ |p| p == "category_id" })
+        @layer = Layer.new(layer_params.reject{ |p| p == "category_id" })
         @layer.crs = params.delete(:srs).first.to_s if params[:srs].present?
         if @layer.save
           if dimension_values && dimension_values.any?
@@ -55,7 +55,7 @@ module Geocms
 
       def update
         @layer = Layer.find(params[:id])
-        @layer.update_attributes(params[:layer])
+        @layer.update_attributes(layer_params)
         respond_with [:edit, :backend, @layer]
       end
 
@@ -79,13 +79,17 @@ module Geocms
       end
 
       private
-      def require_category
-        if params[:category_id].present?
-          @category = Category.find(params[:category_id])
-        else
-          @category = Category.find(params[:layer][:category_id])
+        def require_category
+          if params[:category_id].present?
+            @category = Category.find(params[:category_id])
+          else
+            @category = Category.find(layer_params[:category_id])
+          end
         end
-      end
+
+        def layer_params
+          params.require(:layer).permit(PermittedAttributes.layer_attributes)
+        end
     end
   end
 end

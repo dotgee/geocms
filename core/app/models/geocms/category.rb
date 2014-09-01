@@ -11,7 +11,6 @@ module Geocms
     acts_as_list scope: [:account_id, :ancestry]
 
     scope :ordered, -> { select([:name, :id, :slug, :ancestry]).ordered_by_ancestry.order("position asc") }
-    attr_accessible :name, :position, :parent_id
 
     before_save :cache_ancestry
 

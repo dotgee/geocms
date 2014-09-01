@@ -21,14 +21,14 @@ module Geocms
       end
 
       def create
-        @data_source = DataSource.new(params[:data_source])
+        @data_source = DataSource.new(data_source_params)
         @data_source.save
         respond_with([:backend, @data_source])
       end
 
       def update
         @data_source = DataSource.find(params[:id])
-        @data_source.update_attributes(params[:data_source])
+        @data_source.update_attributes(data_source_params)
         respond_with([:backend, @data_source])
       end
 
@@ -45,6 +45,12 @@ module Geocms
         gon.rabl "app/views/layers/index.json", :as => :layers, :handler => :rabl
         respond_with([:backend, @data_source])
       end
+
+      private
+        def data_source_params
+          params.require(:data_source).permit(PermittedAttributes.data_source_attributes)
+        end
+
     end
   end
 end

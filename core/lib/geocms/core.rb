@@ -13,8 +13,6 @@ require "rgeo"
 # require "tire"
 require "rolify"
 
-require "protected_attributes"
-
 require "sorcery"
 require "cancancan"
 
@@ -22,3 +20,6 @@ require 'geocms/core/version'
 require 'geocms/core/engine'
 require 'geocms/core/routes'
 require 'geocms/preferences'
+
+require 'geocms/permitted_attributes'
+require 'geocms/core/controller_helpers/strong_parameters'

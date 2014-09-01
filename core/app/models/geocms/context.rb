@@ -3,10 +3,11 @@ module Geocms
     acts_as_tenant(:account)
     has_many :contexts_layers, -> { order(:position) }, :dependent => :destroy
     has_many :layers, :through => :contexts_layers
+
+    belongs_to :folder, class_name: "Geocms::Folder"
+
     mount_uploader :preview, Geocms::ContextPictureUploader
 
-    attr_accessible :maxx, :maxy, :minx, :miny, :name, :zoom, :description, :center_lng,
-  		  :center_lat, :layer_ids, :uuid, :contexts_layers_attributes, :preview, :account_id
     accepts_nested_attributes_for :contexts_layers
     after_create :generate_uuid
 

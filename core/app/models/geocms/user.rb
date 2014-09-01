@@ -7,6 +7,9 @@ module Geocms
 
     has_many :memberships
     has_many :accounts, through: :memberships
+
+    has_many :folders, class_name: "Geocms::Folder"
+
     #acts_as_tenant(:account)
     #after_create :define_role
     before_save :create_md5
@@ -31,8 +34,6 @@ module Geocms
         self.email_md5 = Digest::MD5.hexdigest(email.downcase)
       end
     end
-
-    attr_accessible :email, :password, :password_confirmation, :username, :account, :account_id, :first_name, :last_name, :email_md5
 
     validates_confirmation_of :password
     validates_presence_of :password, on: :create

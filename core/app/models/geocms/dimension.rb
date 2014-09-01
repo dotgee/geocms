@@ -2,8 +2,6 @@ module Geocms
   class Dimension < ActiveRecord::Base
     belongs_to :layer
 
-    attr_accessible :layer_id, :value
-
     default_scope -> { order("value ASC") }
 
     validates :layer_id, presence: true

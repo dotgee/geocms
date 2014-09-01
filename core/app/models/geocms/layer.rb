@@ -81,10 +81,6 @@ module Geocms
     # ATTRIBUTES
     # store :bbox, accessors: [:minx, :maxx, :miny, :maxy]
 
-    attr_accessible :description, :name, :title, :wms_url, :data_source_id, :category_ids, :category,
-  		  :crs, :minx, :miny, :maxx, :maxy, :dimension, :template, :remote_thumbnail_url, :metadata_url,
-  		  :metadata_identifier, :tiled
-
     mount_uploader :thumbnail, Geocms::LayerUploader
 
     validates_presence_of :data_source_id, :name, :title

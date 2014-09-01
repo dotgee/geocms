@@ -11,6 +11,7 @@ module Geocms
       end
 
       def index
+        @folders = Folder.all
         @contexts = Context.all
       end
 
@@ -25,7 +26,7 @@ module Geocms
       end
 
       def create
-        @context = Context.new(params[:context])
+        @context = Context.new(context_params)
         @context.save
         respond_with([:backend, @context])
       end
@@ -37,7 +38,7 @@ module Geocms
 
       def update
         @context = Context.find(params[:id])
-        @context.update_attributes(params[:context])
+        @context.update_attributes(context_params)
         respond_with([:edit, :backend, @context])
       end
 
@@ -46,6 +47,12 @@ module Geocms
         @context.destroy
         respond_with [:backend, @context]
       end
+
+      private
+        def context_params
+          params.require(:context).permit(PermittedAttributes.context_attributes)
+        end
+
     end
   end
 end

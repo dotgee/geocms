@@ -25,14 +25,14 @@ module Geocms
       end
 
       def create
-        @category = Category.new(params[:category])
+        @category = Category.new(category_params)
         @category.save
         respond_with([:backend, @category])
       end
 
       def update
         @category = Category.find(params[:id])
-        @category.update_attributes(params[:category])
+        @category.update_attributes(category_params)
         respond_with([:backend, @category])
       end
 
@@ -51,6 +51,11 @@ module Geocms
         end
         redirect_to [:backend, :categories]
       end
+
+      private
+        def category_params
+          params.require(:category).permit(PermittedAttributes.category_attributes)
+        end
     end
   end
 end

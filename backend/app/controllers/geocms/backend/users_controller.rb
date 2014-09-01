@@ -27,7 +27,7 @@ module Geocms
       end
 
       def create
-        @user = User.new(params[:user])
+        @user = User.new(user_params)
         @user.save
         current_tenant.users << @user
         current_tenant.save
@@ -40,7 +40,7 @@ module Geocms
 
       def update
         @user = User.find(params[:id])
-        @user.update_attributes(params[:user])
+        @user.update_attributes(user_params)
         respond_with [:edit, :backend, @user]
       end
 
@@ -49,6 +49,12 @@ module Geocms
         current_tenant.users.delete(@user)
         respond_with [:backend, :users]
       end
+
+      private
+        def user_params
+          params.require(:user).permit(PermittedAttributes.user_attributes)
+        end
+
     end
   end
 end
