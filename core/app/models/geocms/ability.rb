@@ -15,6 +15,11 @@ module Geocms
         cannot :destroy, :all
         cannot :create, User
         cannot :manage, Account
+      elsif user.new_record?
+        can :read, :all
+        can :new, Context
+        can :share, Context
+        can :create, Context, folder: { visibility: true }
       else
         can :read, :all
         can :new, Context
