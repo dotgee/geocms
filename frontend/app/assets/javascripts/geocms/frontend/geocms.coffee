@@ -4,6 +4,7 @@ geocms = angular.module( 'geocms', [
   'ui.slider'
   'ui.bootstrap'
   'geocms.contexts'
+  'geocms.folders'
   'geocms.map'
   'geocms.cart'
   'geocms.catalogserv'
@@ -11,12 +12,12 @@ geocms = angular.module( 'geocms', [
 ])
 
 geocms.config [
-  "$httpProvider", 
+  "$httpProvider",
   "$stateProvider",
   "$locationProvider",
   "$urlRouterProvider",
   "RestangularProvider",
-  
+
   ( $httpProvider,
     $stateProvider,
     $locationProvider,
@@ -27,7 +28,7 @@ geocms.config [
     RestangularProvider.setDefaultHttpFields({cache: true});
 ]
 
-geocms.run [ 
+geocms.run [
   "Restangular",
   "mapService"
   (Restangular, mapService) ->

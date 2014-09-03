@@ -11,6 +11,7 @@
 #= require ./services/cartService
 #= require ./services/mapService
 #= require ./services/catalogService
+#= require ./folders/folders
 #= require ./catalog/catalog
 #= require ./contexts/contexts
 #= require ./geocms

@@ -5,7 +5,7 @@ contexts = angular.module "geocms.contexts", [
   'geocms.cart'
 ]
 
-contexts.config [ 
+contexts.config [
   "$stateProvider",
   ($stateProvider) ->
     $stateProvider
@@ -17,11 +17,11 @@ contexts.config [
           "header":
             templateUrl: "/templates/shared/header.html"
         abstract: true
-      
+
       .state 'contexts.root',
         url: ""
         parent: "contexts"
-        views: 
+        views:
           "sidebar@contexts":
             templateUrl: "/templates/contexts/sidebar.html"
             controller: "ContextsController"
@@ -36,7 +36,7 @@ contexts.config [
       .state 'contexts.show',
         url: "/{id:[0-9]{1,4}}"
         parent: 'contexts.root'
-        views: 
+        views:
           "sidebar@contexts":
             templateUrl: "/templates/contexts/sidebar.html"
             controller: "ContextsController"
@@ -49,10 +49,10 @@ contexts.config [
               $root.cart.addSeveral()
               console.log data
             ]
-        resolve: 
+        resolve:
           data: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
             Restangular.one('contexts', $stateParams.id).get()
-          ] 
+          ]
 ]
 
 contexts.controller "ContextsController", [
@@ -63,8 +63,8 @@ contexts.controller "ContextsController", [
   "cartService"
 
   ($root, $state, data, mapService, Cart) ->
-    
-    $root.cart = new Cart() unless $root.cart?
+
+    $root.cart = new Cart() # unless $root.cart?
 
     $root.openCatalog = () ->
       if ($state.current.name.indexOf('catalog') > -1) then $state.go "^" else $state.go ".catalog"

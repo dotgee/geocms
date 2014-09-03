@@ -8,6 +8,7 @@ Geocms::Core::Engine.add_routes do
       end
       resources :contexts
       resources :categories
+      resources :folders
     end
   end
 end

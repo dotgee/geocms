@@ -1,0 +1,10 @@
+.row-thumbnails
+  ul.thumbnails
+    li.span3.fixed-layout ng-repeat="folder in folders"
+      a ui-sref="folders.show(folder)"
+        .thumbnail.unbordered
+          .placeholder
+            .carticon-folder.folder-display
+          .caption
+            h4
+              |{{folder.name}}

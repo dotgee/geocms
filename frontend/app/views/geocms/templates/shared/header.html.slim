@@ -2,12 +2,14 @@
   .navbar-inner
     .container
       ul.nav.nav-branding
-        li= link_to "", :class => "brand" do
-          = @current_tenant.logo_image_tag
-          li= link_to "#", :class => "brand brand-context" do
+        li
+          a ui-sref="contexts.root"
+            = @current_tenant.logo_image_tag
+        li
+          a.brand.brand-context ui-sref="contexts.root"
             = "#{current_tenant.name}"
             = " | #{yield(:context_name)}" if content_for?(:context_name)
       .top-menu
-        = link_to (t "maps"), ""
+        a ui-sref="folders.root" Cartes
         - if logged_in?
           = link_to "Admin", ""

@@ -13,9 +13,9 @@ html(lang="en" ng-app="geocms")
       / = stylesheet_link_tag "leaflet/leaflet.ie"
     = csrf_meta_tags
   body.fullscreen class=(yield :body_class)
-    #progress
-      dt
-      dd
+    / #progress
+    /   dt
+    /   dd
     div ui-view="header"
     div ui-view=""
     == yield

@@ -1,6 +1,6 @@
 $main-color: #1570a6 !default;
-$button-color: #4d90fe !default;
-$darken-button-color: darken($button-color, 5) !default;
+$button-color: $main-color !default;
+$darken-button-color: $button-color !default;
 
 // Blues
 $oxford_blue: #3C4E5A !default;
