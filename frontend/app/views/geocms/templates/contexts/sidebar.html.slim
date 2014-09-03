@@ -1,45 +1,46 @@
 .hud
-  .map-controls
-    .m-btn-group
-      button.save.m-btn.blue
-        span= t "context.save"
-      button.share.m-btn.disabled disabled="disabled"
-        span= t "context.share"
-        '
-        i.m-icon-swapright
-      = link_to "", :class => "m-btn geovisu disabled", :target => "geovisu" do
-        |Geovisu
-        '
-        i.icon-geovisu
-  ul.nav.nav-tabs.row-fluid id="hud-tab"
-    li.active
-      = link_to "#layers", "data-toggle" => "tab" do
-        = t "layers"
-    li
-      = link_to "#infos", "data-toggle" => "tab" do
-        = t "context.infos"
-  .tab-content
-    .tab-pane id="infos"
-      a.m-btn.mini.blue.from-map = t "context.from_map"
-    .tab-pane.active id="layers"
-      .add-layer ng-click="openCatalog()"
-        span = t "add_a_new_layer"
-        a class="m-btn mini blue icn-only pull-right" 
-          i.icon-plus.icon-white
-          |&nbsp;
-          i.icon-layer
-      ul.nav.nav-list#layer-list
-        li ng-repeat="layer in cart.layers" ng-include="'/templates/layers/cart_item.html'"
+  div ng-include="'/templates/contexts/top_sidebar.html'"
+  tabset.row-fluid#hud-tab
+    tab heading=t("layers")
+      #layers
+        .add-layer ng-click="openCatalog()"
+          span = t "add_a_new_layer"
+          a class="m-btn mini blue icn-only pull-right"
+            i.icon-plus.icon-white
+            |&nbsp;
+            i.icon-layer
+        ul.nav.nav-list#layer-list
+          li ng-repeat="layer in cart.layers" ng-include="'/templates/layers/cart_item.html'"
+    tab heading=t("context.infos")
+      #infos
+        form data-fieldsets=""
+          fieldset data-fields=""
+            .control-group.field-name
+              label.control-label for="context_name"  Name
+              .controls
+                span data-editor=""
+                  input#context_name.m-wrap.input-block-level name="name" type="text" ng-model="cart.context.name"
+            .control-group.field-description
+              label.control-label for="context_description"  Description
+              .controls
+                span data-editor=""
+                  textarea#context_description.m-wrap.input-block-level name="description" type="text"  ng-model="cart.context.description"
+            .control-group.field-center_lng.pull-left.input-position.first
+              label.control-label for="context_center_lng"  Longitude
+              .controls
+                span data-editor=""
+                  input#context_center_lng.m-wrap.input-mini name="center_lng" type="text" ng-model="cart.context.center_lng"
+            .control-group.field-center_lat.pull-left.input-position
+              label.control-label for="context_center_lat"  Latitude
+              .controls
+                span data-editor=""
+                  input#context_center_lat.m-wrap.input-mini name="center_lat" type="text" ng-model="cart.context.center_lat"
+            .control-group.field-zoom.pull-left.input-position
+              label.control-label for="context_zoom"  Zoom
+              .controls
+                span data-editor=""
+                  input#context_zoom.m-wrap.input-mini name="zoom" type="text" ng-model="cart.context.zoom"
+            a.m-btn.mini.blue.from-map Importer
 
-  .m-btn-group#ctrls
-    button.m-btn.first.icn-only.legend data-toggle="button" rel="tooltip" data-original-title=t("context.controls.legend")
-      i.carticon-list
-    button.m-btn.icn-only.globe rel="tooltip" data-original-title=t("context.controls.position")
-      i.carticon-globe
-    button.m-btn.icn-only.tools  data-toggle="button" rel="tooltip" data-original-title=t("context.controls.tools")
-      i.carticon-tools
-    button.m-btn.icn-only.fullscreen data-toggle="button" rel="tooltip" data-original-title=t("context.controls.fullscreen")
-      i.carticon-resize-full
-    button.m-btn.last.icn-only.togglehud rel="tooltip" data-original-title=t("context.controls.hud")
-      i.carticon-left-circled
-  
+
+  div ng-include="'/templates/contexts/bottom_sidebar.html'"

@@ -45,7 +45,7 @@
 
 // LEFT NAVBAR - TABS
 #hud-tab {
-  li {
+  > ul > li {
     margin-left: 0;
     width: 50%;
     a {

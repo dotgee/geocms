@@ -9,6 +9,8 @@ cartModule.service "cartService",
     
       Cart = ->
         @layers = []
+        @context = null
+        @state = "saved"
         return
 
       Cart::toggleVisibility = (layer) ->
@@ -35,11 +37,17 @@ cartModule.service "cartService",
         Restangular.one("layers", id).get().then (data) ->
           that.layers.push ms.addLayer(data.layer)
 
-      Cart::addSeveral = (context_layers) ->
+      Cart::addSeveral = () ->
         that = this
-        _.each context_layers, (cl) ->
+        console.log @context
+        _.each @context.contexts_layers, (cl) ->
           that.layers.push ms.addLayer(cl)
 
+      Cart::save = () ->
+        # unless @state == "saved"
+        console.log "saving..."
+        console.log @context
+        @context.save()
 
       Cart::centerOn = (layer) ->
         bbox =  new L.LatLngBounds(

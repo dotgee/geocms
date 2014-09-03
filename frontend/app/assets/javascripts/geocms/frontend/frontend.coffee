@@ -6,8 +6,7 @@
 #= require leaflet
 #= require ./proj4leaflet
 #= require moment
-#= require ./vendor/jquery-ui-custom.min
-#= require ./vendor/ui-slider
+#= require_tree ./vendor
 
 #= require ./services/cartService
 #= require ./services/mapService

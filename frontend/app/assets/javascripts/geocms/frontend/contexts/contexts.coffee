@@ -43,9 +43,11 @@ contexts.config [
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
             controller: ["mapService", "data", "$rootScope", (mapService, data, $root) ->
-              mapService.createMap("map", data.context.center_lat, data.context.center_lng, data.context.zoom)
+              mapService.createMap("map", data.center_lat, data.center_lng, data.zoom)
               mapService.addBaseLayer()
-              $root.cart.addSeveral(data.contexts_layers)
+              $root.cart.context = data
+              $root.cart.addSeveral()
+              console.log data
             ]
         resolve: 
           data: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->

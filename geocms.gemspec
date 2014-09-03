@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.license      = %q{CeCiLL}
 
   s.add_dependency 'geocms_core', version
-  s.add_dependency 'geocms_api', version
   s.add_dependency 'geocms_backend', version
+  s.add_dependency 'geocms_api', version
   s.add_dependency 'geocms_frontend', version
 end
