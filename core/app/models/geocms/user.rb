@@ -23,6 +23,13 @@ module Geocms
       [first_name, last_name].reject(&:blank?).join(" ")
     end
 
+    def set_folder
+      # begin
+      #   uniq_name = uniq_name_generator()
+      # end while (not Folder.where(name: uniq_name.to_s).first.blank?)
+      self.folders.create(name: username, visibility: false)
+    end
+
     private
     def define_role
       if account.users.empty?
@@ -36,15 +43,8 @@ module Geocms
       end
     end
 
-    def set_folder
-      begin
-        uniq_name = uniq_name_generator()
-      end while (not Folder.where(name: uniq_name.to_s).first.blank?)
-      self.folders.create(name: uniq_name, visibility: false)
-    end
-
     def uniq_name_generator
-      "#{self.first_name}_#{self.last_name}_" + (Folder.where("name like ?", "#{self.first_name}_#{self.last_name}_%").count+1).to_s
+      "#{self.username}_" + (Folder.where("name like ?", "#{self.username}_%").count+1).to_s
     end
 
     validates_confirmation_of :password

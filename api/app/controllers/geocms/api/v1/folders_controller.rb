@@ -1,8 +1,8 @@
 module Geocms
   class Api::V1::FoldersController < Api::V1::BaseController
+    load_and_authorize_resource class: "Geocms::Folder"
 
     def index
-      @folders = Geocms::Folder.all
       render json: @folders, each_serializer: FolderShortSerializer
     end
 

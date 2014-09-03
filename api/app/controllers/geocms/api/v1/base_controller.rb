@@ -7,6 +7,11 @@ module Geocms
         # ActiveModel::Serializer.root = true
         set_current_tenant_by_subdomain(Geocms::Account, :subdomain)
         serialization_scope :current_tenant
+
+        private
+        def current_ability
+          @current_ability ||= Geocms::Ability.new(current_user, current_tenant)
+        end
       end
     end
   end

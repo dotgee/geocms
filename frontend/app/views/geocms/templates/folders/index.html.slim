@@ -4,7 +4,7 @@
       a ui-sref="folders.show(folder)"
         .thumbnail.unbordered
           .placeholder
-            .carticon-folder.folder-display
+            .carticon-folder.folder-display ng-class="(folder.visibility == false || folder.visibility == null) ? 'non-public-folder' : ''"
           .caption
             h4
               |{{folder.name}}

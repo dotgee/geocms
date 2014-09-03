@@ -1,5 +1,5 @@
 module Geocms
   class FolderShortSerializer < ActiveModel::Serializer
-    attributes :id, :name
+    attributes :slug, :name, :visibility
   end
 end

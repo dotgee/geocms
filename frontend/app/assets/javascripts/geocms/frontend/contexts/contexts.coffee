@@ -34,7 +34,7 @@ contexts.config [
             ]
 
       .state 'contexts.show',
-        url: "/{id:[0-9]{1,4}}"
+        url: '/{slug:[a-zA-Z0-9_]*}'
         parent: 'contexts.root'
         views:
           "sidebar@contexts":
@@ -42,16 +42,19 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "$rootScope", (mapService, data, $root) ->
+            controller: ["mapService", "data", "folders", "$rootScope", (mapService, data, folders, $root) ->
               mapService.createMap("map", data.center_lat, data.center_lng, data.zoom)
               mapService.addBaseLayer()
               $root.cart.context = data
               $root.cart.addSeveral()
-              console.log data
+              $root.folders = folders
             ]
         resolve:
           data: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
-            Restangular.one('contexts', $stateParams.id).get()
+            Restangular.one('contexts', $stateParams.slug).get()
+          ]
+          folders: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
+            Restangular.all('folders').getList()
           ]
 ]
 

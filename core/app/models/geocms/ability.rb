@@ -16,15 +16,18 @@ module Geocms
         cannot :create, User
         cannot :manage, Account
       elsif user.new_record?
-        can :read, :all
+        can :read, Context
+        can :read, Folder, folder: { visibility: true }
         can :new, Context
         can :share, Context
         can :create, Context, folder: { visibility: true }
       else
-        can :read, :all
+        can :read, Context
+        can :read, Folder, visibility: true
+        can :read, Folder, user: user
         can :new, Context
         can :share, Context
-        can :save, Context, folder: { owner: user }
+        can :save, Context, folder: { user: user }
       end
 
       # Global admin can do everything

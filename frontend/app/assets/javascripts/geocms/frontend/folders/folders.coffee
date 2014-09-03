@@ -33,7 +33,7 @@ folders.config [
 
       # state folders.show : affichage d'un folder avec ses contexts
       .state 'folders.show',
-        url: '/{id:[0-9]{1,4}}'
+        url: '/{slug:[a-zA-Z0-9_]*}'
         parent: 'folders'
         views:
           '@':
@@ -43,7 +43,7 @@ folders.config [
             ]
         resolve:
           data: ['Restangular', '$stateParams', (Restangular, $stateParams) ->
-            Restangular.one('folders', $stateParams.id).get()
+            Restangular.one('folders', $stateParams.slug).get()
           ]
 
 ]

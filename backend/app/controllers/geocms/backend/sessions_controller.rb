@@ -17,7 +17,7 @@ module Geocms
 
       def destroy
         logout
-        redirect_to root_url, :notice => "Logged out!"
+        redirect_to backend_root_url, :notice => "Logged out!"
       end
     end
   end
