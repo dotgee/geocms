@@ -1,16 +1,17 @@
 cartModule = angular.module "geocms.cart", ["geocms.map", "restangular"]
 
-cartModule.service "cartService", 
-  [ 
+cartModule.service "cartService",
+  [
     "mapService",
     "Restangular",
     "$rootScope",
     (ms, Restangular, $root) ->
-    
+
       Cart = ->
         @layers = []
         @context = null
         @state = "saved"
+        @folders = []
         return
 
       Cart::toggleVisibility = (layer) ->

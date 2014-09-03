@@ -8,7 +8,9 @@ Geocms::Core::Engine.add_routes do
       end
       resources :contexts
       resources :categories
-      resources :folders
+      resources :folders do
+        get :writable, on: :collection
+      end
     end
   end
 end

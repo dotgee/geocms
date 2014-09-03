@@ -34,7 +34,7 @@ contexts.config [
             ]
 
       .state 'contexts.show',
-        url: '/{slug:[a-zA-Z0-9_]*}'
+        url: '/{slug}'
         parent: 'contexts.root'
         views:
           "sidebar@contexts":
@@ -47,14 +47,14 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.context = data
               $root.cart.addSeveral()
-              $root.folders = folders
+              $root.cart.folders = folders
             ]
         resolve:
-          data: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
+          data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.slug).get()
           ]
-          folders: ["Restangular", "$stateParams", "mapService", (Restangular, $stateParams, mapService) ->
-            Restangular.all('folders').getList()
+          folders: ["Restangular", (Restangular) ->
+            Restangular.all('folders').customGETLIST("writable")
           ]
 ]
 
