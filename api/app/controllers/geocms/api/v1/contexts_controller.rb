@@ -11,6 +11,10 @@ module Geocms
       respond_with @context
     end
 
+    def default
+      @context = Geocms::Context.where(by_default: true).first
+      respond_with @context
+    end
 
     private
     def default_serializer_options

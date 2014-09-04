@@ -6,7 +6,9 @@ Geocms::Core::Engine.add_routes do
         get "search", on: :collection
         get "bbox", on: :member
       end
-      resources :contexts
+      resources :contexts do
+        get :default, on: :collection
+      end
       resources :categories
       resources :folders do
         get :writable, on: :collection

@@ -26,6 +26,7 @@ geocms.config [
 
     $locationProvider.html5Mode(true)
     RestangularProvider.setDefaultHttpFields({cache: true});
+
 ]
 
 geocms.run [

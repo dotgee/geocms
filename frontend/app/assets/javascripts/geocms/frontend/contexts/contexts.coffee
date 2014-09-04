@@ -17,7 +17,10 @@ contexts.config [
           "header":
             templateUrl: "/templates/shared/header.html"
         abstract: true
-
+        resolve:
+          folders: ["Restangular", (Restangular) ->
+            Restangular.all('folders').customGETLIST("writable")
+          ]
       .state 'contexts.root',
         url: ""
         parent: "contexts"
@@ -27,11 +30,19 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", (mapService) ->
-              context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
-              mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
-              mapService.addBaseLayer()
+            controller: ["mapService", "data", "$rootScope", "$state", (mapService, data, $root, $state) ->
+              if data != null && data != undefined && data != "null"
+                console.log "here"
+                $state.transitionTo('contexts.show', {slug: data.slug})
+              else
+                context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
+                mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
+                mapService.addBaseLayer()
             ]
+        resolve:
+          data: ["Restangular", (Restangular) ->
+            Restangular.all('contexts').customGET("default")
+          ]
 
       .state 'contexts.show',
         url: '/{slug}'
@@ -53,19 +64,16 @@ contexts.config [
           data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.slug).get()
           ]
-          folders: ["Restangular", (Restangular) ->
-            Restangular.all('folders').customGETLIST("writable")
-          ]
+
 ]
 
 contexts.controller "ContextsController", [
   "$rootScope"
   "$state"
-  "data"
   "mapService"
   "cartService"
 
-  ($root, $state, data, mapService, Cart) ->
+  ($root, $state, mapService, Cart) ->
 
     $root.cart = new Cart() # unless $root.cart?
 

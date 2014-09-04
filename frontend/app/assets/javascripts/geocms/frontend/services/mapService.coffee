@@ -1,19 +1,20 @@
-mapModule = angular.module "geocms.map", []
+mapModule = angular.module "geocms.map", ["geocms.plugins"]
 
-mapModule.service "mapService", [() ->
-  
+mapModule.service "mapService", ["pluginService", (pluginService) ->
+
   mapService = {}
-  
+
   mapService.container = null
   mapService.layers = []
   mapService.crs = null
 
   mapService.createMap = (id, lat, lng, zoom) ->
-    # options = 
+    # options =
     #   crs: @crs
-    options = {}
+    options = { zoomControl: false }
     @container = new L.Map(id, options).setView([lat, lng], zoom)
-    
+    pluginService.addPlugins(@container)
+
   mapService.addBaseLayer = () ->
     # L.tileLayer.wms("http://osm.geobretagne.fr/gwc01/service/wms", {
     #   layers: "osm:google",
@@ -46,7 +47,7 @@ mapModule.service "mapService", [() ->
     layer._tilelayer.addTo(@container)
     layer.onMap = true
     layer
-  
+
   mapService.defineProj = (crs) ->
     scale = (zoom) ->
       return 1 / (4891.96875 / Math.pow(2, zoom))

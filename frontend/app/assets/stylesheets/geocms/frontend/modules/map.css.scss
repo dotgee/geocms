@@ -1,0 +1,61 @@
+.leaflet-control-zoom, #mousemove {
+  box-shadow: none;
+  height: 20px;
+  vertical-align: top;
+  font-size: 10px;
+  font-family: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
+  position: absolute;
+  overflow: hidden;
+  background: rgba(0,0,0,0.50);
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #fff;
+  border-radius: 3px;
+}
+
+#mousemove {
+  border: none;
+  display: inline-block;
+  background: rgba(0,0,0,0.30);
+  color: rgba(255,255,255,.8);
+  padding-left: 10px;
+  width: 110px;
+  border-radius: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  left: 54px;
+}
+
+.leaflet-control-zoom.leaflet-bar {
+  width: 54px;
+}
+
+.leaflet-control-zoom.leaflet-bar a, .leaflet-control-zoom.leaflet-bar a:hover {
+  float: right;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  line-height: 18px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+
+  color: #fff;
+  background: rgba(0,0,0,0.30);
+  border-right: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,.5);
+}
+
+.leaflet-control-zoom.leaflet-bar a:hover {
+  color: rgba(255,255,255,.8);
+}
+
+.leaflet-control-zoom.leaflet-bar a:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.leaflet-control-zoom.leaflet-bar {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}

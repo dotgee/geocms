@@ -9,6 +9,7 @@
 #= require_tree ./vendor
 
 #= require ./services/cartService
+#= require ./services/pluginService
 #= require ./services/mapService
 #= require ./services/catalogService
 #= require ./folders/folders
