@@ -12,6 +12,8 @@
 #= require ./services/pluginService
 #= require ./services/mapService
 #= require ./services/catalogService
+#= require ./services/mapOptionService
+#= require ./directives/draggableDirective
 #= require ./folders/folders
 #= require ./catalog/catalog
 #= require ./contexts/contexts

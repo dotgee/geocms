@@ -30,14 +30,15 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "$rootScope", "$state", (mapService, data, $root, $state) ->
+            controller: ["mapService", "data", "$rootScope", "$state", "$scope", (mapService, data, $root, $state, $scope) ->
               if data != null && data != undefined && data != "null"
-                console.log "here"
                 $state.transitionTo('contexts.show', {slug: data.slug})
               else
                 context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
                 mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
+                $root.cart.context = context
                 mapService.addBaseLayer()
+              $scope.mapService = mapService
             ]
         resolve:
           data: ["Restangular", (Restangular) ->
@@ -53,12 +54,13 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "folders", "$rootScope", (mapService, data, folders, $root) ->
+            controller: ["mapService", "data", "folders", "$rootScope", "$scope", (mapService, data, folders, $root, $scope) ->
               mapService.createMap("map", data.center_lat, data.center_lng, data.zoom)
               mapService.addBaseLayer()
               $root.cart.context = data
               $root.cart.addSeveral()
               $root.cart.folders = folders
+              $scope.mapService = mapService
             ]
         resolve:
           data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
@@ -68,16 +70,20 @@ contexts.config [
 ]
 
 contexts.controller "ContextsController", [
+  "$scope"
   "$rootScope"
   "$state"
   "mapService"
   "cartService"
+  "mapOptionService"
 
-  ($root, $state, mapService, Cart) ->
+  ($scope, $root, $state, mapService, Cart, optionService) ->
 
     $root.cart = new Cart() # unless $root.cart?
 
-    $root.openCatalog = () ->
+    $scope.openCatalog = () ->
       if ($state.current.name.indexOf('catalog') > -1) then $state.go "^" else $state.go ".catalog"
 
+    $scope.mapOptions = optionService
+    $scope.mapService = mapService
 ]

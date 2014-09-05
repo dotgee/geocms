@@ -7,6 +7,7 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
   mapService.container = null
   mapService.layers = []
   mapService.crs = null
+  mapService.fullscreen = false
 
   mapService.createMap = (id, lat, lng, zoom) ->
     # options =
@@ -60,6 +61,9 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
                 transformation)
 
     @crs.scale = scale
+
+  mapService.invalidateMap = () ->
+    @container.invalidateSize()
 
   mapService
 ]

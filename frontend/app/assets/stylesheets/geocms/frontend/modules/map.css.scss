@@ -1,4 +1,5 @@
 .leaflet-control-zoom, #mousemove {
+  left: 0px;
   box-shadow: none;
   height: 20px;
   vertical-align: top;
@@ -58,4 +59,11 @@
 .leaflet-control-zoom.leaflet-bar {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
+}
+
+.map-fullscreen {
+  left: 0px !important;
+}
+.menu-fullscreen {
+  left: -335px !important;
 }

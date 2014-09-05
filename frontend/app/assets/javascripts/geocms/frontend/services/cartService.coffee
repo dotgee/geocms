@@ -17,12 +17,15 @@ cartModule.service "cartService",
       Cart::toggleVisibility = (layer) ->
         if layer._tilelayer.options.opacity > 0
           layer._tilelayer.setOpacity(0)
+          layer.opacity = 0
         else
           layer._tilelayer.setOpacity(0.9)
+          layer.opacity = 0.9
 
       Cart::setOpacity = (ev, ui) ->
         index = $(ui.handle).parent().data("index")
         $root.cart.layers[index]._tilelayer.setOpacity(ui.value)
+        $root.cart.layers[index].opacity = ui.value
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)

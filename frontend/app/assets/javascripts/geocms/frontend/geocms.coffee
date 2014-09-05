@@ -9,6 +9,8 @@ geocms = angular.module( 'geocms', [
   'geocms.cart'
   'geocms.catalogserv'
   'geocms.catalog'
+  'geocms.map_options'
+  'geocms.draggable'
 ])
 
 geocms.config [
@@ -31,8 +33,9 @@ geocms.config [
 
 geocms.run [
   "Restangular",
-  "mapService"
-  (Restangular, mapService) ->
+  "mapService",
+  "draggableDirective"
+  (Restangular, mapService, draggable) ->
     Restangular.setBaseUrl("/api/v1")
     mapService.defineProj("EPSG:2154")
 ]
