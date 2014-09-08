@@ -16,11 +16,21 @@ module Geocms
       respond_with @context
     end
 
+    def update
+      @context = Geocms::Context.find(params[:id])
+      @context.update_attributes(context_params)
+      respond_with @context
+    end
+
     private
     def default_serializer_options
       {
         root: false
       }
+    end
+
+    def context_params
+      params.require(:context).permit(PermittedAttributes.context_attributes)
     end
 
   end

@@ -51,6 +51,8 @@ cartModule.service "cartService",
         # unless @state == "saved"
         console.log "saving..."
         console.log @context
+        # @context.contexts_layer_ids = _.map(@context.contexts_layers, )
+        delete @context.contexts_layers
         @context.save()
 
       Cart::centerOn = (layer) ->
