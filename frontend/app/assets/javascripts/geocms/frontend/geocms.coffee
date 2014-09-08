@@ -2,6 +2,7 @@ geocms = angular.module( 'geocms', [
   'ui.router'
   'restangular'
   'ui.slider'
+  'ui.tree'
   'ui.bootstrap'
   'geocms.contexts'
   'geocms.folders'

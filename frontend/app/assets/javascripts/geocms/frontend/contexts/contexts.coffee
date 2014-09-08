@@ -99,6 +99,11 @@ contexts.controller "ContextsController", [
     $scope.openCatalog = () ->
       if ($state.current.name.indexOf('catalog') > -1) then $state.go "^" else $state.go ".catalog"
 
+    $scope.treeOptions = {
+      dropped: (event) ->
+        console.log event.dest
+    }
+
     $scope.mapOptions = optionService
     $scope.mapService = mapService
     $root.fullscreen = false unless $state.is("contexts.show.share")

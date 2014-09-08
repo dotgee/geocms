@@ -9,8 +9,9 @@
             i.icon-plus.icon-white
             |&nbsp;
             i.icon-layer
-        ul.nav.nav-list#layer-list
-          li ng-repeat="layer in cart.layers" ng-include="'/templates/layers/cart_item.html'"
+        div ui-tree="treeOptions"
+          ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
+            li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="'/templates/layers/cart_item.html'"
     tab heading=t("context.infos")
       #infos
         form data-fieldsets=""
