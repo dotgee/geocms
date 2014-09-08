@@ -9,7 +9,7 @@ cartModule.service "cartService",
 
       Cart = ->
         @layers = []
-        @context = null
+        @wrapper = null
         @state = "saved"
         @folders = []
         return
@@ -20,12 +20,12 @@ cartModule.service "cartService",
           layer.opacity = 0
         else
           layer._tilelayer.setOpacity(0.9)
-          layer.opacity = 0.9
+          layer.opacity = 90
 
       Cart::setOpacity = (ev, ui) ->
         index = $(ui.handle).parent().data("index")
         $root.cart.layers[index]._tilelayer.setOpacity(ui.value)
-        $root.cart.layers[index].opacity = ui.value
+        $root.cart.layers[index].opacity = ui.value * 100
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)
@@ -33,7 +33,7 @@ cartModule.service "cartService",
         layer.onMap = false
 
       Cart::get = (id) ->
-        layer = _.findWhere(@layers, {id: id})
+        layer = _.findWhere(@layers, {layer_id: id})
         @layers[@layers.indexOf(layer)]
 
       Cart::add = (id) ->
@@ -43,16 +43,14 @@ cartModule.service "cartService",
 
       Cart::addSeveral = () ->
         that = this
-        console.log @context
         _.each @context.contexts_layers, (cl) ->
           that.layers.push ms.addLayer(cl)
 
       Cart::save = () ->
-        # unless @state == "saved"
-        console.log "saving..."
-        console.log @context
-        # @context.contexts_layer_ids = _.map(@context.contexts_layers, )
-        delete @context.contexts_layers
+        delete @context.contexts_layers # BUG: circular dependency in json
+        @context.contexts_layers_attributes = _.map(@layers, (cl) ->
+          { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity }
+        )
         @context.save()
 
       Cart::centerOn = (layer) ->

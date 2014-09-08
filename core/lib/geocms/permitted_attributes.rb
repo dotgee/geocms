@@ -5,7 +5,7 @@ module Geocms
       :bounding_box_attributes,
       :category_attributes,
       :context_attributes,
-      :contexts_layer_attributes,
+      :contexts_layers_attributes,
       :data_source_attributes,
       :dimension_attributes,
       :folder_attributes,
@@ -29,14 +29,15 @@ module Geocms
       :name, :position, :parent_id
     ]
 
-    @@context_attributes = [
-      :maxx, :maxy, :minx, :miny, :name, :zoom, :description,:center_lng,
-      :center_lat, :layer_ids, :uuid, :contexts_layers_attributes, :preview,
-      :account_id, :folder_id, :by_default
+    @@contexts_layers_attributes = [
+      :id, :position, :opacity, :layer_id, :context_id, :visibility
     ]
 
-    @@contexts_layer_attributes = [
-      :position, :opacity, :layer_id, :context_id, :visibility
+    @@context_attributes = [
+      :id, :name, :zoom, :description, :center_lng, :center_lat,
+      :layer_ids, :uuid, :contexts_layers_attributes, :preview,
+      :account_id, :folder_id, :by_default, :slug,
+      contexts_layers_attributes: @@contexts_layers_attributes
     ]
 
     @@data_source_attributes = [

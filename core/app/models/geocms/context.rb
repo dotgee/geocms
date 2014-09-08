@@ -11,7 +11,7 @@ module Geocms
 
     mount_uploader :preview, Geocms::ContextPictureUploader
 
-    accepts_nested_attributes_for :contexts_layers
+    accepts_nested_attributes_for :contexts_layers, allow_destroy: true
     after_create :generate_uuid
 
     after_save :generate_preview

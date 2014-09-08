@@ -18,8 +18,11 @@ module Geocms
 
     def update
       @context = Geocms::Context.find(params[:id])
-      @context.update_attributes(context_params)
-      respond_with @context
+      if @context.update_attributes(context_params)
+        render json: @context
+      else
+        render json: @context.errors.to_hash
+      end
     end
 
     private
