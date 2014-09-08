@@ -19,12 +19,12 @@
   display: inline-block;
   background: rgba(0,0,0,0.30);
   color: rgba(255,255,255,.8);
-  padding-left: 10px;
   width: 110px;
   border-radius: 0;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   left: 54px;
+  text-align: center;
 }
 
 .leaflet-control-zoom.leaflet-bar {
@@ -66,4 +66,12 @@
 }
 .menu-fullscreen {
   left: -335px !important;
+}
+
+.fullscreen-share {
+  top: 0;
+  left: 0;
+  #map {
+    left: 0;
+  }
 }

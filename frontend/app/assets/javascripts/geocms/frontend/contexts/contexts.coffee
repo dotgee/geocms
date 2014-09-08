@@ -66,7 +66,22 @@ contexts.config [
           data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.slug).get()
           ]
-
+      .state 'contexts.show.share',
+        url: '/share'
+        parent: 'contexts.show'
+        views:
+          "header@":
+            templateUrl: ""
+            controller: ["$rootScope", "mapService", ($root, ms) ->
+              $root.fullscreen = true
+              setTimeout (->
+                ms.invalidateMap()
+                return
+              ), 2000
+            ]
+          "sidebar@contexts":
+            templateUrl: ""
+            controller: "ContextsController"
 ]
 
 contexts.controller "ContextsController", [
@@ -86,4 +101,5 @@ contexts.controller "ContextsController", [
 
     $scope.mapOptions = optionService
     $scope.mapService = mapService
+    $root.fullscreen = false unless $state.is("contexts.show.share")
 ]
