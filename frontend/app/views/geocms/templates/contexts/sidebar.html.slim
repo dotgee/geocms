@@ -1,19 +1,25 @@
+a#save-button
+  span.carticon-floppy
+  |Sauvegarder
+
 .hud ng-class="{'menu-fullscreen': mapService.fullscreen}"
-  div ng-include="'/templates/contexts/top_sidebar.html'"
+  /div ng-include="'/templates/contexts/top_sidebar.html'"
   tabset.row-fluid#hud-tab
     tab heading=t("layers")
       #layers
-        .add-layer ng-click="openCatalog()"
-          span = t "add_a_new_layer"
-          a class="m-btn mini blue icn-only pull-right"
-            i.icon-plus.icon-white
-            |&nbsp;
-            i.icon-layer
-        div ui-tree="treeOptions"
-          ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
-            li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="'/templates/layers/cart_item.html'"
+        div ng-hide="cart.currentLayer"
+          .add-layer ng-click="openCatalog()"
+            span = t "add_a_new_layer"
+            a class="m-btn mini blue icn-only pull-right"
+              i.icon-plus.icon-white
+              |&nbsp;
+              i.icon-layer
+          div.hud-panel ui-tree="treeOptions"
+            ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
+              li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="'/templates/layers/cart_item.html'"
+        div ng-show="cart.currentLayer" ng-include="'/templates/layers/controls.html'"
     tab heading=t("context.infos")
-      #infos
+      #infos.hud-panel
         form data-fieldsets=""
           fieldset data-fields=""
             .control-group.field-name
@@ -47,6 +53,10 @@
                 span data-editor=""
                   input#context_zoom.m-wrap.input-mini name="zoom" type="text" ng-model="cart.context.zoom"
             a.m-btn.mini.blue.from-map Importer
-
-
-  div ng-include="'/templates/contexts/bottom_sidebar.html'"
+    tab heading="Légende"
+      #legend.hud-panel
+        div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
+          h6
+            |{{layer.title}}
+          img ng-src="{{layer.data_source_wms}}?request=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
+  /div ng-include="'/templates/contexts/bottom_sidebar.html'"

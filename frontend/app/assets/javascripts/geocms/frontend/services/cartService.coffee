@@ -9,7 +9,8 @@ cartModule.service "cartService",
 
       Cart = ->
         @layers = []
-        @wrapper = null
+        @currentLayer = null
+        @context = null
         @state = "saved"
         @folders = []
         return
@@ -30,7 +31,7 @@ cartModule.service "cartService",
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)
         @layers.splice(@layers.indexOf(layer), 1)
-        layer.onMap = false
+        @currentLayer = null
 
       Cart::get = (id) ->
         layer = _.findWhere(@layers, {layer_id: id})

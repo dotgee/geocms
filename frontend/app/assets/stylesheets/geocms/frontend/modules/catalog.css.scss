@@ -3,9 +3,9 @@
   background: white;
   position: fixed;
   bottom: 0px;
-  left: 335px;
+  left: 0;
   right: 0px;
-  top: 50px;
+  top: 0px;
   overflow-y: auto;
   visibility: hidden;
   opacity: 0;
@@ -97,7 +97,13 @@
 
 .source {
   color: #B4B4B4;
-  margin: -6px 0 1px;
+  font-size: 10px;
+  margin: -3px 0 1px;
+  text-transform: uppercase;
+  font-variant: small-caps;
+  a {
+    color: #B4B4B4;
+  }
 }
 
 .media.layer {

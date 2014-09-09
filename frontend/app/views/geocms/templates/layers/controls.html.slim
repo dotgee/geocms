@@ -1,0 +1,32 @@
+.add-layer ng-click="cart.currentLayer = null"
+  span Retour à la liste
+  a class="m-btn mini blue icn-only pull-right"
+    span.carticon-menu
+
+.hud-panel style="padding: 0 10px 35px; max-height: 280px;"
+  div ng-switch="" on="activeControl"
+    div ng-switch-when="opacity"
+      h6 Contrôle de l'opacité
+      .opacity-controler
+        div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="cart.currentLayer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"
+    div ng-switch-when="temporality"
+      h6 Contrôle de la temporalité
+    div ng-switch-default=""
+      h6
+        |{{cart.currentLayer.title}}
+      div
+        |{{cart.currentLayer.description}}
+
+#ctrls
+  a.m-btn.mini.center rel='tooltip' data-original-title='Centrer' ng-click="cart.centerOn(cart.currentLayer)"
+    i.carticon-target
+  a.m-btn.mini.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'opacity') ? 'default' : 'opacity'" ng-class="{active: (activeControl == 'opacity')}"
+    i.carticon-adjust
+  a.m-btn.mini.toggle-dimension data-toggle='button' rel='tooltip' data-original-title='Temporalité' ng-class="{disabled: !cart.currentLayer.dimension, active: (activeControl == 'temporality')}" ng-click="activeControl = (activeControl == 'temporality') ? 'default' : 'temporality'"
+    i.carticon-clock
+  a.m-btn.mini.metadata-iframe rel='tooltip' data-original-title='Métadonnées' ng-class="{disabled: !cart.currentLayer.metadata_url}"
+    i.carticon-vcard
+  a.m-btn.mini rel='tooltip' data-original-title='Télécharger' target='_blank' ng-class="{disabled: cart.currentLayer.data_source_not_internal}"
+    i.carticon-download
+  a.m-btn.mini.remove rel='tooltip' data-original-title='Supprimer' ng-click="cart.remove(cart.currentLayer)"
+    i.carticon-trash

@@ -4,23 +4,27 @@
   color: $oxford_blue;
   z-index: 1000;
   position: absolute;
-  left: 0;
-  top: 0px;
-  bottom: 0px;
+  left: 30px;
+  top: 10px;
   width: $hudsize;
-  background: #F8F8F8;
-  border-right: 2px solid #DDD;
+  height: auto;
+  max-height: 400px;
+  padding-bottom: 10px;
+  background: white;
   transition: left 300ms;
   -moz-transition: left 300ms;
   -webkit-transition: left 300ms;
   @include box-sizing(border-box);
   .tab-content {
-    position: absolute;
-    top: 105px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
+    // position: absolute;
+    // top: 105px;
+    // left: 0;
+    // right: 0;
+    // bottom: 50px;
     overflow-y: auto;
+  }
+  .nav.nav-tabs {
+    margin-bottom: 0px;
   }
 }
 
@@ -47,15 +51,23 @@
 #hud-tab {
   > ul > li {
     margin-left: 0;
-    width: 50%;
+    width: 33.3333%;
     a {
+      background-color: $oxford_blue;
+      color: #FFF;
+      font-weight: bold;
+      font-size: 11px;
+      cursor: pointer;
       border-right: none;
-      border-left: 1px solid #ddd;
-      border-top: 1px solid #ddd;
+      border-left: 1px solid rgba(255, 255, 255, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.25) !important;
       @include border-radius(0px);
       margin-right: 0;
       text-align: center;
-      @include unstyled-link;
+    }
+    &.active a {
+      background-color: darken($oxford_blue, 15);
     }
     &:first-child {
       a {
@@ -65,26 +77,63 @@
   }
 }
 
+#save-button {
+  cursor: pointer;
+  text-decoration: none;
+  width: 130px;
+  position: absolute;
+  top: 11px;
+  left: 481px;
+  z-index: 300;
+  height: 26px;
+  text-align: center;
+  border-radius: 0 4px 4px 0;
+  padding: 5px;
+  background: #8889CC;
+  color: #FFF;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.m-btn .carticon-menu {
+  line-height: 10px;
+  font-size: 14px;
+}
+
 // LEFT NAVBAR - CONTROLS
 
 #ctrls {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
+  right: 0;
   border-top: 1px solid #E6E6E6;
   z-index: 50;
   .m-btn {
     margin-top: 0;
-    padding: 14px 24px;
+    padding: 10px 19px;
+    margin: 0;
     &:last-child {
-      padding: 14px 23px 14px 24px;
+      padding: 10px 4px;
     }
   }
+}
+
+#legend {
+  padding: 10px;
+}
+
+.hud-panel {
+  max-height: 330px;
+  overflow-y: scroll;
 }
 
 // LEFT NAVBAR - TABS - LAYERS
 
 #layers {
+  .hud-panel {
+    max-height: 324px;
+  }
   .cart-item-controls {
     // visibility: hidden;
   }
@@ -98,7 +147,7 @@
   .grippy {
     display: inline-block;
     background: asset-url("geocms/grippy.png") repeat-y right;
-    height: 45px;
+    height: 35px;
     width: 10px;
     vertical-align: top;
     margin-right: 4px;
@@ -106,9 +155,10 @@
   }
   .right-infos {
     display: inline-block;
-    width: 290px;
+    width: 430px;
     .title {
       @include ellipsis;
+      cursor: pointer;
     }
   }
   .control-buttons {
@@ -173,10 +223,8 @@
       left: 2px;
     }
     border-bottom: 1px solid #eee;
-    &.sortable-placeholder {
-      border: 1px dashed #CCC;
-      background: none;
-      height: 45px;
+    &:last-child {
+      border-bottom: 0;
     }
   }
 }
@@ -184,7 +232,9 @@
 //  LEFT NAVBAR - TABS - LAYERS - ADD BUTTON
 
 .add-layer {
-  background: white;
+  background: $boston_blue;
+  color: white;
+  font-weight: 500;
   height: 38px;
   padding: 0 15px;
   span {

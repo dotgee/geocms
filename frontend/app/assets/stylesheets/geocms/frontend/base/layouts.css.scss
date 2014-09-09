@@ -27,17 +27,17 @@ body.fullscreen{
   box-shadow: none;
 }
 
-.wrapper {
-  position: absolute;
-  top: 50px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  transition: top 100ms;
-  -webkit-transition: top 100ms;
-  @include box-sizing(border-box);
-  padding-bottom: 0px;
-}
+// .wrapper {
+//   position: absolute;
+//   top: 0;
+//   left: 0px;
+//   right: 0px;
+//   bottom: 0px;
+//   transition: top 100ms;
+//   -webkit-transition: top 100ms;
+//   @include box-sizing(border-box);
+//   padding-bottom: 0px;
+// }
 
 .container-infos {
   height: 90px;
