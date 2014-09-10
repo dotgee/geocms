@@ -1,5 +1,9 @@
 
 .hud ng-hide="catalogOpened()"
+  a#save-button ng-click="cart.save()" ng-class="{saved: cart.state == 'saved'}"
+    span.carticon-floppy
+    span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
+
   /div ng-include="'/templates/contexts/top_sidebar.html'"
   tabset.row-fluid#hud-tab
     tab heading=t("layers")

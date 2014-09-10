@@ -23,14 +23,18 @@ cartModule.service "cartService",
           layer._tilelayer.setOpacity(0.9)
           layer.opacity = 90
 
+        @state = "unsaved"
+
       Cart::setOpacity = (ev, ui) ->
         $root.cart.currentLayer._tilelayer.setOpacity(ui.value)
         $root.cart.currentLayer.opacity = ui.value * 100
+        $root.cart.state = "unsaved"
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)
         @layers.splice(@layers.indexOf(layer), 1)
         @currentLayer = null
+        @state = "unsaved"
 
       Cart::get = (id) ->
         layer = _.findWhere(@layers, {layer_id: id})
@@ -40,6 +44,7 @@ cartModule.service "cartService",
         that = this
         Restangular.one("layers", id).get().then (data) ->
           that.layers.push ms.addLayer(data.layer)
+        @state = "unsaved"
 
       Cart::addSeveral = () ->
         that = this
@@ -52,6 +57,7 @@ cartModule.service "cartService",
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity }
         )
         @context.save()
+        @state = "saved"
 
       Cart::centerOn = (layer) ->
         bbox =  new L.LatLngBounds(
