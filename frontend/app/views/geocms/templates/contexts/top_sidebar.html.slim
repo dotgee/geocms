@@ -1,4 +1,5 @@
 .account-infos
-  = image_tag current_tenant.logo, height: "50px"
+  a ui-sref="folders.root" href="#"
+    = image_tag current_tenant.logo, height: "50px"
   = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
 .clearfix

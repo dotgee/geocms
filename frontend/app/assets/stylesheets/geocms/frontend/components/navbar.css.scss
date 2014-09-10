@@ -4,7 +4,7 @@
     padding-top: 8px;
   }
   &.brand-context {
-    margin-top: 4px;
+    margin-top: 16px;
   }
 }
 
@@ -13,12 +13,15 @@
 }
 
 .navbar-inner {
-  background: $main-color;
+  background: $color-panel-1;
   @include border-radius(0px);
   @include background-image(none);
   filter: none;
   border: none;
   min-height: 50px;
+  .user-image {
+    margin-top: 10px;
+  }
 }
 
 .brand {

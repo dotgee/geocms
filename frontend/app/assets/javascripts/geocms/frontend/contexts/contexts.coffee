@@ -14,8 +14,6 @@ contexts.config [
         views:
           "":
             templateUrl: "/templates/contexts/root.html"
-          "header":
-            templateUrl: "/templates/shared/header.html"
         abstract: true
         resolve:
           folders: ["Restangular", (Restangular) ->
@@ -72,8 +70,6 @@ contexts.config [
         url: '/share'
         parent: 'contexts.show'
         views:
-          "header@":
-            templateUrl: ""
           "sidebar@contexts":
             templateUrl: ""
             controller: "ContextsController"

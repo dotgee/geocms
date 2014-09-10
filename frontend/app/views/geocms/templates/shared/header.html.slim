@@ -1,4 +1,4 @@
-/.navbar
+.navbar
   .navbar-inner
     .container
       ul.nav.nav-branding
@@ -9,7 +9,6 @@
           a.brand.brand-context ui-sref="contexts.root"
             = "#{current_tenant.name}"
             = " | #{yield(:context_name)}" if content_for?(:context_name)
-/.top-menu
-  a ui-sref="folders.root" Cartes
-  - if logged_in?
-    = link_to "Admin", ""
+      
+      = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
+    .clearfix

@@ -1,10 +1,11 @@
 .account-infos {
   padding: 5px 10px;
   border-top: $color-panel-2 3px solid;
-  .user-image {
-    border-radius: 100%;
-    border: 1px solid $color-panel-5;
-    width: 50px;
-    height: 50px;
-  }
+}
+
+.user-image {
+  border-radius: 100%;
+  border: 1px solid $color-panel-5;
+  width: 50px;
+  height: 50px;
 }
