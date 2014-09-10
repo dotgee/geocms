@@ -92,8 +92,8 @@ contexts.controller "ContextsController", [
     $root.cart = new Cart()
 
     watchers = '[cart.context.name, cart.context.description, cart.context.folder_id, cart.context.center_lng, cart.context.center_lat, cart.context.zoom]'
-    $root.$watchCollection watchers, () ->
-      $root.cart.state = "unsaved"
+    $root.$watchCollection watchers, (newValues, oldValues) ->
+      $root.cart.state = "unsaved" unless newValues == oldValues
     , true
 
     $scope.openCatalog = () ->

@@ -54,12 +54,13 @@ cartModule.service "cartService",
 
       Cart::save = () ->
         delete @context.contexts_layers # BUG: circular dependency in json
+        that = this
         @context.contexts_layers_attributes = _.map(@layers, (cl) ->
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity }
         )
         @context.save().then ((response)->
           toaster.pop('success', "La sauvegarde a réussi", response.data)
-          @state = "saved"
+          that.state = "saved"
         ), (response)->
           toaster.pop('error', "La sauvegarde a échoué", response.data)
 
