@@ -24,9 +24,8 @@ cartModule.service "cartService",
           layer.opacity = 90
 
       Cart::setOpacity = (ev, ui) ->
-        index = $(ui.handle).parent().data("index")
-        $root.cart.layers[index]._tilelayer.setOpacity(ui.value)
-        $root.cart.layers[index].opacity = ui.value * 100
+        $root.cart.currentLayer._tilelayer.setOpacity(ui.value)
+        $root.cart.currentLayer.opacity = ui.value * 100
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)

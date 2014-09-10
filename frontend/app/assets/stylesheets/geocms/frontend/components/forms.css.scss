@@ -113,11 +113,7 @@ select.cke_dialog_ui_input_select {
     border-right: none;
   }
   .m-btn {
-    border: {
-      top: 1px solid #DADADA;
-      right:1px solid #DADADA;
-      bottom: 1px solid #DADADA;
-    }
-    padding: 7px 14px 8px;
+    border-radius: 0 4px 4px 0 !important;
+    padding: 10px 14px 10px;
   }
 }

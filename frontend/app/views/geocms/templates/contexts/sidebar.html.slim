@@ -1,8 +1,5 @@
-a#save-button
-  span.carticon-floppy
-  |Sauvegarder
 
-.hud ng-class="{'menu-fullscreen': mapService.fullscreen}"
+.hud ng-hide="catalogOpened()"
   /div ng-include="'/templates/contexts/top_sidebar.html'"
   tabset.row-fluid#hud-tab
     tab heading=t("layers")
@@ -11,7 +8,7 @@ a#save-button
           .add-layer ng-click="openCatalog()"
             span = t "add_a_new_layer"
             a class="m-btn mini blue icn-only pull-right"
-              i.icon-plus.icon-white
+              i.carticon-plus.icon-white
               |&nbsp;
               i.icon-layer
           div.hud-panel ui-tree="treeOptions"

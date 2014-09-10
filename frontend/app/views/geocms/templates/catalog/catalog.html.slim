@@ -5,12 +5,12 @@
   .container-fluid
     .m-input-append.layers-search
       input.m-wrap.search-input size="16" type="text" placeholder=t("layer.search") name="search-layer"
-      button.m-btn.icn-only#search href="#"
-        i.icon-search
+      button.m-btn.blue.icn-only#search href="#"
+        i.carticon-search
     .clearfix
     ul.breadcrumb
       li ng-click="catalog.goToRoot()"
-        i.icon-home
+        i.carticon-home
         span.divider
           |/
       li ng-repeat="category in catalog.categoryTree"

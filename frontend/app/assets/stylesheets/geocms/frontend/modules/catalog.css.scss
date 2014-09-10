@@ -16,7 +16,7 @@
   &.active {
     visibility: visible;
     z-index: 1100;
-    background: rgba(248, 248, 248, .90);
+    background: rgba(250, 250, 250, 0);
     opacity: 1;
   }
   .btn-close {
@@ -35,11 +35,23 @@
     margin-bottom: 15px;
   }
   h1 {
-    margin-left: 40px;
+    margin-left: 20px;
     text-transform: none;
+    color: $color-panel-1-darkened;
   }
   .breadcrumb {
-    border: 1px solid #DADADA;
+    background-color: $color-panel-1;
+    border: 1px solid $color-panel-2;
+    i {
+      color: white;
+      text-shadow: none;
+    }
+    > li > a {
+      text-shadow: none;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
   .media {
     background: white;
@@ -49,10 +61,13 @@
     h4 {
       cursor: pointer;
       font-weight: 500;
-      color: $oxford_blue;
+      color: $color-panel-1-darkened;
       [class^="icon-"] {
         margin: 4px 0 3px;
       }
+    }
+    .carticon-folder {
+      color: $color-panel-2;
     }
     .media-wrapper {
       padding: 5px;

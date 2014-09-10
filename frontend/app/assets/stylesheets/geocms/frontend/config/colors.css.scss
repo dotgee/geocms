@@ -26,9 +26,19 @@ $alizarin: #E74C3C !default;
 $pomegranate: #C0392B !default;
 
 // Green
-$emerland: #2ECC71 !default;
+$emerald: #2ECC71 !default;
 $nephritis: #27AE60 !default;
 
+// Orange
+$carrot: #e67e22 !default;
+$pumpkin: #d35400 !default;
+
 $main-color: #1570a6 !default;
-$button-color: $outer_space !default;
+$button-color: $pomegranate !default;
 $darken-button-color: $button-color !default;
+
+$color-panel-1: $alizarin !default;
+$color-panel-1-darkened: darken($color-panel-1, 20) !default;
+$color-panel-2: $pomegranate !default;
+$color-panel-2-darkened: darken($color-panel-2, 20) !default;
+$color-panel-3: $carrot !default;

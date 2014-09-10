@@ -92,7 +92,10 @@ contexts.controller "ContextsController", [
     $root.cart = new Cart()
 
     $scope.openCatalog = () ->
-      if ($state.current.name.indexOf('catalog') > -1) then $state.go "^" else $state.go ".catalog"
+      if $scope.catalogOpened() then $state.go "^" else $state.go ".catalog"
+
+    $scope.catalogOpened = () ->
+      $state.current.name.indexOf('catalog') > -1
 
     $scope.treeOptions = {
       dropped: (event) ->
