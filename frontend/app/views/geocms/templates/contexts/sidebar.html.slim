@@ -52,7 +52,7 @@
               .controls
                 span data-editor=""
                   input#context_zoom.m-wrap.input-mini name="zoom" type="text" ng-model="cart.context.zoom"
-            a.m-btn.mini.blue.from-map ng-click="cart.importCenter()" Importer
+            a.m-btn.mini.blue.from-map ng-click="cart.importCenter()" Position actuelle
     tab heading="Légende"
       #legend.hud-panel
         div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
