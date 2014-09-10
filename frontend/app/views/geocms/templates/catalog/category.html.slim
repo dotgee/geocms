@@ -1,6 +1,7 @@
-.media-wrapper
-  .media-body ng-click="catalog.getCategory(category)"
-    h4.media-heading.category
-      i.carticon-folder
-      |&nbsp;
-      |{{category.name}}
+- cache ["v1", "category"] do
+  .media-wrapper
+    .media-body ng-click="catalog.getCategory(category)"
+      h4.media-heading.category
+        i.carticon-folder-open
+        |&nbsp;
+        |{{category.name}}

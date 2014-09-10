@@ -1,23 +1,2 @@
-.m-btn-group#ctrls
-  button.m-btn.first.icn-only.legend data-toggle="button" rel="tooltip" data-original-title=t("context.controls.legend") ng-click="legend = !legend" ng-class="{active: legend}"
-    i.carticon-list
-  button.m-btn.icn-only.globe rel="tooltip" data-original-title=t("context.controls.position") ng-click="mapOptions.centerMap()"
-    i.carticon-globe
-  button.m-btn.icn-only.tools  data-toggle="button" rel="tooltip" data-original-title=t("context.controls.tools")
-    i.carticon-tools
-  button.m-btn.icn-only.fullscreen data-toggle="button" rel="tooltip" data-original-title=t("context.controls.fullscreen")
-    i.carticon-resize-full
-  button.m-btn.last.icn-only.togglehud rel="tooltip" data-original-title=t("context.controls.hud") ng-click="mapOptions.fullscreen()"
-    i.carticon-left-circled
-
-#legend-graphic.leaflet-legend ng-show="legend" draggable=""
-  .modal-header
-    button.close type="button" data-dismiss="modal" aria-hidden="true" ng-click="legend = !legend" &times;
-    h4= t "legend"
-  .inner-legend
-    div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
-      h6
-        |{{layer.title}}
-      img ng-src="{{layer.data_source_wms}}?request=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
-
-
+- cache ["v1", "bottom-sidebar"] do
+  #undefined
