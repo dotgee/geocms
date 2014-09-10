@@ -36,3 +36,30 @@
   border-radius: 4px;
   border: none;
 }
+
+.leaflet-control-geosearch {
+  input#leaflet-control-geosearch-qry {
+    width: 0px;
+    height: 30px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    border: 1px solid #d5d5d5;
+    box-shadow: none;
+    background: #f6f6f6 asset-url("geocms/search-icon.png") no-repeat 10px 8px;
+    padding: 0 5px 0 30px;
+    color: #32323a;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+  }
+
+  input#leaflet-control-geosearch-qry:focus {
+    width: 180px;
+    border: 1px solid #d5d5d5;
+    box-shadow: none;
+    color: #32323a;
+    font-weight: 300;
+  }
+}
