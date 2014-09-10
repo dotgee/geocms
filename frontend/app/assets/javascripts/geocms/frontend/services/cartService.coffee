@@ -5,7 +5,8 @@ cartModule.service "cartService",
     "mapService",
     "Restangular",
     "$rootScope",
-    (ms, Restangular, $root) ->
+    "toaster",
+    (ms, Restangular, $root, toaster) ->
 
       Cart = ->
         @layers = []
@@ -56,8 +57,12 @@ cartModule.service "cartService",
         @context.contexts_layers_attributes = _.map(@layers, (cl) ->
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity }
         )
-        @context.save()
-        @state = "saved"
+        @context.save().then ((response)->
+          toaster.pop('success', "La sauvegarde a réussi", response.data)
+          @state = "saved"
+        ), (response)->
+          toaster.pop('error', "La sauvegarde a échoué", response.data)
+
 
       Cart::centerOn = (layer) ->
         bbox =  new L.LatLngBounds(

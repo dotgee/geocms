@@ -4,6 +4,8 @@ geocms = angular.module( 'geocms', [
   'ui.slider'
   'ui.tree'
   'ui.bootstrap'
+  'ngAnimate'
+  'toaster'
   'geocms.contexts'
   'geocms.folders'
   'geocms.map'

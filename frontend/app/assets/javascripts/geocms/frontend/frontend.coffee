@@ -3,6 +3,7 @@
 #= require angular
 #= require restangular
 #= require angular-ui-router
+#= require angular-animate
 #= require leaflet
 #= require ./proj4leaflet
 #= require moment

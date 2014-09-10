@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'geocms_core', version
   s.add_dependency 'geocms_api', version
-  
+
   s.add_dependency "sass-rails", '~> 4.0.0'
   s.add_dependency "coffee-rails", '~> 4.0.0'
   #s.add_dependency "compass-rails", "~> 1.1.2"
@@ -32,12 +32,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-assets-angular', "~> 1.2.18"
   s.add_dependency 'rails-assets-restangular', "1.4.0"
   s.add_dependency 'rails-assets-angular-ui-router', "0.2.10"
+  s.add_dependency 'rails-assets-angular-animate', "1.2.19"
   # s.add_dependency 'rails-assets-angular-ui-slider', '0.0.2'
   s.add_dependency 'rails-assets-leaflet', "0.7.3"
   s.add_dependency 'rails-assets-proj4', "~> 1.3.4"
   # Waiting for proj4leaflet to be compatible
   # s.add_dependency 'rails-assets-proj4leaflet', "0.7.0"
   s.add_dependency 'rails-assets-moment', "2.7.0"
-  
+
 
 end

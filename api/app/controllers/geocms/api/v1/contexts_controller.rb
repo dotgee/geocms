@@ -18,10 +18,14 @@ module Geocms
 
     def update
       @context = Geocms::Context.find(params[:id])
-      if @context.update_attributes(context_params)
-        render json: @context
+      if can? :update, @context
+        if @context.update_attributes(context_params)
+          render json: @context
+        else
+          render json: @context.errors.to_hash
+        end
       else
-        render json: @context.errors.to_hash
+        render json: "Vous n'avez pas les droits pour sauvegarder cet carte.", status: :forbidden
       end
     end
 
