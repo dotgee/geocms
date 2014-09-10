@@ -83,7 +83,7 @@
   width: 130px;
   position: absolute;
   top: 11px;
-  left: 481px;
+  left: 480px;
   z-index: 300;
   height: 26px;
   text-align: center;
@@ -155,7 +155,7 @@
   }
   .right-infos {
     display: inline-block;
-    width: 430px;
+    width: 400px;
     .title {
       @include ellipsis;
       cursor: pointer;

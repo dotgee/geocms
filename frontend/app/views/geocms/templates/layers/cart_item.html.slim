@@ -1,6 +1,6 @@
 .grippy ui-tree-handle=""
 .right-infos
-  .title
+  label.title
     input type="checkbox" class="layer-visibility" id="{{layer.name}}" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
     a title="{{layer.title}}" class="unstyled" ng-click="cart.currentLayer = layer"
       |{{layer.title}}
