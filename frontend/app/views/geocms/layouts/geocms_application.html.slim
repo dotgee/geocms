@@ -6,8 +6,6 @@ html(lang="en" ng-app="geocms")
     title== content_for?(:title) ? yield(:title) : "GeoCMS"
     meta content="" name="description"
     meta content="width=device-width" name="viewport"
-    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
-    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
     = stylesheet_link_tag "geocms/application"
     /[if lt IE 9]
       / = stylesheet_link_tag "leaflet/leaflet.ie"

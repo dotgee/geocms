@@ -1,8 +1,4 @@
-.map-controls
-  .m-btn-group
-    button.save.m-btn.blue ng-click="cart.save()"
-      span= t "context.save"
-    button.share.m-btn.disabled disabled="disabled"
-      span= t "context.share"
-      '
-      i.m-icon-swapright
+.account-infos
+  = image_tag current_tenant.logo, height: "50px"
+  = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
+.clearfix

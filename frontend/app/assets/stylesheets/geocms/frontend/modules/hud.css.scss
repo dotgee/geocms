@@ -8,7 +8,7 @@
   top: 10px;
   width: $hudsize;
   height: auto;
-  max-height: 400px;
+  max-height: 440px;
   padding-bottom: 10px;
   background: white;
   transition: left 300ms;
@@ -82,7 +82,7 @@
   text-decoration: none;
   width: 130px;
   position: absolute;
-  top: 0;
+  top: 63px;
   left: 450px;
   z-index: 300;
   height: 27px;
@@ -128,7 +128,7 @@
 }
 
 .hud-panel {
-  max-height: 330px;
+  max-height: 360px;
   overflow-y: auto;
 }
 

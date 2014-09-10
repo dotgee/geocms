@@ -7,12 +7,13 @@ body {
   margin: 0 auto;
   @include box-shadow(rgba(0,0,0,0.1) 0px 0 20px 10px);
   position: relative;
-  font: normal 13px/25px "Open Sans", Arial, sans-serif;
+  font: normal 13px/25px Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
 body.backend{
   background-color: $mercury;
+  font: normal 13px/25px "Open Sans", Arial, sans-serif;
 }
 // EXPLORE LAYOUT
 
