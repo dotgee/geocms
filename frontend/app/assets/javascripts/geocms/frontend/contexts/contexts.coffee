@@ -31,13 +31,13 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "$rootScope", "$state", "$scope", (mapService, data, $root, $state, $scope) ->
+            controller: ["mapService", "data", "$rootScope", "$state", "$scope", "Restangular", (mapService, data, $root, $state, $scope, Restangular) ->
               if data != null && data != undefined && data != "null"
                 $state.transitionTo('contexts.show', {slug: data.slug})
               else
                 context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
                 mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
-                $root.cart.context = context
+                $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
                 mapService.addBaseLayer()
               $scope.mapService = mapService
             ]

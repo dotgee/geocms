@@ -17,6 +17,8 @@ module Geocms
     after_save :generate_preview
     after_save :set_default
 
+    validates :name, :description, presence: true
+
     default_scope -> { order("created_at DESC") }
 
     def contexts_layers_attributes=(attrs)

@@ -23,6 +23,10 @@ module Geocms
         can :read, Folder, folder: { visibility: true }
         can [:new, :read, :share], Context
         can :create, Context, folder: { visibility: true }
+        can :update, Context do |context|
+          context.new_record? or
+          context.folder.nil?
+        end
       else
         can :read, Folder, visibility: true
         can [:read, :write], Folder, user: user

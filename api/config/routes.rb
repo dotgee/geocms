@@ -8,6 +8,7 @@ Geocms::Core::Engine.add_routes do
       end
       resources :contexts do
         get :default, on: :collection
+        get :wmc, on: :member
       end
       resources :categories
       resources :folders do
