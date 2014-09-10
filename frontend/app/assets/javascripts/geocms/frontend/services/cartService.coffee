@@ -72,5 +72,11 @@ cartModule.service "cartService",
                 )
         ms.container.fitBounds(bbox)
 
+      Cart::importCenter = ->
+        centerInfos = ms.importCenter()
+        @context.center_lng = centerInfos.center.lng
+        @context.center_lat = centerInfos.center.lat
+        @context.zoom = centerInfos.zoom
+
       Cart
   ]

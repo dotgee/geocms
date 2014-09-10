@@ -62,6 +62,12 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
 
     @crs.scale = scale
 
+  mapService.importCenter = ->
+    {
+      center: @container.getCenter()
+      zoom: @container.getZoom()
+    }
+
   mapService.invalidateMap = () ->
     @container.invalidateSize()
 
