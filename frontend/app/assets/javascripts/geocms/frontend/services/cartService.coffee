@@ -53,6 +53,9 @@ cartModule.service "cartService",
           that.layers.push ms.addLayer(cl)
 
       Cart::save = () ->
+        if(@context.folder)
+          @context.folder_id = @context.folder.id.id
+          delete @context.folder
         delete @context.contexts_layers # BUG: circular dependency in json
         that = this
         @context.contexts_layers_attributes = _.map(@layers, (cl) ->

@@ -30,7 +30,7 @@ geocms.config [
     RestangularProvider ) ->
 
     $locationProvider.html5Mode(true)
-    RestangularProvider.setDefaultHttpFields({cache: true});
+    # RestangularProvider.setDefaultHttpFields({cache: true});
 
     $urlRouterProvider.when('', '/maps');
     $urlRouterProvider.when('/', '/maps');

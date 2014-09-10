@@ -7,7 +7,7 @@ module Geocms
     # Editors can't destroy items nor administrate users and instances
 
     def initialize(user, current_tenant)
-      user ||= User.new # guest user (not logged in)
+      user ||= Geocms::User.new # guest user (not logged in)
       if user.has_role? :admin
         can :manage, :all
       elsif user.has_role? :admin, current_tenant
@@ -20,7 +20,7 @@ module Geocms
         cannot :create, User
         cannot :manage, Account
       elsif user.new_record?
-        can :read, Folder, folder: { visibility: true }
+        can :read, Folder, visibility: true
         can [:new, :read, :share], Context
         can :create, Context, folder: { visibility: true }
         can :update, Context do |context|
@@ -31,7 +31,8 @@ module Geocms
         can :read, Folder, visibility: true
         can [:read, :write], Folder, user: user
         can [:new, :read, :share], Context
-        can :save, Context, folder: { user: user }
+        can :create, Context, folder: { user: user }
+        can :update, Context, folder: { user: user }
       end
 
     end

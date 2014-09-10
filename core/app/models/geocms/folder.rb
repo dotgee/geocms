@@ -5,7 +5,7 @@ module Geocms
 
     belongs_to :user
 
-    has_many :contexts, class_name: "Geocms::Context"
+    has_many :contexts
 
     validates :user, :name, presence: true
     validates :name, uniqueness: true

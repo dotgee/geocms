@@ -73,7 +73,7 @@ body.fullscreen{
   @include box-shadow(none);
   position: relative;
   background: white;
-  height: 260px;
+  min-height: 280px;
   &.new {
     background: rgba(0, 0, 0, 0.05);
     text-align: center;
