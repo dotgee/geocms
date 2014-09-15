@@ -30,7 +30,7 @@ app = angular.module("geocms", [
 
 
   $scope.import = () ->
-    layer = $scope.extractLayerInformations()
+    layers = $scope.extractLayerInformations()
     layers = Restangular.restangularizeElement(null, layers, "layers")
     layers.customPOST({layers: layers}, "import")
 
