@@ -1,6 +1,6 @@
 mapModule = angular.module "geocms.map", ["geocms.plugins"]
 
-mapModule.service "mapService", ["pluginService", (pluginService) ->
+mapModule.service "mapService", ["pluginService", "$http", (pluginService, $http) ->
 
   mapService = {}
 
@@ -84,18 +84,33 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
     @container.addEventListener('click', @getFeatureWMS)
   
   mapService.getFeatureWMS = (e) ->
-    url = @getWMSFeatureURL(e)
+    url = mapService.getWMSFeatureURL(e)
+    $http.get(
+      url
+    ).success((data, status, headers, config) ->
+      template = _.template(mapService.currentLayer.template)
+
+      L.popup({ maxWidth: 800, maxHeight: 600 })
+            .setLatLng(e.latlng)
+            .setContent(template(data.features[0].properties))
+            .openOn(mapService.container)
+    ).error (data, status, headers, config) ->
 
   mapService.getWMSFeatureURL = (e) ->
-    bbox = @container.getBounds()
-    WIDTH = @container.getSize().x
-    HEIGHT = @container.getSize().y
+    BBOX = @container.getBounds().toBBoxString()
+    size = @container.getSize()
     x = @container.layerPointToContainerPoint(e.layerPoint).x
     y = @container.layerPointToContainerPoint(e.layerPoint).y
 
-    map.queryable_layer.data_source.wms+'?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS='+map.queryable_layer.name+'&QUERY_LAYERS='+map.queryable_layer.name+'&STYLES=&'+
-          'BBOX='+BBOX+'&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image/png&INFO_FORMAT=text/html&'+
-    'SRS='+EPSG+'&X='+x+'&Y='+y+"&FEATURE_COUNT=500"
+    @currentLayer.data_source_wms+'?SERVICE=WMS&VERSION=1.1.1'+
+      '&request=GetFeatureInfo'+
+      '&query_layers='+@currentLayer.name+
+      '&layers='+@currentLayer.name+
+      '&BBOX='+BBOX+
+      '&x='+x+'&y='+y+
+      '&height='+size.y+'&width='+size.x+
+      '&info_format=application/json&'+
+      'SRS=CRS:84'+'&count=1'
 
   mapService
 ]
