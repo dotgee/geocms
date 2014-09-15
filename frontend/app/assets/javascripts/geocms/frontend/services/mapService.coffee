@@ -27,10 +27,17 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
     #     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
     #     'Imagery © <a href="http://geobretagne.fr/accueil/">GeoBretagne</a>'
     # }).addTo(@container)
-    mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/impeyal.map-el9s7flv/{z}/{x}/{y}.png', {
-        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-    })
-    mapboxTiles.addTo(@container)
+
+    baseLayer = L.tileLayer(
+      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        attribution: '...',
+        maxZoom: 18
+      }
+    ).addTo(@container)
+    # mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/impeyal.map-el9s7flv/{z}/{x}/{y}.png', {
+    #     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    # })
+    # mapboxTiles.addTo(@container)
 
   mapService.addLayer = (layer) ->
     layer.opacity = 90 unless layer.opacity?
