@@ -26,6 +26,9 @@ cartModule.service "cartService",
 
         @state = "unsaved"
 
+      Cart::toggleQuery = ->
+        ms.addEventListener(@currentLayer)
+
       Cart::setOpacity = (ev, ui) ->
         $root.cart.currentLayer._tilelayer.setOpacity(ui.value)
         $root.cart.currentLayer.opacity = ui.value * 100

@@ -78,5 +78,24 @@ mapModule.service "mapService", ["pluginService", (pluginService) ->
   mapService.invalidateMap = () ->
     @container.invalidateSize()
 
+  mapService.addEventListener = (layer) ->
+    $("#map").css("cursor", "crosshair")
+    @currentLayer = layer
+    @container.addEventListener('click', @getFeatureWMS)
+  
+  mapService.getFeatureWMS = (e) ->
+    url = @getWMSFeatureURL(e)
+
+  mapService.getWMSFeatureURL = (e) ->
+    bbox = @container.getBounds()
+    WIDTH = @container.getSize().x
+    HEIGHT = @container.getSize().y
+    x = @container.layerPointToContainerPoint(e.layerPoint).x
+    y = @container.layerPointToContainerPoint(e.layerPoint).y
+
+    map.queryable_layer.data_source.wms+'?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS='+map.queryable_layer.name+'&QUERY_LAYERS='+map.queryable_layer.name+'&STYLES=&'+
+          'BBOX='+BBOX+'&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image/png&INFO_FORMAT=text/html&'+
+    'SRS='+EPSG+'&X='+x+'&Y='+y+"&FEATURE_COUNT=500"
+
   mapService
 ]
