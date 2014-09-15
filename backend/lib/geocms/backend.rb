@@ -13,3 +13,8 @@ require 'sass-rails'
 require 'coffee-rails'
 require 'rabl'
 require 'gon'
+
+require "rails-assets-lodash"
+require "rails-assets-angular"
+require "rails-assets-restangular"
+require "rails-assets-ng-table"

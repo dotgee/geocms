@@ -21,6 +21,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'geocms_core', version
 
+  s.add_dependency 'rails-assets-angular', "~> 1.2.18"
+  s.add_dependency 'rails-assets-lodash', "2.4.1"
+  s.add_dependency 'rails-assets-restangular', "1.4.0"
+  s.add_dependency 'rails-assets-ng-table', "0.3.3"
+
   s.add_dependency "sass-rails", '~> 4.0.0'
   s.add_dependency "coffee-rails", '~> 4.0.0'
   s.add_dependency "slim-rails"

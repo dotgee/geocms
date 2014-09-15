@@ -25,6 +25,8 @@ module Geocms
     has_many :categorizations
     has_many :categories, through: :categorizations
 
+    accepts_nested_attributes_for :bounding_boxes
+
     # SCOPES
     default_scope -> { order(:title) }
     scope :for_frontend, -> { select(

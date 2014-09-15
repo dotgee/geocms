@@ -38,5 +38,6 @@ Gem::Specification.new do |s|
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"
   s.add_dependency "sidekiq"
+  s.add_dependency "interactor", "~> 3.0"
 
 end

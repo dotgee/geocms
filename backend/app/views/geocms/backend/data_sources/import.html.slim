@@ -1,27 +1,40 @@
-.page-header
-  h1= "#{t("backend.layers_imported_from").html_safe} #{@data_source.name}"
+div ng-controller="ImportCtrl"
+  div loading-container="tableParams.settings().$loading"
+    table ng-table="tableParams" show-filter="true" class="table"
+      tbody
+        tr ng-repeat="layer in $data"
+          td width="30"
+            input type="checkbox" ng-click="markForImport(layer.table)"
+          td data-title="'Nom'" sortable="name"
+            |{{layer.table.name}}
+          td data-title="'Titre'" sortable="title"
+            |{{layer.table.title}}
 
-.alert.alert-success.hide#layer-import
-  a.close data-dismiss="alert" ×
-  = t("layer.imported_successfully")
+  a.m-btn.blue ng-click="import()" Importer
+/ .page-header
+/   h1= "#{t("backend.layers_imported_from").html_safe} #{@data_source.name}"
 
-table.table.table-striped.table-import
-  thead
-    tr
-      th= t(:name)
-      th
-  tbody#import-layers
+/ .alert.alert-success.hide#layer-import
+/   a.close data-dismiss="alert" ×
+/   = t("layer.imported_successfully")
 
-#modal-form.modal.hide.fade
-  .modal-header
-    button.close aria-hidden="true" data-dismiss="modal" type="button"
-    h3= t("layer.create")
-  .modal-body
-  .modal-footer
-    a.m-btn data-dismiss="modal" aria-hidden="true" = t("cancel")
-    a.m-btn.blue#save href="#" = t("confirm")
+/ table.table.table-striped.table-import
+/   thead
+/     tr
+/       th= t(:name)
+/       th
+/   tbody#import-layers
 
-#data-source-id.hide data-id=@data_source.id
+/ #modal-form.modal.hide.fade
+/   .modal-header
+/     button.close aria-hidden="true" data-dismiss="modal" type="button"
+/     h3= t("layer.create")
+/   .modal-body
+/   .modal-footer
+/     a.m-btn data-dismiss="modal" aria-hidden="true" = t("cancel")
+/     a.m-btn.blue#save href="#" = t("confirm")
 
-= content_for :javascripts do
-  = javascript_include_tag "backend/import"
+/ #data-source-id.hide data-id=@data_source.id
+
+/ = content_for :javascripts do
+/   = javascript_include_tag "backend/import"

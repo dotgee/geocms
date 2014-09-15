@@ -12,6 +12,7 @@ require "kaminari"
 require "rgeo"
 # require "tire"
 require "rolify"
+require "interactor"
 
 require "sorcery"
 require "cancancan"

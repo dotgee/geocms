@@ -20,7 +20,7 @@ table.table.table-striped.table-backend
           = link_to [:backend, category], :confirm => 'Are you sure?', :method => :delete , :class => "m-btn red icn-only mini" do
             i.icon-trash.icon-white
     - @layers.page(params[:page]).each do |layer|
-      == render layer
+      == render "geocms/backend/layers/layer", layer: layer
     = paginate @layers
 = link_to t("layer.create"), [:new, :backend, @category, :layer], :class => "m-btn blue"
 = link_to t(:add_child), new_backend_category_path(:parent_id => @category.id), :class => "m-btn blue"
