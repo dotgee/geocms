@@ -60,5 +60,5 @@
           div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
             h6
               |{{layer.title}}
-            img ng-src="{{layer.data_source_wms}}?request=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
+            img ng-src="{{layer.data_source_wms}}?service=wms&request=GetLegendGraphic&VERSION=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
     /div ng-include="'/templates/contexts/bottom_sidebar.html'"
