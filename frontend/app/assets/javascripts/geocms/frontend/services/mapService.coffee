@@ -86,7 +86,7 @@ mapModule.service "mapService", ["pluginService", "$http", (pluginService, $http
   mapService.getFeatureWMS = (e) ->
     url = mapService.getWMSFeatureURL(e)
     $http.get(
-      url
+      "/proxy.php?url="+encodeURIComponent(url)
     ).success((data, status, headers, config) ->
       template = _.template(mapService.currentLayer.template)
 
