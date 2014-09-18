@@ -1,11 +1,10 @@
 - cache ["v1", "folders"] do
-  .row-thumbnails
-    ul.thumbnails
-      li.span3.fixed-layout ng-repeat="folder in folders"
-        a ui-sref="folders.show(folder)"
-          .thumbnail.unbordered
-            .placeholder
-              .carticon-folder.folder-display ng-class="(folder.visibility == false || folder.visibility == null) ? 'non-public-folder' : ''"
-            .caption
-              h4
-                |{{folder.name}}
+  .container
+    .page-header
+      h1 Projets
+    .row
+      .col-sm-4.col-md-3 ng-repeat="folder in folders"
+        .thumbnail.thumbnail-folder ui-sref="folders.show(folder)"
+          .carticon-folder.folder-display ng-class="(folder.visibility == false || folder.visibility == null) ? 'non-public-folder' : ''"
+          h4
+            |{{folder.name}}

@@ -1,41 +1,41 @@
 - cache ["v1", "controls"] do
   .add-layer ng-click="cart.currentLayer = null"
     span Retour à la liste
-    a class="m-btn mini blue icn-only pull-right"
+    a class="btn btn-default btn-xs blue icn-only pull-right"
       span.carticon-menu
 
   .hud-panel style="padding: 0 10px 35px; max-height: 280px;"
     div ng-switch="" on="activeControl"
       div ng-switch-when="opacity"
-        h6 Contrôle de l'opacité
+        h5 Contrôle de l'opacité
         .opacity-controler
           div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="cart.currentLayer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"
       div ng-switch-when="temporality"
-        h6 Contrôle de la temporalité
+        h5 Contrôle de la temporalité
       div ng-switch-when="cql_filter"
-        h6 Filtrer les données
+        h5 Filtrer les données
         .control-group.field-zoom.pull-left
           .controls
             input type="text" ng-model="cart.currentLayer.cql_filter" placeholder="Entrez votre filtre CQL"
-        a.m-btn.mini.blue.from-map Appliquer
+        a.btn.btn-default.btn-xs.blue.from-map Appliquer
       div ng-switch-when="downloads"
-        h6 Méta-données & Téléchargement
+        h5 Méta-données & Téléchargement
       div ng-switch-default=""
-        h6
+        h5
           |{{cart.currentLayer.title}}
-        div
+        p
           |{{cart.currentLayer.description}}
 
   #ctrls
-    a.m-btn.mini.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.centerOn(cart.currentLayer)"
+    a.btn.btn-default.btn-xs.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.centerOn(cart.currentLayer)"
       i.carticon-target
-    a.m-btn.mini.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'opacity') ? 'default' : 'opacity'" ng-class="{active: (activeControl == 'opacity')}"
+    a.btn.btn-default.btn-xs.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'opacity') ? 'default' : 'opacity'" ng-class="{active: (activeControl == 'opacity')}"
       i.carticon-adjust
-    a.m-btn.mini.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.toggleQuery(); activeControl = (activeControl == 'interogation') ? 'default' : 'interogation'" ng-class="{active: (activeControl == 'interogation')}"
+    a.btn.btn-default.btn-xs.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.toggleQuery(); activeControl = (activeControl == 'interogation') ? 'default' : 'interogation'" ng-class="{active: (activeControl == 'interogation')}"
       i.carticon-info
-    a.m-btn.mini.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'cql_filter') ? 'default' : 'cql_filter'" ng-class="{active: (activeControl == 'cql_filter')}"
+    a.btn.btn-default.btn-xs.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'cql_filter') ? 'default' : 'cql_filter'" ng-class="{active: (activeControl == 'cql_filter')}"
       i.carticon-search
-    a.m-btn.mini.blue rel='tooltip' data-original-title='Télécharger' ng-class="{disabled: cart.currentLayer.data_source_not_internal, active: (activeControl == 'downloads')}"  ng-click="activeControl = (activeControl == 'downloads') ? 'default' : 'downloads'"
+    a.btn.btn-default.btn-xs.blue rel='tooltip' data-original-title='Télécharger' ng-class="{disabled: cart.currentLayer.data_source_not_internal, active: (activeControl == 'downloads')}"  ng-click="activeControl = (activeControl == 'downloads') ? 'default' : 'downloads'"
       i.carticon-download
-    a.m-btn.mini.blue.remove rel='tooltip' data-original-title='Supprimer' ng-click="cart.remove(cart.currentLayer)"
+    a.btn.btn-default.btn-xs.blue.remove rel='tooltip' data-original-title='Supprimer' ng-click="cart.remove(cart.currentLayer)"
       i.carticon-trash

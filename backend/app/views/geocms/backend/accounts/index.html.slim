@@ -15,6 +15,6 @@ table.table.table-striped
         td= account.subdomain
         td= account.created_at.strftime("%d/%m/%Y")
         td
-          = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "m-btn red icn-only mini" do
-            i.icon-trash.icon-white
-= link_to t("accounts.new"), [:new, :backend, :account], class: "m-btn blue"
+          = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
+            i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
+= link_to t("accounts.new"), [:new, :backend, :account], class: "btn btn-primary"

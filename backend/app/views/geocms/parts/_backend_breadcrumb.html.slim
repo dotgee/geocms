@@ -1,11 +1,8 @@
 ul.breadcrumb.backend
   li
     = link_to backend_root_path do
-      i.icon-home
-    span.divider >
+      i.glyphicon.glyphicon-home
   - category.ancestors.each do |cat|
     li
       = link_to cat.name, [:backend, cat]
-      span.divider
-        '>
   li.active= category.name

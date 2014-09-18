@@ -1,68 +1,14 @@
-.navbar .nav > li > a {
-  text-shadow: none;
-  &.brand {
-    padding-top: 8px;
-  }
-  &.brand-context {
-    margin-top: 16px;
-  }
+.navbar {
+  border-radius: 0px;
 }
 
-.navbar .nav > li {
-  line-height: 30px;
+.navbar-brand {
+  padding: 10px 15px;
+  height: 70px;
 }
 
-.navbar-inner {
-  background: $color-panel-1;
-  @include border-radius(0px);
-  @include background-image(none);
-  filter: none;
-  border: none;
-  min-height: 50px;
+.navbar-nav {
   .user-image {
     margin-top: 10px;
-  }
-}
-
-.brand {
-  line-height: 25px;
-}
-
-// BACKEND
-
-.navbar.backend {
-  .container {
-    width: 1300px;
-  }
-  .nav {
-    margin: 9px 10px 0 0;
-    > li {
-      margin: 5px;
-      > a {
-        font-family: 'Open Sans Condensed';
-        font-size: 13px;
-        color: #FFF;
-        display: inline-block;
-        background: $outer_space;
-        margin: 0px;
-        padding: 0px 30px;
-        text-transform: uppercase;
-        border-radius: 4px;
-        height: 40px;
-        line-height: 40px;
-        font-weight: bolder;
-        &:hover, &:focus {
-          color: #E6E6E6;
-        }
-        &.brand {
-          background: none;
-        }
-      }
-    }
-  }
-  margin-bottom: 0px;
-  .navbar-inner {
-    background: $oxford_blue;
-    min-height: 70px;
   }
 }

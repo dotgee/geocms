@@ -6,29 +6,29 @@
   td {
     vertical-align: middle;
     line-height: 23px;
+    &.actions {
+      vertical-align: middle;
+    }
     &.default {
       color: #666;
       font-style: italic;
     }
-    .m-btn-group {
+    .btn-group {
       margin-right: 20px;
     }
-    .m-btn {
+    .btn {
       margin-top: 0;
     }
-    .m-btn-group .m-btn {
+    .btn-group .btn {
       float: none;
     }
-    .icon-layer-blue {
+    .glyphicon.glyphicon-layer-btn-primary {
       margin-top: 5px;
       margin-right: 5px;
     }
-    .icon-folder {
+    .glyphicon.glyphicon-folder {
       margin-top: 4px;
       margin-right: 5px;
-    }
-    a {
-      @include link-colors(#3788C0, #3C4E5A)
     }
   }
   &.categories-index {

@@ -11,16 +11,16 @@ table.table.table-striped.table-backend
     - @category.children.each do |category|
       tr
         td
-          i.icon-folder
+          i.glyphicon.glyphicon-folder
           = link_to category.name, [:backend, category]
         td
-          = link_to edit_backend_category_path(category) , :class => "m-btn blue mini icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
-            i.icon-pencil.icon-white
+          = link_to edit_backend_category_path(category) , :class => "btn btn-primary btn-xs icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+            i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
         td
-          = link_to [:backend, category], :confirm => 'Are you sure?', :method => :delete , :class => "m-btn red icn-only mini" do
-            i.icon-trash.icon-white
+          = link_to [:backend, category], :confirm => 'Are you sure?', :method => :delete , :class => "btn btn-danger icn-only btn-xs" do
+            i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
     - @layers.page(params[:page]).each do |layer|
       == render "geocms/backend/layers/layer", layer: layer
     = paginate @layers
-= link_to t("layer.create"), [:new, :backend, @category, :layer], :class => "m-btn blue"
-= link_to t(:add_child), new_backend_category_path(:parent_id => @category.id), :class => "m-btn blue"
+= link_to t("layer.create"), [:new, :backend, @category, :layer], :class => "btn btn-primary"
+= link_to t(:add_child), new_backend_category_path(:parent_id => @category.id), :class => "btn btn-primary"

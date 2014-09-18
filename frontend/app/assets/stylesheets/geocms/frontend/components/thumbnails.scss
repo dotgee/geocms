@@ -1,0 +1,75 @@
+
+// .row-thumbnails {
+//   background: asset-url("geocms/tiny_grid.png");
+//   border-top: 5px solid rgba(235, 235, 235, 0.55);
+//   ul.thumbnails {
+//     padding: 20px 20px 0;
+//     li {
+//       max-width: 278px;
+//       &:first-child{
+//         margin-left: 2.12766%;
+//       }
+//       &.fixed-layout {
+//         width: 278px;
+//       }
+//     }
+//   }
+// }
+
+// .backend {
+//   .row-thumbnails {
+//     margin: 0 -20px;
+//   }
+// }
+
+// .thumbnail.unbordered {
+//   border: none;
+//   @include border-radius(0);
+//   @include box-shadow(none);
+//   position: relative;
+//   background: white;
+//   min-height: 280px;
+//   &.new {
+//     background: rgba(0, 0, 0, 0.05);
+//     text-align: center;
+//     a {
+//       margin-top: 90px;
+//     }
+//   }
+//   &:hover {
+//     @include box-shadow(rgba(0, 0, 0, 0.05) 0px 0px 0px 5px);
+//   }
+// }
+
+// .caption {
+//   padding: 3px 9px;
+//   p {
+//     @include ellipsis;
+//   }
+// }
+
+// .thumbnails-control {
+//   position: absolute !important;
+//   bottom: 0;
+//   right: 0;
+//   .btn {
+//     background: rgba(0, 8, 16, 0.8);
+//     &:first-child {
+//       @include border-radius(3px 0px 0px 0px);
+//     }
+//   }
+// }
+
+// .thumbnail-link:hover {
+//   text-decoration: none;
+// }
+
+.thumbnail-folder {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid transparent;
+  &:hover {
+    background: #f8f8f8;
+    border: 1px solid #e7e7e7;
+  }
+}

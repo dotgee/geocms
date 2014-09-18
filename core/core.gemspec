@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", ">= 4.0.0"
   s.add_dependency "sprockets", "~> 2.11.0"
   s.add_dependency "compass-rails"
-  s.add_dependency "bootstrap-sass", "~> 2.2.2"
+  s.add_dependency "bootstrap-sass", "~> 3.2.0"
   s.add_dependency 'draper', '~> 1.3'
   s.add_dependency "acts_as_tenant", '~> 0.3.6'
   s.add_dependency "friendly_id"

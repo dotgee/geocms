@@ -39,7 +39,7 @@
   margin-bottom: 10px;
 }
 
-.m-btn.geovisu {
+.btn.geovisu {
   margin-left: 15px;
   padding: 8px 12px 9px;
   i {
@@ -85,7 +85,7 @@
   top: 63px;
   left: 450px;
   z-index: 300;
-  height: 27px;
+  height: 37px;
   text-align: center;
   border-radius: 0 4px 4px 0;
   padding: 5px;
@@ -99,7 +99,7 @@
   }
 }
 
-.m-btn .carticon-menu {
+.btn .carticon-menu {
   line-height: 10px;
   font-size: 14px;
 }
@@ -113,12 +113,13 @@
   right: 0;
   border-top: 1px solid #E6E6E6;
   z-index: 50;
-  .m-btn {
+  .btn {
     margin-top: 0;
-    padding: 10px 19px;
+    padding: 8px 29px;
     margin: 0;
     &:last-child {
-      padding: 10px 4px;
+      padding: 8px 24px;
+      border-right: 0;
     }
   }
 }
@@ -244,20 +245,7 @@
   span {
     line-height: 35px;
   }
-  .layer-button {
-    padding: 5px 10px;
-    height: 20px;
-    background: #B4C2CC;
-    @include border-radius(3px);
-    [class^="icon-"] {
-      margin-top: 2px;
-    }
-    .icon-layer {
-      background-position: bottom;
-      margin-top: 4px;
-    }
-    &:hover {
-      background: $color-panel-1;
-    }
+  a {
+    margin-top: 7px;
   }
 }

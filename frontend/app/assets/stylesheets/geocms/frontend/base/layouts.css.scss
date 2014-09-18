@@ -11,10 +11,6 @@ body {
   font-weight: 300;
 }
 
-body.backend{
-  background-color: $mercury;
-  font: normal 13px/25px "Open Sans", Arial, sans-serif;
-}
 // EXPLORE LAYOUT
 
 body.fullscreen{
@@ -28,103 +24,12 @@ body.fullscreen{
   box-shadow: none;
 }
 
-// .wrapper {
-//   position: absolute;
-//   top: 0;
-//   left: 0px;
-//   right: 0px;
-//   bottom: 0px;
-//   transition: top 100ms;
-//   -webkit-transition: top 100ms;
-//   @include box-sizing(border-box);
-//   padding-bottom: 0px;
-// }
-
 .container-infos {
   height: 90px;
-}
-
-.row-thumbnails {
-  background: asset-url("geocms/tiny_grid.png");
-  border-top: 5px solid rgba(235, 235, 235, 0.55);
-  ul.thumbnails {
-    padding: 20px 20px 0;
-    li {
-      max-width: 278px;
-      &:first-child{
-        margin-left: 2.12766%;
-      }
-      &.fixed-layout {
-        width: 278px;
-      }
-    }
-  }
-}
-
-.backend {
-  .row-thumbnails {
-    margin: 0 -20px;
-  }
-}
-
-.thumbnail.unbordered {
-  border: none;
-  @include border-radius(0);
-  @include box-shadow(none);
-  position: relative;
-  background: white;
-  min-height: 280px;
-  &.new {
-    background: rgba(0, 0, 0, 0.05);
-    text-align: center;
-    a {
-      margin-top: 90px;
-    }
-  }
-  &:hover {
-    @include box-shadow(rgba(0, 0, 0, 0.05) 0px 0px 0px 5px);
-  }
-}
-
-.caption {
-  padding: 3px 9px;
-  p {
-    @include ellipsis;
-  }
-}
-
-.thumbnails-control {
-  position: absolute !important;
-  bottom: 0;
-  right: 0;
-  .m-btn {
-    background: rgba(0, 8, 16, 0.8);
-    &:first-child {
-      @include border-radius(3px 0px 0px 0px);
-    }
-  }
-}
-
-.thumbnail-link:hover {
-  text-decoration: none;
 }
 
 .placeholder {
   width: 100%;
   background: $clouds;
   height: 170px;
-}
-
-#wrap {
-  background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9wHFwcfBBm+GcAAAAAySURBVBjTY2RgYBB5+vTpGwYkIC0tjSHG+PTpUwZiABMDkYAGCqWlpUXQBbGJDQXPAAACQA3p/nxRSgAAAABJRU5ErkJggg==);
-}
-
-.main-container {
-  width: 1200px;
-  padding: 20px 40px;
-  margin: 40px;
-  background: white;
-  &.no-color {
-    background: transparent;
-  }
 }

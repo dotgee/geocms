@@ -1,5 +1,5 @@
 - cache ["v1", "layer"] do
-  .media-wrapper.media-layer ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)"
+  div ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)"
     a.pull-left.image-link
       img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64' ng-if="false"
     .media-body

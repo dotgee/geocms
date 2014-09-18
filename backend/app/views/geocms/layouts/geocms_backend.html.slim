@@ -9,42 +9,42 @@ html ng-app="geocms"
     = csrf_meta_tags
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
-    = stylesheet_link_tag "geocms/application"
     = stylesheet_link_tag "geocms/backend/backend"
     = yield :stylesheets
     = yield(:js_header)
-  body.backend
+  body
+    nav.navbar.navbar-default.navbar-backend role="navigation" 
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#geocms-navbar" data-toggle="collapse" type="button" 
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand ui-sref="contexts.root"
+            = logo_for_tenant
+        #geocms-navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+              li= link_to t("menu.layers"), backend_categories_path
+              li= link_to t("maps"), backend_folders_path
+              li= link_to t("menu.data_sources"), backend_data_sources_path
+              li= link_to t("menu.users"), backend_users_path
+              li= link_to t("menu.preferences"), edit_backend_preferences_path
+              li= link_to t("menu.accounts"), backend_accounts_path
+          form.navbar-form.navbar-left
+            .input-group
+              input type="text" class="form-control" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
+              span class="input-group-btn"
+                button class="btn btn-default" type="button" 
+                  span.glyphicon.glyphicon-search
+          ul.nav.navbar-nav.navbar-right
+            li= link_to t("menu.logout"), logout_path
 
-    #wrap
-      .navbar.backend
-        .navbar-inner
-          .container
-            ul.nav
-              li= link_to backend_root_path, :class => "brand" do
-               = logo_for_tenant
-              - if logged_in?
-                li= link_to t("menu.categories"), backend_categories_path
-                li= link_to t("maps"), backend_folders_path
-                li= link_to t("menu.data_sources"), backend_data_sources_path
-                li= link_to t("menu.users"), backend_users_path
-                li= link_to t("menu.preferences"), edit_backend_preferences_path
-                li= link_to t("menu.accounts"), backend_accounts_path
-            - if logged_in?
-              ul.nav.pull-right
-                li= link_to t("menu.logout"), logout_path
-      - if logged_in?
-        .search-container
-          form class="form-search navbar-form-search" action="#{backend_search_path}" method="get"
-            .input-append
-              input.span6 type="text" class="input-medium search-query" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
-              button.m-btn
-                i.icon-search
-      #page
-        .container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
-          == render "/geocms/layouts/messages"
-          == yield
-          #push
-    == render "/geocms/layouts/footer"
+
+    #page
+      .container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
+        == render "/geocms/layouts/messages"
+        == yield
     javascript:
       var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
     = javascript_include_tag "geocms/backend"

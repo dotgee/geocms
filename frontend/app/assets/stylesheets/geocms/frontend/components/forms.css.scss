@@ -76,7 +76,10 @@ input:-webkit-autofill:focus {
 
 #infos {
   form {
-    margin: 20px 10px 0; 
+    margin: 10px 10px 0;
+    .row {
+      margin-right: 0;
+    }
   }
   label {
     width: auto;
@@ -95,11 +98,7 @@ textarea {
   }
 }
 
-#context_zoom {
-  width: 20px;
-}
-
-.input-mini {
+.input-btn-default btn-xs {
   width: 53px;
 }
 
@@ -112,7 +111,7 @@ select.cke_dialog_ui_input_select {
     border: 1px solid #DADADA;
     border-right: none;
   }
-  .m-btn {
+  .btn {
     border-radius: 0 4px 4px 0 !important;
     padding: 10px 14px 10px;
   }

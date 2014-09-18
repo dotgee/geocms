@@ -1,10 +1,10 @@
 [class^="icon-"] {
   margin-top: 0;
+  display: inline-block;
   &.icon-layer {
     background: asset-url("geocms/layers.png") no-repeat;
     width: 12px;
     height: 10px;
-    margin-top: 3px;
     background-position: bottom;
     &:hover {
       background-position: top;

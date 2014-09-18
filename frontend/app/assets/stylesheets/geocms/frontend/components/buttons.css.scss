@@ -1,3 +1,7 @@
+.btn {
+  border-radius: 0px !important;
+}
+
 .control-buttons{
   margin-top: 2px;
   a{
@@ -5,7 +9,7 @@
     margin-top: 0;
     padding: 4px 0px;
   }
-  .m-btn {
+  .btn {
     // @include background-image(linear-gradient(top, #EEE, #E4E4E4));
     min-width: 35px;
     margin: 0 2px;
@@ -19,13 +23,11 @@
 }
 
 .from-map {
-  margin-top: 37px;
-  margin-left: 10px;
-  float: left;
+  margin-top: 45px;
   font-size: 9px;
 }
 
-.m-btn {
+.btn {
   font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, sans-serif;
   text-transform: uppercase;
   font-weight: bold;

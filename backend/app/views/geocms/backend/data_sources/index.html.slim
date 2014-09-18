@@ -21,16 +21,16 @@ table.table.table-striped.table-backend
         tr
           td = data_source.name
           td
-            = link_to [:import, :backend, data_source], :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t("datasource.import") do
-              i.icon-download.icon-white
+            = link_to [:import, :backend, data_source], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("datasource.import") do
+              i.glyphicon.glyphicon-download.glyphicon.glyphicon-white
           td
-            = link_to edit_backend_data_source_path(data_source), :class => "m-btn mini blue icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
-              i.icon-pencil.icon-white
+            = link_to edit_backend_data_source_path(data_source), :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+              i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
           td
-            = link_to [:backend, data_source], :confirm => 'Are you sure?', :method => :delete, :class => "m-btn mini red icn-only" do
-              i.icon-trash.icon-white
+            = link_to [:backend, data_source], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-xs btn-danger icn-only" do
+              i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
 br
-= link_to t("datasource.new"), new_backend_data_source_path, :class => "m-btn blue"
+= link_to t("datasource.new"), new_backend_data_source_path, :class => "btn btn-primary"
 
 .modal.wait-modal.hide.fade.in
   .modal-body

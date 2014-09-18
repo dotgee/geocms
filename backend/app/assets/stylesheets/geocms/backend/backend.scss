@@ -1,3 +1,8 @@
+@import "config/colors";
+@import "vendor/vendor";
+@import "base/layout";
+@import "components/components";
+
 .input-select {
   margin: 10px 0 10px 0;
   select.input-xxlarge {

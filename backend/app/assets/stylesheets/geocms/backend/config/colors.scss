@@ -1,15 +1,15 @@
 // Blues
-$oxford_blue: #3C4E5A !default;
-$boston_blue: #3887BE !default;
+$oxford_btn-primary: #3C4E5A !default;
+$boston_btn-primary: #3887BE !default;
 $outer_space: #28353D !default;
 
-// Light blue
+// Light btn-primary
 $peter_river: #3498DB !default;
 $belize_hole: #2980B9 !default;
 
-// Deep blue
+// Deep btn-primary
 $wet_asphalt: #34495E !default;
-$midnight_blue: #2C3E50 !default;
+$midnight_btn-primary: #2C3E50 !default;
 
 // Light grey
 $clouds: #ECF0F1 !default;
@@ -39,7 +39,7 @@ $darken-button-color: $button-color !default;
 
 $color-panel-1: $alizarin !default;
 $color-panel-1-darkened: darken($color-panel-1, 20) !default;
-$color-panel-2: $pomegranate !default;
+$color-panel-2: $oxford_btn-primary !default;
 $color-panel-2-darkened: darken($color-panel-2, 20) !default;
 $color-panel-3: $carrot !default;
 
@@ -47,8 +47,15 @@ $color-panel-4: $clouds !default;
 $color-panel-5: $silver !default;
 
 
+$link-color: $oxford_btn-primary !default;
+
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              white !default;
-$btn-default-bg:                 $pomegranate !default;
-$btn-default-border:             darken($pomegranate, 5) !default;
+$btn-default-bg:                 $oxford_btn-primary !default;
+$btn-default-border:             darken($oxford_btn-primary, 5) !default;
+
+
+$btn-primary-color:              white !default;
+$btn-primary-bg:                 $oxford_btn-primary !default;
+$btn-primary-border:             darken($oxford_btn-primary, 5) !default;

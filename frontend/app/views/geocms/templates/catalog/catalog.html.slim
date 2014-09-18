@@ -1,24 +1,23 @@
 - cache ["v1", "catalog"] do
   #catalog.popup.active
-    button.m-btn.icn-only.btn-close.blue.close ng-click="catalog.close()" &times;
+    button.btn.btn-default.btn-xs.btn-close.close ng-click="catalog.close()" &times;
     .page-header
       h1 = t "layers_catalog"
-    .container-fluid
-      .m-input-append.layers-search
-        input.m-wrap.search-input size="16" type="text" placeholder=t("layer.search") name="search-layer"
-        button.m-btn.blue.icn-only#search href="#"
-          i.carticon-search
-      .clearfix
+    .container
+      .row
+        .col-md-6
+          .input-group
+            input type="text" class="form-control" placeholder=t("layer.search")
+            span class="input-group-btn"
+              button class="btn btn-default" type="button"
+                span.glyphicon.glyphicon-search
+      .small-space
       ul.breadcrumb
         li ng-click="catalog.goToRoot()"
           i.carticon-home
-          span.divider
-            |/
         li ng-repeat="category in catalog.categoryTree"
           a ng-click="catalog.getCategory(category)"
             |{{category.name}}
-          span.divider
-            |/
       .row-fluid#catalog-categories
         .media ng-repeat="category in catalog.categories" ng-include="'/templates/catalog/category.html'")
-        .media ng-repeat="layer in catalog.layers" ng-include="'/templates/catalog/layer.html'")
+        .media ng-repeat="layer in catalog.layers" ng-include="'/templates/catalog/layer.html'") 

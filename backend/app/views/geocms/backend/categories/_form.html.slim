@@ -5,6 +5,6 @@
     = f.input :name
     = f.input :parent_id, :as => :hidden, :input_html => { :value => @category.parent_id }
   .form-actions
-    .m-btn-group
-      = f.button :submit, :class => "m-btn blue"
-      = link_to "Cancel", backend_categories_path, :class => "m-btn"
+    .btn.btn-default-group
+      = f.button :submit, :class => "btn btn-primary"
+      = link_to "Cancel", backend_categories_path, :class => "btn"

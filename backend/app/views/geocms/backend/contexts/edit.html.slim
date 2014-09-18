@@ -10,6 +10,6 @@
   - if @context.preview?
     = image_tag @context.preview
   .form-actions
-    .m-btn-group
-      = f.submit class: "m-btn blue"
-      = link_to t("back"), [:backend, :contexts], class: "m-btn"
+    .btn.btn-default-group
+      = f.submit class: "btn btn-primary"
+      = link_to t("back"), [:backend, :contexts], class: "btn"

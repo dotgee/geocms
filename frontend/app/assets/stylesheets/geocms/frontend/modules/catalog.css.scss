@@ -22,13 +22,14 @@
   .btn-close {
     margin: 20px;
     position: fixed;
-    top: 63px;
+    top: 20px;
     right: 0px;
-    padding: 3px 9px 3px 10px;
+    padding: 2px 8px 4px 8px;
     &.close {
       color: white;
       text-shadow: none;
       @include opacity(100);
+      background-color: $btn-default-bg;
     }
   }
   .page-header {
@@ -53,37 +54,38 @@
       cursor: pointer;
     }
   }
-  .media {
-    background: white;
+
+}
+
+.media {
+  background: white;
+  cursor: pointer;
+  border: 1px solid #DADADA;
+  @include not-selectable;
+  h4 {
     cursor: pointer;
-    border: 1px solid #DADADA;
-    @include not-selectable;
-    h4 {
-      cursor: pointer;
-      font-weight: 500;
-      color: $color-panel-1-darkened;
-      [class^="icon-"] {
-        margin: 4px 0 3px;
-      }
+    font-weight: 500;
+    color: $color-panel-1-darkened;
+    [class^="icon-"] {
+      margin: 4px 0 3px;
     }
-    .carticon-folder {
-      color: $color-panel-2;
-    }
-    .media-wrapper {
-      padding: 5px;
-      overflow: hidden;
-      zoom: 1;
-    }
-    .image-link {
-      background: #F2EFE9;
-      border: 1px solid #D8D5D0;
-      height: 64px;
-      width: 64px;
-    }
-    .added {
-      @include box-shadow(inset 0 1px 6px rgba(0, 0, 0, 0.25));
-      @include background-image(linear-gradient(top, #EEE, #DDD));
-    }
+  }
+  .carticon-folder {
+    color: $color-panel-2;
+  }
+  .media-body {
+    padding: 5px;
+  }
+  .image-link {
+    margin: 5px;
+    background: #F2EFE9;
+    border: 1px solid #D8D5D0;
+    height: 64px;
+    width: 64px;
+  }
+  .added {
+    @include box-shadow(inset 0 1px 6px rgba(0, 0, 0, 0.25));
+    @include background-image(linear-gradient(top, #EEE, #DDD));
   }
 }
 
@@ -129,4 +131,8 @@
   .description {
     @include ellipsis;
   }
+}
+
+.small-space {
+  height: 10px;
 }

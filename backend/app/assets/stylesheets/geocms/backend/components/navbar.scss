@@ -1,0 +1,48 @@
+.navbar-backend {
+  background: $oxford_btn-primary;
+  min-height: 70px;
+  border-radius: 0;
+  border: {
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .navbar-form {
+    margin-top: 20px;
+  }
+  .container {
+    width: 1300px;
+  }
+  .navbar-brand {
+    img {
+      margin-top: -8px;
+    }
+  }
+  .nav {
+    margin: 9px 10px 0 0;
+    > li {
+      margin: 5px;
+      > a {
+        font-family: 'Open Sans Condensed';
+        font-size: 13px;
+        color: #FFF;
+        display: inline-block;
+        background: $outer_space;
+        margin: 0px;
+        padding: 0px 25px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        height: 40px;
+        line-height: 40px;
+        font-weight: bolder;
+        &:hover, &:focus {
+          color: #E6E6E6;
+        }
+        &.brand {
+          background: none;
+        }
+      }
+    }
+  }
+  margin-bottom: 0px;
+}

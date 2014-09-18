@@ -15,10 +15,10 @@ table.table.table-striped.table-users
 br
 - if can? :create, Geocms::User
   = text_field_tag :user, nil, :placeholder => "Choisir un collaborateur", :class => "input-add-colaborator", :style => "width: 400px;"
-  button.m-btn.btn-add-colaborator.blue= t("add")
+  button.btn.btn-default.btn-add-colaborator.btn-primary= t("add")
   br
   br
-  = link_to t("users.new"), [:new, :backend, :user], class: "m-btn"
+  = link_to t("users.new"), [:new, :backend, :user], class: "btn"
 
 = content_for :javascripts do
   = javascript_include_tag "backend/typeahead"

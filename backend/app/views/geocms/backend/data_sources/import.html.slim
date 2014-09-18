@@ -1,6 +1,9 @@
 div ng-controller="ImportCtrl"
+  br
+  .alert.alert-danger role="alert" ng-if="error"
+    |{{error}}
   div loading-container="tableParams.settings().$loading"
-    table ng-table="tableParams" show-filter="true" class="table"
+    table ng-table="tableParams" show-filter="true" class="table" ng-hide="error"
       tbody
         tr ng-repeat="layer in $data"
           td width="30"
@@ -10,7 +13,7 @@ div ng-controller="ImportCtrl"
           td data-title="'Titre'" sortable="title"
             |{{layer.table.title}}
 
-  a.m-btn.blue ng-click="import()" Importer
+  a.btn.btn-default.btn-primary ng-click="import()" Importer
 / .page-header
 /   h1= "#{t("backend.layers_imported_from").html_safe} #{@data_source.name}"
 
@@ -31,8 +34,8 @@ div ng-controller="ImportCtrl"
 /     h3= t("layer.create")
 /   .modal-body
 /   .modal-footer
-/     a.m-btn data-dismiss="modal" aria-hidden="true" = t("cancel")
-/     a.m-btn.blue#save href="#" = t("confirm")
+/     a.btn.btn-default data-dismiss="modal" aria-hidden="true" = t("cancel")
+/     a.btn.btn-default.btn-primary#save href="#" = t("confirm")
 
 / #data-source-id.hide data-id=@data_source.id
 

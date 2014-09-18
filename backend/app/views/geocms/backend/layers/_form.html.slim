@@ -1,4 +1,4 @@
-= simple_form_for([:backend, @layer], :defaults => { :input_html => { :class => 'input-block-level' } }, :html => {:class => 'form-horizontal' }) do |f|
+= simple_form_for([:backend, @layer]) do |f|
   = f.input :name
   = f.association :data_source
   = f.input :metadata_url
@@ -10,5 +10,5 @@
     legend Move to
     = f.association :categories, :collection => @categories
     #layer data-id=@layer.id
-  .m-btn-group
-    = f.submit :class => "m-btn blue"
+  .btn.btn-default-group
+    = f.submit :class => "btn btn-primary"

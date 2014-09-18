@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sass-rails", '~> 4.0.0'
   s.add_dependency "coffee-rails", '~> 4.0.0'
   s.add_dependency "slim-rails"
-  s.add_dependency "simple_form", '~> 3.0.0'
+  s.add_dependency "simple_form", '>= 3.1.0.rc2'
   s.add_dependency "responders", '~> 1.0.0'
   s.add_dependency "ckeditor"
   s.add_dependency 'rabl', '~> 0.7.9'

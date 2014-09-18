@@ -4,7 +4,7 @@
   ul.thumbnails
     - @contexts.each do |context|
       li.span3.fixed-layout
-        .thumbnail.unbordered
+        .thumbnail.unbordebtn-danger
           .placeholder
             - if context.preview?
               = image_tag context.preview
@@ -12,8 +12,8 @@
             .caption
               h4 = context.name
               p= context.description
-          .m-btn-group.thumbnails-control
-            = link_to [:refresh_preview, :backend, context], :class => "m-btn icn-only mini" do
-              i.icon-refresh.icon-white
-            = link_to [:backend, context], :confirm => "Are you sure ?", :method => :delete, :class => "m-btn icn-only mini" do
-              i.icon-trash.icon-white
+          .btn.btn-default-group.thumbnails-control
+            = link_to [:refresh_preview, :backend, context], :class => "btn icn-only btn-xs" do
+              i.glyphicon.glyphicon-refresh.glyphicon.glyphicon-white
+            = link_to [:backend, context], :confirm => "Are you sure ?", :method => :delete, :class => "btn icn-only btn-xs" do
+              i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

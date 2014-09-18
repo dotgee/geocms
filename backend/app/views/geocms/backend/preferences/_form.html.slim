@@ -1,6 +1,6 @@
 .row-fluid
   .span6
-    = form_tag [:backend, :preferences], {:method => :put, :class => "form-horizontal"} do |f|
+    = form_tag [:backend, :preferences], {:method => :put} do |f|
       h4   Carte
       .form-inputs
         - Geocms::Account.prefs.keys.each do |p|
@@ -10,13 +10,13 @@
               = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value
       .control-group
         .controls
-          = submit_tag t(:edit), :class => "m-btn blue"
+          = submit_tag t(:edit), :class => "btn btn-primary"
   .span6
     h4   Compte
-    = simple_form_for ActsAsTenant.current_tenant, { :url => backend_preferences_path, :method => :put, :html => { :class => "form-horizontal" } } do |f|
+    = simple_form_for ActsAsTenant.current_tenant, { :url => backend_preferences_path, :method => :put } do |f|
       = image_tag f.object.logo if f.object.logo?
       = f.input :name
       = f.input :logo
       .control-group
         .controls
-          = f.submit t(:edit), :class => "m-btn blue"
+          = f.submit t(:edit), :class => "btn btn-primary"

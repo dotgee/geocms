@@ -1,15 +1,17 @@
 - cache ["v1", "folder"] do
-  a.carticon-left-bold.back-folder ui-sref="folders.root"
 
-  .row-thumbnails
-    ul.thumbnails
-      li.span3.fixed-layout ng-repeat="context in folder.contexts"
-        a ui-sref="contexts.show(context)"
-          .thumbnail.unbordered
-            .placeholder
-              img ng-src="{{context.preview_url}}" ng-if="context.preview_url"
-            .caption
-              h4
-                |{{context.name}}
-              p
-                |{{context.description}}
+  .container
+    .page-header
+      h1 
+        a.unstyled ui-sref="folders.root" Projets / 
+        small
+          |{{folder.name}}
+    .row
+      .col-sm-4.col-md-3 ng-repeat="context in folder.contexts"
+        .thumbnail ui-sref="contexts.show(context)"
+          .placeholder
+            img ng-src="{{context.preview_url}}" ng-if="context.preview_url"
+          h4
+            |{{context.name}}
+          p
+            |{{context.description}}
