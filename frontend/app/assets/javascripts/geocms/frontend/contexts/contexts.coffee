@@ -31,7 +31,7 @@ contexts.config [
             templateUrl: "/templates/contexts/map.html"
             controller: ["mapService", "data", "folders", "$rootScope", "$state", "$scope", "Restangular", (mapService, data, folders, $root, $state, $scope, Restangular) ->
               if data != null && data != undefined && data != "null"
-                $state.transitionTo('contexts.show', {slug: data.slug})
+                $state.transitionTo('contexts.show', {uuid: data.uuid})
               else
                 context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
                 mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
@@ -46,7 +46,7 @@ contexts.config [
           ]
 
       .state 'contexts.show',
-        url: '/{slug}'
+        url: '/{uuid}'
         parent: 'contexts.root'
         views:
           "sidebar@contexts":
@@ -64,7 +64,7 @@ contexts.config [
             ]
         resolve:
           data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
-            Restangular.one('contexts', $stateParams.slug).get()
+            Restangular.one('contexts', $stateParams.uuid).get()
           ]
 
       .state 'contexts.show.share',

@@ -34,6 +34,10 @@ geocms.config [
 
     $urlRouterProvider.when('', '/maps');
     $urlRouterProvider.when('/', '/maps');
+
+    _.templateSettings =
+      interpolate: /\{\{(.+?)\}\}/g
+
 ]
 
 geocms.run [
@@ -47,7 +51,7 @@ geocms.run [
     # This is a little hacky
     # Before sending the object to the server i need to wrap it in an object
     # of the same name
-    # eg : context: { ... } instead of { ... }
+    # eg : context: { attr1: ..., attr2: ... } instead of { attr1: ..., attr2: ... }
     # by default restangular sends it as a hash with the attributes, which is not
     # what rails strong parameters expect
     # if you find a way around it you can delete undescore singularize which is only

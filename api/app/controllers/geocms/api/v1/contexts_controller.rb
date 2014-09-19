@@ -8,7 +8,7 @@ module Geocms
     end
 
     def show
-      @context = Geocms::Context.find(params[:id])
+      @context = Geocms::Context.where(uuid: params[:id]).first
       respond_with @context
     end
 

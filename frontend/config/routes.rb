@@ -4,5 +4,5 @@ Geocms::Core::Engine.append_routes do
   # controller to match all, routes being handled by angularjs
   root to: "pages#index"
   get '/maps(*foo)', to: "pages#index"
-  get '/folders(*foo)', to: "pages#index"
+  get '/projects(*foo)', to: "pages#index"
 end

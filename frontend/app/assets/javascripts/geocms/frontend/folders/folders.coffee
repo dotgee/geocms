@@ -8,7 +8,7 @@ folders.config [
   ($stateProvider) ->
     $stateProvider
       .state 'folders',
-        url: '/folders'
+        url: '/projects'
         views:
           '':
             templateUrl: '/templates/folders/root.html'
