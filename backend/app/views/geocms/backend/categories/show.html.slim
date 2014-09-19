@@ -11,7 +11,9 @@ table.table.table-striped.table-backend
     - @category.children.each do |category|
       tr
         td
-          i.glyphicon.glyphicon-folder
+          span.glyphicon.glyphicon-folder-open
+          '
+          '
           = link_to category.name, [:backend, category]
         td
           = link_to edit_backend_category_path(category) , :class => "btn btn-primary btn-xs icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do

@@ -4,6 +4,7 @@ $navbarBrandColor: white;
 $navbarLinkColorHover: #D4EBFA;
 $sansFontFamily: 'Segoe UI', Helvetica, Arial, sans-serif;
 $linkColor: $oxford_blue;
+@import "bootstrap-sprockets";
 @import "bootstrap";
 .breadcrumb {
   li {

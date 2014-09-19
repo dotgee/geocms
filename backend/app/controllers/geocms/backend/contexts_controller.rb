@@ -2,6 +2,7 @@
 module Geocms
   module Backend
     class ContextsController < Geocms::Backend::ApplicationController
+      before_action :load_folder
 
       def refresh_preview
         @context = Context.find(params[:id])
@@ -51,6 +52,10 @@ module Geocms
       private
         def context_params
           params.require(:context).permit(PermittedAttributes.context_attributes)
+        end
+
+        def load_folder
+          @folder = Folder.find(params[:folder_id])
         end
 
     end

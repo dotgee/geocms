@@ -1,0 +1,9 @@
+label.boolean {
+  margin-right: 10px;
+}
+
+.file.form-control {
+  border: 0;
+  @include box-shadow(none);
+  padding-left: 0;
+}

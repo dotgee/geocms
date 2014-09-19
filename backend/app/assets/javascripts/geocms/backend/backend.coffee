@@ -2,6 +2,7 @@
 
 #= require jquery
 #= require jquery_ujs
+#= require bootstrap
 #= require angular
 #= require lodash
 #= require restangular

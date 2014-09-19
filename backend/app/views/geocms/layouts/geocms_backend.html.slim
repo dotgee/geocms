@@ -26,10 +26,10 @@ html ng-app="geocms"
         #geocms-navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
               li= link_to t("menu.layers"), backend_categories_path
-              li= link_to t("maps"), backend_folders_path
+              li= link_to t("menu.contexts"), backend_folders_path
               li= link_to t("menu.data_sources"), backend_data_sources_path
               li= link_to t("menu.users"), backend_users_path
-              li= link_to t("menu.preferences"), edit_backend_preferences_path
+              /li= link_to t("menu.preferences"), edit_backend_preferences_path
               li= link_to t("menu.accounts"), backend_accounts_path
           form.navbar-form.navbar-left
             .input-group

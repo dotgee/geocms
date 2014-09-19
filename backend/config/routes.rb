@@ -46,13 +46,11 @@ Geocms::Core::Engine.add_routes do
 
     resources :accounts, :only => [:index, :new, :create, :destroy]
 
-    resources :contexts do
-      member do
-        get 'refresh_preview'
-      end
-    end
-
     resources :folders do
+
+      resources :contexts do
+        get 'refresh_preview', on: :member
+      end
 
     end
 

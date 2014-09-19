@@ -17,6 +17,7 @@ table.table.table-striped
         td
           = link_to [:edit, :backend, folder], class: "btn btn-xs btn-primary icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
             i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
+          '
           = link_to [:backend, folder], confirm: "Are you sure ?", method: :delete, class: "btn btn-danger icn-only btn-xs" do
             i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
 = link_to t("folder.new"), [:new, :backend, :folder], class: "btn btn-primary"
