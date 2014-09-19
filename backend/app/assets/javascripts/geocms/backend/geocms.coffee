@@ -20,7 +20,7 @@ app = angular.module("geocms", [
       # console.log $scope.$data
       if $scope.layers?
         $defer.resolve $scope.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
-      else
+      else 
         Restangular.one("data_sources", $scope.source_id).customGET("capabilities").then(
           (response) ->
             params.total response.total
