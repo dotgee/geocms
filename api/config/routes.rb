@@ -14,7 +14,9 @@ Geocms::Core::Engine.add_routes do
         get :wmc, on: :member
       end
       
-      resources :categories
+      resources :categories do
+        get :ordered, on: :collection
+      end
       
       resources :folders do
         get :writable, on: :collection

@@ -29,6 +29,16 @@ module Geocms
       self.names_depth_cache = path.map(&:name).join('/')
     end
 
+    def self.arrange_as_array(options={}, hash=nil)
+      hash ||= arrange(options)
+
+      arr = []
+      hash.each do |node, children|
+        arr << node
+        arr += arrange_as_array(options, children) unless children.empty?
+      end
+      arr
+    end
 
     def self.json_tree(nodes)
       nodes.map do |node, sub_nodes|

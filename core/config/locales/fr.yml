@@ -41,6 +41,8 @@ fr:
   category:
     new_root: "Ajouter une catégorie mère"
   menu:
+    layers: "Couches"
+    contexts: "Projets"
     categories: "Catégories"
     data_sources: "Sources"
     users: "Utilisateurs"

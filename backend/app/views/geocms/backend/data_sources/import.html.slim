@@ -1,43 +1,23 @@
-div ng-controller="ImportCtrl"
+div ng-controller="ImportCtrl" ng-init="source_id=#{@data_source.id}"
   br
   .alert.alert-danger role="alert" ng-if="error"
     |{{error}}
-  div loading-container="tableParams.settings().$loading"
-    table ng-table="tableParams" show-filter="true" class="table" ng-hide="error"
+  .alert.alert-success role="alert" ng-if="success"
+    |{{success}}
+  .alert.alert-info ng-show="tableParams.settings().$loading" ng-hide="error"
+    |Chargement en cours, merci de patienter...
+  div ng-hide="tableParams.settings().$loading"
+    table ng-table="tableParams" class="table" ng-hide="error"
       tbody
-        tr ng-repeat="layer in $data"
+        tr ng-repeat="layer in $data" ng-click="layer.$selected = !layer.$selected" ng-class="{active: layer.$selected}"
           td width="30"
-            input type="checkbox" ng-click="markForImport(layer.table)"
-          td data-title="'Nom'" sortable="name"
+            input type="checkbox" ng-model="layer.$selected" ng-change="layer.$selected = !layer.$selected"
+          td data-title="'Nom'"
             |{{layer.table.name}}
           td data-title="'Titre'" sortable="title"
             |{{layer.table.title}}
-
-  a.btn.btn-default.btn-primary ng-click="import()" Importer
-/ .page-header
-/   h1= "#{t("backend.layers_imported_from").html_safe} #{@data_source.name}"
-
-/ .alert.alert-success.hide#layer-import
-/   a.close data-dismiss="alert" ×
-/   = t("layer.imported_successfully")
-
-/ table.table.table-striped.table-import
-/   thead
-/     tr
-/       th= t(:name)
-/       th
-/   tbody#import-layers
-
-/ #modal-form.modal.hide.fade
-/   .modal-header
-/     button.close aria-hidden="true" data-dismiss="modal" type="button"
-/     h3= t("layer.create")
-/   .modal-body
-/   .modal-footer
-/     a.btn.btn-default data-dismiss="modal" aria-hidden="true" = t("cancel")
-/     a.btn.btn-default.btn-primary#save href="#" = t("confirm")
-
-/ #data-source-id.hide data-id=@data_source.id
-
-/ = content_for :javascripts do
-/   = javascript_include_tag "backend/import"
+  .row
+    .col-xs-6
+      select.form-control ng-model="category" ng-options="('-- '.repeat(category.depth)+category.name) for category in categories track by category.id"
+    .col-xs-2.col-md-1
+      a.btn.btn-default.btn-primary ng-click="import()" ng-class="{disabled: !category}" Importer

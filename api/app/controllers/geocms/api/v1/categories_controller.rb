@@ -11,6 +11,11 @@ module Geocms
       respond_with @category
     end
 
+    def ordered
+      @categories = Category.arrange_as_array(order: :name)
+      respond_with @categories, each_serializer: CategoryShortSerializer
+    end
+
     private
     def default_serializer_options
       {

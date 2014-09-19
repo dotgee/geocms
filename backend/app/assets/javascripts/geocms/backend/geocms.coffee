@@ -1,46 +1,55 @@
+String.prototype.repeat = ( num ) ->
+  new Array( num + 1 ).join( this );
+
 app = angular.module("geocms", [
   "ngTable"
   "restangular"
-]).controller("ImportCtrl", ($scope, $location, ngTableParams, Restangular) ->
+]).controller("ImportCtrl", ($scope, $location, ngTableParams, Restangular, filterFilter) ->
   Restangular.setBaseUrl("/api/v1")
-  $scope.source_id = $location.absUrl().split("/")[5] # id de la datasource (ugly)
 
   $scope.tableParams = new ngTableParams(
     page: 1 # show first page
     count: 20 # count per page
-    sorting:
-      name: "asc" # initial sorting
+    # sorting:
+    #   name: "asc" # initial sorting
+    filter:
+      "table.name": "ign"
   ,
     total: 0 # length of data
     getData: ($defer, params) ->
-      Restangular.one("data_sources", $scope.source_id).customGET("capabilities").then (data) ->
-        params.total data.total
-        $defer.resolve data.layers
+      # console.log $scope.$data
+      if $scope.layers?
+        $defer.resolve $scope.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
+      else
+        Restangular.one("data_sources", $scope.source_id).customGET("capabilities").then(
+          (response) ->
+            params.total response.total
+            $scope.layers = data.layers
+            $defer.resolve data.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
+          , (response) ->
+            $scope.error = response.data.message
+        )
       return
   )
 
-  $scope.checkedLayers = []
-
-  $scope.markForImport = (layer) ->
-    index = $scope.checkedLayers.indexOf(layer)
-    if (index > -1)
-      $scope.checkedLayers.splice(index, 1)
-    else
-      $scope.checkedLayers.push (layer)
-
+  Restangular.all("categories").customGETLIST("ordered").then (data) ->
+    $scope.categories = data
 
   $scope.import = () ->
-    layers = $scope.extractLayerInformations()
-    layers = Restangular.restangularizeElement(null, layers, "layers")
-    layers.customPOST({layers: layers}, "import")
+    if $scope.category?
+      layers = $scope.extractLayerInformations()
+      layers = Restangular.restangularizeElement(null, layers, "layers")
+      layers.customPOST({layers: layers}, "import").then (response) ->
+        $scope.success = "L'import a réussi."
 
   $scope.extractLayerInformations = () ->
-    layers = _.map $scope.checkedLayers, (layer) ->
+    layers = _.map filterFilter($scope.layers, {$selected: true}), (layer) ->
       {
-        name: layer.name
-        title: layer.title
+        name: layer.table.name
+        title: layer.table.title
         data_source_id: $scope.source_id
-        bounding_boxes_attributes: _.map(layer.bbox, (box) ->
+        category_ids: [$scope.category.id]
+        bounding_boxes_attributes: _.map(layer.table.bbox, (box) ->
           bbox = box.table.bbox
           bbox = [bbox[1], bbox[0], bbox[3], bbox[2]] if box.table.srs == "CRS:84"
           {
