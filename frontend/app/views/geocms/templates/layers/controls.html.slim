@@ -5,19 +5,19 @@
       span.carticon-menu
 
   .hud-panel style="padding: 0 10px 35px; max-height: 280px;"
-    div ng-switch="" on="activeControl"
+    div ng-switch="" on="controls"
       div ng-switch-when="opacity"
         h5 Contrôle de l'opacité
         .opacity-controler
           div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="cart.currentLayer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01" data-index="{{$index}}"
       div ng-switch-when="temporality"
         h5 Contrôle de la temporalité
-      div ng-switch-when="cql_filter"
+      div ng-switch-when="filters"
         h5 Filtrer les données
         .control-group.field-zoom.pull-left
           .controls
             input type="text" ng-model="cart.currentLayer.cql_filter" placeholder="Entrez votre filtre CQL"
-        a.btn.btn-default.btn-xs.blue.from-map Appliquer
+        a.btn.btn-default.btn-xs.from-map Appliquer
       div ng-switch-when="downloads"
         h5 Méta-données & Téléchargement
       div ng-switch-default=""
@@ -26,16 +26,16 @@
         p
           |{{cart.currentLayer.description}}
 
-  #ctrls
-    a.btn.btn-default.btn-xs.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.centerOn(cart.currentLayer)"
+  #ctrls.btn-group
+    label.btn.btn-default.btn-xs tooltip='Centrer' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
       i.carticon-target
-    a.btn.btn-default.btn-xs.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'opacity') ? 'default' : 'opacity'" ng-class="{active: (activeControl == 'opacity')}"
+    label.btn.btn-default.btn-xs tooltip='Opacité' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
       i.carticon-adjust
-    a.btn.btn-default.btn-xs.blue.center rel='tooltip' data-original-title='Centrer' ng-click="cart.toggleQuery(); activeControl = (activeControl == 'interogation') ? 'default' : 'interogation'" ng-class="{active: (activeControl == 'interogation')}"
+    label.btn.btn-default.btn-xs tooltip='Interrogation' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()" 
       i.carticon-info
-    a.btn.btn-default.btn-xs.blue.opacity data-toggle='button' rel='tooltip' data-original-title='Opacité' ng-click="activeControl = (activeControl == 'cql_filter') ? 'default' : 'cql_filter'" ng-class="{active: (activeControl == 'cql_filter')}"
+    label.btn.btn-default.btn-xs tooltip='Opacité' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'filters'" uncheckable=""
       i.carticon-search
-    a.btn.btn-default.btn-xs.blue rel='tooltip' data-original-title='Télécharger' ng-class="{disabled: cart.currentLayer.data_source_not_internal, active: (activeControl == 'downloads')}"  ng-click="activeControl = (activeControl == 'downloads') ? 'default' : 'downloads'"
+    label.btn.btn-default.btn-xs tooltip='Télécharger' tooltip-append-to-body="true" ng-class="{disabled: cart.currentLayer.data_source_not_internal}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
       i.carticon-download
-    a.btn.btn-default.btn-xs.blue.remove rel='tooltip' data-original-title='Supprimer' ng-click="cart.remove(cart.currentLayer)"
+    label.btn.btn-default.btn-xs tooltip='Supprimer' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
       i.carticon-trash
