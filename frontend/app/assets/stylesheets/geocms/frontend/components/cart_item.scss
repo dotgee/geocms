@@ -1,0 +1,54 @@
+#layer-list {
+  label {
+    font-size: 13px;
+  }
+  padding: {
+    left: 0;
+    right: 0;
+  }
+  > li {
+    padding: {
+      top: 5px;
+      bottom: 5px;
+      left: 2px;
+    }
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.cart-item {
+  display: table;
+  width: 100%;
+}
+
+.cart-column {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cart-column-grippy {
+  width: 15px;
+  vertical-align: middle;
+  .grippy {
+    display: inline-block;
+    background: asset-url("geocms/grippy.png") repeat-y right;
+    height: 100%;
+    width: 10px;
+    vertical-align: top;
+    cursor: move;
+  }
+}
+
+.cart-column-image {
+  width: 40px;
+  vertical-align: top;
+  padding-top: 3px;
+}
+
+.cart-column-details {
+  width: 40px;
+  color: $color-panel-5;
+}

@@ -82,7 +82,7 @@
   text-decoration: none;
   width: 130px;
   position: absolute;
-  top: 63px;
+  top: 65px;
   left: 450px;
   z-index: 300;
   height: 37px;
@@ -139,39 +139,6 @@
   .hud-panel {
     max-height: 324px;
   }
-  .cart-item-controls {
-    // visibility: hidden;
-  }
-  label {
-    margin-bottom: 2px;
-  }
-  .layer-visibility {
-    margin-top: -1px;
-    margin-right: 5px;
-  }
-  .grippy {
-    display: inline-block;
-    background: asset-url("geocms/grippy.png") repeat-y right;
-    height: 35px;
-    width: 10px;
-    vertical-align: top;
-    margin-right: 4px;
-    cursor: move;
-  }
-  .right-infos {
-    display: inline-block;
-    width: 400px;
-    .title {
-      @include ellipsis;
-      cursor: pointer;
-    }
-  }
-  .control-buttons {
-    margin-left: -2px;
-    a:hover {
-      background: none;
-    }
-  }
   .dimensionable {
     height: 50px;
   }
@@ -209,27 +176,6 @@
     }
     .icon-plus {
       margin-left: 2px;
-    }
-  }
-}
-
-#layer-list {
-  label {
-    font-size: 13px;
-  }
-  padding: {
-    left: 0;
-    right: 0;
-  }
-  > li {
-    padding: {
-      top: 5px;
-      bottom: 5px;
-      left: 2px;
-    }
-    border-bottom: 1px solid #eee;
-    &:last-child {
-      border-bottom: 0;
     }
   }
 }

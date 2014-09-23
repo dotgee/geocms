@@ -1,5 +1,10 @@
 .account-infos
-  a ui-sref="folders.root" href="#"
-    = image_tag current_tenant.logo, height: "50px"
-  = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
-.clearfix
+  .row
+    .col-md-3
+      a ui-sref="folders.root" href="#"
+        = image_tag current_tenant.logo, height: "50px"
+    .col-md-7
+      h1.context-title
+        |{{cart.context.name}}
+    .col-md-2
+      = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"

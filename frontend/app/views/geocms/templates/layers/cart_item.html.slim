@@ -1,11 +1,15 @@
 - cache ["v1", "cart-item"] do
-  .grippy ui-tree-handle=""
-  .right-infos
-    label.title
-      input type="checkbox" class="layer-visibility" id="{{layer.name}}" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
+  .cart-item
+    .cart-column.cart-column-grippy
+      .grippy ui-tree-handle=""
+    .cart-column.cart-column-image
+      img ng-src="{{layer.thumbnail_url}}" width='34' height='34'
+    .cart-column
       a title="{{layer.title}}" class="unstyled" ng-click="cart.currentLayer = layer"
         |{{layer.title}}
-    p.source ng-if="layer.data_source_name"
-      |Source :
-      a href="{{layer.data_source_ogc}}" target="_blank"
-        '&nbsp;{{layer.data_source_name}}
+      p.source ng-if="layer.data_source_name"
+        |Source :
+        a href="{{layer.data_source_ogc}}" target="_blank"
+          '&nbsp;{{layer.data_source_name}}
+    .cart-column.cart-column-details ng-click="cart.currentLayer = layer"
+      span.glyphicon.glyphicon-chevron-right
