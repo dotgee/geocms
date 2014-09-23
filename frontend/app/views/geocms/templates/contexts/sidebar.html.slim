@@ -1,6 +1,6 @@
 - cache ["v1", "sidebar"] do
   .hud ng-hide="catalogOpened()"
-    a#save-button ng-click="cart.save()" ng-class="{saved: cart.state == 'saved'}"
+    a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}"
       span.carticon-floppy
       span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
 
