@@ -1,7 +1,13 @@
 - cache ["v1", "folders"] do
   .container
-    .page-header
-      h1 Projets
+    .page-header.row
+      .col-xs-10
+        h1 Projets
+      .col-xs-2
+        a.btn.btn-default ui-sref="contexts.new"
+          span.glyphicon.glyphicon-plus
+          '
+          |Nouveau projet
     .row
       .col-sm-4.col-md-3 ng-repeat="folder in folders"
         .thumbnail.thumbnail-folder ui-sref="folders.show(folder)"

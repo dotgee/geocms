@@ -1,7 +1,8 @@
 module Geocms
   class Api::V1::ContextsController < Api::V1::BaseController
     respond_to :xml, only: :wmc
-
+    serialization_scope :current_user
+    
     def index
       @contexts = Geocms::Context.all
       respond_with @contexts

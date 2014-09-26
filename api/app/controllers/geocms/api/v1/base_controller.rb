@@ -11,7 +11,7 @@ module Geocms
 
         private
         def current_ability
-          @current_ability ||= Geocms::Ability.new(current_user, current_tenant)
+          @current_ability ||= Geocms::Ability.new(current_user)
         end
       end
     end

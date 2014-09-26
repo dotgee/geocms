@@ -14,6 +14,11 @@ catalog.config [
           "catalog@contexts":
             templateUrl: "/templates/catalog/catalog.html"
             controller: "CatalogController"
+      .state 'contexts.new.catalog',
+        views:
+          "catalog@contexts":
+            templateUrl: "/templates/catalog/catalog.html"
+            controller: "CatalogController"
       .state 'contexts.root.catalog',
         views:
           "catalog@contexts":

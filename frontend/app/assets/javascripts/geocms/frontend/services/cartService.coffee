@@ -92,6 +92,7 @@ cartModule.service "cartService",
         @context.save().then ((response)->
           toaster.pop('success', "La sauvegarde a réussi", response.data)
           that.state = "saved"
+          $state.transitionTo("contexts.show", {uuid: response.uuid})
         ), (response)->
           toaster.pop('error', "La sauvegarde a échoué", response.data)
 

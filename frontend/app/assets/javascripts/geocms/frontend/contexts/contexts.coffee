@@ -29,21 +29,32 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "folders", "$rootScope", "$state", "$scope", "Restangular", (mapService, data, folders, $root, $state, $scope, Restangular) ->
-              if data != null && data != undefined && data != "null"
-                $state.transitionTo('contexts.show', {uuid: data.uuid})
+            controller: ["context", "$state", (context, $state) ->
+              if context != null && context != undefined && context != "null"
+                $state.transitionTo('contexts.show', {uuid: context.uuid})
               else
-                context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
-                mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
-                $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
-                mapService.addBaseLayer()
-              $root.cart.folders = folders
-              $scope.mapService = mapService
+                $state.transitionTo('contexts.new')
             ]
         resolve:
-          data: ["Restangular", (Restangular) ->
+          context: ["Restangular", (Restangular) ->
             Restangular.all('contexts').customGET("default")
           ]
+
+      .state 'contexts.new',
+        url: '/new'
+        parent: 'contexts.root'
+        views:
+          "map@contexts":
+            templateUrl: "/templates/contexts/map.html"
+            controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", (mapService, folders, $root, $scope, Restangular) ->
+              context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
+              mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
+              $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
+              mapService.addBaseLayer()
+              $root.cart.folders = folders
+              $root.cart.context.editable = true
+              $scope.mapService = mapService
+            ]
 
       .state 'contexts.show',
         url: '/{uuid}'
@@ -54,16 +65,16 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
-            controller: ["mapService", "data", "folders", "$rootScope", "$scope", (mapService, data, folders, $root, $scope) ->
-              mapService.createMap("map", data.center_lat, data.center_lng, data.zoom)
+            controller: ["mapService", "context", "folders", "$rootScope", "$scope", (mapService, context, folders, $root, $scope) ->
+              mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               mapService.addBaseLayer()
-              $root.cart.context = data
+              $root.cart.context = context
               $root.cart.addSeveral()
               $root.cart.folders = folders
               $scope.mapService = mapService
             ]
         resolve:
-          data: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
+          context: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.uuid).get()
           ]
 
