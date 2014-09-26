@@ -6,7 +6,9 @@ cartModule.service "cartService",
     "Restangular",
     "$rootScope",
     "toaster",
-    (ms, Restangular, $root, toaster) ->
+    "$state",
+    "$interval",
+    (ms, Restangular, $root, toaster, $state, $interval) ->
 
       Cart = ->
         @layers = []
@@ -33,6 +35,29 @@ cartModule.service "cartService",
         $root.cart.currentLayer._tilelayer.setOpacity(ui.value)
         $root.cart.currentLayer.opacity = ui.value * 100
         $root.cart.state = "unsaved"
+
+      Cart::toggleTimeline = () ->
+        diff = @currentLayer.dimensions.length - @currentLayer.timelineIndex - 1
+        that = this
+        if @player? or diff == 0
+          @stopTimeline()
+        else
+          @player = $interval(@playTimeline, 2000, diff)
+          @player.then ->
+            that.stopTimeline()
+
+      Cart::stopTimeline = () ->
+        $interval.cancel($root.cart.player)
+        @player = null
+
+      Cart::playTimeline = () ->
+        that = $root.cart
+        that.currentLayer.timelineIndex += 1
+        that.currentLayer._tilelayer.setParams({time: that.currentLayer.dimensions[that.currentLayer.timelineIndex]})
+
+      Cart::slideTimeline = (ev, ui) ->
+        currentTime = $root.cart.currentLayer.dimensions[$root.cart.currentLayer.timelineIndex]
+        $root.cart.currentLayer._tilelayer.setParams({time: currentTime})
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)

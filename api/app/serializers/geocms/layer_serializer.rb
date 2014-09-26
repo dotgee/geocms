@@ -4,7 +4,7 @@ module Geocms
 
     attributes  :layer_id, :title, :description, :name, :tiled, :template,
                 :data_source_wms, :data_source_wms_version, :data_source_not_internal,
-                :data_source_ogc, :data_source_name, :bbox
+                :data_source_ogc, :data_source_name, :bbox, :dimensions
 
     def bbox
       object.boundingbox(scope)
@@ -12,6 +12,10 @@ module Geocms
 
     def layer_id
       object.id
+    end
+
+    def dimensions
+      object.dimensions.map(&:value)
     end
 
   end

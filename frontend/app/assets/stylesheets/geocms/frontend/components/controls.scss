@@ -1,0 +1,16 @@
+.timeline {
+  .row {
+    border: 1px solid #E5E5E5;
+  }
+  .ui-slider-horizontal {
+    margin-top: 8px;
+  }
+  .timeline-control, .date {
+    border-right: 1px solid #E5E5E5;
+    text-align: center;
+  }
+  .ui-slider-range {
+    background-image: none;
+    background-color: $color-panel-2;
+  }
+}
