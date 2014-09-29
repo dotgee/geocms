@@ -7,7 +7,7 @@ module Geocms
                 :data_source_ogc, :data_source_name, :bbox, :dimensions, :metadata_url
 
     def bbox
-      object.boundingbox(scope)
+      object.boundingbox
     end
 
     def layer_id

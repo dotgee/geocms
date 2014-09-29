@@ -25,21 +25,5 @@ module Geocms
       [sw, ne]
     end
 
-    class << self
-      def create_bounding_boxes(layer, bbox)
-        bbox.each do |proj|
-          crs = proj[0]
-          box = proj[1]["table"]["bbox"]
-          box = [box[1], box[0], box[3], box[2]] if crs == "CRS:84"
-          layer.bounding_boxes.create(  minx: box[0],
-                                        miny: box[1],
-                                        maxx: box[2],
-                                        maxy: box[3],
-                                        crs: crs
-                                      )
-        end
-      end
-    end
-
   end
 end

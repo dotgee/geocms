@@ -7,7 +7,7 @@ module Geocms
     # has_one :layer
 
     def bbox
-      object.layer.boundingbox(scope)
+      object.layer.boundingbox
     end
 
     def dimensions

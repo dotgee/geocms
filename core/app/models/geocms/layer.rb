@@ -46,9 +46,9 @@ module Geocms
     # Finds the relevant bbox among all the bboxes stored
     # First check if there is a bounding box in CRS:84 (leaflet default)
     # Otherwise fallback on another and convert it to CRS:84
-    def boundingbox(tenant)
+    def boundingbox
       bbox = bounding_boxes.leafletable.any?      ? bounding_boxes.leafletable.first      :
-             bounding_boxes.current(tenant).any?  ? bounding_boxes.current(tenant).first  :
+             # bounding_boxes.current(tenant).any?  ? bounding_boxes.current(tenant).first  :
              bounding_boxes.any?                  ? bounding_boxes.first                  :
              nil
       bbox.for_leaflet unless bbox.nil?

@@ -25,7 +25,7 @@ module Geocms
       end
 
       def current_ability
-        @current_ability ||= Geocms::Ability.new(current_user, current_tenant)
+        @current_ability ||= Geocms::Ability.new(current_user)
       end
 
       rescue_from CanCan::AccessDenied do |exception|
