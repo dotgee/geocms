@@ -3,7 +3,7 @@ module Geocms
 
     attributes :id, :opacity, :layer_id, :title, :description, :name, :tiled, :template, 
                :data_source_wms, :data_source_wms_version, :data_source_not_internal,
-               :data_source_ogc, :data_source_name, :bbox, :position, :dimensions
+               :data_source_ogc, :data_source_name, :bbox, :position, :dimensions, :metadata_url
     # has_one :layer
 
     def bbox

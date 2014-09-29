@@ -28,6 +28,9 @@
         a.btn.btn-default.btn-xs.from-map Appliquer
       div ng-switch-when="downloads"
         h5 Méta-données & Téléchargement
+        a ng-href="{{cart.currentLayer.metadata_url}}" target="geonetwork" ng-if="cart.currentLayer.metadata_url" Voir les meta données
+        br
+        a ng-href="{{cart.currentLayer.data_source_wms}}?REQUEST=getFeature&service=wfs&outputFormat=shape-zip&typename={{cart.currentLayer.name}}" target="_blank" ng-if="!cart.currentLayer.data_source_not_internal" Télécharger
       div ng-switch-default=""
         h5
           |{{cart.currentLayer.title}}
@@ -41,9 +44,9 @@
       i.carticon-info
     label.btn.btn-default.btn-xs tooltip='Opacité' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
       i.carticon-adjust
-    label.btn.btn-default.btn-xs tooltip='Timeline' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable=""
+    label.btn.btn-default.btn-xs tooltip='Timeline' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-class="{disabled: cart.currentLayer.dimensions.length == 0}"
       i.carticon-play
-    label.btn.btn-default.btn-xs tooltip='Télécharger' tooltip-append-to-body="true" ng-class="{disabled: cart.currentLayer.data_source_not_internal}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
+    label.btn.btn-default.btn-xs tooltip='Télécharger' tooltip-append-to-body="true" ng-class="{disabled: (cart.currentLayer.data_source_not_internal && !cart.currentLayer.metadata_url)}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
       i.carticon-download
     label.btn.btn-default.btn-xs tooltip='Supprimer' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
       i.carticon-trash
