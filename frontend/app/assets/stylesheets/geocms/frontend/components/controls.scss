@@ -1,3 +1,8 @@
+.hud-panel-controls {
+  padding: 0 10px 10px;
+  max-height: 280px;
+}
+
 .timeline {
   .row {
     border: 1px solid #E5E5E5;
@@ -12,5 +17,28 @@
   .ui-slider-range {
     background-image: none;
     background-color: $color-panel-2;
+  }
+}
+
+.opacity-controler {
+  margin-top: 5px;
+  width: 285px;
+}
+
+#ctrls {
+  position: absolute;
+  bottom: -37px;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #E6E6E6;
+  z-index: 50;
+  .btn {
+    margin-top: 0;
+    padding: 8px 29px;
+    margin: 0;
+    &:last-child {
+      padding: 8px 24px;
+      border-right: 0;
+    }
   }
 }

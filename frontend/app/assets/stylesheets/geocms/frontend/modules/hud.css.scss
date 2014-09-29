@@ -8,8 +8,8 @@
   top: 10px;
   width: $hudsize;
   height: auto;
-  max-height: 440px;
-  padding-bottom: 10px;
+  max-height: 450px;
+  // padding-bottom: 10px;
   background: white;
   transition: left 300ms;
   -moz-transition: left 300ms;
@@ -29,15 +29,6 @@
 }
 
 // LEFT NAVBAR - SAVE AND SHARE
-.buttons-placeholder {
-  height: 47px;
-}
-
-.map-controls {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
 .btn.geovisu {
   margin-left: 15px;
@@ -110,23 +101,6 @@
 
 // LEFT NAVBAR - CONTROLS
 
-#ctrls {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-top: 1px solid #E6E6E6;
-  z-index: 50;
-  .btn {
-    margin-top: 0;
-    padding: 8px 29px;
-    margin: 0;
-    &:last-child {
-      padding: 8px 24px;
-      border-right: 0;
-    }
-  }
-}
 
 #legend {
   padding: 10px;
@@ -141,46 +115,7 @@
 
 #layers {
   .hud-panel {
-    max-height: 324px;
-  }
-  .dimensionable {
-    height: 50px;
-  }
-  .dimensions-list {
-    // @include column-count(3);
-    // li.active {
-    //   font-weight: bold;
-    //   font-size: 13px;
-    //   color: #0072BB;
-    // }
-    width: 155px;
-    float: left;
-    margin: 5px 6px 0 9px;
-    .ui-slider .ui-slider-handle {
-      width: 10px;
-    }
-  }
-  .wrap-dates {
-    font-size: 11px;
-  }
-  .dimension-value {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 40px;
-    font-weight: bold;
-    margin-top: 1px;
-  }
-  .opacity-controler {
-    margin-top: 5px;
-    width: 285px;
-    i {
-      float: left;
-      cursor: pointer;
-      margin-top: -2px;
-    }
-    .icon-plus {
-      margin-left: 2px;
-    }
+    max-height: 300px;
   }
 }
 
