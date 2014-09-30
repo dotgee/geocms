@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rolify"
   s.add_dependency "rgeo"
   s.add_dependency "curb"
-  # s.add_dependency "tire"
+  s.add_dependency "pg_search"
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"
   s.add_dependency "sidekiq"

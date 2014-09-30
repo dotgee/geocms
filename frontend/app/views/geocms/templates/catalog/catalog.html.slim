@@ -7,8 +7,8 @@
       .row
         .col-md-6
           .input-group
-            input type="text" class="form-control" placeholder=t("layer.search")
-            span class="input-group-btn"
+            input type="text" class="form-control" placeholder=t("layer.search") ng-model="catalog.query" ng-enter="catalog.search()"
+            span class="input-group-btn" ng-click="catalog.search()"
               button class="btn btn-default" type="button"
                 span.glyphicon.glyphicon-search
       .small-space
@@ -20,4 +20,5 @@
             |{{category.name}}
       .row-fluid#catalog-categories
         .media ng-repeat="category in catalog.categories" ng-include="'/templates/catalog/category.html'")
-        .media ng-repeat="layer in catalog.layers" ng-include="'/templates/catalog/layer.html'") 
+        .media ng-repeat="layer in catalog.layers" ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)"
+          div ng-include="'/templates/catalog/layer.html'"

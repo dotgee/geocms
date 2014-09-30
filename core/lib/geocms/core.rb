@@ -10,7 +10,7 @@ require "ancestry"
 require "acts_as_list"
 require "kaminari"
 require "rgeo"
-# require "tire"
+require "pg_search"
 require "rolify"
 require "interactor"
 

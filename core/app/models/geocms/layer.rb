@@ -1,20 +1,8 @@
 require "curb"
 module Geocms
   class Layer < ActiveRecord::Base
-    # include Geocms::Concerns::Searchable
     extend FriendlyId
-    friendly_id :title, use: [:slugged, :finders]
-
-    # ELASTICSEARCH MAPPING
-
-    # define_mapping do
-    #   indexes :id,           :index    => :not_analyzed
-    #   indexes :title,        :analyzer => 'french_analyzer', :boost => 10
-    #   indexes :name,         :analyzer => 'french_analyzer'
-    #   indexes :description,  :analyzer => 'snowball'
-    # end
-
-    # RELATIONSHIPS
+    include ::PgSearch
 
     belongs_to :data_source
     has_many :contexts_layers,  -> { uniq.order(:position) },  dependent: :destroy
@@ -26,22 +14,14 @@ module Geocms
     has_many :categories, through: :categorizations
 
     accepts_nested_attributes_for :bounding_boxes
-
-    # SCOPES
-    default_scope -> { order(:title) }
-    scope :for_frontend, -> { select(
-                              ["geocms_layers.name", "geocms_layers.title", "geocms_layers.id", "geocms_layers.description",
-                                "geocms_layers.dimension", "geocms_layers.category_id", "data_sources.wms", "geocms_layers.metadata_url",
-                                "geocms_dimensions.value" , "category_ids"
-                              ]
-                            )
-                            .includes(:data_source).includes(:categories).includes(:dimensions)
-  		                      .order("geocms_dimensions.value") }
-
-
     delegate :wms, :wms_version, :not_internal, :ogc, :name, to: :data_source, prefix: true
 
-    # INSTANCE METHODS
+    friendly_id :title, use: [:slugged, :finders]
+    mount_uploader :thumbnail, Geocms::LayerUploader
+    validates_presence_of :data_source_id, :name, :title
+
+    default_scope -> { order(:title) }
+    pg_search_scope :search, against: [:name, :title]
 
     # Finds the relevant bbox among all the bboxes stored
     # First check if there is a bounding box in CRS:84 (leaflet default)
@@ -61,6 +41,7 @@ module Geocms
       ROGC::WMSClient.get_map(data_source.wms, name, box, width, height, bbox.crs)
     end
 
+    # TODO: Scary code
     def do_thumbnail(force=false)
       if force || self.thumbnail.url.nil?
         tempfile = Tempfile.new([ self.id.to_s, '.png' ])
@@ -79,13 +60,6 @@ module Geocms
         end
       end
     end
-
-    # ATTRIBUTES
-    # store :bbox, accessors: [:minx, :maxx, :miny, :maxy]
-
-    mount_uploader :thumbnail, Geocms::LayerUploader
-
-    validates_presence_of :data_source_id, :name, :title
 
   end
 end

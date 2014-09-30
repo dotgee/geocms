@@ -21,7 +21,7 @@ module Geocms
         end
 
         def search
-          @layers = current_tenant.layers.search(params)
+          @layers = current_tenant.layers.search(params[:q])
           respond_with @layers
         end
 
@@ -33,7 +33,6 @@ module Geocms
 
         def import
           layers_params[:layers].each do |layer_param|
-            # raise layer_param.inspect
             Layer.create!(layer_param)
           end
           render json: {status: "ok"}
