@@ -8,6 +8,19 @@
   }
 }
 
+.thumbnail-layer {
+  padding: 0;
+  h4 {
+    padding: {
+      left: 5px;
+      right: 5px;
+    }
+  }
+  p {
+    padding: 10px 7px;
+  }
+}
+
 .placeholder {
   width: 100%;
   background: $clouds;
