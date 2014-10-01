@@ -46,7 +46,7 @@ catalogModule.service "catalogService",
       return
 
     Catalog::goToRoot = ->
-      @close() if @categoryTree.length == 0 and @query.length == 0
+      return @close() unless @categoryTree.length > 0 and @query?
       @categoryTree = []
       @layers = []
       @categories = []
@@ -58,7 +58,6 @@ catalogModule.service "catalogService",
       Restangular.all("layers").customGET("search", { q: @query }).then (response) ->
         that.layers = response.layers
         that.categories = []
-
 
     Catalog::close = ->
       $state.go "^"
