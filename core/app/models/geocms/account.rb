@@ -23,5 +23,9 @@ module Geocms
     validates_uniqueness_of :name
     validates :subdomain, presence: true, uniqueness: true, subdomain: { :reserved => %w(www test) }
 
+    def prefs
+      preferences.map { |k| {"#{k.name}" => k.value} }.reduce({}, :merge)
+    end
+
   end
 end

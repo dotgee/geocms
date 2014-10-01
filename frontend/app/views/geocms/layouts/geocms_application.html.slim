@@ -3,7 +3,7 @@ html(lang="en" ng-app="geocms")
   head
     meta charset="utf-8"
     meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
-    title== content_for?(:title) ? yield(:title) : "GeoCMS"
+    title= current_tenant.name
     meta content="" name="description"
     meta content="width=device-width" name="viewport"
     = stylesheet_link_tag "geocms/application"
@@ -18,4 +18,6 @@ html(lang="en" ng-app="geocms")
     div ui-view=""
     == yield
 
+    javascript:
+      var config = #{raw (current_tenant.prefs.to_json)}
     = javascript_include_tag "geocms/application"

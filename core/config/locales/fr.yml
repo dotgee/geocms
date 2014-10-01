@@ -49,6 +49,7 @@ fr:
     preferences: "Préferences"
     logout: "Déconnexion"
     accounts: "Instances"
+    advanced: "Configuration"
   backend:
     import: "Importer"
     layers_imported_from: "Couches récupérées depuis"

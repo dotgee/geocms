@@ -47,7 +47,7 @@ contexts.config [
           "map@contexts":
             templateUrl: "/templates/contexts/map.html"
             controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", (mapService, folders, $root, $scope, Restangular) ->
-              context = { center_lat: 48.331638, center_lng: -4.34526, zoom: 6 }
+              context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
               mapService.addBaseLayer()
