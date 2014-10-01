@@ -1,22 +1,25 @@
-.row-fluid
-  .span6
-    = form_tag [:backend, :preferences], {:method => :put} do |f|
-      h4   Carte
+.row
+  .col-md-6
+    = form_tag [:backend, :preferences], {method: :put} do |f|
+      .page-header
+        h4   Carte
       .form-inputs
         - Geocms::Account.prefs.keys.each do |p|
-          .control-group
-            = label_tag p, p.to_s.humanize, :class => "control-label"
-            .controls
-              = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value
+          .form-group
+            = label_tag p, p.to_s.humanize, class: "control-label"
+            = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value, class: "form-control"
       .control-group
         .controls
-          = submit_tag t(:edit), :class => "btn btn-primary"
-  .span6
-    h4   Compte
-    = simple_form_for ActsAsTenant.current_tenant, { :url => backend_preferences_path, :method => :put } do |f|
-      = image_tag f.object.logo if f.object.logo?
+          = submit_tag t(:edit), class: "btn btn-primary"
+  .col-md-6
+    .page-header
+      h4   Compte
+    = simple_form_for ActsAsTenant.current_tenant, { url: backend_preferences_path, method: :put } do |f|
       = f.input :name
-      = f.input :logo
+      .row
+        .col-xs-6
+          = f.input :logo
+        .col-xs-6
+          = image_tag f.object.logo if f.object.logo?
       .control-group
-        .controls
-          = f.submit t(:edit), :class => "btn btn-primary"
+          = f.submit t(:edit), class: "btn btn-primary"

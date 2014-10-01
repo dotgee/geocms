@@ -1,5 +1,5 @@
 // Blues
-$oxford_btn-primary: #3C4E5A !default;
+$oxford_blue: #3C4E5A !default;
 $boston_btn-primary: #3887BE !default;
 $outer_space: #28353D !default;
 
@@ -39,7 +39,7 @@ $darken-button-color: $button-color !default;
 
 $color-panel-1: $alizarin !default;
 $color-panel-1-darkened: darken($color-panel-1, 20) !default;
-$color-panel-2: $oxford_btn-primary !default;
+$color-panel-2: $oxford_blue !default;
 $color-panel-2-darkened: darken($color-panel-2, 20) !default;
 $color-panel-3: $carrot !default;
 
@@ -47,15 +47,17 @@ $color-panel-4: $clouds !default;
 $color-panel-5: $silver !default;
 
 
-$link-color: $oxford_btn-primary !default;
+$link-color: $oxford_blue !default;
 
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              white !default;
-$btn-default-bg:                 $oxford_btn-primary !default;
-$btn-default-border:             darken($oxford_btn-primary, 5) !default;
+$btn-default-bg:                 $oxford_blue !default;
+$btn-default-border:             darken($oxford_blue, 5) !default;
 
 
 $btn-primary-color:              white !default;
-$btn-primary-bg:                 $oxford_btn-primary !default;
-$btn-primary-border:             darken($oxford_btn-primary, 5) !default;
+$btn-primary-bg:                 $oxford_blue !default;
+$btn-primary-border:             darken($oxford_blue, 5) !default;
+
+$component-active-bg: $oxford_blue;

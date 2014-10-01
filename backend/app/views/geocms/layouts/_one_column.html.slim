@@ -1,0 +1,3 @@
+.container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
+  == render "/geocms/layouts/messages"
+  == yield

@@ -1,0 +1,7 @@
+ul.nav.nav-pills.nav-stacked style="margin-top: 40px;"
+  li class= "#{"active" if controller == 'preferences'}"
+    = link_to "Préférences", edit_backend_preferences_path
+  li class= "#{"active" if controller == 'accounts'}"
+    = link_to "Instances", backend_accounts_path
+  li class= "#{"active" if controller == 'users'}"
+    = link_to "Utilisateurs", backend_users_path

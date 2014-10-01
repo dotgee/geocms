@@ -28,9 +28,7 @@ html ng-app="geocms"
               li= link_to t("menu.layers"), backend_categories_path
               li= link_to t("menu.contexts"), backend_folders_path
               li= link_to t("menu.data_sources"), backend_data_sources_path
-              li= link_to t("menu.users"), backend_users_path
-              /li= link_to t("menu.preferences"), edit_backend_preferences_path
-              li= link_to t("menu.accounts"), backend_accounts_path
+              li= link_to t("menu.advanced"), edit_backend_preferences_path
           form.navbar-form.navbar-left
             .input-group
               input type="text" class="form-control" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
@@ -42,9 +40,11 @@ html ng-app="geocms"
 
 
     #page
-      .container.main-container class=(content_for?(:container_class) ? yield(:container_class) : "")
-        == render "/geocms/layouts/messages"
-        == yield
+      - if content_for? :sidebar
+        == render "/geocms/layouts/two_columns"
+      - else
+        == render "/geocms/layouts/one_column"
+      
     javascript:
       var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
     = javascript_include_tag "geocms/backend"

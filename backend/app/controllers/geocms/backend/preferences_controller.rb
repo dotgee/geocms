@@ -17,7 +17,7 @@ module Geocms
 
       private
         def preference_params
-          params.require(:preference).permit(PermittedAttributes.preference_attributes)
+          params.require(:preferences).permit(PermittedAttributes.preference_attributes)
         end
     end
   end
