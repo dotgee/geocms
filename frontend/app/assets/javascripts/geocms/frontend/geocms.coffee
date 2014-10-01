@@ -9,7 +9,6 @@ geocms = angular.module( 'geocms', [
   'wu.masonry'
   'toaster'
   'geocms.contexts'
-  'geocms.geoserver'
   'geocms.folders'
   'geocms.map'
   'geocms.cart'
