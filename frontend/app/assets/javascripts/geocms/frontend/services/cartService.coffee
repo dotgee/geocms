@@ -29,7 +29,10 @@ cartModule.service "cartService",
         @state = "unsaved"
 
       Cart::toggleQuery = ->
-        ms.addEventListener(@currentLayer)
+        if ms.currentLayer == @currentLayer
+          ms.removeEventListener(@currentLayer)
+        else
+          ms.addEventListener(@currentLayer)
 
       Cart::setOpacity = (ev, ui) ->
         $root.cart.currentLayer._tilelayer.setOpacity(ui.value)

@@ -83,6 +83,11 @@ mapModule.service "mapService", ["pluginService", "$http", (pluginService, $http
     @currentLayer = layer
     @container.addEventListener('click', @getFeatureWMS)
   
+  mapService.removeEventListener = ->
+    $("#map").removeAttr('style')
+    @currentLayer = null
+    @container.removeEventListener('click', @getFeatureWMS)
+
   mapService.getFeatureWMS = (e) ->
     url = mapService.getWMSFeatureURL(e)
     $http.get(
