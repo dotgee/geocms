@@ -34,7 +34,7 @@ mapModule.service "mapService",
           styles: layer.default_style || '',
           continuousWorld: true,
           tiled: layer.tiled,
-          maxZoom: 24,
+          maxZoom: layer.max_zoom,
           minZoom: 3,
           opacity: (layer.opacity / 100)
         layer._tilelayer.addTo(@container)

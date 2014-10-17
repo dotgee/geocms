@@ -4,7 +4,8 @@ module Geocms
 
     attributes  :layer_id, :title, :description, :name, :tiled, :template,
                 :data_source_wms, :data_source_wms_version, :data_source_not_internal,
-                :data_source_ogc, :data_source_name, :bbox, :dimensions, :metadata_url
+                :data_source_ogc, :data_source_name, :bbox, :dimensions, :metadata_url,
+                :max_zoom
 
     def bbox
       object.boundingbox
