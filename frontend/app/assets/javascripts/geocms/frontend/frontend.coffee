@@ -11,6 +11,7 @@
 #= require moment
 #= require_tree ./vendor
 
+#= require ./services/baseLayerService
 #= require ./services/projectionService
 #= require ./services/cartService
 #= require ./services/pluginService
