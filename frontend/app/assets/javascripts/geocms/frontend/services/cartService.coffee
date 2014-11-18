@@ -28,6 +28,13 @@ cartModule.service "cartService",
 
         @state = "unsaved"
 
+      Cart::recalculateLayerZIndex = ->
+        l = @layers.length
+        _.each @layers, (layer, index) ->
+          layer._tilelayer.setZIndex(l - index)
+
+        @state = "unsaved"
+        
       Cart::toggleQuery = ->
         if ms.currentLayer == @currentLayer
           ms.removeEventListener(@currentLayer)
@@ -75,7 +82,7 @@ cartModule.service "cartService",
       Cart::add = (id) ->
         that = this
         Restangular.one("layers", id).get().then (data) ->
-          that.layers.push ms.addLayer(data.layer)
+          that.layers.unshift ms.addLayer(data.layer)
         @state = "unsaved"
 
       Cart::addSeveral = () ->
@@ -89,8 +96,8 @@ cartModule.service "cartService",
           delete @context.folder
         delete @context.contexts_layers # BUG: circular dependency in json
         that = this
-        @context.contexts_layers_attributes = _.map(@layers, (cl) ->
-          { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity }
+        @context.contexts_layers_attributes = _.map(@layers, (cl, index) ->
+          { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity, position: index }
         )
         @context.save().then ((response)->
           toaster.pop('success', "La sauvegarde a réussi", response.data)
