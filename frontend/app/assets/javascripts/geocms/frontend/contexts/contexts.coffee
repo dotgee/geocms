@@ -112,7 +112,7 @@ contexts.controller "ContextsController", [
 
     $scope.treeOptions = {
       dropped: (event) ->
-        console.log event.dest
+        $root.cart.recalculateLayerZIndex()
     }
 
     $scope.mapOptions = optionService
