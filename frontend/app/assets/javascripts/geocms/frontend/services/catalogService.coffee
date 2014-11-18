@@ -46,7 +46,7 @@ catalogModule.service "catalogService",
       return
 
     Catalog::goToRoot = ->
-      return @close() unless @categoryTree.length > 0 and @query?
+      return @close() unless @categoryTree.length > 0 or @query?
       @categoryTree = []
       @layers = []
       @categories = []
