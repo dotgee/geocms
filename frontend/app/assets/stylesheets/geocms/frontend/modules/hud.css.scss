@@ -11,10 +11,6 @@
   max-height: 450px;
   // padding-bottom: 10px;
   background: white;
-  transition: left 300ms;
-  -moz-transition: left 300ms;
-  -webkit-transition: left 300ms;
-  @include box-sizing(border-box);
   .tab-content {
     // position: absolute;
     // top: 105px;
