@@ -2,11 +2,10 @@
   .cart-item
     .cart-column.cart-column-grippy
       .grippy ui-tree-handle=""
-    .cart-column.cart-column-image
-      / img ng-src="{{layer.thumbnail_url}}" width='34' height='34'
-      img ng-src="http://lorempixel.com/34/34/abstract/{{$index+1}}"
-    .cart-column
-      a title="{{layer.title}}" class="unstyled" ng-click="cart.currentLayer = layer"
+    .cart-column.cart-column-checkbox 
+      input type="checkbox" class="layer-visibility" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
+    .cart-column ng-click="cart.currentLayer = layer"
+      a title="{{layer.title}}" class="unstyled"
         |{{layer.title}}
       p.source ng-if="layer.data_source_name"
         |Source :
