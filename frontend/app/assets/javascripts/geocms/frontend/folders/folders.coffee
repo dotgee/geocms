@@ -33,7 +33,7 @@ folders.config [
 
       # state folders.show : affichage d'un folder avec ses contexts
       .state 'folders.show',
-        url: '/{slug:[a-zA-Z0-9_]*}'
+        url: '/{slug}'
         parent: 'folders'
         views:
           '@':
