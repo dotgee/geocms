@@ -1,16 +1,19 @@
 .container
   .page-header
     h1 
-      a.unstyled ui-sref="folders.root" Projets / 
+      = link_to "Projets / ", [:backend, :folders], class: "unstyled" 
       small= @folder.name
-  .row
-    - @contexts.each do |context|
-      .col-sm-4.col-md-3
-        = link_to [:edit, :backend, @folder, context] do
-          .thumbnail
-            .placeholder
-              = image_tag context.preview if context.preview.present?
-            h4
-              = context.name
-            p
-              = context.description
+  table.table.table-striped
+    thead
+      th= t(:name)
+      th
+    tbody
+      - @contexts.each do |context|
+        tr
+          td= link_to context.name, [:edit, :backend, @folder, context]
+          td
+            = link_to [:edit, :backend, @folder, context], class: "btn btn-xs btn-primary icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
+              i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
+            '
+            = link_to [:backend, @folder, context], confirm: "Are you sure ?", method: :delete, class: "btn btn-danger icn-only btn-xs" do
+              i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
