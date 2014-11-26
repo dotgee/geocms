@@ -13,6 +13,8 @@ require 'sass-rails'
 require 'coffee-rails'
 require 'rabl'
 require 'gon'
+require 'ckeditor'
+require 'simple_form'
 
 require "rails-assets-lodash"
 require "rails-assets-angular"
