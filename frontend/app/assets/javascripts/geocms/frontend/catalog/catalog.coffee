@@ -12,17 +12,17 @@ catalog.config [
       .state 'contexts.show.catalog',
         views:
           "catalog@contexts":
-            templateUrl: "/templates/catalog/catalog.html"
+            templateUrl: config.prefix_uri+"/templates/catalog/catalog.html"
             controller: "CatalogController"
       .state 'contexts.new.catalog',
         views:
           "catalog@contexts":
-            templateUrl: "/templates/catalog/catalog.html"
+            templateUrl: config.prefix_uri+"/templates/catalog/catalog.html"
             controller: "CatalogController"
       .state 'contexts.root.catalog',
         views:
           "catalog@contexts":
-            templateUrl: "/templates/catalog/catalog.html"
+            templateUrl: config.prefix_uri+"/templates/catalog/catalog.html"
             controller: "CatalogController"
 ]
 

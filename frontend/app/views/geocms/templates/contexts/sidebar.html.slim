@@ -3,8 +3,7 @@
     a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}" ng-if="cart.context.editable"
       span.carticon-floppy
       span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
-
-    div ng-include="'/templates/contexts/top_sidebar.html'"
+    div ng-include="" src="config.prefix_uri+'/templates/contexts/top_sidebar.html'"
     tabset.row-fluid#hud-tab
       tab heading=t("layers")
         #layers
@@ -17,8 +16,8 @@
                 i.icon-layer
             div.hud-panel ui-tree="treeOptions"
               ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
-                li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="'/templates/layers/cart_item.html'"
-          div ng-show="cart.currentLayer" ng-include="'/templates/layers/controls.html'"
+                li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="config.prefix_uri+'/templates/layers/cart_item.html'"
+          div ng-show="cart.currentLayer" ng-include="config.prefix_uri+'/templates/layers/controls.html'"
       tab heading=t("context.infos")
         #infos.hud-panel
           div ng-switch="cart.context.editable"
@@ -51,11 +50,11 @@
                   |{{cart.context.name}}
                 p
                   |{{cart.context.description}}
-            div ng-include="'/templates/shared/share.html'"
+            div ng-include="config.prefix_uri+'/templates/shared/share.html'"
       tab heading="Légende"
         #legend.hud-panel
           div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
             h6
               |{{layer.title}}
             img ng-src="{{layer.data_source_wms}}?service=wms&request=GetLegendGraphic&VERSION=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
-    /div ng-include="'/templates/contexts/bottom_sidebar.html'"
+    /div ng-include="config.prefix_uri+'/templates/contexts/bottom_sidebar.html'"

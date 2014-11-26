@@ -33,8 +33,8 @@ geocms.config [
     $locationProvider.html5Mode(true)
     # RestangularProvider.setDefaultHttpFields({cache: true});
 
-    $urlRouterProvider.when('', '/maps');
-    $urlRouterProvider.when('/', '/maps');
+    $urlRouterProvider.when(config.prefix_uri+'', config.prefix_uri+'/maps');
+    $urlRouterProvider.when(config.prefix_uri+'/', config.prefix_uri+'/maps');
 
     _.templateSettings =
       interpolate: /\{\{(.+?)\}\}/g
@@ -44,9 +44,10 @@ geocms.config [
 geocms.run [
   "Restangular"
   "mapService"
-  (Restangular, mapService) ->
-    Restangular.setBaseUrl("/api/v1")
-
+  "$rootScope"
+  (Restangular, mapService, $root) ->
+    Restangular.setBaseUrl(config.prefix_uri+"/api/v1")
+    $root.config = config
     # TODO: find a better way
     # This is a little hacky
     # Before sending the object to the server i need to wrap it in an object

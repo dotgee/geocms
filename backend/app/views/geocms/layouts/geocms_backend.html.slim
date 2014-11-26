@@ -45,7 +45,9 @@ html ng-app="geocms"
       - else
         == render "/geocms/layouts/one_column"
       
+
     javascript:
-      var GEOCMS_PREFIX = "#{ENV["PREFIX"]}"
+      var config = #{raw (current_tenant.prefs.to_json)}
+
     = javascript_include_tag "geocms/backend"
     == yield :javascripts

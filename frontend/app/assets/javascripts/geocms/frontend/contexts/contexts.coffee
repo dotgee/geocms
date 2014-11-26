@@ -10,10 +10,10 @@ contexts.config [
   ($stateProvider) ->
     $stateProvider
       .state 'contexts',
-        url: "/maps"
+        url: config.prefix_uri+"/maps"
         views:
           "":
-            templateUrl: "/templates/contexts/root.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/root.html"
         abstract: true
         resolve:
           folders: ["Restangular", (Restangular) ->
@@ -25,10 +25,10 @@ contexts.config [
         parent: "contexts"
         views:
           "sidebar@contexts":
-            templateUrl: "/templates/contexts/sidebar.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/sidebar.html"
             controller: "ContextsController"
           "map@contexts":
-            templateUrl: "/templates/contexts/map.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["context", "$state", (context, $state) ->
               if context != null && context != undefined && context != "null"
                 $state.transitionTo('contexts.show', {uuid: context.uuid})
@@ -45,7 +45,7 @@ contexts.config [
         parent: 'contexts.root'
         views:
           "map@contexts":
-            templateUrl: "/templates/contexts/map.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", (mapService, folders, $root, $scope, Restangular) ->
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
@@ -61,10 +61,10 @@ contexts.config [
         parent: 'contexts.root'
         views:
           "sidebar@contexts":
-            templateUrl: "/templates/contexts/sidebar.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/sidebar.html"
             controller: "ContextsController"
           "map@contexts":
-            templateUrl: "/templates/contexts/map.html"
+            templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["mapService", "context", "folders", "$rootScope", "$scope", (mapService, context, folders, $root, $scope) ->
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               mapService.addBaseLayer()

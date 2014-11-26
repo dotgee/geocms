@@ -64,7 +64,7 @@ module Geocms
     ]
 
     @@preference_attributes = [
-      :name, :value, :longitude, :latitude, :zoom, :crs
+      :name, :value, :longitude, :latitude, :zoom, :crs, :host, :prefix_uri
     ]
 
     @@user_attributes = [

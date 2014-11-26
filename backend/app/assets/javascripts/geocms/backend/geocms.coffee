@@ -5,7 +5,7 @@ app = angular.module("geocms", [
   "ngTable"
   "restangular"
 ]).controller("ImportCtrl", ($scope, $location, ngTableParams, Restangular, filterFilter) ->
-  Restangular.setBaseUrl("/api/v1")
+  Restangular.setBaseUrl(config.prefix_uri+"/api/v1")
 
   $scope.tableParams = new ngTableParams(
     page: 1 # show first page

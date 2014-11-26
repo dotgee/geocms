@@ -13,7 +13,10 @@ module Geocms
     preference :longitude , -1.676239
     preference :latitude  , 48.118434
     preference :zoom      , 4
-    preference :crs       , "EPSG:4326"
+    preference :crs       , "EPSG:3857"
+    preference :host      , "localhost"
+    preference :prefix_uri, ""
+    
 
     CRS = ["EPSG:4326", "EPSG:2154", "WGS:84"]
 

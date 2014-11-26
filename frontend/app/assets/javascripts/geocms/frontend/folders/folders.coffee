@@ -8,12 +8,12 @@ folders.config [
   ($stateProvider) ->
     $stateProvider
       .state 'folders',
-        url: '/projects'
+        url: config.prefix_uri+'/projects'
         views:
           '':
-            templateUrl: '/templates/folders/root.html'
+            templateUrl: config.prefix_uri+'/templates/folders/root.html'
           'header':
-            templateUrl: '/templates/shared/header.html'
+            templateUrl: config.prefix_uri+'/templates/shared/header.html'
         abstract: true
 
       # state folders.root : index des folders avec resolve pour recuperer les folders, donc definir API
@@ -22,7 +22,7 @@ folders.config [
         parent: 'folders'
         views:
           '@':
-            templateUrl: '/templates/folders/index.html'
+            templateUrl: config.prefix_uri+'/templates/folders/index.html'
             controller: ['data', '$scope', (data, $scope) ->
               $scope.folders = data
             ]
@@ -37,7 +37,7 @@ folders.config [
         parent: 'folders'
         views:
           '@':
-            templateUrl: '/templates/folders/show.html'
+            templateUrl: config.prefix_uri+'/templates/folders/show.html'
             controller: ['data', '$scope', (data, $scope) ->
               $scope.folder = data
             ]
