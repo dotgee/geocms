@@ -1,7 +1,7 @@
 // LEFT NAVBAR
 
 .hud {
-  color: $oxford_blue;
+  color: $hud-body-color;
   z-index: 1000;
   position: absolute;
   left: 10px;
@@ -10,7 +10,7 @@
   height: auto;
   max-height: 450px;
   // padding-bottom: 10px;
-  background: white;
+  background: $hud-background-color;
   .tab-content {
     // position: absolute;
     // top: 105px;
@@ -40,8 +40,8 @@
     margin-left: 0;
     width: 33.3333%;
     a {
-      background-color: $color-panel-2;
-      color: #FFF;
+      background-color: $hud-tab-background-color;
+      color: $hud-tab-color;
       font-weight: 500;
       font-size: 13px;
       line-height: 15px;
@@ -56,7 +56,8 @@
       text-align: center;
     }
     &.active a {
-      background-color: darken($color-panel-2, 15);
+      background-color: $hud-tab-background-color-active;
+      color: $hud-tab-color-active;
     }
     &:first-child {
       a {
@@ -78,14 +79,14 @@
   text-align: center;
   border-radius: 0 4px 4px 0;
   padding: 5px;
-  background: rgba($color-panel-3, 0.8);
-  color: #FFF;
+  background: rgba($save-button-background-color, 0.8);
+  color: $save-button-color;
   font-weight: 500;
   font-size: 13px;
   letter-spacing: 0.5px;
   text-shadow: none;
   &.saved {
-    background: rgba($color-panel-3, 0.5);
+    background: rgba($save-button-background-color, 0.5);
     cursor: initial;
   }
 }
@@ -118,8 +119,8 @@
 //  LEFT NAVBAR - TABS - LAYERS - ADD BUTTON
 
 .add-layer {
-  background: $color-panel-1;
-  color: white;
+  background: $action-bar-background-color;
+  color: $action-bar-color;
   font-weight: 500;
   height: 38px;
   padding: 0 15px;

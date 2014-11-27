@@ -6,18 +6,18 @@
 
 .timeline {
   .row {
-    border: 1px solid #E5E5E5;
+    border: 1px solid $timeline-border-color;
   }
   .ui-slider-horizontal {
     margin-top: 8px;
   }
   .timeline-control, .date {
-    border-right: 1px solid #E5E5E5;
+    border-right: 1px solid $timeline-border-color;
     text-align: center;
   }
   .ui-slider-range {
     background-image: none;
-    background-color: $color-panel-2;
+    background-color: $ui-slider-range-background-color;
   }
 }
 

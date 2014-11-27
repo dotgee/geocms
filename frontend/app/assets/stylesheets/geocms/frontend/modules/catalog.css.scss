@@ -1,18 +1,13 @@
 #catalog {
   padding-bottom: 30px;
-  background: white;
+  background: $catalog-background-color;
+  color: $catalog-body-color;
   position: fixed;
   bottom: 0px;
   left: 0;
   right: 0px;
   top: 0px;
   overflow-y: auto;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 1;
-  transition: opacity .35s, z-index .35s;
-  -moz-transition: opacity .35s, z-index .35s;
-  -webkit-transition: opacity .35s, z-index .35s;
   &.active {
     visibility: visible;
     z-index: 1100;
@@ -38,18 +33,18 @@
   h1 {
     // margin-left: 20px;
     text-transform: none;
-    color: $color-panel-1-darkened;
+    color: $catalog-heading-color;
   }
   .breadcrumb {
-    background-color: $color-panel-1;
-    border: 1px solid $color-panel-2;
+    background-color: $breadcrumb-background-color;
+    border: 1px solid $breadcrumb-border-color;
     i {
-      color: white;
+      color: $breadcrumb-body-color;
       text-shadow: none;
     }
     > li > a {
       text-shadow: none;
-      color: white;
+      color: $breadcrumb-body-color;
       cursor: pointer;
     }
     > li:last-child > a:hover {
@@ -60,20 +55,21 @@
 }
 
 .media {
-  background: white;
+  background: $media-background-color;
+  color: $media-body-color;
   cursor: pointer;
   border: 1px solid #DADADA;
   @include not-selectable;
   h4 {
     cursor: pointer;
     font-weight: 500;
-    color: $color-panel-1-darkened;
+    color: $media-heading-color;
     [class^="icon-"] {
       margin: 4px 0 3px;
     }
   }
   .carticon-folder {
-    color: $color-panel-2;
+    color: $media-icon-color;
   }
   .media-body {
     padding: 5px;

@@ -1,20 +1,22 @@
 .account-infos {
   padding: 5px 10px;
-  border-top: $color-panel-2 3px solid;
+  border-top: $top-sidebar-border-top-color 3px solid;
+  color: $top-sidebar-body-color;
+  background-color: $top-sidebar-background-color;
 }
 
 .context-title {
   font-size: 12px;
   text-transform: none;
   font-weight: bold;
-  color: rgba(60, 78, 90, 0.91);
+  color: $top-sidebar-heading-color;
   margin-top: 10px;
   line-height: 16px;
 }
 
 .user-image {
   border-radius: 100%;
-  border: 1px solid $color-panel-5;
+  border: 1px solid $user-image-border-color;
   width: 50px;
   height: 50px;
 }

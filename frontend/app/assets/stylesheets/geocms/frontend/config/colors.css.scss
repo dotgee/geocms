@@ -1,54 +1,77 @@
-// Blues
-$oxford_blue: #3C4E5A !default;
-$boston_blue: #3887BE !default;
-$outer_space: #28353D !default;
+// General palettes
 
-// Light blue
-$peter_river: #3498DB !default;
-$belize_hole: #2980B9 !default;
+$primary-palette: $md-list-blue-grey !default;
+$secondary-palette: $md-list-light-blue !default;
+$tertiary-palette: $md-list-light-blue !default;
 
-// Deep blue
-$wet_asphalt: #34495E !default;
-$midnight_blue: #2C3E50 !default;
+$color-panel-1: nth($primary-palette, 5) !default;
+$color-panel-1-darkened: nth($primary-palette, 7) !default;
+$color-panel-1-lightened: nth($primary-palette, 2) !default;
 
-// Light grey
-$clouds: #ECF0F1 !default;
-$silver: #BDC3C7 !default;
+$color-panel-2: nth($secondary-palette, 5) !default;
+$color-panel-2-fallback: white !default;
+$color-panel-2-lightened: nth($secondary-palette, 2) !default;
 
-$mercury: #e4e4e4 !default;
+$color-panel-3: nth($tertiary-palette, 5) !default;
 
-// Dark grey
-$concrete: #95A5A6 !default;
-$absestos: #7F8C8D !default;
+// Application variables
 
-// Red
-$alizarin: #E74C3C !default;
-$pomegranate: #C0392B !default;
+$hud-background-color: white !default;
+$hud-body-color: $md-clr-ui-body-1 !default;
 
-// Green
-$emerald: #2ECC71 !default;
-$nephritis: #27AE60 !default;
+$hud-tab-background-color: $color-panel-1-darkened !default;
+$hud-tab-background-color-active: nth($primary-palette, 9) !default;
+$hud-tab-color: $color-panel-2-fallback !default;
+$hud-tab-color-active: $color-panel-2-fallback !default;
+$hud-layer-chevron: $color-panel-2 !default;
 
-// Orange
-$carrot: #e67e22 !default;
-$pumpkin: #d35400 !default;
+$save-button-background-color: $color-panel-2 !default;
+$save-button-color: $color-panel-2-fallback !default;
 
-$main-color: #1570a6 !default;
-$button-color: $pomegranate !default;
-$darken-button-color: $button-color !default;
+$action-bar-background-color: $color-panel-1 !default;
+$action-bar-color: $color-panel-2-fallback !default;
 
-$color-panel-1: $alizarin !default;
-$color-panel-1-darkened: darken($color-panel-1, 20) !default;
-$color-panel-2: $pomegranate !default;
-$color-panel-2-darkened: darken($color-panel-2, 20) !default;
-$color-panel-3: $carrot !default;
+$catalog-background-color: white !default;
+$catalog-body-color: $md-clr-ui-body-1 !default;
+$catalog-heading-color: $md-clr-ui-headline !default;
 
-$color-panel-4: $clouds !default;
-$color-panel-5: $silver !default;
+$breadcrumb-background-color: $color-panel-1 !default;
+$breadcrumb-border-color: $color-panel-1-darkened !default;
+$breadcrumb-body-color: $color-panel-2-fallback !default;
 
+$media-background-color: white !default;
+$media-body-color: $md-clr-ui-body-1 !default;
+$media-heading-color: $md-clr-ui-headline !default;
+$media-icon-color: $color-panel-1 !default;
+
+$top-sidebar-border-top-color: $color-panel-2 !default;
+$top-sidebar-background-color: white !default;
+$top-sidebar-body-color: $md-clr-ui-headline !default;
+$top-sidebar-heading-color: $md-clr-ui-headline !default;
+$user-image-border-color: $color-panel-2 !default;
+
+$ui-slider-range-background-color: $color-panel-2 !default;
+$timeline-border-color: #E5E5E5 !default;
+$thumbnail-placeholder-background-color: #E5E5E5 !default;
+
+// Bootstrap variables
+
+$navbarLinkColor: $color-panel-2-fallback !default;
+$navbarText: $color-panel-2-fallback !default;
+$navbarBrandColor: $color-panel-2-fallback !default;
+$navbarLinkColorHover: #D4EBFA !default;
+$sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$linkColor: $color-panel-1 !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              white !default;
-$btn-default-bg:                 $pomegranate !default;
-$btn-default-border:             darken($pomegranate, 5) !default;
+$btn-default-color:              $color-panel-2-fallback !default;
+$btn-default-bg:                 $color-panel-2 !default;
+$btn-default-border:             nth($tertiary-palette, 7) !default;
+
+
+$btn-primary-color:              $color-panel-2-fallback !default;
+$btn-primary-bg:                 $color-panel-2 !default;
+$btn-primary-border:             nth($tertiary-palette, 7) !default;
+
+$component-active-bg: $color-panel-2;
