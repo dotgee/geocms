@@ -1,5 +1,5 @@
 .navbar-backend {
-  background: $oxford_blue;
+  background: $color-panel-1-darkened;
   position: fixed;
   top: 0;
   right: 0;
@@ -29,9 +29,9 @@
       > a {
         font-family: 'Open Sans Condensed';
         font-size: 13px;
-        color: #FFF;
+        color: $color-panel-2-fallback;
         display: inline-block;
-        background: $outer_space;
+        background: $color-panel-1;
         margin: 0px;
         padding: 0px 25px;
         text-transform: uppercase;
@@ -40,7 +40,8 @@
         line-height: 40px;
         font-weight: bolder;
         &:hover, &:focus {
-          color: #E6E6E6;
+          color: $color-panel-2;
+          background-color: $color-panel-1-lightened;
         }
         &.brand {
           background: none;

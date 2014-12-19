@@ -23,13 +23,13 @@ module Geocms
       def create
         @data_source = DataSource.new(data_source_params)
         @data_source.save
-        respond_with([:backend, @data_source])
+        respond_with([:import, :backend, @data_source])
       end
 
       def update
         @data_source = DataSource.find(params[:id])
         @data_source.update_attributes(data_source_params)
-        respond_with([:backend, @data_source])
+        respond_with([:import, :backend, @data_source])
       end
 
       def destroy

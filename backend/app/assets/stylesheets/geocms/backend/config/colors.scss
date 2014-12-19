@@ -1,63 +1,39 @@
-// Blues
-$oxford_blue: #3C4E5A !default;
-$boston_btn-primary: #3887BE !default;
-$outer_space: #28353D !default;
+@import "md-colors";
 
-// Light btn-primary
-$peter_river: #3498DB !default;
-$belize_hole: #2980B9 !default;
+// General palettes
 
-// Deep btn-primary
-$wet_asphalt: #34495E !default;
-$midnight_btn-primary: #2C3E50 !default;
+$primary-palette: $md-list-blue-grey !default;
+$secondary-palette: $md-list-light-blue !default;
+$tertiary-palette: $md-list-light-blue !default;
 
-// Light grey
-$clouds: #ECF0F1 !default;
-$silver: #BDC3C7 !default;
+$color-panel-1: nth($primary-palette, 5) !default;
+$color-panel-1-darkened: nth($primary-palette, 7) !default;
+$color-panel-1-lightened: nth($primary-palette, 2) !default;
 
-$mercury: #e4e4e4 !default;
+$color-panel-2: nth($secondary-palette, 5) !default;
+$color-panel-2-fallback: white !default;
+$color-panel-2-lightened: nth($secondary-palette, 2) !default;
 
-// Dark grey
-$concrete: #95A5A6 !default;
-$absestos: #7F8C8D !default;
+$color-panel-3: nth($tertiary-palette, 5) !default;
 
-// Red
-$alizarin: #E74C3C !default;
-$pomegranate: #C0392B !default;
+// Bootstrap variables
 
-// Green
-$emerald: #2ECC71 !default;
-$nephritis: #27AE60 !default;
-
-// Orange
-$carrot: #e67e22 !default;
-$pumpkin: #d35400 !default;
-
-$main-color: #1570a6 !default;
-$button-color: $pomegranate !default;
-$darken-button-color: $button-color !default;
-
-$color-panel-1: $alizarin !default;
-$color-panel-1-darkened: darken($color-panel-1, 20) !default;
-$color-panel-2: $oxford_blue !default;
-$color-panel-2-darkened: darken($color-panel-2, 20) !default;
-$color-panel-3: $carrot !default;
-
-$color-panel-4: $clouds !default;
-$color-panel-5: $silver !default;
-
-
-$link-color: $oxford_blue !default;
+$navbarLinkColor: $color-panel-2-fallback !default;
+$navbarText: $color-panel-2-fallback !default;
+$navbarBrandColor: $color-panel-2-fallback !default;
+$navbarLinkColorHover: #D4EBFA !default;
+$sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$linkColor: $color-panel-1 !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              white !default;
-$btn-default-bg:                 $oxford_blue !default;
-$btn-default-border:             darken($oxford_blue, 5) !default;
+$btn-default-color:              $color-panel-2-fallback !default;
+$btn-default-bg:                 $color-panel-2 !default;
+$btn-default-border:             nth($tertiary-palette, 7) !default;
 
 
-$btn-primary-color:              white !default;
-$btn-primary-bg:                 $oxford_blue !default;
-$btn-primary-border:             darken($oxford_blue, 5) !default;
+$btn-primary-color:              $color-panel-2-fallback !default;
+$btn-primary-bg:                 $color-panel-2 !default;
+$btn-primary-border:             nth($tertiary-palette, 7) !default;
 
-$component-active-bg: $oxford_blue;
+$component-active-bg: $color-panel-2;
