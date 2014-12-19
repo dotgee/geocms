@@ -13,10 +13,13 @@
                 span.glyphicon.glyphicon-search
       .small-space
       ul.breadcrumb
-        li ng-click="catalog.goToRoot()"
-          i.carticon-home
+        li 
+          a ng-click="catalog.goToRoot()"
+            i.carticon-home
         li ng-repeat="category in catalog.categoryTree"
-          a ng-click="catalog.getCategory(category)"
+          a ng-click="catalog.getCategory(category)" ng-if="$index != (catalog.categoryTree.length -1)"
+            |{{category.name}}
+          span ng-if="$index === (catalog.categoryTree.length -1)" 
             |{{category.name}}
       .row-fluid#catalog-categories
         .media ng-repeat="category in catalog.categories" ng-include="config.prefix_uri+'/templates/catalog/category.html'")

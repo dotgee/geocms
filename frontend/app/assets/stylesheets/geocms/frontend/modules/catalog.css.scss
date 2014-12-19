@@ -38,17 +38,15 @@
   .breadcrumb {
     background-color: $breadcrumb-background-color;
     border: 1px solid $breadcrumb-border-color;
+    color: $breadcrumb-body-color;
     i {
-      color: $breadcrumb-body-color;
+      color: $breadcrumb-link-color;
       text-shadow: none;
     }
     > li > a {
       text-shadow: none;
-      color: $breadcrumb-body-color;
+      color: $breadcrumb-link-color;
       cursor: pointer;
-    }
-    > li:last-child > a:hover {
-      text-decoration: none;
     }
   }
 
