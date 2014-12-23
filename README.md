@@ -6,10 +6,10 @@ It was built to make it easier for people to consume geospatial data from multip
 
 GeoCMS actually consists of several different gems, each of which are maintained in a single repository. By requiring the GeoCMS gem you automatically require all of the necessary gem dependencies which are:
 
-geocms_api (RESTful API)
-geocms_frontend (User-facing components)
-geocms_backend (Admin area)
-geocms_core (Models & Mailers, the basic components of geocms that it can't run without)
+* geocms_api (RESTful API)
+* geocms_frontend (User-facing components)
+* geocms_backend (Admin area)
+* geocms_core (Models & Mailers, the basic components of geocms that it can't run without)
 
 All of the gems are designed to work together to provide a vizualisation platform. It is also possible, however, to use only the pieces you are interested in. For example, you could use just the barebones geocms_core gem and build your own user facing interface on top of it.
 
