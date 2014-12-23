@@ -79,6 +79,7 @@ $ bundle exec rake db:seed
 * Mount GeoCMS in your application (in config/routes.rb) :
 
 ```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   mount Geocms::Core::Engine, :at => "/"
 end
@@ -97,12 +98,12 @@ In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.htm
 Here are some ways **you** can contribute:
 
 * by using prerelease versions / master branch
-* by reporting [bugs](https://github.com/geocms/geocms/issues/new)
+* by reporting [bugs](https://github.com/jchapron/geocms/issues/new)
 * by writing or editing documentation
-* by writing [specs](https://github.com/geocms/geocms/labels/NeedSpecs)
-* by writing [needed code](https://github.com/geocms/geocms/labels/NeedCode) or [finishing code](https://github.com/geocms/geocms/labels/stalled)
-* by [refactoring code](https://github.com/geocms/geocms/labels/performance)
-* by resolving [issues](https://github.com/geocms/geocms/issues)
-* by reviewing [pull requests](https://github.com/geocms/geocms/pulls)
+* by writing [specs](https://github.com/jchapron/geocms/labels/NeedSpecs)
+* by writing [needed code](https://github.com/jchapron/geocms/labels/NeedCode) or [finishing code](https://github.com/jchapron/geocms/labels/stalled)
+* by [refactoring code](https://github.com/jchapron/geocms/labels/performance)
+* by resolving [issues](https://github.com/jchapron/geocms/issues)
+* by reviewing [pull requests](https://github.com/jchapron/geocms/pulls)
 
 
