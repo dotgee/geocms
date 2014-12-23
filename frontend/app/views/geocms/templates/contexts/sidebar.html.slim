@@ -5,7 +5,7 @@
       span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
     div ng-include="" src="config.prefix_uri+'/templates/contexts/top_sidebar.html'"
     tabset.row-fluid#hud-tab
-      tab heading=t("layers")
+      tab heading=t("layers") uncheckable=""
         #layers
           div ng-hide="cart.currentLayer"
             .add-layer ng-click="openCatalog()"
@@ -18,7 +18,7 @@
               ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
                 li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="config.prefix_uri+'/templates/layers/cart_item.html'"
           div ng-show="cart.currentLayer" ng-include="config.prefix_uri+'/templates/layers/controls.html'"
-      tab heading=t("context.infos")
+      tab heading=t("context.infos") uncheckable=""
         #infos.hud-panel
           div ng-switch="cart.context.editable"
             div ng-switch-when="true"
@@ -51,7 +51,7 @@
                 p
                   |{{cart.context.description}}
             div ng-include="config.prefix_uri+'/templates/shared/share.html'"
-      tab heading="Légende"
+      tab heading="Légende" uncheckable=""
         #legend.hud-panel
           div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
             h6
