@@ -45,13 +45,13 @@ Guide
 
 The installation process should be straightforward once you make sure that all dependecies are installed.
 
-1. Create a new Rails application :
+* Create a new Rails application :
 ```bash
 $ gem install rails -v 4.1.8
 $ rails new myapp -D postgresql
 ```
 
-2. Install GeoCMS in your app :
+* Install GeoCMS in your app :
 
 To use a stable build of GeoCMS, you can manually add GeoCMS to your
 Rails application. To use the 2-4-stable branch of GeoCMS, add this line to
@@ -68,7 +68,7 @@ line:
 gem 'geocms', github: 'jchapron/geocms'
 ```
 
-3. Install GeoCMS migrations and data : 
+* Install GeoCMS migrations and data : 
 
 ```bash
 $ bundle exec rake railties:install:migrations
@@ -76,7 +76,7 @@ $ bundle exec rake db:migrate
 $ bundle exec rake db:seed
 ```
 
-4. Mount GeoCMS in your application (in config/routes.rb) :
+* Mount GeoCMS in your application (in config/routes.rb) :
 
 ```ruby
 Rails.application.routes.draw do
