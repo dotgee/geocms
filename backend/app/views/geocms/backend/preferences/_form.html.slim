@@ -16,7 +16,7 @@
   .col-md-6
     .page-header
       h4   Compte
-    = simple_form_for ActsAsTenant.current_tenant, { url: backend_preferences_path, method: :put } do |f|
+    = simple_form_for [:backend, current_tenant] do |f|
       = f.input :name
       .row
         .col-xs-6

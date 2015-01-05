@@ -19,6 +19,12 @@ module Geocms
         respond_with [:backend, :accounts]
       end
 
+      def update
+        @account = Account.find(params[:id])
+        @account.update_attributes(account_params)
+        respond_with [:edit, :backend, :preferences]
+      end
+
       def destroy
         @account = Account.find(params[:id])
         @account.destroy

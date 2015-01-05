@@ -44,7 +44,7 @@ Geocms::Core::Engine.add_routes do
       end
     end
 
-    resources :accounts, :only => [:index, :new, :create, :destroy]
+    resources :accounts
 
     resources :folders do
 
