@@ -1,4 +1,4 @@
-= simple_form_for([:backend, @layer]) do |f|
+= simple_form_for([:backend, @layer], defaults: { input_html: { "ng-non-bindable" => true }}) do |f|
   = f.input :title, input_html: { autofocus: "autofocus" }
   = f.input :name
   = f.association :data_source
