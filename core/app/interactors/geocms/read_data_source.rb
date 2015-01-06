@@ -13,7 +13,7 @@ module Geocms
 
     def get_capabilities
       begin
-        wms_client = ROGC::WMSClient.new(context.url)
+        wms_client = ROGC::WMSClient.new(context[:url])
         capabilities = wms_client.capabilities
         context.layers = capabilities.capability.layers
       rescue

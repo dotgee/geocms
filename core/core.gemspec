@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency "cancancan"
   s.add_dependency "rolify"
   s.add_dependency "rgeo"
-  s.add_dependency "curb", "0.7.15"
+  s.add_dependency "curb"
   s.add_dependency "pg_search"
   s.add_dependency "sorcery"
   s.add_dependency "kaminari"
