@@ -1,10 +1,10 @@
 xml.instruct!
 xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://www.opengis.net/context", "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation" => "http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd") do
   xml.General do
-    xml.BoundingBox(:SRS => current_tenant.crs.value, :maxx => @context.maxx, :maxy => @context.maxy, :minx => @context.minx, :miny => @context.miny)
+    xml.BoundingBox(:SRS => current_tenant.crs.value, :maxx => @context.center_lng, :maxy => @context.center_lat, :minx => @context.center_lng, :miny => @context.center_lat)
     xml.Title @context.name
     xml.Extension do
-      xml.tag!("ol:maxExtent", :maxx => @context.maxx, :maxy => @context.maxy, :minx => @context.minx, :miny => @context.miny, "xmlns:ol" => "http://openlayers.org/context")
+      xml.tag!("ol:maxExtent", :maxx => @context.center_lng, :maxy => @context.center_lat, :minx => @context.center_lng, :miny => @context.center_lat, "xmlns:ol" => "http://openlayers.org/context")
     end
   end
   xml.LayerList do
@@ -57,7 +57,7 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
         end
         xml.Extension do
           bbox = layer.boundingbox
-          xml.tag!("ol:maxExtent", :maxx => bbox[1], :maxy => bbox[2], :minx => bbox[2], :miny => bbox[3], "xmlns:ol" => "http://openlayers.org/context")
+          xml.tag!("ol:maxExtent", :maxx => bbox[2], :maxy => bbox[3], :minx => bbox[0], :miny => bbox[1], "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:numZoomLevels", 17, "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:tileSize", :height => "256", :width => "256", "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:units", "m", "xmlns:ol" => "http://openlayers.org/context")
