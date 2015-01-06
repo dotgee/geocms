@@ -60,8 +60,9 @@ app = angular.module("geocms", [
             maxy: bbox[3]
           }
         )
-        # TODO: dimension_values
-        # dimension_values: layer.dimension_values
+        dimensions_attributes: _.map(layer.table.dimensions.time.table.values, (dim) ->
+          value: dim
+        )
       }
 
   return

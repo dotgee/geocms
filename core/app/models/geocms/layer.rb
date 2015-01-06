@@ -14,6 +14,8 @@ module Geocms
     has_many :categories, through: :categorizations
 
     accepts_nested_attributes_for :bounding_boxes
+    accepts_nested_attributes_for :dimensions
+    
     delegate :wms, :wms_version, :not_internal, :ogc, :name, to: :data_source, prefix: true
 
     friendly_id :title, use: [:slugged, :finders]
