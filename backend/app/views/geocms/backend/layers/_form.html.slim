@@ -5,7 +5,7 @@
   = f.input :metadata_url
   = f.input :description
   = f.input :max_zoom
-  = f.input :tiled
+  = f.input :tiled, wrapper: :inline_checkbox
   = f.input :template, :as => :ckeditor
   - unless @layer.new_record?
     legend Move to

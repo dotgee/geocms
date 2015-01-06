@@ -74,8 +74,15 @@ fr:
   button_login: "Connexion (accès restreint)"
   simple_form:
     labels:
+      defaults:
+        name: Nom
+        description: Description
+        folder: Dossier
       data_source:
-        not_internal: "Source externe" 
+        not_internal: "Source externe"
+      context:
+        by_default: "Par défaut"
+        preview: "Aperçu"
   #####
   # Rails i18n
   #####

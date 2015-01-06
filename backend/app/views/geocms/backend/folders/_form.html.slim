@@ -1,4 +1,4 @@
 = simple_form_for [:backend, @folder] do |f|
   = f.input :name
-  = f.input :visibility, as: :boolean
+  = f.input :visibility, as: :boolean, wrapper: :inline_checkbox
   = f.submit class: "btn btn-primary"

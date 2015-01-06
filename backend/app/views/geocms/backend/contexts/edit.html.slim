@@ -5,7 +5,7 @@
   = f.input :name, input_html: { class: "input-xxlarge" }
   = f.input :description, input_html: { class: "input-xxlarge", rows: "5" }
   .input-select= f.association :folder, input_html: { class: "input-xxlarge" }
-  = f.input :by_default
+  = f.input :by_default, wrapper: :inline_checkbox
   = f.input :preview
   - if @context.preview?
     = image_tag @context.preview
