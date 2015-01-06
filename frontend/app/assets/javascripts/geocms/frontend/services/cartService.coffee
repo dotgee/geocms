@@ -109,8 +109,8 @@ cartModule.service "cartService",
 
       Cart::centerOn = (layer) ->
         bbox =  new L.LatLngBounds(
-                    new L.LatLng layer.bbox[0], layer.bbox[1]
-                  , new L.LatLng layer.bbox[2], layer.bbox[3]
+                    new L.LatLng layer.bbox[1], layer.bbox[0] # miny, minx
+                  , new L.LatLng layer.bbox[3], layer.bbox[2] # maxy, maxx
                 )
         ms.container.fitBounds(bbox)
 

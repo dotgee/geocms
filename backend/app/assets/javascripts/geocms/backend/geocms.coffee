@@ -51,12 +51,12 @@ app = angular.module("geocms", [
         category_ids: [$scope.category.id]
         bounding_boxes_attributes: _.map(layer.table.bbox, (box) ->
           bbox = box.table.bbox
-          bbox = [bbox[1], bbox[0], bbox[3], bbox[2]] if box.table.srs == "CRS:84"
+          bbox = [bbox[1], bbox[0], bbox[3], bbox[2]] if box.table.srs == "EPSG:4326"
           {
             crs: box.table.srs
             minx: bbox[0]
-            maxx: bbox[1]
-            miny: bbox[2]
+            maxx: bbox[2]
+            miny: bbox[1]
             maxy: bbox[3]
           }
         )
