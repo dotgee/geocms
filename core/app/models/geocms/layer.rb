@@ -15,7 +15,7 @@ module Geocms
 
     accepts_nested_attributes_for :bounding_boxes
     accepts_nested_attributes_for :dimensions
-    
+
     delegate :wms, :wms_version, :not_internal, :ogc, :name, to: :data_source, prefix: true
 
     friendly_id :title, use: [:slugged, :finders]
@@ -28,8 +28,8 @@ module Geocms
     # Finds the relevant bbox among all the bboxes stored
     # First check if there is a bounding box in EPSG:3857 (leaflet default)
     def boundingbox
-      bbox = bounding_boxes.leafletable.any? ? bounding_boxes.leafletable.first : []
-      bbox.to_bbox
+      bbox = bounding_boxes.leafletable.first
+      bbox.nil? ? [] : bbox.to_bbox
     end
 
     def thumb_url(width = 64, height = 64, native_srs)

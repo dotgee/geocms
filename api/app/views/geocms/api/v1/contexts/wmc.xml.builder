@@ -56,7 +56,7 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
           xml.Format("image/png", :current => 1)
         end
         xml.Extension do
-          bbox = layer.boundingbox(current_tenant)
+          bbox = layer.boundingbox
           xml.tag!("ol:maxExtent", :maxx => bbox[1], :maxy => bbox[2], :minx => bbox[2], :miny => bbox[3], "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:numZoomLevels", 17, "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:tileSize", :height => "256", :width => "256", "xmlns:ol" => "http://openlayers.org/context")
