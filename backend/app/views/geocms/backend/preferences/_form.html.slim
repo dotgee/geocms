@@ -20,7 +20,7 @@
       = f.input :name
       .row
         .col-xs-6
-          = f.input :logo
+          = f.input :logo, hint: t("logo_hint")
         .col-xs-6
           = image_tag f.object.logo if f.object.logo?
       .control-group

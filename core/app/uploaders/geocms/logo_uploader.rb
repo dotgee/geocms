@@ -11,7 +11,7 @@ module Geocms
     # include Sprockets::Helpers::IsolatedHelper
 
     # Choose what kind of storage to use for this uploader:
-    process :resize_to_fit => [128, 33] 
+    process :resize_to_limit => [nil, 50]
     storage :file
     # storage :fog
 

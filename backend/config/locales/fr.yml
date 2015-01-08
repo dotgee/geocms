@@ -5,6 +5,7 @@ fr:
     name: Nom
     new: Nouveau dossier
     visibility: Public
+  logo_hint: "Taille conseillée : 80x50 px"
   result_search: Résultat de la recherche
   simple_form:
     labels:
