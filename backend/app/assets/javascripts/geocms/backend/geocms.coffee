@@ -47,6 +47,7 @@ app = angular.module("geocms", [
       infos = {
         name: layer.table.name
         title: layer.table.title
+        description: layer.table.abstract
         data_source_id: $scope.source_id
         category_ids: [$scope.category.id]
         bounding_boxes_attributes: _.map(layer.table.bbox, (box) ->
@@ -64,6 +65,9 @@ app = angular.module("geocms", [
       unless angular.equals({},layer.table.dimensions)
         dimensions = { dimensions_attributes: _.map(layer.table.dimensions.time.table.values, (dim) -> value: dim) }
         angular.extend dimensions, infos
+      unless angular.equals([],layer.table.metadata_urls)
+        infos.metadata_url = layer.table.metadata_urls[0].table.href
+
       infos
 
   return
