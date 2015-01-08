@@ -20,7 +20,7 @@ app = angular.module("geocms", [
       # console.log $scope.$data
       if $scope.layers?
         $defer.resolve $scope.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
-      else 
+      else
         Restangular.one("data_sources", $scope.source_id).customGET("capabilities").then(
           (response) ->
             params.total response.total
@@ -44,7 +44,7 @@ app = angular.module("geocms", [
 
   $scope.extractLayerInformations = () ->
     layers = _.map filterFilter($scope.layers, {$selected: true}), (layer) ->
-      {
+      infos = {
         name: layer.table.name
         title: layer.table.title
         data_source_id: $scope.source_id
@@ -60,10 +60,11 @@ app = angular.module("geocms", [
             maxy: bbox[3]
           }
         )
-        dimensions_attributes: _.map(layer.table.dimensions.time.table.values, (dim) ->
-          value: dim
-        )
       }
+      unless angular.equals({},layer.table.dimensions)
+        dimensions = { dimensions_attributes: _.map(layer.table.dimensions.time.table.values, (dim) -> value: dim) }
+        angular.extend dimensions, infos
+      infos
 
   return
 )
