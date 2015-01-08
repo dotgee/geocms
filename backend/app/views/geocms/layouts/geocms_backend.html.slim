@@ -13,10 +13,10 @@ html ng-app="geocms"
     = yield :stylesheets
     = yield(:js_header)
   body
-    nav.navbar.navbar-default.navbar-backend.navbar-static-top role="navigation" 
+    nav.navbar.navbar-default.navbar-backend.navbar-static-top role="navigation"
       .container-fluid
         .navbar-header
-          button.navbar-toggle.collapsed data-target="#geocms-navbar" data-toggle="collapse" type="button" 
+          button.navbar-toggle.collapsed data-target="#geocms-navbar" data-toggle="collapse" type="button"
             span.sr-only Toggle navigation
             span.icon-bar
             span.icon-bar
@@ -29,11 +29,11 @@ html ng-app="geocms"
               li= link_to t("menu.contexts"), backend_folders_path
               li= link_to t("menu.data_sources"), backend_data_sources_path
               li= link_to t("menu.advanced"), edit_backend_preferences_path
-          form.navbar-form.navbar-left
+          form.navbar-form.navbar-left action="/backend/search"
             .input-group
               input type="text" class="form-control" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
               span class="input-group-btn"
-                button class="btn btn-default" type="button" 
+                button class="btn btn-default" type="submit"
                   span.glyphicon.glyphicon-search
           ul.nav.navbar-nav.navbar-right
             li= link_to t("menu.logout"), logout_path
@@ -44,10 +44,10 @@ html ng-app="geocms"
         == render "/geocms/layouts/two_columns"
       - else
         == render "/geocms/layouts/one_column"
-      
+
 
     javascript:
       var config = #{raw (current_tenant.prefs.to_json)}
-    
+
     = javascript_include_tag "geocms/backend"
     == yield :javascripts

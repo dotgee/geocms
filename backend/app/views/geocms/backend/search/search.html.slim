@@ -1,5 +1,5 @@
 .page-header
-  h1 Résultat de la recherche
+  h1 = t(:result_search)
 table.table.table-striped.table-backend
   thead
     tr
@@ -9,6 +9,6 @@ table.table.table-striped.table-backend
       th
   tbody
     - @layers.each do |layer|
-      == render layer
+      == render "geocms/backend/layers/layer", layer: layer
 
 = paginate @layers

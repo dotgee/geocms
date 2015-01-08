@@ -5,6 +5,7 @@ fr:
     name: Nom
     new: Nouveau dossier
     visibility: Public
+  result_search: Résultat de la recherche
   simple_form:
     labels:
       folder:
