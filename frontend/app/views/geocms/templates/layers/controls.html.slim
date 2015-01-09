@@ -16,7 +16,7 @@
           .row
             .col-xs-1.timeline-control ng-click="cart.toggleTimeline()"
               span.glyphicon ng-class="{'glyphicon-play': !cart.player, 'glyphicon-pause': cart.player}"
-            .col-xs-3.date ng-init="cart.currentLayer.timelineIndex = 0"
+            .col-xs-3.date ng-init="cart.currentLayer.timelineIndex = cart.currentLayer.timelineIndex || 0"
               |{{cart.currentLayer.dimensions[cart.currentLayer.timelineIndex] | date : 'dd/MM/yyyy'}}
             .col-xs-8.slider
               div ui-slider="{orientation: 'horizontal', slide: cart.slideTimeline, range: 'min'}" min="0" max="{{cart.currentLayer.dimensions.length-1}}" step="1" ng-model="cart.currentLayer.timelineIndex"
@@ -40,7 +40,7 @@
   #ctrls.btn-group
     label.btn.btn-default.btn-xs tooltip='Centrer' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
       i.carticon-target
-    label.btn.btn-default.btn-xs tooltip='Interrogation' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()" 
+    label.btn.btn-default.btn-xs tooltip='Interrogation' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()"
       i.carticon-info
     label.btn.btn-default.btn-xs tooltip='Opacité' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
       i.carticon-adjust
