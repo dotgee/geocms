@@ -16,6 +16,7 @@ module Geocms
     preference :crs       , "EPSG:3857"
     preference :host      , "localhost"
     preference :prefix_uri, ""
+    preference :geovisu_url, "/geovisu"
     
 
     CRS = ["EPSG:4326", "EPSG:2154", "WGS:84"]
