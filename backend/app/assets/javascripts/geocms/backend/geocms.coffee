@@ -4,36 +4,61 @@ String.prototype.repeat = ( num ) ->
 app = angular.module("geocms", [
   "ngTable"
   "restangular"
-]).controller("ImportCtrl", ($scope, $location, ngTableParams, Restangular, filterFilter) ->
+]).controller("ImportCtrl", ($scope, $location, ngTableParams, Restangular, filterFilter, $filter) ->
   Restangular.setBaseUrl(config.prefix_uri+"/api/v1")
+  
+  $scope.checkboxes = {
+    checkAll: false
+  }
 
   $scope.tableParams = new ngTableParams(
     page: 1 # show first page
-    count: 20 # count per page
+    count: 10 # count per page
     # sorting:
     #   name: "asc" # initial sorting
-    filter:
-      "table.name": "ign"
   ,
     total: 0 # length of data
     getData: ($defer, params) ->
+
+      filterFullProperties = () ->
+        if params.filter()
+          $filter('filter')(data.layers, {"$": params.filter().filter})
+        else
+          data.layers
+
+      getDatasPerPage = (datas) ->
+        datas.slice((params.page() - 1) * params.count(), params.page() * params.count())
+
+      reloadPagination = (datas) ->
+        params.total(datas.length);
+
       # console.log $scope.$data
       if $scope.layers?
-        $defer.resolve $scope.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
-      else
+        orderedDatas = filterFullProperties()
+        params.total(orderedDatas.length)
+        $defer.resolve $scope.layers = getDatasPerPage(orderedDatas)
+      else 
         Restangular.one("data_sources", $scope.source_id).customGET("capabilities").then(
           (response) ->
             params.total response.total
-            $scope.layers = data.layers
-            $defer.resolve data.layers.slice((params.page() - 1) * params.count(), params.page() * params.count())
-          , (response) ->
-            $scope.error = response.data.message
+            $defer.resolve $scope.layers = getDatasPerPage(data.layers)
+            $scope.error = response.data.message if response.data
         )
       return
   )
 
   Restangular.all("categories").customGETLIST("ordered").then (data) ->
     $scope.categories = data
+
+  $scope.$watch "checkboxes.checkAll", (oldVal, newVal) ->
+    return if !$scope.layers
+    for layer in $scope.layers
+      layer.$selected = !newVal
+  , true
+
+  $scope.names = (column) ->
+    console.log column
+    true
 
   $scope.import = () ->
     if $scope.category?
