@@ -3,58 +3,12 @@
     a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}" ng-if="cart.context.editable"
       span.carticon-floppy
       span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
-    div ng-include="" src="config.prefix_uri+'/templates/contexts/top_sidebar.html'"
+    == render "geocms/templates/sidebar/header"
     tabset.row-fluid#hud-tab
       tab heading=t("layers") uncheckable=""
-        #layers
-          div ng-hide="cart.currentLayer"
-            .add-layer ng-click="openCatalog()"
-              span = t "add_a_new_layer"
-              a.btn.btn-default.btn-xs.pull-right.btn-add-layer
-                i.carticon-plus.icon-white
-                |&nbsp;
-                i.icon-layer
-            div.hud-panel ui-tree="treeOptions"
-              ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
-                li ng-repeat="layer in cart.layers" ui-tree-node="" ng-include="config.prefix_uri+'/templates/layers/cart_item.html'"
-          div ng-show="cart.currentLayer" ng-include="config.prefix_uri+'/templates/layers/controls.html'"
+        == render "geocms/templates/sidebar/tab_cart"
       tab heading=t("context.infos") uncheckable=""
-        #infos.hud-panel
-          div ng-switch="cart.context.editable"
-            div ng-switch-when="true"
-              form role="form"
-                .form-group
-                  label for="context_name"  Nom
-                  input#context_name.form-control name="name" type="text" ng-model="cart.context.name"
-                .form-group
-                  label for="context_description"  Description
-                  textarea#context_description.form-control name="description" type="text"  ng-model="cart.context.description"
-                .form-group
-                  label for="context_folder"  Dossier
-                  select#context_folder.form-control name="folder" ng-model="cart.context.folder.id" ng-options="folder.name for folder in cart.folders"
-                .row
-                  .form-group.col-md-3
-                    label for="context_center_lng"  Longitude
-                    input#context_center_lng.form-control name="center_lng" type="text" ng-model="cart.context.center_lng"
-                  .form-group.col-md-3
-                    label for="context_center_lat"  Latitude
-                    input#context_center_lat.form-control name="center_lat" type="text" ng-model="cart.context.center_lat"
-                  .form-group.col-md-2
-                    label for="context_zoom"  Zoom
-                    input#context_zoom.form-control name="zoom" type="text" ng-model="cart.context.zoom"
-                  .col-md-2
-                    a.btn.btn-default.btn-xs.from-map ng-click="cart.importCenter()" Position actuelle
-            div ng-switch-default=""
-              form
-                h5
-                  |{{cart.context.name}}
-                p
-                  |{{cart.context.description}}
-            div ng-include="config.prefix_uri+'/templates/shared/share.html'"
+        == render "geocms/templates/sidebar/tab_infos"
       tab heading="Légende" uncheckable=""
-        #legend.hud-panel
-          div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
-            h6
-              |{{layer.title}}
-            img ng-src="{{layer.data_source_wms}}?service=wms&request=GetLegendGraphic&VERSION=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'
-    /div ng-include="config.prefix_uri+'/templates/contexts/bottom_sidebar.html'"
+        == render "geocms/templates/sidebar/tab_legend"
+    == render "geocms/templates/sidebar/footer"

@@ -1,0 +1,32 @@
+#infos.hud-panel
+  div ng-switch="cart.context.editable"
+    div ng-switch-when="true"
+      form role="form"
+        .form-group
+          label for="context_name"  Nom
+          input#context_name.form-control name="name" type="text" ng-model="cart.context.name"
+        .form-group
+          label for="context_description"  Description
+          textarea#context_description.form-control name="description" type="text"  ng-model="cart.context.description"
+        .form-group
+          label for="context_folder"  Dossier
+          select#context_folder.form-control name="folder" ng-model="cart.context.folder.id" ng-options="folder.name for folder in cart.folders"
+        .row
+          .form-group.col-md-3
+            label for="context_center_lng"  Longitude
+            input#context_center_lng.form-control name="center_lng" type="text" ng-model="cart.context.center_lng"
+          .form-group.col-md-3
+            label for="context_center_lat"  Latitude
+            input#context_center_lat.form-control name="center_lat" type="text" ng-model="cart.context.center_lat"
+          .form-group.col-md-2
+            label for="context_zoom"  Zoom
+            input#context_zoom.form-control name="zoom" type="text" ng-model="cart.context.zoom"
+          .col-md-2
+            a.btn.btn-default.btn-xs.from-map ng-click="cart.importCenter()" Position actuelle
+    div ng-switch-default=""
+      form
+        h5
+          |{{cart.context.name}}
+        p
+          |{{cart.context.description}}
+    div ng-include="config.prefix_uri+'/templates/shared/share.html'"
