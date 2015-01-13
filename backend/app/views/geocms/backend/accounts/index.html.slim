@@ -2,14 +2,18 @@
   == render "/geocms/parts/sidebar", controller: "accounts"
 
 .page-header
-  h1 Listing accounts
+  h1 
+    = t("modules.accounts.title")
 
 table.table.table-striped
   thead
     tr
-      th Name
-      th Domain
-      th Created at
+      th 
+        = t("name")
+      th 
+        = t("domain")
+      th 
+        = t("created_at")
       th
   tbody
     - @accounts.each do |account| 
@@ -20,4 +24,4 @@ table.table.table-striped
         td
           = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
             i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
-= link_to t("accounts.new"), [:new, :backend, :account], class: "btn btn-primary"
+= link_to t("add"), [:new, :backend, :account], class: "btn btn-primary"

@@ -5,14 +5,14 @@ div ng-controller="ImportCtrl" ng-init="source_id=#{@data_source.id}"
   .alert.alert-success role="alert" ng-if="success"
     |{{success}}
   .alert.alert-info ng-show="tableParams.settings().$loading" ng-hide="error"
-    |Chargement en cours, merci de patienter...
+    = t('messages.loading')
   div ng-hide="tableParams.settings().$loading"
     table show-filter="true" ng-table="tableParams" class="table table-striped" ng-hide="error" 
       tbody
         tr ng-repeat="layer in $data" ng-click="layer.$selected = !layer.$selected" ng-class="{active: layer.$selected}"
           td width="30" style="text-align: left" header="'ng-table/headers/checkbox.html'"
             input type="checkbox" ng-model="layer.$selected" ng-change="layer.$selected = !layer.$selected"
-          td data-title="'Nom'" filter="{ 'filter': 'text' }" 
+          td data-title="'#{t(:name)}'" filter="{ 'filter': 'text' }" 
 
             |{{layer.table.title}}
             br
@@ -26,4 +26,5 @@ div ng-controller="ImportCtrl" ng-init="source_id=#{@data_source.id}"
     .col-xs-6
       select.form-control ng-model="category" ng-options="('-- '.repeat(category.depth)+category.name) for category in categories track by category.id"
     .col-xs-2.col-md-1
-      a.btn.btn-default.btn-primary ng-click="import()" ng-class="{disabled: !category}" Importer
+      a.btn.btn-default.btn-primary ng-click="import()" ng-class="{disabled: !category}"
+        = t(:import)

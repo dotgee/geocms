@@ -1,11 +1,12 @@
 .container
   .page-header
     h1 
-      = link_to "Projets / ", [:backend, :folders], class: "unstyled" 
+      = link_to "#{t(:project)} / ", [:backend, :folders], class: "unstyled" 
       small= @folder.name
   table.table.table-striped
     thead
-      th= t(:name)
+      th
+        = t(:name)
       th
     tbody
       - @contexts.each do |context|
@@ -15,5 +16,5 @@
             = link_to [:edit, :backend, @folder, context], class: "btn btn-xs btn-primary icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
               i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
             '
-            = link_to [:backend, @folder, context], confirm: "Are you sure ?", method: :delete, class: "btn btn-danger icn-only btn-xs" do
+            = link_to [:backend, @folder, context], confirm: "#{t('messages.confirm')}", method: :delete, class: "btn btn-danger icn-only btn-xs" do
               i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

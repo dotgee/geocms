@@ -7,11 +7,11 @@ tr
       = move_link geocms.move_backend_category_path(category, direction: "up"), "up", category.first?
     span.name class="depth-#{category.depth}" = link_to category.name, geocms.backend_category_path(category)
   td.actions
-    = link_to geocms.new_backend_category_path(parent_id: category.id), rel: "tooltip", "data-original-title" => t(:add_child) do
+    = link_to geocms.new_backend_category_path(parent_id: category.id), rel: "tooltip", "data-original-title" => t('modules.categories.new') do
       i.glyphicon.glyphicon-plus.glyphicon.glyphicon-white
   td.actions
     = link_to geocms.edit_backend_category_path(category), rel: "tooltip", "data-original-title" => t(:edit) do
       i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td.actions
-    = link_to geocms.backend_category_path(category), confirm: 'Are you sure?', method: :delete do
+    = link_to geocms.backend_category_path(category), confirm: "#{t('messages.confirm')}", method: :delete do
       i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

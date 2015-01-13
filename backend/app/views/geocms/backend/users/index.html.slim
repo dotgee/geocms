@@ -2,14 +2,17 @@
   == render "/geocms/parts/sidebar", controller: "users"
 
 .page-header
-  h1 = t("users.index")
+  h1 = t("modules.users.title")
 
 table.table.table-striped.table-users
   thead
     tr
-      th Username
-      th Email
-      th Joined on
+      th 
+        = t("login")
+      th 
+        = t("email")
+      th 
+        = t("joined_on")
       th width="40px"
       th width="40px"
   tbody
@@ -17,11 +20,13 @@ table.table.table-striped.table-users
       == render "user", user: u
 br
 - if can? :create, Geocms::User
-  = text_field_tag :user, nil, :placeholder => "Choisir un collaborateur", :class => "input-add-colaborator", :style => "width: 400px;"
-  button.btn.btn-default.btn-add-colaborator.btn-primary= t("add")
+  .input-group
+    = text_field_tag :user, nil, :placeholder => "#{t('modules.users.choose_collaborator')}", :class => "input-add-colaborator, form-control"
+    span.input-group-btn
+      button.btn.btn-default
+        = t("add")
   br
-  br
-  = link_to t("users.new"), [:new, :backend, :user], class: "btn"
+  = link_to t("modules.users.new"), [:new, :backend, :user], class: "btn btn-default"
 
 = content_for :javascripts do
   = javascript_include_tag "backend/typeahead"

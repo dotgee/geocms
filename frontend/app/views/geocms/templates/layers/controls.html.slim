@@ -1,17 +1,17 @@
 - cache ["v1", "controls"] do
   .add-layer ng-click="cart.currentLayer = null; controls=null;"
-    span Retour à la liste
+    span= t(:back_to_list)
     a class="btn btn-default btn-xs blue icn-only pull-right"
       span.carticon-menu
 
   .hud-panel.hud-panel-controls
     div ng-switch="" on="controls"
       div ng-switch-when="opacity"
-        h5 Contrôle de l'opacité
+        h5=t "modules.layers.opacity_control"
         .opacity-controler
           div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="cart.currentLayer._tilelayer.options.opacity" use-decimals="" min="0" max="1" step="0.01"
       div ng-switch-when="timeline"
-        h5 Contrôle de la temporalité
+        h5=t "modules.layers.temporality_control"
         .timeline
           .row
             .col-xs-1.timeline-control ng-click="cart.toggleTimeline()"
@@ -21,16 +21,16 @@
             .col-xs-8.slider
               div ui-slider="{orientation: 'horizontal', slide: cart.slideTimeline, range: 'min'}" min="0" max="{{cart.currentLayer.dimensions.length-1}}" step="1" ng-model="cart.currentLayer.timelineIndex"
       div ng-switch-when="filters"
-        h5 Filtrer les données
+        h5= t "filter_data"
         .control-group.field-zoom.pull-left
           .controls
             input type="text" ng-model="cart.currentLayer.cql_filter" placeholder="Entrez votre filtre CQL"
-        a.btn.btn-default.btn-xs.from-map Appliquer
+        a.btn.btn-default.btn-xs.from-map= t "apply"
       div ng-switch-when="downloads"
-        h5 Méta-données & Téléchargement
-        a ng-href="{{cart.currentLayer.metadata_url}}" target="geonetwork" ng-if="cart.currentLayer.metadata_url" Voir les meta données
+        h5=t "modules.layers.metadata_and_download" 
+        a ng-href="{{cart.currentLayer.metadata_url}}" target="geonetwork" ng-if="cart.currentLayer.metadata_url" =t "modules.layers.see_metadata" 
         br
-        a ng-href="{{cart.currentLayer.data_source_wms}}?REQUEST=getFeature&service=wfs&outputFormat=shape-zip&typename={{cart.currentLayer.name}}" target="_blank" ng-if="!cart.currentLayer.data_source_not_internal" Télécharger
+        a ng-href="{{cart.currentLayer.data_source_wms}}?REQUEST=getFeature&service=wfs&outputFormat=shape-zip&typename={{cart.currentLayer.name}}" target="_blank" ng-if="!cart.currentLayer.data_source_not_internal" = t :download
       div ng-switch-default=""
         h5
           |{{cart.currentLayer.title}}
@@ -38,15 +38,15 @@
           |{{cart.currentLayer.description}}
 
   #ctrls.btn-group
-    label.btn.btn-default.btn-xs tooltip='Centrer' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
+    label.btn.btn-default.btn-xs tooltip='#{t(:center)}' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
       i.carticon-target
-    label.btn.btn-default.btn-xs tooltip='Interrogation' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()"
+    label.btn.btn-default.btn-xs tooltip='#{t(:interrogation)}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()"
       i.carticon-info
-    label.btn.btn-default.btn-xs tooltip='Opacité' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
+    label.btn.btn-default.btn-xs tooltip='#{t(:opacity)}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
       i.carticon-adjust
-    label.btn.btn-default.btn-xs tooltip='Timeline' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-class="{disabled: cart.currentLayer.dimensions.length == 0}"
+    label.btn.btn-default.btn-xs tooltip='#{t(:timeline)}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-class="{disabled: cart.currentLayer.dimensions.length == 0}"
       i.carticon-play
-    label.btn.btn-default.btn-xs tooltip='Télécharger' tooltip-append-to-body="true" ng-class="{disabled: (cart.currentLayer.data_source_not_internal && !cart.currentLayer.metadata_url)}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
+    label.btn.btn-default.btn-xs tooltip='#{t(:download)}' tooltip-append-to-body="true" ng-class="{disabled: (cart.currentLayer.data_source_not_internal && !cart.currentLayer.metadata_url)}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
       i.carticon-download
-    label.btn.btn-default.btn-xs tooltip='Supprimer' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
+    label.btn.btn-default.btn-xs tooltip='#{t(:delete)}' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
       i.carticon-trash

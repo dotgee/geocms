@@ -1,10 +1,12 @@
 .page-header
-  h1= "#{ActsAsTenant.current_tenant.name} - Categories"
+  h1
+    = "#{ActsAsTenant.current_tenant.name} - #{t(:'modules.categories.title')}"
 
 table.table.table-striped.categories-index.table-backend
   thead
     tr
-      th Name
+      th 
+        = t('name')
       th width="40px"
       th width="40px"
       th width="40px"
@@ -12,4 +14,4 @@ table.table.table-striped.categories-index.table-backend
     = nested_categories(@categories)
 
 br
-= link_to t("category.new_root"), geocms.new_backend_category_path, :class => "btn btn-primary"
+= link_to t('modules.categories.new'), geocms.new_backend_category_path, :class => "btn btn-primary"

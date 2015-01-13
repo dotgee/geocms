@@ -2,18 +2,21 @@
   == render "/geocms/parts/sidebar", controller: "accounts"
 
 .page-header
-  h1 Nouveau compte
+  h1 
+    = t("modules.accounts.title_new")
 
 = simple_form_for [:backend, @account] do |f|
   .row
     .span6
       legend
-        h4 Compte
+        h4 
+          = t("account")
       = f.input :name
       = f.input :subdomain
     .span6.offset2
       legend
-        h4 Utilisateur
+        h4 
+          = t("user")
       = f.simple_fields_for :users do |p|
         = p.input :username
         = p.input :email

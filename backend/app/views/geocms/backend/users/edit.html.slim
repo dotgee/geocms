@@ -1,4 +1,8 @@
 = content_for :sidebar do
   == render "/geocms/parts/sidebar", controller: "users"
 
-== render "form"
+.page-header
+  .span6
+    legend 
+       = t("modules.users.title_edit")
+    == render "form"

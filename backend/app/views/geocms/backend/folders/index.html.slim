@@ -1,23 +1,27 @@
 .page-header
-  h1= t("folders")
+  h1
+    = t("modules.folders.title")
 
 table.table.table-striped
   thead
     tr
-      th= t("folder.name")
-      th= t("folder.visibility")
-      th= t("folder.created_at")
+      th= t(:name)
+      th= t(:public)
+      th= t(:created_at)
       th
   tbody
     - @folders.each do |folder|
       tr
-        td= link_to folder.name, [:backend, folder]
-        td= folder.visibility
-        td= folder.created_at.strftime("%d/%m/%Y")
+        td
+          = link_to folder.name, [:backend, folder]
+        td
+          = t(folder.visibility.to_s)
+        td
+          = folder.created_at.strftime("%d/%m/%Y")
         td
           = link_to [:edit, :backend, folder], class: "btn btn-xs btn-primary icn-only", rel: "tooltip", "data-original-title" => t(:edit) do
             i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
           '
-          = link_to [:backend, folder], confirm: "Are you sure ?", method: :delete, class: "btn btn-danger icn-only btn-xs" do
+          = link_to [:backend, folder], confirm: "#{t('messages.confirm')}", method: :delete, class: "btn btn-danger icn-only btn-xs" do
             i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
-= link_to t("folder.new"), [:new, :backend, :folder], class: "btn btn-primary"
+= link_to t("modules.folders.new"), [:new, :backend, :folder], class: "btn btn-primary"

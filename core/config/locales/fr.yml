@@ -2,29 +2,53 @@ fr:
   actions:
     layers:
       new: "Ajouter couche"
+
+  #Generic
   browse: "Parcourir"
   edit: "Modifier"
   add: "Ajouter"
   destroy: "Supprimer"
   add_child: "Créer une sous-catégorie"
-  context:
-    refreshing: "Merci de patienter"
-    save: "Sauvegarder"
-    share: "Partager"
-    infos: "Informations"
-    from_map: "Importer"
-    sharable:
-      share_your_map: "Partagez votre carte"
-      direct_link: "Lien direct"
-      html_embed: "Ou par iframe"
-      geovisu_show: "Voir sur Geovisu"
-      copy: "Copier"
-    controls:
-      legend: "Légende"
-      position: "Retour à la position initiale"
-      tools: "Outils"
-      fullscreen: "Plein écran"
-      hud: "Masquer"
+  source: Source
+  new_project: Nouveau projet
+  projects: Projets
+  back_to_list: Retour à la liste
+  filter_data: Filtrer les données
+  download: Télécharger
+  interrogation: Intérrogation
+  timeline: Timeline
+  opacity: Opacity
+  import: Importer
+  name: Nom
+  edit: Modifier
+  cancel: Annuler
+  public: Public
+  created_at: Créé le
+  "true": Oui
+  "false": Non
+  zoom: Zoom
+  center: Center
+  login: Identifiant
+  joined_on : Arrivé le
+  email: Email
+  add: Ajouter
+  domain: Domaine
+  user: Utilisateur
+  account: Compte
+  maps: Carte
+  update: Mise à jour
+  project: Projet
+  layers: "Couches"
+  categories: "Catégories"
+  add_a_new_layer: "Ajouter une nouvelle couche"
+  layers_catalog: "Catalogue de données géoréférencées"
+  legend: "Légende"
+  maps: "Cartes"
+  back: "Retour"
+  access_denied: "Vous n'êtes pas autorisé à effectuer cette action."
+  button_login: "Connexion (accès restreint)"
+  delete: supprimer
+
   datasource:
     import: "Importer"
     new: "Créer une nouvelle source de données"
@@ -40,16 +64,7 @@ fr:
     logged_in: "Authentification réussie"
   category:
     new_root: "Ajouter une catégorie mère"
-  menu:
-    layers: "Couches"
-    contexts: "Projets"
-    categories: "Catégories"
-    data_sources: "Sources"
-    users: "Utilisateurs"
-    preferences: "Préferences"
-    logout: "Déconnexion"
-    accounts: "Instances"
-    advanced: "Configuration"
+
   backend:
     import: "Importer"
     layers_imported_from: "Couches récupérées depuis"
@@ -63,26 +78,38 @@ fr:
     imported_successfully: "Couche importée avec succès"
   data_source:
     wait: "Please wait while we find the layers. This shouldn't be too long."
-  layers: "Couches"
-  categories: "Catégories"
-  add_a_new_layer: "Ajouter une nouvelle couche"
-  layers_catalog: "Catalogue de données géoréférencées"
-  legend: "Légende"
-  maps: "Cartes"
-  back: "Retour"
-  access_denied: "Vous n'êtes pas autorisé à effectuer cette action."
-  button_login: "Connexion (accès restreint)"
+  
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer
+      update: Mettre à jour
+      submit: Valider
+
   simple_form:
     labels:
       defaults:
         name: Nom
         description: Description
         folder: Dossier
+        username: Identifiant
+        password: Mot de passe
       data_source:
         not_internal: "Source externe"
       context:
-        by_default: "Par défaut"
-        preview: "Aperçu"
+        by_default: Par défaut
+        preview: Aperçu
+      folder:
+        visibility: Public
+      user:
+        first_name: Prénom
+        last_name: Nom
+        email: Email
+        password_confirmation: Confirmation du mot de passe
+      account:
+        subdomain: Sous Domaine
+        
   #####
   # Rails i18n
   #####
