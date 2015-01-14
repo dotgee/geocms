@@ -1,3 +1,8 @@
+.form-control {
+  @include border-radius(0);
+  @include box-shadow(none);
+}
+
 .form-signin {
   max-width: 475px;
   padding: 19px 29px 29px;
