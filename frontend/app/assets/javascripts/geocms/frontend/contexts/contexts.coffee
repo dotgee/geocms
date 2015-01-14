@@ -53,6 +53,7 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.folders = folders
               $root.cart.context.editable = true
+              $root.cart.state = "new"
               $scope.mapService = mapService
             ]
 
