@@ -1,12 +1,12 @@
 .page-header
   h1
-    = "#{ActsAsTenant.current_tenant.name} - #{t(:'modules.categories.title')}"
-
+    = "#{ActsAsTenant.current_tenant.name} - #{t('modules.categories.title.index')}"
+  
 table.table.table-striped.categories-index.table-backend
   thead
     tr
       th 
-        = t('name')
+        = t('activerecord.attributes.default.name')
       th width="40px"
       th width="40px"
       th width="40px"

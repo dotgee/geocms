@@ -10,7 +10,7 @@ tr
     = link_to geocms.new_backend_category_path(parent_id: category.id), rel: "tooltip", "data-original-title" => t('modules.categories.new') do
       i.glyphicon.glyphicon-plus.glyphicon.glyphicon-white
   td.actions
-    = link_to geocms.edit_backend_category_path(category), rel: "tooltip", "data-original-title" => t(:edit) do
+    = link_to geocms.edit_backend_category_path(category), rel: "tooltip", "data-original-title" => t("actions.default.edit") do
       i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td.actions
     = link_to geocms.backend_category_path(category), confirm: "#{t('messages.confirm')}", method: :delete do

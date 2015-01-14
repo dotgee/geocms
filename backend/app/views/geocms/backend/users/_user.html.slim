@@ -3,7 +3,7 @@ tr
   td= user.email
   td= user.created_at.strftime("%d/%m/%Y")
   td
-    = link_to [:edit, :backend, user], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+    = link_to [:edit, :backend, user], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
       i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td
     = link_to [:backend, user], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do

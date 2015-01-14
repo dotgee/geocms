@@ -3,17 +3,17 @@
 
 .page-header
   h1 
-    = t("modules.accounts.title")
+    = t("modules.accounts.title.index")
 
 table.table.table-striped
   thead
     tr
       th 
-        = t("name")
+        = t("activerecord.attributes.default.name")
       th 
-        = t("domain")
+        = t("activerecord.attributes.default.domain")
       th 
-        = t("created_at")
+        = t("activerecord.attributes.default.created_at")
       th
   tbody
     - @accounts.each do |account| 
@@ -24,4 +24,4 @@ table.table.table-striped
         td
           = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
             i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
-= link_to t("add"), [:new, :backend, :account], class: "btn btn-primary"
+= link_to t("actions.default.add"), [:new, :backend, :account], class: "btn btn-primary"

@@ -3,7 +3,7 @@
     = form_tag [:backend, :preferences], {method: :put} do |f|
       .page-header
         h4 
-          = t(:maps)
+          = t("modules.preferences.maps")
       .form-inputs
         - Geocms::Account.prefs.keys.each do |p|
           .form-group
@@ -13,7 +13,7 @@
         = t("modules.preferences.maps_conseil")
       .control-group
         .controls
-          = submit_tag t(:update), class: "btn btn-primary"
+          = submit_tag t("actions.default.update"), class: "btn btn-primary"
   .col-md-6
     .page-header
       h4
@@ -26,4 +26,4 @@
         .col-xs-6
           = image_tag f.object.logo if f.object.logo?
       .control-group
-          = f.submit t(:update), class: "btn btn-primary"
+          = f.submit t("actions.default.update"), class: "btn btn-primary"

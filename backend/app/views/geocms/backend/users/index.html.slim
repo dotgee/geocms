@@ -2,17 +2,17 @@
   == render "/geocms/parts/sidebar", controller: "users"
 
 .page-header
-  h1 = t("modules.users.title")
+  h1 = t("modules.users.title.index")
 
 table.table.table-striped.table-users
   thead
     tr
       th 
-        = t("login")
+        = t "activerecord.attributes.default.login"
       th 
-        = t("email")
+        = t "activerecord.attributes.default.email"
       th 
-        = t("joined_on")
+        = t "activerecord.attributes.default.joined_on"
       th width="40px"
       th width="40px"
   tbody
@@ -24,7 +24,7 @@ br
     = text_field_tag :user, nil, :placeholder => "#{t('modules.users.choose_collaborator')}", :class => "input-add-colaborator, form-control"
     span.input-group-btn
       button.btn.btn-default
-        = t("add")
+        = t("actions.default.add")
   br
   = link_to t("modules.users.new"), [:new, :backend, :user], class: "btn btn-default"
 

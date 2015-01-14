@@ -3,7 +3,7 @@
 
 .page-header
   h1 
-    = t("modules.accounts.title_new")
+    = t("modules.accounts.title.new")
 
 = simple_form_for [:backend, @account] do |f|
   .row
@@ -24,4 +24,4 @@
   .form-actions
     .btn.btn-default-group
       = f.button :submit, :class => "btn btn-primary"
-      = link_to "Cancel", backend_accounts_path, :class => "btn"
+      = link_to t("actions.default.cancel"), backend_accounts_path, :class => "btn"

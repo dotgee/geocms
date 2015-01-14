@@ -25,4 +25,4 @@ table.table.table-striped.table-backend
       == render "geocms/backend/layers/layer", layer: layer
     = paginate @layers
 = link_to t("layer.create"), [:new, :backend, @category, :layer], :class => "btn btn-primary"
-= link_to t(:add_child), new_backend_category_path(:parent_id => @category.id), :class => "btn btn-primary"
+= link_to t("modules.categories.sub_category.add"), new_backend_category_path(:parent_id => @category.id), :class => "btn btn-primary"
