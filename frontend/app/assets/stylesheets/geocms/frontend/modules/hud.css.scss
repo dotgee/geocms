@@ -1,6 +1,4 @@
-// LEFT NAVBAR
-
-.hud {
+ .hud {
   color: $hud-body-color;
   z-index: 1000;
   position: absolute;
@@ -8,15 +6,8 @@
   top: 10px;
   width: $hudsize;
   height: auto;
-  max-height: 450px;
-  // padding-bottom: 10px;
   background: $hud-background-color;
   .tab-content {
-    // position: absolute;
-    // top: 105px;
-    // left: 0;
-    // right: 0;
-    // bottom: 50px;
     overflow-y: auto;
   }
   .nav.nav-tabs {
@@ -24,46 +15,24 @@
   }
 }
 
-// LEFT NAVBAR - SAVE AND SHARE
+.hud-panel {
+  overflow-y: auto;
+}
 
-.btn.geovisu {
-  margin-left: 15px;
-  padding: 8px 12px 9px;
-  i {
-    margin-top: 3px;
+#layers {
+  .hud-panel {
+    max-height: 300px;
   }
 }
 
-// LEFT NAVBAR - TABS
-#hud-tab {
-  > ul > li {
-    margin-left: 0;
-    width: 33.3333%;
-    a {
-      background-color: $hud-tab-background-color;
-      color: $hud-tab-color;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 15px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      border-right: none;
-      border-left: 1px solid rgba(255, 255, 255, 0.25);
-      border-top: 1px solid rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.25) !important;
-      @include border-radius(0px);
-      margin-right: 0;
-      text-align: center;
-    }
-    &.active a {
-      background-color: $hud-tab-background-color-active;
-      color: $hud-tab-color-active;
-    }
-    &:first-child {
-      a {
-        border-left: none;
-      }
-    }
+#infos {
+  height: 380px;
+}
+
+#legend {
+  padding: 10px;
+  .hud-panel {
+    max-height: 350px;
   }
 }
 
@@ -96,38 +65,12 @@
   font-size: 14px;
 }
 
-// LEFT NAVBAR - CONTROLS
-
-
-#legend {
-  padding: 10px;
-}
-
-.hud-panel {
-  max-height: 348px;
-  overflow-y: auto;
-}
-
-// LEFT NAVBAR - TABS - LAYERS
-
-#layers {
-  .hud-panel {
-    max-height: 300px;
-  }
-}
-
-//  LEFT NAVBAR - TABS - LAYERS - ADD BUTTON
-
-.add-layer {
-  background: $action-bar-background-color;
-  color: $action-bar-color;
-  font-weight: 500;
-  height: 38px;
-  padding: 0 15px;
-  span {
-    line-height: 35px;
-  }
-  a {
-    margin-top: 7px;
+.page-header.project-name {
+  padding: 20px;
+  margin: 0;
+  h3 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 20px;
   }
 }

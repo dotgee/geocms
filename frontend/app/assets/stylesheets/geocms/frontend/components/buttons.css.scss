@@ -23,8 +23,8 @@
 }
 
 .from-map {
-  margin-top: 45px;
-  font-size: 9px;
+  padding-top: 45px;
+  // font-size: 9px;
 }
 
 .import-btn {
@@ -36,5 +36,20 @@
 .page-header {
   .btn {
     margin-top: 20px;
+  }
+}
+
+
+.add-layer {
+  background: $action-bar-background-color;
+  color: $action-bar-color;
+  font-weight: 500;
+  height: 38px;
+  padding: 0 15px;
+  span {
+    line-height: 35px;
+  }
+  a {
+    margin-top: 7px;
   }
 }

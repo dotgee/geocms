@@ -2,7 +2,7 @@
 
 $primary-palette: $md-list-blue-grey !default;
 $secondary-palette: $md-list-light-blue !default;
-$tertiary-palette: $md-list-light-blue !default;
+$tertiary-palette: $md-list-grey !default;
 
 $color-panel-1: nth($primary-palette, 5) !default;
 $color-panel-1-darkened: nth($primary-palette, 7) !default;
@@ -13,6 +13,7 @@ $color-panel-2-fallback: white !default;
 $color-panel-2-lightened: nth($secondary-palette, 2) !default;
 
 $color-panel-3: nth($tertiary-palette, 5) !default;
+$color-panel-3-darkened: nth($tertiary-palette, 7) !default;
 
 // Application variables
 
@@ -23,6 +24,12 @@ $hud-tab-background-color: $color-panel-1-darkened !default;
 $hud-tab-background-color-active: nth($primary-palette, 9) !default;
 $hud-tab-color: $color-panel-2-fallback !default;
 $hud-tab-color-active: $color-panel-2-fallback !default;
+
+$hud-tab-alt-background-color:  nth($tertiary-palette, 3) !default;
+$hud-tab-alt-background-color-active:  $hud-background-color !default;
+$hud-tab-alt-color: nth($tertiary-palette, 7)  !default;
+$hud-tab-alt-color-active: nth($tertiary-palette, 7)  !default;
+
 $hud-layer-chevron: $color-panel-2 !default;
 
 $save-button-background-color: $color-panel-2 !default;

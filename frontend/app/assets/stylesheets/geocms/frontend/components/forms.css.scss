@@ -11,6 +11,10 @@
   }
 }
 
+.form-control[readonly] {
+  background-color: white;
+}
+
 .signup {
   float: left;
   padding: 12px 0 0;
@@ -74,20 +78,14 @@ input:-webkit-autofill:focus {
 
 // LEFT NAVBAR - INFOS
 
-#infos {
-  form {
-    margin: 10px 10px 0;
-    .row {
-      margin-right: 0;
-    }
-  }
-  label {
-    width: auto;
-  }
-}
-
 textarea {
   resize: none;
+}
+
+textarea.code {
+  font-family: monospace;
+  font-size: 11px;
+  white-space: pre-wrap;
 }
 
 .input-position {

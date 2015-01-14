@@ -1,0 +1,23 @@
+div ng-switch="cart.state"
+  div ng-switch-when="new"
+    |
+  div ng-switch-default=""
+    .page-header.project-name
+      h3
+        |{{cart.context.name}}
+    form.form-horizontal.inside-tab-pane role="form"
+
+      .form-group
+        label.col-sm-2 for="map_id"  Map ID
+        .col-sm-10
+          input#map_id.form-control ng-model="cart.context.uuid" ng-readonly="true" text-select=""
+
+      .form-group
+        label.col-sm-2 for="direct_link"  Share
+        .col-sm-10
+          input#direct_link.form-control ng-readonly="true" ng-model="cart.context.direct_link" text-select=""
+
+      .form-group
+        label.col-sm-2 for="embed_code"  Embed
+        .col-sm-10
+          textarea#embed_code.code.form-control ng-readonly="true" text-select="" ng-model="cart.context.embed_code" rows="3"

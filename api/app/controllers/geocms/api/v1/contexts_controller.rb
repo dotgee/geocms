@@ -1,6 +1,7 @@
 module Geocms
   class Api::V1::ContextsController < Api::V1::BaseController
     respond_to :xml, only: :wmc
+    serialization_scope :current_scope
     
     def index
       @contexts = Geocms::Context.all
@@ -57,6 +58,13 @@ module Geocms
 
     def context_params
       params.require(:context).permit(PermittedAttributes.context_attributes)
+    end
+
+    def current_scope
+      {
+        user: current_user,
+        account: current_tenant
+      }
     end
 
   end
