@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-assets-restangular', "1.4.0"
   s.add_dependency 'rails-assets-angular-ui-router', "0.2.10"
   s.add_dependency 'rails-assets-angular-animate', "1.2.19"
+  s.add_dependency 'rails-assets-angular-bootstrap', '~> 0.12.0'
   # s.add_dependency 'rails-assets-angular-ui-slider', '0.0.2'
   s.add_dependency 'rails-assets-masonry', '3.1.5'
   s.add_dependency 'rails-assets-angular-masonry', '0.9.1'

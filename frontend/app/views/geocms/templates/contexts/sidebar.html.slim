@@ -4,11 +4,11 @@
       span.carticon-floppy
       span ng-bind="cart.state == 'saved' ? '#{t("context.protected")}' : '#{t("context.save")}'"
     == render "geocms/templates/sidebar/header"
-    tabset.row-fluid#hud-tab
-      tab heading=t("context.layers") uncheckable=""
+    navtabset.nav-filled justified="true" hashAware="true"
+      navtab heading=t("context.layers") uncheckable="" href="'#layers'"
         == render "geocms/templates/sidebar/tab_cart"
-      tab heading=t("context.infos") uncheckable=""
+      navtab heading=t("context.infos") uncheckable="" href="'#project'"
         == render "geocms/templates/sidebar/tab_infos"
-      tab heading=t("context.legende") uncheckable=""
+      navtab heading=t("context.legende") uncheckable="" href="'#legend'"
         == render "geocms/templates/sidebar/tab_legend"
     == render "geocms/templates/sidebar/footer"
