@@ -2,9 +2,7 @@
   == render "/geocms/parts/sidebar", controller: "users"
 
 .page-header
-  h1 Ajouter un collaborateur
-
-.row-fluid
   .span6
-    legend Nouvel utilisateur
+    legend 
+       = t("modules.users.title.new")
     == render "form"

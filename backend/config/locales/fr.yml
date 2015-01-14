@@ -1,19 +1,92 @@
 fr:
-  folders: Dossier
-  folder:
-    created_at: Créé le
-    name: Nom
-    new: Nouveau dossier
-    visibility: Public
-  logo_hint: "Taille conseillée : 80x50 px"
-  result_search: Résultat de la recherche
+  user: Utilisateur
+  account: Compte
+
+  messages:
+    loading: "Chargement en cours, merci de patienter..."
+    comfirm: Êtes vous sur ?
+  modules:
+    data_sources:
+      title:
+        index: Source de données
+        edit: Edition de la source de données
+        new: Nouvelle source de données
+      name: Sources
+      internal_sources: Sources internes
+      external_sources: Sources externes
+      new: Créer une nouvelle source de données
+      modal_loading_data_couches: Veuillez patienter pendant que nous trouvons les couches. Cela ne devrait pas être trop long.
+    categories:
+      title: 
+        index: Catégories
+        edit: Edition d'une categorie
+        new: Ajout d'une categorie
+      new: Ajouter une catégorie mère
+      sub_category:
+        add: Créer une sous-catégorie  
+    folders:
+      title: 
+        index: Répertoires
+        new: Nouveau répertoire
+        edit: Edition du répertoire
+      name: Répertoires
+      projects: Projets
+      project: Projets
+      new: Ajouter un répertoire
+      new_project: Nouveau projet
+    users:
+      name: Utilisateurs
+      title: 
+        index: Utilisateurs
+        new: Nouvel utilisateur
+        edit: Edition de l'utilisateur
+      choose_collaborator: Choisir un collaborateur
+      new: Créer un compte
+    accounts:
+      title: 
+        index : Comptes
+        new: Nouveau compte
+      account: Compte
+      user: Utilisateur
+    preferences:
+      title:
+        edit: Edition des préférences
+      maps_conseil: "Projections supportées : EPSG:3857, EPSG:4326, EPSG:2154"
+      maps: Carte
+
+  menu:
+    layers: Couches
+    contexts: Projets
+    categories: Catégories
+    data_sources: Sources
+    users: Utilisateurs
+    preferences: Préferences
+    logout: Déconnexion
+    accounts: Instances
+    advanced: Configuration
+    input:
+      placeholder:
+        search_layers: Rechercher une couche
+
   simple_form:
     labels:
-      folder:
+      defaults:
         name: Nom
-        visibility: Public
-  helpers:
-    submit:
+        description: Description
+        folder: Dossier
+        username: Identifiant
+        password: Mot de passe
+      data_source:
+        not_internal: Source externe
+      context:
+        by_default: Par défaut
+        preview: Aperçu
       folder:
-        create: Créer
-        update: Mettre à jour
+        visibility: Public
+      user:
+        first_name: Prénom
+        last_name: Nom
+        email: Email
+        password_confirmation: Confirmation du mot de passe
+      account:
+        subdomain: Sous Domaine

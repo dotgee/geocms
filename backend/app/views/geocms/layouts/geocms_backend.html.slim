@@ -31,7 +31,7 @@ html ng-app="geocms"
               li= link_to t("menu.advanced"), edit_backend_preferences_path
           form.navbar-form.navbar-left action="/backend/search"
             .input-group
-              input type="text" class="form-control" placeholder="Rechercher une couche" name="query" value="#{params[:query]}" autocomplete="off"
+              input type="text" class="form-control" placeholder="#{t('menu.input.placeholder.search_layers')}" name="query" value="#{params[:query]}" autocomplete="off"
               span class="input-group-btn"
                 button class="btn btn-default" type="submit"
                   span.glyphicon.glyphicon-search

@@ -2,20 +2,22 @@
   .col-md-6
     = form_tag [:backend, :preferences], {method: :put} do |f|
       .page-header
-        h4   Carte
+        h4 
+          = t("modules.preferences.maps")
       .form-inputs
         - Geocms::Account.prefs.keys.each do |p|
           .form-group
             = label_tag p, p.to_s.humanize, class: "control-label"
             = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value, class: "form-control"
       .form-group.hint
-        |Projections supportées : EPSG:3857, EPSG:4326, EPSG:2154
+        = t("modules.preferences.maps_conseil")
       .control-group
         .controls
-          = submit_tag t(:edit), class: "btn btn-primary"
+          = submit_tag t("actions.default.update"), class: "btn btn-primary"
   .col-md-6
     .page-header
-      h4   Compte
+      h4
+        = t(:account)
     = simple_form_for [:backend, current_tenant] do |f|
       = f.input :name
       .row
@@ -24,4 +26,4 @@
         .col-xs-6
           = image_tag f.object.logo if f.object.logo?
       .control-group
-          = f.submit t(:edit), class: "btn btn-primary"
+          = f.submit t("actions.default.update"), class: "btn btn-primary"

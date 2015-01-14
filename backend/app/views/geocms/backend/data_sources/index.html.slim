@@ -1,11 +1,13 @@
 .page-header
-  h1 Listing Data Sources
+  h1 
+    = t 'modules.data_sources.title.index'
 
 
 table.table.table-striped.table-backend
   thead
     tr
-      th Name
+      th
+        = t "activerecord.attributes.default.name"
       th width="40px"
       th width="40px"
       th width="40px"
@@ -13,7 +15,7 @@ table.table.table-striped.table-backend
     - @data_sources.each do |not_internal, data_sources|
       tr
         td
-          b= not_internal ? "Sources externes" : "Sources internes"
+          b = not_internal ? t('modules.data_sources.external_sources') : t('modules.data_sources.internal_sources')
         td
         td
         td
@@ -21,22 +23,22 @@ table.table.table-striped.table-backend
         tr
           td = data_source.name
           td
-            = link_to [:import, :backend, data_source], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("datasource.import") do
+            = link_to [:import, :backend, data_source], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.import") do
               i.glyphicon.glyphicon-download.glyphicon.glyphicon-white
           td
-            = link_to edit_backend_data_source_path(data_source), :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+            = link_to edit_backend_data_source_path(data_source), :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
               i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
           td
-            = link_to [:backend, data_source], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-xs btn-danger icn-only" do
+            = link_to [:backend, data_source], :confirm => "#{t('messages.confirm')}", :method => :delete, :class => "btn btn-xs btn-danger icn-only" do
               i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
 br
-= link_to t("datasource.new"), new_backend_data_source_path, :class => "btn btn-primary"
+= link_to t('modules.data_sources.new') , new_backend_data_source_path, :class => "btn btn-primary"
 
 .modal.wait-modal.hide.fade.in
   .modal-body
     = image_tag "throbber.svg"
     br
-    = t("data_source.wait")
+    = t('modules.data_sources.modal_loading_data_couches')
 
 = content_for :javascripts do
   javascript:

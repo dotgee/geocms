@@ -3,11 +3,11 @@
     .container
       button.btn.btn-default.btn-xs.btn-close.close ng-click="catalog.close()" &times;
       .page-header
-        h1 = t "layers_catalog"
+        h1 = t "modules.layers.catalog"
       .row
         .col-md-6
           .input-group
-            input type="text" class="form-control" placeholder=t("layer.search") ng-model="catalog.query" ng-enter="catalog.search()"
+            input type="text" class="form-control" placeholder=t("actions.default.search") ng-model="catalog.query" ng-enter="catalog.search()"
             span class="input-group-btn" ng-click="catalog.search()"
               button class="btn btn-default" type="button"
                 span.glyphicon.glyphicon-search

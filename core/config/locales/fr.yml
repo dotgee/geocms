@@ -1,88 +1,39 @@
 fr:
+  "true": Oui
+  "false": Non
+
   actions:
-    layers:
-      new: "Ajouter couche"
-  browse: "Parcourir"
-  edit: "Modifier"
-  add: "Ajouter"
-  destroy: "Supprimer"
-  add_child: "Créer une sous-catégorie"
-  context:
-    refreshing: "Merci de patienter"
-    save: "Sauvegarder"
-    share: "Partager"
-    infos: "Informations"
-    from_map: "Importer"
-    sharable:
-      share_your_map: "Partagez votre carte"
-      direct_link: "Lien direct"
-      html_embed: "Ou par iframe"
-      geovisu_show: "Voir sur Geovisu"
-      copy: "Copier"
-    controls:
-      legend: "Légende"
-      position: "Retour à la position initiale"
-      tools: "Outils"
-      fullscreen: "Plein écran"
-      hud: "Masquer"
-  datasource:
-    import: "Importer"
-    new: "Créer une nouvelle source de données"
-  account:
-    new: "Créer un nouveau compte"
-  users:
-    new: "Créer un compte utilisateur"
-    index: "Liste des collaborateurs"
-  user:
-    sign_up: "Inscription"
-  session:
-    invalid_credentials: "Mauvais email ou password"
-    logged_in: "Authentification réussie"
-  category:
-    new_root: "Ajouter une catégorie mère"
-  menu:
-    layers: "Couches"
-    contexts: "Projets"
-    categories: "Catégories"
-    data_sources: "Sources"
-    users: "Utilisateurs"
-    preferences: "Préferences"
-    logout: "Déconnexion"
-    accounts: "Instances"
-    advanced: "Configuration"
-  backend:
-    import: "Importer"
-    layers_imported_from: "Couches récupérées depuis"
+    default:
+      browse: Parcourir
+      edit: Modifier
+      add: Ajouter
+      destroy: Supprimer
+      download: Télécharger
+      back: Retour
+      back: 
+        list: Retour à la liste
+      import: Importer
+      cancel: Annuler
+      filter: Filtrer
+      filter:
+        data: Filtrer les données
+      update: Mise à jour
+      delete: Supprimer
+      search: Rechercher
+    
   footer:
     legal: "Mentions légales"
     copyright: "Copyright 2013 © Dotgee. Tous droits réservés."
     contact: "Contact"
-  layer:
-    search: Rechercher
-    create: "Créer une nouvelle couche"
-    imported_successfully: "Couche importée avec succès"
-  data_source:
-    wait: "Please wait while we find the layers. This shouldn't be too long."
-  layers: "Couches"
-  categories: "Catégories"
-  add_a_new_layer: "Ajouter une nouvelle couche"
-  layers_catalog: "Catalogue de données géoréférencées"
-  legend: "Légende"
-  maps: "Cartes"
-  back: "Retour"
-  access_denied: "Vous n'êtes pas autorisé à effectuer cette action."
-  button_login: "Connexion (accès restreint)"
-  simple_form:
-    labels:
-      defaults:
-        name: Nom
-        description: Description
-        folder: Dossier
-      data_source:
-        not_internal: "Source externe"
-      context:
-        by_default: "Par défaut"
-        preview: "Aperçu"
+  
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer
+      update: Mettre à jour
+      submit: Valider
+        
   #####
   # Rails i18n
   #####
@@ -297,5 +248,18 @@ fr:
     errors:
       <<: *errors
   activerecord:
+    attributes:
+      default:
+        name: Nom
+        created_at: Créé le
+        public: Public
+        joined_on : Arrivé le
+        email: Email
+        zoom: Zoom
+        opacity: Opacity
+        source: Source
+        login: Identifiant
+        domain: Domaine
+        user: Utilisateur
     errors:
       <<: *errors

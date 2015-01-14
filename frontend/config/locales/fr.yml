@@ -1,0 +1,37 @@
+fr:
+  modules:
+    layers:
+      opacity_control: Contrôle de l'opacité
+      temporality_control: Contrôle de la temporalité
+      metadata_and_download: "Méta-données & Téléchargement"
+      see_metadata: Voir les meta données
+      add: Ajouter une nouvelle couche
+      catalog: Catalogue de couches
+      controls:
+        center: Centre
+        interrogation: Interrogation
+        opacity: Opacité
+        timeline: TImelne
+
+  context:
+    refreshing: Merci de patienter
+    save: Sauvegarder
+    share: Partager
+    infos: Informations
+    layers: Couches
+    legende: Légende
+    from_map: Importer
+    protected: Sauvegardé
+    save: Sauvegarder
+    sharable:
+      share_your_map: Partagez votre carte
+      direct_link: Lien direct
+      html_embed: Ou par iframe
+      geovisu_show: Voir sur Geovisu
+      copy: Copier
+    controls:
+      legend: Légende
+      position: Retour à la position initiale
+      tools: Outils
+      fullscreen: Plein écran
+      hud: Masquer

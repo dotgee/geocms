@@ -3,7 +3,7 @@ tr
     i.icon-layer
     = link_to layer.title, [:edit, :backend, layer]
   td
-    = link_to [:edit, :backend, layer], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t(:edit) do
+    = link_to [:edit, :backend, layer], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
       i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td
     = link_to (@category ? [:backend, @category, layer] : [:backend, layer]), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do

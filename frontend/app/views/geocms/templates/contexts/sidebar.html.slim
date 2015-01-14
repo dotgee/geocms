@@ -2,13 +2,13 @@
   .hud ng-hide="catalogOpened()"
     a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}" ng-if="cart.context.editable"
       span.carticon-floppy
-      span ng-bind="cart.state == 'saved' ? 'Sauvegardé' : 'Sauvegarder'"
+      span ng-bind="cart.state == 'saved' ? '#{t("context.protected")}' : '#{t("context.save")}'"
     == render "geocms/templates/sidebar/header"
     tabset.row-fluid#hud-tab
-      tab heading=t("layers") uncheckable=""
+      tab heading=t("context.layers") uncheckable=""
         == render "geocms/templates/sidebar/tab_cart"
       tab heading=t("context.infos") uncheckable=""
         == render "geocms/templates/sidebar/tab_infos"
-      tab heading="Légende" uncheckable=""
+      tab heading=t("context.legende") uncheckable=""
         == render "geocms/templates/sidebar/tab_legend"
     == render "geocms/templates/sidebar/footer"
