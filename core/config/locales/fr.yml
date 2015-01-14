@@ -33,29 +33,6 @@ fr:
       create: Créer
       update: Mettre à jour
       submit: Valider
-
-  simple_form:
-    labels:
-      defaults:
-        name: Nom
-        description: Description
-        folder: Dossier
-        username: Identifiant
-        password: Mot de passe
-      data_source:
-        not_internal: Source externe
-      context:
-        by_default: Par défaut
-        preview: Aperçu
-      folder:
-        visibility: Public
-      user:
-        first_name: Prénom
-        last_name: Nom
-        email: Email
-        password_confirmation: Confirmation du mot de passe
-      account:
-        subdomain: Sous Domaine
         
   #####
   # Rails i18n
