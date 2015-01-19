@@ -1,7 +1,5 @@
 div class="btn-group layer-menu" role="group"
-  / button.btn.btn-default class="#{controller?("geocms/backend/categories") ? "active" : "" }"
   = link_to backend_categories_path, class: "btn btn-default #{controller?('geocms/backend/categories') ? 'active' : '' }" do
-    i.glyphicon.glyphicon-th.layer-menu-icon
-  / button.btn.btn-default class="#{controller?("geocms/backend/layers") ? "active" : "" }"
+    i.glyphicon.glyphicon-folder-open.layer-menu-icon
   = link_to backend_layers_path, class: "btn btn-default #{controller?('geocms/backend/layers') ? 'active' : '' }" do
     i.glyphicon.glyphicon-th-list.layer-menu-icon

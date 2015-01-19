@@ -11,9 +11,8 @@ table.table.table-striped.categories-index.table-backend
     tr
       th= t("activerecord.attributes.default.name")
       th= t("modules.layers.categories")
-      th= t("activerecord.attributes.default.created_at")
-      th
-      th
+      th.th-action
+      th.th-action
   tbody
     - @layers.each do |layer|
         = render partial: "layer_list", locals: {layer: layer}
