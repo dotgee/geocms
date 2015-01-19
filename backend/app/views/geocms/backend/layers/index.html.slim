@@ -1,18 +1,22 @@
+= render partial: 'geocms/shared/layer_menu'
 .page-header
-  h1= "#{ActsAsTenant.current_tenant.name} #{@category.name} - Layers"
+  h1
+    = t("modules.layers.title.index")
 
-= link_to 'New Layer', [:new, :backend, @category, :layer], :class => "btn pull-right"
 .clearfix
 = paginate @layers
-table.table.table-striped
+
+table.table.table-striped.categories-index.table-backend
   thead
     tr
-      th Title
-      th
+      th= t("activerecord.attributes.default.name")
+      th= t("modules.layers.categories")
+      th= t("activerecord.attributes.default.created_at")
       th
       th
   tbody
     - @layers.each do |layer|
-      == render layer
+        = render partial: "layer_list", locals: {layer: layer}
 br
 
+= link_to t("modules.layers.title.new"), [:new, :backend, @category, :layer], class: "btn btn-primary"

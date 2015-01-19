@@ -1,11 +1,12 @@
+= render partial: 'geocms/shared/layer_menu'
 .page-header
   h1
     = "#{ActsAsTenant.current_tenant.name} - #{t('modules.categories.title.index')}"
-  
+
 table.table.table-striped.categories-index.table-backend
   thead
     tr
-      th 
+      th
         = t('activerecord.attributes.default.name')
       th width="40px"
       th width="40px"

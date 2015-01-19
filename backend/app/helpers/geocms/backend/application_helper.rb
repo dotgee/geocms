@@ -17,5 +17,10 @@ module Geocms
       tpl = admin ? "geocms/parts/backend_breadcrumb" : "geocms/parts/breadcrumb"
       render tpl, :category => category
     end
+
+    def controller?(*controller)
+      controller.include?(params[:controller])
+    end
+
   end
 end

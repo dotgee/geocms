@@ -18,7 +18,7 @@ Geocms::Core::Engine.add_routes do
       resources :layers
     end
 
-    resources :layers, :only => [:create, :edit, :update, :new, :destroy] do
+    resources :layers, :only => [:index, :create, :edit, :update, :new, :destroy] do
       member do
         get "getfeatures", :to => "layers#getfeatures"
       end

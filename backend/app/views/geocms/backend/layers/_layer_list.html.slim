@@ -1,0 +1,14 @@
+tr
+  td
+    i.icon-layer
+    = link_to layer.title, [:edit, :backend, layer]
+  td
+    = render partial: 'link_category', collection: layer.categories, spacer_template: 'geocms/shared/comma'
+  td
+    = layer.created_at.strftime("%d/%m/%Y")
+  td
+    = link_to [:edit, :backend, layer], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
+      i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
+  td
+    = link_to (@category ? [:backend, @category, layer] : [:backend, layer]), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
+      i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

@@ -17,15 +17,15 @@ fr:
       new: Créer une nouvelle source de données
       modal_loading_data_couches: Veuillez patienter pendant que nous trouvons les couches. Cela ne devrait pas être trop long.
     categories:
-      title: 
+      title:
         index: Catégories
         edit: Edition d'une categorie
         new: Ajout d'une categorie
       new: Ajouter une catégorie mère
       sub_category:
-        add: Créer une sous-catégorie  
+        add: Créer une sous-catégorie
     folders:
-      title: 
+      title:
         index: Répertoires
         new: Nouveau répertoire
         edit: Edition du répertoire
@@ -34,16 +34,21 @@ fr:
       project: Projets
       new: Ajouter un répertoire
       new_project: Nouveau projet
+    layers:
+      categories: Catégories
+      title:
+        index: Couches
+        new: Ajouter une nouvelle couche
     users:
       name: Utilisateurs
-      title: 
+      title:
         index: Utilisateurs
         new: Nouvel utilisateur
         edit: Edition de l'utilisateur
       choose_collaborator: Choisir un collaborateur
       new: Créer un compte
     accounts:
-      title: 
+      title:
         index : Comptes
         new: Nouveau compte
       account: Compte
@@ -90,3 +95,10 @@ fr:
         password_confirmation: Confirmation du mot de passe
       account:
         subdomain: Sous Domaine
+  views:
+    pagination:
+      first: Première page
+      last: Dernière page
+      next: Suivante
+      previous: Précédente
+      truncate: "..."

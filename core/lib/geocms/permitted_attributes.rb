@@ -53,10 +53,10 @@ module Geocms
     ]
 
     @@layer_attributes = [
-      :description, :name, :title, :wms_url, :data_source_id, :category_ids,
-      :category, :crs, :minx, :miny, :maxx, :maxy, :dimension, :template,
+      :description, :name, :title, :wms_url, :data_source_id, :category,
+      :crs, :minx, :miny, :maxx, :maxy, :dimension, :template,
       :remote_thumbnail_url, :metadata_url, :metadata_identifier,
-      :tiled, :max_zoom 
+      :tiled, :max_zoom, :category_ids => []
     ]
 
     @@membership_attributes = [
