@@ -1,23 +1,23 @@
 form.inside-tab-pane role="form"
   .form-group
-    label for="context_name"  Nom
+    label for="context_name" =t("contexts.attributes.name")
     input#context_name.form-control name="name" type="text" ng-model="cart.context.name" ng-readonly="!cart.context.editable"
   .form-group
-    label for="context_description"  Description
+    label for="context_description" =t("contexts.attributes.description")
     textarea#context_description.form-control name="description" type="text"  ng-model="cart.context.description" ng-readonly="!cart.context.editable"
   .form-group
-    label for="context_folder"  Dossier
+    label for="context_folder" =t("contexts.attributes.folder")
     select#context_folder.form-control name="folder" ng-model="cart.context.folder.id" ng-options="folder.name for folder in cart.folders" ng-readonly="!cart.context.editable"
   .row
     .form-group.col-md-3
-      label for="context_center_lng"  Longitude
+      label for="context_center_lng" =t("contexts.attributes.center_lng")
       input#context_center_lng.form-control name="center_lng" type="text" ng-model="cart.context.center_lng" ng-readonly="!cart.context.editable"
     .form-group.col-md-3
-      label for="context_center_lat"  Latitude
+      label for="context_center_lat" =t("contexts.attributes.center_lat")
       input#context_center_lat.form-control name="center_lat" type="text" ng-model="cart.context.center_lat" ng-readonly="!cart.context.editable"
     .form-group.col-md-2
-      label for="context_zoom"  Zoom
+      label for="context_zoom" =t("contexts.attributes.zoom_level")
       input#context_zoom.form-control name="zoom" type="text" ng-model="cart.context.zoom" ng-readonly="!cart.context.editable"
     .col-md-2.from-map
-      a href="" ng-click="cart.importCenter()" ng-if="cart.context.editable" tooltip='Position actuelle' tooltip-append-to-body="true"
+      a href="" ng-click="cart.importCenter()" ng-if="cart.context.editable" tooltip=t("informations.settings.import_position") tooltip-append-to-body="true"
         i.glyphicon.glyphicon-map-marker
