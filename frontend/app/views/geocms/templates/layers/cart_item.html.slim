@@ -8,7 +8,7 @@
       a title="{{layer.title}}" class="unstyled"
         |{{layer.title}}
       p.source ng-if="layer.data_source_name"
-        |#{t(:couche)} :
+        |#{t("layers.data_source")}
         a href="{{layer.data_source_ogc}}" target="_blank"
           '&nbsp;{{layer.data_source_name}}
     .cart-column.cart-column-details ng-click="cart.currentLayer = layer"

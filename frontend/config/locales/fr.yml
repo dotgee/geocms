@@ -15,6 +15,7 @@ fr:
     header: Couches
     open_catalog: Ajouter une couche
     back_to_list: Retour à la liste
+    data_source: "Source :"
     controls:
       center:
         tooltip: Centrer
