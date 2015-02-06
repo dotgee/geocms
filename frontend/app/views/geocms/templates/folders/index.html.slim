@@ -2,12 +2,12 @@
   .container
     .page-header.row
       .col-xs-10
-        h1= t "project"
+        h1= t "contexts.header"
       .col-xs-2
         a.btn.btn-default ui-sref="contexts.new"
           span.glyphicon.glyphicon-plus
           '
-         = t "new_project"
+          = t "contexts.actions.new"
     .row
       .col-sm-4.col-md-3 ng-repeat="folder in folders"
         .thumbnail.thumbnail-folder ui-sref="folders.show(folder)"

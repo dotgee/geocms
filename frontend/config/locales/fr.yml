@@ -1,8 +1,10 @@
 fr:
   contexts:
+    header: Projets
     actions:
       save: Sauvegarder
       saved: Sauvegardé
+      new: Nouveau projet
     attributes:
       name: Nom
       description: Description
