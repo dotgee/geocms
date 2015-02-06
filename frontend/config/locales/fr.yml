@@ -44,6 +44,12 @@ fr:
 
   informations:
     header: Projet
+    features:
+      header: "Sauvegardez votre projet pour :"
+      f1: Partager votre projet
+      f2: Collaborer sur l'édition du projet
+      f3: Y revenir ultérieurement
+      f4: ""
     sharing:
       header: Infos
       map_id: UUID

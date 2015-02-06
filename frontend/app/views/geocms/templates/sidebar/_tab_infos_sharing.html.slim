@@ -1,6 +1,12 @@
 div ng-switch="cart.state"
   div ng-switch-when="new"
-    |
+    .save-project-features
+      p= t "informations.features.header"
+      ul.list-unstyled
+        li= t "informations.features.f1"
+        li= t "informations.features.f2"
+        li= t "informations.features.f3"
+        li= t "informations.features.f4"
   div ng-switch-default=""
     .page-header.project-name
       h3
