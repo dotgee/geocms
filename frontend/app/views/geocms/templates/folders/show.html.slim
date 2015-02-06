@@ -3,7 +3,7 @@
   .container
     .page-header
       h1 
-        a.unstyled ui-sref="folders.root" '#{t(:projects)} /' 
+        a.unstyled ui-sref="folders.root" = "#{t('contexts.header')} /" 
         small
           |{{folder.name}}
     .row masonry="" load-images="false" masonry-options="{isStill: true}"
