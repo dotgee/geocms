@@ -61,7 +61,7 @@ app = angular.module("geocms", [
     true
 
   $scope.import = () ->
-    if $scope.category?
+    if $scope.selectedCategories?
       layers = $scope.extractLayerInformations()
       layers = Restangular.restangularizeElement(null, layers, "layers")
       layers.customPOST({layers: layers}, "import").then (response) ->
@@ -74,7 +74,7 @@ app = angular.module("geocms", [
         title: layer.table.title
         description: layer.table.abstract
         data_source_id: $scope.source_id
-        category_ids: [$scope.category.id]
+        category_ids: _.map($scope.selectedCategories, (category) -> category.id)
         bounding_boxes_attributes: _.map(layer.table.bbox, (box) ->
           bbox = box.table.bbox
           bbox = [bbox[1], bbox[0], bbox[3], bbox[2]] if box.table.srs == "EPSG:4326"

@@ -24,7 +24,7 @@ div ng-controller="ImportCtrl" ng-init="source_id=#{@data_source.id}"
 
   .row
     .col-xs-6
-      select.form-control ng-model="category" ng-options="('-- '.repeat(category.depth)+category.name) for category in categories track by category.id"
+      select.form-control ng-model="selectedCategories" ng-options="('-- '.repeat(category.depth)+category.name) for category in categories track by category.id" multiple="multiple" ng-multiple="true"
     .col-xs-2.col-md-1
-      a.btn.btn-default.btn-primary ng-click="import()" ng-class="{disabled: !category}"
+      a.btn.btn-default.btn-primary ng-click="import()" ng-class="{disabled: !selectedCategories}"
         = t("actions.default.import")
