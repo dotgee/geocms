@@ -23,7 +23,7 @@ fr:
               blank: Le nom doit être rempli.
             description:
               blank: La description doit être remplie.
-            layers:
+            contexts_layers:
               blank: 'Au moins une couche doit être ajoutée.'
   actions:
     default:
