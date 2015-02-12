@@ -17,7 +17,7 @@ module Geocms
     after_save :generate_preview
     after_save :set_default
 
-    validates :name, :description, presence: true
+    validates :name, :layers, presence: true
 
     default_scope -> { order("created_at DESC") }
 

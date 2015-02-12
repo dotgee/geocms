@@ -46,7 +46,7 @@ contexts.config [
         views:
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
-            controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", (mapService, folders, $root, $scope, Restangular) ->
+            controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location', (mapService, folders, $root, $scope, Restangular, $location) ->
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
@@ -55,6 +55,7 @@ contexts.config [
               $root.cart.context.editable = true
               $root.cart.state = "new"
               $scope.mapService = mapService
+              $location.hash('layers')
             ]
 
       .state 'contexts.show',
@@ -103,7 +104,7 @@ contexts.controller "ContextsController", [
 
     watchers = '[cart.context.name, cart.context.description, cart.context.folder_id, cart.context.center_lng, cart.context.center_lat, cart.context.zoom]'
     $root.$watchCollection watchers, (newValues, oldValues) ->
-      $root.cart.state = "unsaved" unless newValues == oldValues
+      $root.cart.state = "unsaved" unless angular.equals(newValues, oldValues)
     , true
 
     $scope.openCatalog = () ->

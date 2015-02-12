@@ -100,11 +100,12 @@ cartModule.service "cartService",
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity, position: index }
         )
         @context.save().then ((response)->
-          toaster.pop('success', "La sauvegarde a réussi", response.data)
-          that.state = "saved"
-          $state.transitionTo("contexts.show", {uuid: response.uuid})
+          $state.transitionTo("contexts.show", {uuid: response.uuid}).then ->
+            toaster.pop('success', "La sauvegarde a réussi", response.data)
+            $root.cart.state = "saved"
         ), (response)->
-          toaster.pop('error', "La sauvegarde a échoué", response.data)
+          $root.settingsActive = true
+          toaster.pop('error', "La sauvegarde a échoué", response.data.message)
 
 
       Cart::centerOn = (layer) ->
