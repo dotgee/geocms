@@ -4,7 +4,7 @@ module Geocms
     belongs_to :layer
 
     scope :current, -> (tenant) { where(crs: tenant.crs.value) }
-    scope :leafletable, -> { where(["crs in (?)", ['CRS:84']]) }
+    scope :leafletable, -> { where(["crs in (?)", ['CRS:84', 'EPSG:4326']]) }
 
     def to_bbox
       [minx, miny, maxx, maxy]
