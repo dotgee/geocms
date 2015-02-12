@@ -7,7 +7,7 @@ module Geocms
     accepts_nested_attributes_for :users
 
     has_many :categories, dependent: :destroy
-    has_many :layers, through: :categories
+    has_many :layers, -> { uniq }, through: :categories
     has_many :contexts, dependent: :destroy
 
     preference :longitude , -1.676239

@@ -3,7 +3,7 @@ module Geocms
     class SearchController < Geocms::Backend::ApplicationController
 
       def search
-        @layers = Layer.search(params[:query]).page(params[:page])
+        @layers = current_tenant.layers.search(params[:query]).page(params[:page])
       end
 
     end
