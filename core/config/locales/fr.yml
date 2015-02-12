@@ -1,65 +1,9 @@
 fr:
-  "true": Oui
-  "false": Non
-
-  activerecord:
-    models:
-      geocms/context: Projet
-      geocms/user: Utilisateur
-      geocms/layer: Couche
-    attributes:
-      geocms/context:
-        name: Nom
-        description: Description
-        layers: Couches
-    placeholders:
-      geocms/context:
-        name: Projet sans nom
-    errors:
-      models:
-        geocms/context:
-          attributes:
-            name:
-              blank: Le nom doit être rempli.
-            description:
-              blank: La description doit être remplie.
-            contexts_layers:
-              blank: 'Au moins une couche doit être ajoutée.'
-  actions:
-    default:
-      browse: Parcourir
-      edit: Modifier
-      add: Ajouter
-      destroy: Supprimer
-      download: Télécharger
-      back: Retour
-      back: 
-        list: Retour à la liste
-      import: Importer
-      cancel: Annuler
-      filter: Filtrer
-      filter:
-        data: Filtrer les données
-      update: Mise à jour
-      delete: Supprimer
-      search: Rechercher
-    
-  footer:
-    legal: "Mentions légales"
-    copyright: "Copyright 2013 © Dotgee. Tous droits réservés."
-    contact: "Contact"
   
-  helpers:
-    select:
-      prompt: Veuillez sélectionner
-    submit:
-      create: Créer
-      update: Mettre à jour
-      submit: Valider
-        
-  #####
+
+  ##############################################################################
   # Rails i18n
-  #####
+  ##############################################################################
   date:
     abbr_day_names:
       - dim
@@ -265,3 +209,79 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
     pm: 'pm'
+
+  ##############################################################################
+
+  ##############################################################################
+
+  "true": Oui
+  "false": Non
+
+  activerecord:
+    models:
+      geocms/context: Projet
+      geocms/user: Utilisateur
+      geocms/layer: Couche
+    attributes:
+      default:
+        name: Nom
+        created_at: Créé le
+        public: Public
+        joined_on : Arrivé le
+        email: Email
+        zoom: Zoom
+        opacity: Opacity
+        source: Source
+        login: Identifiant
+        domain: Domaine
+        user: Utilisateur
+      geocms/context:
+        name: Nom
+        description: Description
+        layers: Couches
+    placeholders:
+      geocms/context:
+        name: Projet sans nom
+    errors:
+      <<: *errors
+      models:
+        geocms/context:
+          attributes:
+            name:
+              blank: Le nom doit être rempli.
+            description:
+              blank: La description doit être remplie.
+            contexts_layers:
+              blank: 'Au moins une couche doit être ajoutée.'
+
+  actions:
+    default:
+      browse: Parcourir
+      edit: Modifier
+      add: Ajouter
+      destroy: Supprimer
+      download: Télécharger
+      back: Retour
+      back: 
+        list: Retour à la liste
+      import: Importer
+      cancel: Annuler
+      filter: Filtrer
+      filter:
+        data: Filtrer les données
+      update: Mise à jour
+      delete: Supprimer
+      search: Rechercher
+    
+  footer:
+    legal: "Mentions légales"
+    copyright: "Copyright 2013 © Dotgee. Tous droits réservés."
+    contact: "Contact"
+  
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer
+      update: Mettre à jour
+      submit: Valider
