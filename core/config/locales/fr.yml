@@ -2,6 +2,29 @@ fr:
   "true": Oui
   "false": Non
 
+  activerecord:
+    models:
+      geocms/context: Projet
+      geocms/user: Utilisateur
+      geocms/layer: Couche
+    attributes:
+      geocms/context:
+        name: Nom
+        description: Description
+        layers: Couches
+    placeholders:
+      geocms/context:
+        name: Projet sans nom
+    errors:
+      models:
+        geocms/context:
+          attributes:
+            name:
+              blank: Le nom doit être rempli.
+            description:
+              blank: La description doit être remplie.
+            layers:
+              blank: 'Au moins une couche doit être ajoutée.'
   actions:
     default:
       browse: Parcourir
@@ -38,18 +61,6 @@ fr:
   # Rails i18n
   #####
   date:
-    formats:
-      default: "%d/%m/%Y"
-      short: "%e %b"
-      long: "%e %B %Y"
-    day_names:
-      - dimanche
-      - lundi
-      - mardi
-      - mercredi
-      - jeudi
-      - vendredi
-      - samedi
     abbr_day_names:
       - dim
       - lun
@@ -58,20 +69,6 @@ fr:
       - jeu
       - ven
       - sam
-    month_names:
-      - ~
-      - janvier
-      - février
-      - mars
-      - avril
-      - mai
-      - juin
-      - juillet
-      - août
-      - septembre
-      - octobre
-      - novembre
-      - décembre
     abbr_month_names:
       - ~
       - jan.
@@ -86,88 +83,154 @@ fr:
       - oct.
       - nov.
       - déc.
+    day_names:
+      - dimanche
+      - lundi
+      - mardi
+      - mercredi
+      - jeudi
+      - vendredi
+      - samedi
+    formats:
+      default: "%d/%m/%Y"
+      short: "%e %b"
+      long: "%e %B %Y"
+    month_names:
+      - ~
+      - janvier
+      - février
+      - mars
+      - avril
+      - mai
+      - juin
+      - juillet
+      - août
+      - septembre
+      - octobre
+      - novembre
+      - décembre
     order:
       - :day
       - :month
       - :year
-
-  time:
-    formats:
-      default: "%d %B %Y %H:%M:%S"
-      short: "%d %b %H:%M"
-      long: "%A %d %B %Y %H:%M"
-    am: 'am'
-    pm: 'pm'
-
   datetime:
     distance_in_words:
+      about_x_hours:
+        one:   "environ une heure"
+        other: "environ %{count} heures"
+      about_x_months:
+        one:   "environ un mois"
+        other: "environ %{count} mois"
+      about_x_years:
+        one:   "environ un an"
+        other: "environ %{count} ans"
+      almost_x_years:
+        one:   "presqu'un an"
+        other: "presque %{count} ans"
       half_a_minute: "une demi-minute"
-      less_than_x_seconds:
-        zero:  "moins d'une seconde"
-        one:   "moins d'une seconde"
-        other: "moins de %{count} secondes"
-      x_seconds:
-        one:   "1 seconde"
-        other: "%{count} secondes"
       less_than_x_minutes:
         zero:  "moins d'une minute"
         one:   "moins d'une minute"
         other: "moins de %{count} minutes"
-      x_minutes:
-        one:   "1 minute"
-        other: "%{count} minutes"
-      about_x_hours:
-        one:   "environ une heure"
-        other: "environ %{count} heures"
-      x_days:
-        one:   "1 jour"
-        other: "%{count} jours"
-      about_x_months:
-        one:   "environ un mois"
-        other: "environ %{count} mois"
-      x_months:
-        one:   "1 mois"
-        other: "%{count} mois"
-      about_x_years:
-        one:   "environ un an"
-        other: "environ %{count} ans"
+      less_than_x_seconds:
+        zero:  "moins d'une seconde"
+        one:   "moins d'une seconde"
+        other: "moins de %{count} secondes"
       over_x_years:
         one:   "plus d'un an"
         other: "plus de %{count} ans"
-      almost_x_years:
-        one:   "presqu'un an"
-        other: "presque %{count} ans"
+      x_days:
+        one:   "1 jour"
+        other: "%{count} jours"
+      x_minutes:
+        one:   "1 minute"
+        other: "%{count} minutes"
+      x_months:
+        one:   "1 mois"
+        other: "%{count} mois"
+      x_seconds:
+        one:   "1 seconde"
+        other: "%{count} secondes"
     prompts:
-      year:   "Année"
-      month:  "Mois"
       day:    "Jour"
       hour:   "Heure"
       minute: "Minute"
+      month:  "Mois"
       second: "Seconde"
-
+      year:   "Année"
+  errors:
+    format: "%{message}"
+    messages: &errors_messages
+      accepted: "'%{attribute}' doit être accepté(e)"
+      blank: "'%{attribute}' doit être rempli(e)"
+      present: "'%{attribute}' doit être vide"
+      confirmation: "'%{attribute}' ne concorde pas avec la confirmation"
+      empty: "'%{attribute}' doit être rempli(e)"
+      equal_to: "'%{attribute}' doit être égal à %{count}"
+      even: "'%{attribute}' doit être pair"
+      exclusion: "'%{attribute}' n'est pas disponible"
+      greater_than: "'%{attribute}' doit être supérieur à %{count}"
+      greater_than_or_equal_to: "'%{attribute}' doit être supérieur ou égal à %{count}"
+      inclusion: "'%{attribute}' n'est pas inclus(e) dans la liste"
+      invalid: "'%{attribute}' n'est pas valide"
+      less_than: "'%{attribute}' doit être inférieur à %{count}"
+      less_than_or_equal_to: "'%{attribute}' doit être inférieur ou égal à %{count}"
+      not_a_number: "'%{attribute}' n'est pas un nombre"
+      not_an_integer: "'%{attribute}' doit être un nombre entier"
+      odd: "'%{attribute}' doit être impair"
+      record_invalid: "La validation a échoué : %{errors}"
+      restrict_dependent_destroy:
+        one: "Suppression impossible: un autre enregistrement est lié"
+        many: "Suppression impossible: d'autres enregistrements sont liés"
+      taken: "n'est pas disponible"
+      too_long:
+        one: "est trop long (pas plus d'un caractère)"
+        other: "est trop long (pas plus de %{count} caractères)"
+      too_short:
+        one: "est trop court (au moins un caractère)"
+        other: "est trop court (au moins %{count} caractères)"
+      wrong_length:
+        one: "ne fait pas la bonne longueur (doit comporter un seul caractère)"
+        other: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
+      other_than: "doit être différent de %{count}"
+    template: &errors_template
+      body: "Veuillez vérifier les champs suivants : "
+      header:
+        one:   "Impossible d'enregistrer ce(tte) %{model} : 1 erreur"
+        other: "Impossible d'enregistrer ce(tte) %{model} : %{count} erreurs"
+  helpers:
+    select:
+      prompt: "Veuillez sélectionner"
+    submit:
+      create: "Créer un(e) %{model}"
+      submit: "Enregistrer ce(tte) %{model}"
+      update: "Modifier ce(tte) %{model}"
   number:
-    format:
-      separator: ","
-      delimiter: " "
-      precision: 3
-      significant: false
-      strip_insignificant_zeros: false
     currency:
       format:
-        format: "%n %u"
-        unit: "€"
-        separator: ","
         delimiter: " "
+        format: "%n %u"
         precision: 2
+        separator: ","
         significant: false
         strip_insignificant_zeros: false
-    percentage:
-      format:
-        delimiter: ""
-    precision:
-      format:
-        delimiter: ""
+        unit: "€"
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
     human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: "milliard"
+          million: "million"
+          quadrillion: "million de milliards"
+          thousand: "millier"
+          trillion: "billion"
+          unit: ""
       format:
         delimiter: ""
         precision: 2
@@ -179,87 +242,26 @@ fr:
           byte:
             one:   "octet"
             other: "octets"
+          gb: "Go"
           kb: "ko"
           mb: "Mo"
-          gb: "Go"
           tb: "To"
-      decimal_units:
-        format: "%n %u"
-        units:
-          unit: ""
-          thousand: "millier"
-          million: "million"
-          billion: "milliard"
-          trillion: "billion"
-          quadrillion: "million de milliards"
-
+    percentage:
+      format:
+        delimiter: ""
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ""
   support:
     array:
-      words_connector: ", "
-      two_words_connector: " et "
       last_word_connector: " et "
-
-  helpers:
-    select:
-      prompt: "Veuillez sélectionner"
-    submit:
-      create: "Créer un(e) %{model}"
-      update: "Modifier ce(tte) %{model}"
-      submit: "Enregistrer ce(tte) %{model}"
-
-  errors: &errors
-    format: "%{attribute} %{message}"
-    messages: &errors_messages
-      inclusion: "n'est pas inclus(e) dans la liste"
-      exclusion: "n'est pas disponible"
-      invalid: "n'est pas valide"
-      confirmation: "ne concorde pas avec la confirmation"
-      accepted: "doit être accepté(e)"
-      empty: "doit être rempli(e)"
-      blank: "doit être rempli(e)"
-      too_long:
-        one: "est trop long (pas plus d'un caractère)"
-        other: "est trop long (pas plus de %{count} caractères)"
-      too_short:
-        one: "est trop court (au moins un caractère)"
-        other: "est trop court (au moins %{count} caractères)"
-      wrong_length:
-        one: "ne fait pas la bonne longueur (doit comporter un seul caractère)"
-        other: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
-      not_a_number: "n'est pas un nombre"
-      not_an_integer: "doit être un nombre entier"
-      greater_than: "doit être supérieur à %{count}"
-      greater_than_or_equal_to: "doit être supérieur ou égal à %{count}"
-      equal_to: "doit être égal à %{count}"
-      less_than: "doit être inférieur à %{count}"
-      less_than_or_equal_to: "doit être inférieur ou égal à %{count}"
-      odd: "doit être impair"
-      even: "doit être pair"
-      taken: "n'est pas disponible"
-      record_invalid: "La validation a échoué : %{errors}"
-
-    template: &errors_template
-      header:
-        one:   "Impossible d'enregistrer ce(tte) %{model} : 1 erreur"
-        other: "Impossible d'enregistrer ce(tte) %{model} : %{count} erreurs"
-      body: "Veuillez vérifier les champs suivants : "
-
-  activemodel:
-    errors:
-      <<: *errors
-  activerecord:
-    attributes:
-      default:
-        name: Nom
-        created_at: Créé le
-        public: Public
-        joined_on : Arrivé le
-        email: Email
-        zoom: Zoom
-        opacity: Opacity
-        source: Source
-        login: Identifiant
-        domain: Domaine
-        user: Utilisateur
-    errors:
-      <<: *errors
+      two_words_connector: " et "
+      words_connector: ", "
+  time:
+    am: 'am'
+    formats:
+      default: "%d %B %Y %Hh %Mmin %Ss"
+      long: "%A %d %B %Y %Hh%M"
+      short: "%d %b %Hh%M"
+    pm: 'pm'

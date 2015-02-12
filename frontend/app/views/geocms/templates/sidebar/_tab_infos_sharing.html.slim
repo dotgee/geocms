@@ -15,16 +15,14 @@ div ng-if="cart.context.uuid"
   form.form-horizontal.inside-tab-pane role="form"
 
     .form-group
-      label.col-sm-2 for="map_id" =t("informations.sharing.map_id")
-      .col-sm-10
+      label.col-sm-3 for="map_id" =t("informations.sharing.map_id.label")
+      .col-sm-9
         input#map_id.form-control ng-model="cart.context.uuid" ng-readonly="true" text-select=""
-
     .form-group
-      label.col-sm-2 for="direct_link" =t("informations.sharing.direct_link")
-      .col-sm-10
+      label.col-sm-3 for="direct_link" =t("informations.sharing.direct_link.label")
+      .col-sm-9
         input#direct_link.form-control ng-readonly="true" ng-model="cart.context.direct_link" text-select=""
-
     .form-group
-      label.col-sm-2 for="embed_code" =t("informations.sharing.embed")
-      .col-sm-10
+      label.col-sm-3 for="embed_code" =t("informations.sharing.embed.label")
+      .col-sm-9
         textarea#embed_code.code.form-control ng-readonly="true" text-select="" ng-model="cart.context.embed_code" rows="3"

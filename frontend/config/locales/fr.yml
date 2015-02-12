@@ -52,9 +52,12 @@ fr:
       f4: ""
     sharing:
       header: Infos
-      map_id: UUID
-      direct_link: Lien
-      embed: Iframe
+      map_id: 
+        label: ID
+      direct_link:
+        label: Lien direct
+      embed:
+        label: HTML
     settings:
       header: Configuration
       import_position: Position actuelle
