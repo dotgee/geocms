@@ -37,7 +37,7 @@ module Geocms
         if @context.save
           render json: @context
         else
-          render json: @context.errors.full_messages.join(", "), status: :malformed_request
+          render json: {message: @context.errors.full_messages.join(" ")}, status: 400
         end
       else
         render json: "Vous n'avez pas les droits pour créer cette carte.", status: :forbidden
