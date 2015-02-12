@@ -1,7 +1,7 @@
 - cache ["v1", "controls"] do
   .add-layer ng-click="cart.currentLayer = null; controls=null;"
     span= t("layers.back_to_list")
-    a class="btn btn-default btn-xs blue icn-only pull-right"
+    a class="btn btn-primary btn-xs blue icn-only pull-right"
       span.carticon-menu
 
   .hud-panel.hud-panel-controls
@@ -25,7 +25,7 @@
         .control-group.field-zoom.pull-left
           .controls
             input type="text" ng-model="cart.currentLayer.cql_filter" placeholder=t("layers.controls.filters.placeholder")
-        a.btn.btn-default.btn-xs.from-map= t "layers.controls.filters.apply"
+        a.btn.btn-primary.btn-xs.from-map= t "layers.controls.filters.apply"
       div ng-switch-when="downloads"
         h5=t "layers.controls.downloads.header"
         a ng-href="{{cart.currentLayer.metadata_url}}" target="geonetwork" ng-if="cart.currentLayer.metadata_url" =t "layers.controls.downloads.metadata"
@@ -38,15 +38,15 @@
           |{{cart.currentLayer.description}}
 
   #ctrls.btn-group
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.center.tooltip")}' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.center.tooltip")}' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
       i.carticon-target
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.query.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()"
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.query.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-class="{disabled: !cart.currentLayer.template}" ng-click="cart.toggleQuery()"
       i.carticon-info
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.opacity.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.opacity.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable=""
       i.carticon-adjust
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.timeline.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-class="{disabled: cart.currentLayer.dimensions.length == 0}"
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.timeline.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-class="{disabled: cart.currentLayer.dimensions.length == 0}"
       i.carticon-play
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.downloads.tooltip")}' tooltip-append-to-body="true" ng-class="{disabled: (cart.currentLayer.data_source_not_internal && !cart.currentLayer.metadata_url)}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.downloads.tooltip")}' tooltip-append-to-body="true" ng-class="{disabled: (cart.currentLayer.data_source_not_internal && !cart.currentLayer.metadata_url)}" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
       i.carticon-download
-    label.btn.btn-default.btn-xs tooltip='#{t("layers.controls.destroy.tooltip")}' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
+    label.btn.btn-primary.btn-xs tooltip='#{t("layers.controls.destroy.tooltip")}' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
       i.carticon-trash

@@ -26,3 +26,4 @@ div ng-if="cart.context.uuid"
       label.col-sm-3 for="embed_code" =t("informations.sharing.embed.label")
       .col-sm-9
         textarea#embed_code.code.form-control ng-readonly="true" text-select="" ng-model="cart.context.embed_code" rows="3"
+    == render "geocms/templates/sidebar/tab_infos_additional_sharing_options"

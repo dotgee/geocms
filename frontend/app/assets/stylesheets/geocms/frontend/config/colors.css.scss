@@ -73,10 +73,9 @@ $linkColor: $color-panel-1 !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              $color-panel-2-fallback !default;
-$btn-default-bg:                 $color-panel-2 !default;
-$btn-default-border:             nth($tertiary-palette, 7) !default;
-
+$btn-default-color:              $md-clr-ui-body-1 !default;
+$btn-default-bg:                 $color-panel-2-fallback !default;
+$btn-default-border:             nth($tertiary-palette, 5) !default;
 
 $btn-primary-color:              $color-panel-2-fallback !default;
 $btn-primary-bg:                 $color-panel-2 !default;
