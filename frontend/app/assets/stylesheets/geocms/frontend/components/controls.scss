@@ -7,6 +7,8 @@
 .timeline {
   .row {
     border: 1px solid $timeline-border-color;
+    margin-left: 0;
+    margin-right: 0;
   }
   .ui-slider-horizontal {
     margin-top: 8px;
