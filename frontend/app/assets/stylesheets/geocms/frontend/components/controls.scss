@@ -26,20 +26,22 @@
   width: 285px;
 }
 
-#ctrls {
-  position: absolute;
-  bottom: -37px;
-  left: 0;
-  right: 0;
-  border-top: 1px solid #E6E6E6;
-  z-index: 50;
-  .btn {
-    margin-top: 0;
-    padding: 8px 29px;
-    margin: 0;
-    &:last-child {
-      padding: 8px 24px;
-      border-right: 0;
-    }
+.controls {
+  text-align: right;
+  margin-top: 5px;
+  padding: 5px;
+  background: $controls-background-color;
+  border-top: $controls-border-color 1px solid;
+  color: $controls-body-color;
+  i {
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
   }
+}
+
+.active-control {
+  padding: 10px 10px 20px 10px;
+  background: $active-control-background-color;
+  border-top: 1px solid $active-control-border-color;
 }
