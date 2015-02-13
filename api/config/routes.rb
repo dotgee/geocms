@@ -24,6 +24,7 @@ Geocms::Core::Engine.add_routes do
 
       resources :data_sources, only: [] do
         get :capabilities, on: :member
+        get :get_feature_infos, on: :collection
       end
 
     end

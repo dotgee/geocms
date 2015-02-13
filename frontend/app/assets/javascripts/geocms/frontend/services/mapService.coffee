@@ -62,10 +62,9 @@ mapModule.service "mapService",
 
       mapService.getFeatureWMS = (e) ->
         url = mapService.getWMSFeatureURL(e)
-        $http.get(
-          "/proxy.php?url="+encodeURIComponent(url)
+        $http.get(url
         ).success((data, status, headers, config) ->
-          template = _.template(mapService.currentLayer.template)
+          template = _.template(mapService.generateTemplate(data))
 
           L.popup({ maxWidth: 800, maxHeight: 600 })
                 .setLatLng(e.latlng)
@@ -79,15 +78,23 @@ mapModule.service "mapService",
         x = @container.layerPointToContainerPoint(e.layerPoint).x
         y = @container.layerPointToContainerPoint(e.layerPoint).y
 
-        @currentLayer.data_source_wms+'?SERVICE=WMS&VERSION=1.1.1'+
-          '&request=GetFeatureInfo'+
-          '&query_layers='+@currentLayer.name+
-          '&layers='+@currentLayer.name+
-          '&BBOX='+BBOX+
-          '&x='+x+'&y='+y+
-          '&height='+size.y+'&width='+size.x+
-          '&info_format=application/json&'+
-          'SRS=CRS:84'+'&count=1'
+        '/api/v1/data_sources/get_feature_infos'+
+        '?wms_url='+@currentLayer.data_source_wms+
+        '&feature_name='+@currentLayer.name+
+        '&width='+size.x+
+        '&height='+size.y+
+        '&bbox='+BBOX+
+        '&current_x='+x+
+        '&current_y='+y
 
+      mapService.generateTemplate = (data) ->
+        if mapService.currentLayer.template? and mapService.currentLayer.template != ""
+          template = mapService.currentLayer.template
+        else
+          template = "<ul class='list-unstyled'>"
+          _.each data.features[0].properties, (val, key) ->
+            template += "<li>"+key+": "+val+"</li>"
+          template += "</ul>"
+        template
       mapService
 ]
