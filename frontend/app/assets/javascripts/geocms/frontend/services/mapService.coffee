@@ -6,7 +6,9 @@ mapModule.service "mapService",
     "$http",
     "projectionService",
     "baseLayerService",
-    (pluginService, $http, projections, baseLayerService) ->
+    "$rootScope"
+    "$compile"
+    (pluginService, $http, projections, baseLayerService, $root, $compile) ->
 
       mapService = {}
 
@@ -19,6 +21,7 @@ mapModule.service "mapService",
         options = { zoomControl: false, crs: projections.getCRS(config.crs) }
         @container = new L.Map(id, options).setView([lat, lng], zoom)
         pluginService.addPlugins(@container)
+        @addEventListener()
 
       mapService.addBaseLayer = () ->
         baseLayer = baseLayerService.getBaseLayer()
@@ -50,51 +53,70 @@ mapModule.service "mapService",
       mapService.invalidateMap = () ->
         @container.invalidateSize()
 
-      mapService.addEventListener = (layer) ->
-        $("#map").css("cursor", "crosshair")
-        @currentLayer = layer
-        @container.addEventListener('click', @getFeatureWMS)
+      mapService.addEventListener = () ->
+        @container.addEventListener('click', @queryLayer, mapService)
       
-      mapService.removeEventListener = ->
-        $("#map").removeAttr('style')
-        @currentLayer = null
-        @container.removeEventListener('click', @getFeatureWMS)
+      mapService.queryLayer = (e) ->
+        html = '<div ng-include="\'/templates/layers/popup.html\'"></div>'
+        scope = $root.$new()
+        linkFunction = $compile(html)
+        @currentPosition = e.latlng
+        @layerPoint = e.layerPoint
+        L.popup({ className: "query-layer-switcher"})
+                .setLatLng(@currentPosition)
+                .setContent(linkFunction(scope)[0])
+                .openOn(@container)
+        @container.on('popupclose', (e) -> scope.$destroy())
+        scope.ms = this
+        scope.$apply()
 
-      mapService.getFeatureWMS = (e) ->
-        url = mapService.getWMSFeatureURL(e)
+      mapService.chooseLayer = (layer) ->
+        @currentLayer = layer
+        @getFeatureWMS()
+
+      mapService.containsPoint = ->
+        (item) ->
+          bounds = L.latLngBounds(L.latLng(Math.ceil(item.bbox[1] *100)/100, Math.ceil(item.bbox[0] *100)/100), L.latLng(Math.floor(item.bbox[3] *100)/100, Math.floor(item.bbox[2] *100)/100))
+          return bounds.contains(mapService.currentPosition)
+
+      mapService.getFeatureWMS = ->
+        url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
-          template = _.template(mapService.generateTemplate(data))
-
           L.popup({ maxWidth: 800, maxHeight: 600 })
-                .setLatLng(e.latlng)
-                .setContent(template(data.features[0].properties))
+                .setLatLng(mapService.currentPosition)
+                .setContent(mapService.generateTemplate(data))
                 .openOn(mapService.container)
         ).error (data, status, headers, config) ->
 
-      mapService.getWMSFeatureURL = (e) ->
-        BBOX = @container.getBounds().toBBoxString()
+      mapService.getWMSFeatureURL = () ->
         size = @container.getSize()
-        x = @container.layerPointToContainerPoint(e.layerPoint).x
-        y = @container.layerPointToContainerPoint(e.layerPoint).y
+        position = @container.layerPointToContainerPoint(@layerPoint)
 
         '/api/v1/data_sources/get_feature_infos'+
         '?wms_url='+@currentLayer.data_source_wms+
         '&feature_name='+@currentLayer.name+
         '&width='+size.x+
         '&height='+size.y+
-        '&bbox='+BBOX+
-        '&current_x='+x+
-        '&current_y='+y
+        '&bbox='+@container.getBounds().toBBoxString()+
+        '&current_x='+position.x+
+        '&current_y='+position.y
 
       mapService.generateTemplate = (data) ->
-        if mapService.currentLayer.template? and mapService.currentLayer.template != ""
-          template = mapService.currentLayer.template
+        if data == "null"
+          template = "<p>Impossible d'obtenir les propriétés de cette couche.</p>"
+        else if data.features.length > 0
+          if mapService.currentLayer.template? and mapService.currentLayer.template != ""
+            html = mapService.currentLayer.template
+          else
+            html = "<ul class='list-unstyled'>"
+            _.each data.features[0].properties, (val, key) ->
+              html += "<li>"+key+": "+val+"</li>"
+            html += "</ul>"
+          template = _.template(html)
+          template = template(data.features[0].properties)
         else
-          template = "<ul class='list-unstyled'>"
-          _.each data.features[0].properties, (val, key) ->
-            template += "<li>"+key+": "+val+"</li>"
-          template += "</ul>"
+          template = "<p>Pas de données sur ce point.</p>"
         template
       mapService
 ]
