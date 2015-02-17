@@ -1,5 +1,5 @@
 #legend.hud-panel
-  div ng-repeat="layer in cart.layers | filter:mapOptions.greaterThan('opacity', 0.01)"
+  div ng-repeat="layer in cart.layers | filter:ms.greaterThan('opacity', 0.01)"
     h6
       |{{layer.title}}
     img ng-src="{{layer.data_source_wms}}?service=wms&request=GetLegendGraphic&VERSION=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&layer={{layer.name}}" onerror='$(this).remove()'

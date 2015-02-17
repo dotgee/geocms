@@ -8,7 +8,7 @@ mapOptionModule.service "mapOptionService",
     (ms, Restangular, $root) ->
       mapOptions = {}
 
-      mapOptions.greaterThan = (prop, val) ->
+      ms.greaterThan = (prop, val) ->
         (item) ->
           return true if (item[prop] > val)
 

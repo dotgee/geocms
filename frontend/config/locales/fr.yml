@@ -1,4 +1,12 @@
 fr:
+  
+  geocms:
+    popup:
+      query:
+        header: Interrogation
+        no_infos: Pas d'informations à cet endroit
+        error: Impossible d'obtenir les informations
+        
   contexts:
     header: Projets
     actions:

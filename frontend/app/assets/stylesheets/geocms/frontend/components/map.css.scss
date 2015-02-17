@@ -1,4 +1,4 @@
-#map {
+.map-container {
   background: grey;
   position: absolute;
   top: 0px;
@@ -18,6 +18,10 @@
       left: 10px;
     }
   }
+}
+
+.map-container.leaflet-container {
+  cursor: pointer;
 }
 
 // LEAFLET OVERRIDES
