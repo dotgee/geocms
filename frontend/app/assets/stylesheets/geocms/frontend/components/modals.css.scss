@@ -1,3 +1,71 @@
+.leaflet-container {
+  .geocms-popup {
+    .leaflet-popup-content-wrapper {
+      padding: 0;
+      background: white;
+      @include box-shadow(0 0 0 4px rgba(0,0,0,0.15));
+      @include border-radius(2px);
+    }
+    .leaflet-popup-content {
+      margin: 0;
+    }
+    .leaflet-popup-scrolled {
+      overflow: hidden;
+      border: 0;
+    }
+    a.leaflet-popup-close-button {
+      right: -12px;
+      top: -12px;
+      width: 20px;
+      height: 20px;
+      padding: 3px;
+      background: white;
+      color: $color-panel-1;
+      font-size: 13px;
+      z-index: 1;
+      @include border-radius(18px);
+      @include box-shadow(0 0 0 3px rgba(0,0,0,0.15));
+      &:hover {
+        color: $color-panel-1-darkened;
+      }
+    }
+    .geocms-popup-header {
+      position: relative;
+      width: auto;
+      height: auto;
+      max-height: 45px;
+      overflow: hidden;
+      padding: 13px 12px;
+      background: $color-panel-1;
+      @include border-radius(2px);
+      h1 {
+        color: $color-panel-2-fallback;
+        width: 100%;
+        margin: 0;
+        font: bold 18px "Helvetica Neue", "Helvetica", Arial;
+        color: #FFFFFF;
+        line-height: 20px;
+        text-shadow: 0 1px rgba(0,0,0,0.5);
+        word-wrap: break-word;
+      }
+    }
+    .geocms-popup-body {
+      padding: 10px;
+      overflow: hidden;
+      > p {
+        margin: 0;
+      }
+    }
+  }
+}
+
 .leaflet-popup.query-layer-switcher {
   width: 300px;
+  .nav-pills > li.active > a {
+    background-color: $color-panel-1;
+    @include border-radius(2px);
+    &:hover {
+      background-color: $color-panel-1-darkened;
+    }
+  }
 }

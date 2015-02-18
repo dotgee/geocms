@@ -62,7 +62,7 @@ mapModule.service "mapService",
         linkFunction = $compile(html)
         @currentPosition = e.latlng
         @layerPoint = e.layerPoint
-        L.popup({ className: "query-layer-switcher"})
+        L.popup({ className: "query-layer-switcher geocms-popup"})
                 .setLatLng(@currentPosition)
                 .setContent(linkFunction(scope)[0])
                 .openOn(@container)
@@ -83,7 +83,7 @@ mapModule.service "mapService",
         url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
-          L.popup({ maxWidth: 800, maxHeight: 600 })
+          L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup" })
                 .setLatLng(mapService.currentPosition)
                 .setContent(mapService.generateTemplate(data))
                 .openOn(mapService.container)
@@ -103,20 +103,22 @@ mapModule.service "mapService",
         '&current_y='+position.y
 
       mapService.generateTemplate = (data) ->
+        wrapper = "<div class='geocms-popup-header'><h1>"+@currentLayer.title+"</h1></div>"
+        wrapper += "<div class='geocms-popup-body'>"
         if data == "null"
-          template = "<p>Impossible d'obtenir les propriétés de cette couche.</p>"
+          body = "<p>Impossible d'obtenir les propriétés de cette couche.</p>"
         else if data.features.length > 0
           if mapService.currentLayer.template? and mapService.currentLayer.template != ""
             html = mapService.currentLayer.template
           else
             html = "<ul class='list-unstyled'>"
             _.each data.features[0].properties, (val, key) ->
-              html += "<li>"+key+": "+val+"</li>"
+              html += "<li><strong>"+key+":</strong> "+val+"</li>"
             html += "</ul>"
           template = _.template(html)
-          template = template(data.features[0].properties)
+          body = template(data.features[0].properties)
         else
-          template = "<p>Pas de données sur ce point.</p>"
-        template
+          body = "<p>Pas de données sur ce point.</p>"
+        wrapper + body + '</div>'
       mapService
 ]
