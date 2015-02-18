@@ -4,7 +4,7 @@ module Geocms
     friendly_id :name, use: [:slugged, :finders]
 
     acts_as_tenant(:account)
-    has_many :contexts_layers, -> { order(:position) }, :dependent => :destroy
+    has_many :contexts_layers, -> { order(position: :desc) }, :dependent => :destroy
     has_many :layers, :through => :contexts_layers
 
     belongs_to :folder, class_name: "Geocms::Folder"

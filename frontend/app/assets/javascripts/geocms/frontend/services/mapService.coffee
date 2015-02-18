@@ -40,6 +40,7 @@ mapModule.service "mapService",
           maxZoom: layer.max_zoom,
           minZoom: 3,
           opacity: (layer.opacity / 100)
+          zIndex: layer.position
         layer._tilelayer.addTo(@container)
         layer.onMap = true
         layer
