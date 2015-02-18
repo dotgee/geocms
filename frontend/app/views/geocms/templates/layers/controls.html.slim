@@ -9,16 +9,14 @@
       |{{cart.currentLayer.title}}
     p
       |{{cart.currentLayer.description}}
-    
-  .controls
-    i.carticon-target tooltip='#{t("layers.controls.center.tooltip")}' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
-    i.carticon-info tooltip='#{t("layers.controls.query.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'query'" uncheckable="" ng-click="cart.toggleQuery()"
-    i.carticon-adjust tooltip='#{t("layers.controls.opacity.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable="" 
-    i.carticon-play tooltip='#{t("layers.controls.timeline.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-if="cart.currentLayer.dimensions.length > 0"
-    i.carticon-download tooltip='#{t("layers.controls.downloads.tooltip")}' tooltip-append-to-body="true" ng-if="!cart.currentLayer.data_source_not_internal && cart.currentLayer.metadata_url" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
-    i.carticon-trash tooltip='#{t("layers.controls.destroy.tooltip")}' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
 
   div ng-switch="" on="controls"
+    .controls
+      i.carticon-target tooltip='#{t("layers.controls.center.tooltip")}' tooltip-append-to-body="true" ng-click="cart.centerOn(cart.currentLayer)"
+      i.carticon-adjust tooltip='#{t("layers.controls.opacity.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'opacity'" uncheckable="" 
+      i.carticon-play tooltip='#{t("layers.controls.timeline.tooltip")}' tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-if="cart.currentLayer.dimensions.length > 0"
+      i.carticon-download tooltip='#{t("layers.controls.downloads.tooltip")}' tooltip-append-to-body="true" ng-if="!cart.currentLayer.data_source_not_internal && cart.currentLayer.metadata_url" ng-model="$parent.controls" btn-radio="'downloads'" uncheckable=""
+      i.carticon-trash tooltip='#{t("layers.controls.destroy.tooltip")}' tooltip-append-to-body="true" ng-click="cart.remove(cart.currentLayer)"
     .active-control ng-switch-when="opacity"
       h5=t "layers.controls.opacity.header"
       .opacity-controler
