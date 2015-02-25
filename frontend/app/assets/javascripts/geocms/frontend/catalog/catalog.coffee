@@ -19,6 +19,11 @@ catalog.config [
           "catalog@contexts":
             templateUrl: config.prefix_uri+"/templates/catalog/catalog.html"
             controller: "CatalogController"
+      .state 'contexts.edit.catalog',
+        views:
+          "catalog@contexts":
+            templateUrl: config.prefix_uri+"/templates/catalog/catalog.html"
+            controller: "CatalogController"
       .state 'contexts.root.catalog',
         views:
           "catalog@contexts":

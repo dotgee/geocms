@@ -104,7 +104,7 @@ cartModule.service "cartService",
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity, position: cl.position }
         )
         @context.save().then ((response)->
-          $state.transitionTo("contexts.show", {uuid: response.uuid}).then ->
+          $state.transitionTo("contexts.edit", {uuid: response.uuid}).then ->
             toaster.pop('success', "La sauvegarde a réussi", response.data)
             $root.cart.state = "saved"
         ), (response)->

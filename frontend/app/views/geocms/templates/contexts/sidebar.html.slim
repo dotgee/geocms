@@ -1,8 +1,11 @@
 - cache ["v1", "sidebar"] do
   .hud ng-hide="catalogOpened()"
-    a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}" ng-if="cart.context.editable"
+    a#save-button ng-click="cart.state == 'saved' || cart.save()" ng-class="{saved: cart.state == 'saved'}" ng-if="state != 'contexts.show'"
       span.carticon-floppy
       span ng-bind="cart.state == 'saved' ? '#{t("contexts.actions.saved")}' : '#{t("contexts.actions.save")}'"
+    a#save-button ui-sref='contexts.edit({uuid: cart.context.uuid})' ng-if="state == 'contexts.show' && cart.context.editable"
+      span.carticon-pencil
+      span Editer
     == render "geocms/templates/sidebar/header"
     navtabset.nav-filled justified="true" hashAware="true"
       navtab heading=t("layers.header") uncheckable="" href="'#layers'"

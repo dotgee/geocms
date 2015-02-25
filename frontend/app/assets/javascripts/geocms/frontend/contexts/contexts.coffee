@@ -81,6 +81,30 @@ contexts.config [
             Restangular.one('contexts', $stateParams.uuid).get()
           ]
 
+      .state 'contexts.edit',
+        url: '/{uuid}/edit'
+        parent: 'contexts.root'
+        views:
+          "sidebar@contexts":
+            templateUrl: config.prefix_uri+"/templates/contexts/sidebar.html"
+            controller: "ContextsController"
+          "map@contexts":
+            templateUrl: config.prefix_uri+"/templates/contexts/map.html"
+            controller: ["mapService", "context", "folders", "$rootScope", "$scope", '$location', '$state', (mapService, context, folders, $root, $scope, $location, $state) ->
+              $state.transitionTo('contexts.show', {uuid: context.uuid}) unless context.editable
+              mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
+              mapService.addBaseLayer()
+              $root.cart.context = context
+              $root.cart.addSeveral()
+              $root.cart.folders = folders
+              $scope.mapService = mapService
+              $location.hash('layers')
+            ]
+        resolve:
+          context: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
+            Restangular.one('contexts', $stateParams.uuid).get()
+          ]
+
       .state 'contexts.show.share',
         url: '/share'
         parent: 'contexts.show'
@@ -101,6 +125,8 @@ contexts.controller "ContextsController", [
   ($scope, $root, $state, mapService, Cart, optionService) ->
 
     $root.cart = new Cart()
+
+    $scope.state = $state.current.name
 
     watchers = '[cart.context.name, cart.context.description, cart.context.folder_id, cart.context.center_lng, cart.context.center_lat, cart.context.zoom]'
     $root.$watchCollection watchers, (newValues, oldValues) ->

@@ -1,6 +1,8 @@
 #infos.hud-panel
-  tabset.nav-bottom.nav-alternative justified="true"
+  tabset.nav-bottom.nav-alternative justified="true" ng-if="state != 'contexts.show'"
     tab heading=t("informations.sharing.header") active="sharingActive"
       == render "geocms/templates/sidebar/tab_infos_sharing"
     tab heading=t("informations.settings.header") active="settingsActive"
       == render "geocms/templates/sidebar/tab_infos_settings"
+  div ng-if="state == 'contexts.show'"
+    == render "geocms/templates/sidebar/tab_infos_sharing"

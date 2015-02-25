@@ -12,7 +12,7 @@ div ng-if="cart.context.uuid"
       |{{cart.context.name}}
   p.project-description
     |{{cart.context.description}}
-  form.form-horizontal.inside-tab-pane role="form"
+  form.form-horizontal.inside-tab-pane role="form" ng-if="state != 'contexts.show'"
 
     .form-group
       label.col-sm-3 for="map_id" =t("informations.sharing.map_id.label")
