@@ -1,7 +1,6 @@
 - cache ["v1", "layer"] do
   a.pull-left.image-link
-    / img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64' ng-if="false"
-    img.media-object ng-src="http://lorempixel.com/64/64/abstract/{{$index+1}}"
+    img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64'
   .media-body
     h4.media-heading.layer-heading
       |{{layer.title}}

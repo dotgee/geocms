@@ -1,4 +1,3 @@
-require "curb"
 module Geocms
   class Layer < ActiveRecord::Base
     extend FriendlyId
@@ -22,6 +21,8 @@ module Geocms
     mount_uploader :thumbnail, Geocms::LayerUploader
     validates_presence_of :data_source_id, :name, :title
 
+    after_commit :get_thumbnail, on: :create
+
     default_scope -> { order(:title) }
     pg_search_scope :search, against: [:name, :title]
 
@@ -32,32 +33,11 @@ module Geocms
       bbox.nil? ? [] : bbox.to_bbox
     end
 
-    def thumb_url(width = 64, height = 64, native_srs)
-      bbox = self.bounding_boxes.first
-      box = bbox.to_bbox if bbox
-      return '/images/defaultmap.png' if box.nil?
-      ROGC::WMSClient.get_map(data_source.wms, name, box, width, height, bbox.crs)
-    end
+    private
 
-    # TODO: Scary code
-    def do_thumbnail(force=false)
-      if force || self.thumbnail.url.nil?
-        tempfile = Tempfile.new([ self.id.to_s, '.png' ])
-        tempfile.binmode
-        begin
-         tempfile << Curl.get(self.thumb_url(64, 64, self.crs)).body_str
-         tempfile.rewind
-         self.thumbnail = tempfile
-         # self.remote_thumbnail_url = self.thumb_url(64, 64, self.crs)
-         self.save!
-        rescue => e
-          logger.error e.message
-        ensure
-         tempfile.close
-         tempfile.unlink
-        end
-      end
+    def get_thumbnail 
+      box = bounding_boxes.leafletable.first
+      LayerThumbnailWorker.perform_async(id, data_source_wms, box.crs, box.to_bbox)
     end
-
   end
 end
