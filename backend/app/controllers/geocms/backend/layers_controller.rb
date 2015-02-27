@@ -4,7 +4,7 @@ module Geocms
       #before_filter :require_category, :only => [:destroy]
 
       def index
-        @layers = Layer.all.page(params[:page]).per(params[:per_page])
+        @layers = current_tenant.layers.page(params[:page]).per(params[:per_page])
         respond_with([:backend, @layers])
       end
 

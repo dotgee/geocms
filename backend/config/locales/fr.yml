@@ -73,6 +73,8 @@ fr:
       placeholder:
         search_layers: Rechercher une couche
 
+  result_search: Résultats de la recherche
+
   simple_form:
     labels:
       defaults:

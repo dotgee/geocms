@@ -1,14 +1,18 @@
 .page-header
   h1 = t(:result_search)
-table.table.table-striped.table-backend
+
+.clearfix
+= paginate @layers
+
+table.table.table-striped.categories-index.table-backend
   thead
     tr
-      th Title
-      th
-      th
-      th
+      th= t("activerecord.attributes.default.name")
+      th= t("modules.layers.categories")
+      th.th-action
+      th.th-action
   tbody
     - @layers.each do |layer|
-      == render "geocms/backend/layers/layer", layer: layer
+      == render partial: "geocms/backend/layers/layer_list", locals: {layer: layer}
 
 = paginate @layers
