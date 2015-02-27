@@ -1,12 +1,12 @@
 fr:
-  
+
   geocms:
     popup:
       query:
         header: Interrogation
         no_infos: Pas d'informations à cet endroit
         error: Impossible d'obtenir les informations
-        
+
   contexts:
     header: Projets
     actions:
@@ -60,7 +60,7 @@ fr:
       f4: ""
     sharing:
       header: Informations
-      map_id: 
+      map_id:
         label: ID
       direct_link:
         label: Lien direct
@@ -72,3 +72,7 @@ fr:
 
   legend:
     header: Légende
+
+  modules:
+    layers:
+      catalog: Catalogue

@@ -73,6 +73,7 @@ fr:
       placeholder:
         search_layers: Rechercher une couche
 
+  project: Projets
   result_search: Résultats de la recherche
 
   simple_form:
@@ -104,3 +105,6 @@ fr:
       next: Suivante
       previous: Précédente
       truncate: "..."
+  session:
+    invalid_credentials: "Mauvais email ou password"
+    logged_in: "Authentification réussie"
