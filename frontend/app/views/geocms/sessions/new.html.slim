@@ -1,0 +1,18 @@
+= form_tag backend_sessions_path, method: :post, class: "form-signin #{"with-errors" if flash.any?}" do
+  .page-header
+    h1.lightweight= t('geocms.login.header')
+  - flash.each do |name, msg|
+    .div class="alert alert-#{name == "notice" ? "success" : "danger"}"
+      = content_tag :div, msg, :id => "flash_#{name}"
+  .form-group
+    = label_tag :username, t('geocms.login.username_or_email')
+    = text_field_tag :username, params[:username], class: "form-control "
+
+  .form-group
+    = label_tag :password, t('geocms.login.password')
+    = password_field_tag :password, nil, class: "form-control"
+  .form-actions
+    .row
+      .col-xs-6
+        = submit_tag t('geocms.login.submit'), class: "btn btn-primary btn-submit"
+      .col-xs-6

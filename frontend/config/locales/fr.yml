@@ -7,6 +7,12 @@ fr:
         no_infos: Pas d'informations à cet endroit
         error: Impossible d'obtenir les informations
 
+    login:
+      header: Connexion
+      username_or_email: "Nom d'utilisateur / Adresse email :"
+      password: "Mot de passe :"
+      submit: Connexion
+
   contexts:
     header: Projets
     actions:
@@ -75,4 +81,4 @@ fr:
 
   modules:
     layers:
-      catalog: Catalogue
+      catalog: Catalogue de données réferencées

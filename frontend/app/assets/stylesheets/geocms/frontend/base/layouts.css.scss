@@ -24,6 +24,10 @@ body.fullscreen{
   box-shadow: none;
 }
 
+body.login {
+  background-image: $login-form-background-image;
+}
+
 .container-infos {
   height: 90px;
 }

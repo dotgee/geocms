@@ -4,15 +4,34 @@
 }
 
 .form-signin {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   max-width: 475px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
+  height: 348px;
+  background-color: $login-form-background-color;
+  color: $login-form-body-color;
   @include border-radius(5px);
-  .form-signin-heading, .checkbox {
-    margin-bottom: 10px;
+  &.with-errors {
+    height: 425px;
   }
   h1 {
-    margin-bottom: 40px;
+    text-align: center;
+    color: $login-form-header-color;
+  }
+  .form-group {
+    padding: 0 29px;
+  }
+  .form-actions {
+    background-color: $login-form-actions-background-color;
+    color: $login-form-actions-body-color;
+    border-top: none;
+    padding: 13px 29px 12px;
+    position: relative;
+    bottom: -15px;
   }
 }
 
@@ -36,38 +55,6 @@
   background-color: white;
   border-top: none;
   padding: 4px 20px 11px;
-}
-
-input.input-light {
-  border: 0;
-  border-bottom: 1px solid #CCC;
-  background-color: transparent !important;
-  @include box-shadow(none);
-  @include border-radius(0);
-  line-height: 22px;
-  font-size: 14px;
-  -webkit-appearance: none;
-}
-
-input:-webkit-autofill {
-  background-color: rgba(135, 206, 255, .3) !important;
-}
-
-input:-webkit-autofill {
-    -webkit-box-shadow:0 0 0 50px #F4F4F4 inset;
-    -webkit-text-fill-color: #313131;
-}
-
-input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px  #F4F4F4 inset;
-    -webkit-text-fill-color: #313131;
-}
-
-.label-light {
-  font-size: 12px;
-  font-weight: 400;
-  color: #848484;
-  text-transform: uppercase;
 }
 
 .modal {

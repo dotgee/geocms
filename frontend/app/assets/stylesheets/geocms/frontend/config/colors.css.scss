@@ -68,6 +68,13 @@ $ui-slider-range-background-color: $color-panel-2 !default;
 $timeline-border-color: #9B9B9B !default;
 $thumbnail-placeholder-background-color: #E5E5E5 !default;
 
+$login-form-background-color: white !default;
+$login-form-background-image: image-url("geocms/login.jpg") !default;
+$login-form-body-color: $md-clr-ui-body-1 !default;
+$login-form-header-color: $md-clr-ui-headline !default;
+$login-form-actions-background-color: $color-panel-1 !default;
+$login-form-actions-body-color: $md-clr-ui-body-1 !default;
+
 // Bootstrap variables
 
 $navbarLinkColor: $color-panel-2-fallback !default;

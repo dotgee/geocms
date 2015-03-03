@@ -40,6 +40,7 @@ html ng-app="geocms"
 
 
     #page
+      == render "/geocms/layouts/messages"
       - if content_for? :sidebar
         == render "/geocms/layouts/two_columns"
       - else
