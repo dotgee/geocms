@@ -1,11 +1,11 @@
 fr:
   
-
+  
   session:
     invalid_credentials: Mauvais email ou password
     logged_in: Authentification réussie
     destroy: Deconnecté
-
+    unauthorized: Vous n'êtes pas autorisé à voir cette page.
   ##############################################################################
   # Rails i18n
   ##############################################################################
