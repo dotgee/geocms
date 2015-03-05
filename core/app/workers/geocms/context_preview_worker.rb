@@ -1,28 +1,13 @@
 module Geocms
   class ContextPreviewWorker
     include Sidekiq::Worker
-#     include Rails.application.routes.url_helpers
 
-    def perform(context, url)
-#       t = Tempfile.new([context["uuid"], ".png"])
-#       t.binmode
-#       #TODO
-#       #catch errors
-#       cmd = "phantomjs #{Rails.root}/script/thumbnail.js #{url_for_context(context, url)} #{t.path}"
-#       puts cmd
-#       `#{cmd}`
-
-#       t.rewind
-#       ctx = Context.find(context["id"])
-#       ctx.preview = t
-#       Context.skip_callback(:save, :after, :generate_preview)
-#       ctx.save
+    def perform(context_id, current_tenant_id)
+      current_tenant = Geocms::Account.find current_tenant_id
+      context = Geocms::Context.find context_id
+      context.remote_preview_url = "#{current_tenant.screenshot_url.value}?url=#{current_tenant.host.value}#{context.share_url}"
+      context.save!
     end
 
-#     private
-#       def url_for_context(context, url)
-#         #mettre en place une configuration d'url
-#         return url + share_context_path({ id: context["uuid"] })
-#       end
   end
 end

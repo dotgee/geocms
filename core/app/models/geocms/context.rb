@@ -14,7 +14,6 @@ module Geocms
     accepts_nested_attributes_for :contexts_layers, allow_destroy: true
     after_create :generate_uuid
 
-    after_save :generate_preview
     after_save :set_default
 
     validates :name, :contexts_layers, presence: true
@@ -49,16 +48,11 @@ module Geocms
       [minx, miny, maxx, maxy].join(",")
     end
 
-    private
-      def generate_preview(url = nil, force = false)
-        unless preview_changed?
-          url ||= ENV["HOST_URL"]
-          return true if url.nil?
-          #return true if preview? and !force
-          Geocms::ContextPreviewWorker.perform_async(self, url)
-        end
-      end
+    def share_url
+      "/maps/#{uuid}/share"
+    end
 
+    private
       def set_default
         Context.where('id != ?', id).update_all(by_default: false) if by_default
       end

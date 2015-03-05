@@ -2,16 +2,14 @@
 
   .container
     .page-header
-      h1 
-        a.unstyled ui-sref="folders.root" = "#{t('contexts.header')} /" 
+      h1
+        a.unstyled ui-sref="folders.root" = "#{t('contexts.header')} /"
         small
           |{{folder.name}}
     .row masonry="" load-images="false" masonry-options="{isStill: true}"
       .masonry-brick.col-sm-4.col-md-3 ng-repeat="context in folder.contexts"
         .thumbnail.thumbnail-layer ui-sref="contexts.show(context)"
-          .placeholder style="background: url(http://lorempixel.com/300/200/abstract/{{$index+1}});"
-            / img ng-src="{{context.preview_url}}" ng-if="context.preview_url"
-            / img ng-src="http://lorempixel.com/300/200/abstract/{{$index+1}}"
+          .placeholder style="background: url({{ (context.preview_url ? context.preview_url : '')}}) no-repeat;"
           h4
             |{{context.name}}
           p

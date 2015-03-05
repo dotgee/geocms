@@ -2,7 +2,7 @@ module Geocms
   class Api::V1::ContextsController < Api::V1::BaseController
     respond_to :xml, only: :wmc
     serialization_scope :current_scope
-    
+
     def index
       @contexts = Geocms::Context.all
       respond_with @contexts
@@ -22,6 +22,7 @@ module Geocms
       @context = Geocms::Context.find(params[:id])
       if can? :update, @context
         if @context.update_attributes(context_params)
+          Geocms::ContextPreviewWorker.perform_async(@context.id, current_tenant.id)
           render json: @context
         else
           render json: @context.errors.to_hash
@@ -35,6 +36,7 @@ module Geocms
       if can? :create, Geocms::Context
         @context = Geocms::Context.new(context_params)
         if @context.save
+          Geocms::ContextPreviewWorker.perform_async(@context.id, current_tenant.id)
           render json: @context
         else
           render json: {message: @context.errors.full_messages.join(" ")}, status: 400
