@@ -6,7 +6,7 @@ pluginModule.service "pluginService",
     ($root) ->
       plugins = {}
 
-      plugins.addPlugins = (map) ->
+      plugins.addPlugins = (map, pluginsParams) ->
         # scale on the map
         # scale = new L.Control.Scale({ imperial: false, maxWidth: 100, minWidth: 100 })
         # scale.addTo(map)

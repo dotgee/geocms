@@ -72,8 +72,6 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.context = context
               $root.cart.addSeveral()
-              $root.cart.folders = folders
-              $scope.mapService = mapService
               $location.hash('project')
             ]
         resolve:
@@ -106,12 +104,20 @@ contexts.config [
           ]
 
       .state 'contexts.show.share',
-        url: '/share'
+        url: '/share?plugins'
         parent: 'contexts.show'
         views:
           "sidebar@contexts":
             templateUrl: ""
             controller: "ContextsController"
+          "map@contexts":
+            templateUrl: config.prefix_uri+"/templates/contexts/map.html"
+            controller: ["mapService", "context", "folders", "$rootScope", "$stateParams", (mapService, context, folders, $root, $stateParams) ->
+              mapService.createMap("map", context.center_lat, context.center_lng, context.zoom, $stateParams["plugins"])
+              mapService.addBaseLayer()
+              $root.cart.context = context
+              $root.cart.addSeveral()
+            ]
 ]
 
 contexts.controller "ContextsController", [

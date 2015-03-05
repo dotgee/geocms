@@ -1,6 +1,6 @@
 mapModule = angular.module "geocms.map", ["geocms.plugins", "geocms.projections", "geocms.baseLayer"]
 
-mapModule.service "mapService", 
+mapModule.service "mapService",
   [
     "pluginService",
     "$http",
@@ -17,10 +17,10 @@ mapModule.service "mapService",
       mapService.crs = null
       mapService.fullscreen = false
 
-      mapService.createMap = (id, lat, lng, zoom) ->
+      mapService.createMap = (id, lat, lng, zoom, pluginParams) ->
         options = { zoomControl: false, crs: projections.getCRS(config.crs) }
         @container = new L.Map(id, options).setView([lat, lng], zoom)
-        pluginService.addPlugins(@container)
+        pluginService.addPlugins(@container, pluginParams)
         @addEventListener()
 
       mapService.addBaseLayer = () ->
@@ -56,7 +56,7 @@ mapModule.service "mapService",
 
       mapService.addEventListener = () ->
         @container.addEventListener('click', @queryLayer, mapService)
-      
+
       mapService.queryLayer = (e) ->
         html = '<div ng-include="\'/templates/layers/popup.html\'"></div>'
         scope = $root.$new()
