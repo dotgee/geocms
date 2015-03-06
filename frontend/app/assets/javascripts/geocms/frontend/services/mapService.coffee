@@ -63,6 +63,7 @@ mapModule.service "mapService",
         linkFunction = $compile(html)
         @currentPosition = e.latlng
         @layerPoint = e.layerPoint
+        @container.setView(@currentPosition)
         L.popup({ className: "query-layer-switcher geocms-popup"})
                 .setLatLng(@currentPosition)
                 .setContent(linkFunction(scope)[0])
