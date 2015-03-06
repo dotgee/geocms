@@ -15,16 +15,16 @@
     opacity: 1;
   }
   .btn-close {
-    margin: 20px;
-    position: fixed;
-    top: 20px;
+    position: relative;
+    top: 40px;
     right: 0px;
     padding: 2px 8px 4px 8px;
     &.close {
-      color: white;
+      background-color: $catalog-close-button-background-color;
+      color: $catalog-close-button-color;
+      border: 1px solid $catalog-close-button-border-color;
       text-shadow: none;
       @include opacity(100);
-      background-color: $btn-default-bg;
     }
   }
   .page-header {
