@@ -16,7 +16,7 @@ module Geocms
 
       def getfeatures
         layer = Layer.find(params[:id])
-        @features = WMS::Client.new(layer.data_source_wms, {:layer_name => layer.name}).features_list
+        @features = OGC::DescribeFeatureType.new(layer.data_source_wms, layer.name).properties
         respond_to do |format|
           format.json { render json: @features }
         end

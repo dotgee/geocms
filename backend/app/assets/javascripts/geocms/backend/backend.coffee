@@ -8,3 +8,5 @@
 #= require restangular
 #= require ng-table
 #= require ./geocms
+
+#= require ./ckeditor/features_plugin
