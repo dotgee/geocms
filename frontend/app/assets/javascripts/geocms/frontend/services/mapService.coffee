@@ -78,7 +78,7 @@ mapModule.service "mapService",
 
       mapService.containsPoint = ->
         (item) ->
-          bounds = L.latLngBounds(L.latLng(Math.ceil(item.bbox[1] *100)/100, Math.ceil(item.bbox[0] *100)/100), L.latLng(Math.floor(item.bbox[3] *100)/100, Math.floor(item.bbox[2] *100)/100))
+          bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
           return bounds.contains(mapService.currentPosition)
 
       mapService.getFeatureWMS = ->
