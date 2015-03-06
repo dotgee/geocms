@@ -5,7 +5,7 @@ module Geocms
     skip_before_action :require_login
 
     def new
-      redirect_back_or_to backend_root_url if logged_in?
+      redirect_back_or_to root_url if logged_in?
     end
 
     def create
