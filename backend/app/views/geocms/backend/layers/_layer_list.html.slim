@@ -8,5 +8,5 @@ tr.layer-menu-list
     = link_to [:edit, :backend, layer], rel: "tooltip", "data-original-title" => t("actions.default.edit") do
       i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td.actions
-    = link_to (@category ? [:backend, @category, layer] : [:backend, layer]), confirm: 'Are you sure?', method: :delete do
+    = link_to (@category ? [:backend, @category, layer] : [:backend, layer]), data: { confirm: "#{t(:confirm_delete)}"}, method: :delete do
       i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

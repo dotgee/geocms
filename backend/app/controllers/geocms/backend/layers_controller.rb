@@ -75,7 +75,7 @@ module Geocms
         else
           @layer = Layer.find(params[:id])
           @layer.destroy
-          respond_with([:backend])
+          redirect_to :backend_layers
         end
       end
 

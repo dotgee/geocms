@@ -3,6 +3,8 @@ fr:
   user: Utilisateur
   account: Compte
 
+  confirm_delete: Supprimer ?
+
   messages:
     loading: "Chargement en cours, merci de patienter..."
     comfirm: Êtes vous sur ?
