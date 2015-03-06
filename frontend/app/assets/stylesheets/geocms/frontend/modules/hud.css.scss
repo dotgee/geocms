@@ -10,6 +10,9 @@
   .tab-content {
     overflow-y: auto;
   }
+  .nav-filled {
+    position: relative;
+  }
   .nav.nav-tabs {
     margin-bottom: 0px;
   }
@@ -42,7 +45,7 @@
   text-decoration: none;
   width: 130px;
   position: absolute;
-  top: 65px;
+  top: 0px;
   left: 450px;
   z-index: 300;
   height: 37px;
