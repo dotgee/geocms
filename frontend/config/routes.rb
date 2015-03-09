@@ -1,8 +1,9 @@
 Geocms::Core::Engine.add_routes do
 
   root to: "pages#index"
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
+  get "logout" => "sessions#destroy", as: "logout"
+  get "login" => "sessions#new", as: "login"
+  resources :sessions, only: :create
 
   # serve compiled templates
   get 'templates/(*template_name)', :to => 'static#template'
