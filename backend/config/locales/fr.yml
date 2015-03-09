@@ -39,6 +39,7 @@ fr:
       new_project: Nouveau projet
     layers:
       categories: Catégories
+      new: Créer une nouvelle couche
       title:
         index: Couches
         new: Ajouter une nouvelle couche
