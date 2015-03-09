@@ -1,3 +1,26 @@
+#folders-button {
+  width: 95px;
+  height: 40px;
+  background: white;
+  position: absolute;
+  top: 16px;
+  padding: 7px 5px;
+  right: -52px;
+  border-left: 3px solid rgb(41, 182, 246);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  color: rgb(127, 127, 127);
+  cursor: pointer;
+  &:hover {
+    right: 0;
+  }
+  .carticon-folder {
+    font-size: 23px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+}
+
 .folder-display {
   font-size: 130px;
   text-align: center;
