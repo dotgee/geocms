@@ -36,7 +36,7 @@ module Geocms
     @@context_attributes = [
       :id, :name, :zoom, :description, :center_lng, :center_lat,
       :layer_ids, :uuid, :contexts_layers_attributes, :preview,
-      :account_id, :folder_id, :by_default, :slug,
+      :account_id, :folder_id, :by_default, :slug, :minx, :miny, :maxx, :maxy,
       contexts_layers_attributes: @@contexts_layers_attributes
     ]
 

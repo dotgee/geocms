@@ -36,7 +36,7 @@ cartModule.service "cartService",
           layer.position = p
 
         @state = "unsaved"
-        
+
       Cart::toggleQuery = ->
         if ms.currentLayer == @currentLayer
           ms.removeEventListener(@currentLayer)
@@ -124,6 +124,9 @@ cartModule.service "cartService",
         @context.center_lng = centerInfos.center.lng
         @context.center_lat = centerInfos.center.lat
         @context.zoom = centerInfos.zoom
-
+        @context.miny = centerInfos.bounds.getSouthWest().lat
+        @context.minx = centerInfos.bounds.getSouthWest().lng
+        @context.maxy = centerInfos.bounds.getNorthEast().lat
+        @context.maxx = centerInfos.bounds.getNorthEast().lng
       Cart
   ]

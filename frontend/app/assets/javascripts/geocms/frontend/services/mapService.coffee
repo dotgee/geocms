@@ -49,6 +49,7 @@ mapModule.service "mapService",
         {
           center: @container.getCenter()
           zoom: @container.getZoom()
+          bounds: @container.getBounds()
         }
 
       mapService.invalidateMap = () ->
