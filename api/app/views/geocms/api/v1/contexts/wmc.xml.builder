@@ -1,13 +1,13 @@
 xml.instruct!
 xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://www.opengis.net/context", "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation" => "http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd") do
   xml.General do
-    point_max = Geocms::ProjectionConverter.new(current_tenant.crs.value, [@context.maxx, @context.maxy]).project
-    point_min = Geocms::ProjectionConverter.new(current_tenant.crs.value, [@context.minx, @context.miny]).project
-    xml.BoundingBox(:SRS => current_tenant.crs.value, :maxx => point_max[0], :maxy => point_max[1], :minx => point_min[0], :miny => point_min[1])
-    bounding_box = Geocms::ProjectionConverter.new(current_tenant.crs.value).bbox
+    @point_max = Geocms::ProjectionConverter.new(current_tenant.crs.value, [@context.maxx, @context.maxy]).project
+    @point_min = Geocms::ProjectionConverter.new(current_tenant.crs.value, [@context.minx, @context.miny]).project
+    xml.BoundingBox(:SRS => current_tenant.crs.value, :maxx => @point_max[0], :maxy => @point_max[1], :minx => @point_min[0], :miny => @point_min[1])
 
     xml.Title @context.name
     xml.Extension do
+      bounding_box = Geocms::ProjectionConverter.new(current_tenant.crs.value).bbox
       xml.tag!("ol:maxExtent", :minx => bounding_box[0], :miny => bounding_box[1], :maxx => bounding_box[2], :maxy => bounding_box[3], "xmlns:ol" => "http://openlayers.org/context")
     end
   end
@@ -26,7 +26,8 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
         xml.Format("image/png", :current => 1)
       end
       xml.Extension do
-        xml.tag!("ol:maxExtent", minx: "-357823.236499999999", miny: "6037008.69390000030", maxx: "2146865.30590000004", maxy: "8541697.23630000092", "xmlns:ol" => "http://openlayers.org/context")
+
+        xml.tag!("ol:maxExtent", :minx => @point_min[0], :miny => @point_min[1], :maxx => @point_max[0], :maxy => @point_max[1], "xmlns:ol" => "http://openlayers.org/context")
         xml.tag!("ol:numZoomLevels", 22, "xmlns:ol" => "http://openlayers.org/context")
         xml.tag!("ol:tileSize", :height => "256", :width => "256", "xmlns:ol" => "http://openlayers.org/context")
         xml.tag!("ol:units", "m", "xmlns:ol" => "http://openlayers.org/context")

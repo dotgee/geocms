@@ -20,6 +20,8 @@ module Geocms
         proj_to_4326
       when "EPSG:2154"
         proj_to_2154
+      when "EPSG:3857"
+        proj_to_3857
       else
         @point
       end
