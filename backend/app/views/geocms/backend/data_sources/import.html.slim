@@ -22,7 +22,7 @@ div ng-controller="ImportCtrl" ng-init="source_id=#{@data_source.id}"
     script id="ng-table/headers/checkbox.html" type="text/ng-template" 
       input type="checkbox" ng-model="checkboxes.checkAll" name="filter-checkbox" 
 
-  .row
+  .row ng-hide="tableParams.settings().$loading"
     .col-xs-6
       select.form-control ng-model="selectedCategories" ng-options="('-- '.repeat(category.depth)+category.name) for category in categories track by category.id" multiple="multiple" ng-multiple="true"
     .col-xs-2.col-md-1

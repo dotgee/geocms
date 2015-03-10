@@ -42,7 +42,8 @@ app = angular.module("geocms", [
           (response) ->
             params.total response.total
             $defer.resolve $scope.layers = getDatasPerPage(data.layers)
-            $scope.error = response.data.message if response.data
+          , (error) ->
+            $scope.error = error.data.message
         )
       return
   )
@@ -89,7 +90,7 @@ app = angular.module("geocms", [
       }
       unless angular.equals({},layer.table.dimensions)
         dimensions = { dimensions_attributes: _.map(layer.table.dimensions.time.table.values, (dim) -> value: dim) }
-        angular.extend dimensions, infos
+        infos = angular.extend dimensions, infos
       unless angular.equals([],layer.table.metadata_urls)
         infos.metadata_url = layer.table.metadata_urls[0].table.href
 
