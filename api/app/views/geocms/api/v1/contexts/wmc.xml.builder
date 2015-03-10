@@ -7,8 +7,8 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
 
     xml.Title @context.name
     xml.Extension do
-      bounding_box = Geocms::ProjectionConverter.new(current_tenant.crs.value).bbox
-      xml.tag!("ol:maxExtent", :minx => bounding_box[0], :miny => bounding_box[1], :maxx => bounding_box[2], :maxy => bounding_box[3], "xmlns:ol" => "http://openlayers.org/context")
+      @bounding_box = Geocms::ProjectionConverter.new(current_tenant.crs.value).bbox
+      xml.tag!("ol:maxExtent", :minx => @bounding_box[0], :miny => @bounding_box[1], :maxx => @bounding_box[2], :maxy => @bounding_box[3], "xmlns:ol" => "http://openlayers.org/context")
     end
   end
   xml.LayerList do
@@ -58,8 +58,14 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
         end
         xml.Extension do
           bbox = layer.boundingbox
-          p_min = Geocms::ProjectionConverter.new(current_tenant.crs.value, [bbox[0], bbox[1]]).project
-          p_max = Geocms::ProjectionConverter.new(current_tenant.crs.value, [bbox[2], bbox[3]]).project
+
+          if bbox.nil?
+            p_min = [bbox[0], bbox[1]]
+            p_max = [bbox[2], bbox[3]]
+          else
+            p_min = Geocms::ProjectionConverter.new(current_tenant.crs.value, [bbox[0], bbox[1]]).project
+            p_max = Geocms::ProjectionConverter.new(current_tenant.crs.value, [bbox[2], bbox[3]]).project
+          end
 
           xml.tag!("ol:maxExtent", :maxx => p_max[0], :maxy => p_max[1], :minx => p_min[0], :miny => p_min[1], "xmlns:ol" => "http://openlayers.org/context")
           xml.tag!("ol:numZoomLevels", 17, "xmlns:ol" => "http://openlayers.org/context")
