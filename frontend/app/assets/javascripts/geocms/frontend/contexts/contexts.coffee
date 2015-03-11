@@ -100,6 +100,8 @@ contexts.config [
               $scope.mapService = mapService
               $location.hash('layers')
             ]
+          "plugins@contexts.edit":
+            templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
         resolve:
           context: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.uuid).get()
