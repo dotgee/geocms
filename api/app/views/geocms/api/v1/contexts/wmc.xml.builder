@@ -1,25 +1,20 @@
-crs = params[:crs] ? params[:crs] : current_tenant.crs.value
 xml.instruct!
 xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://www.opengis.net/context", "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation" => "http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd") do
   xml.General do
-    @point_max = Geocms::ProjectionConverter.new(crs, [@context.maxx, @context.maxy]).project
-    @point_min = Geocms::ProjectionConverter.new(crs, [@context.minx, @context.miny]).project
-    xml.BoundingBox(:SRS => crs, :maxx => @point_max[0], :maxy => @point_max[1], :minx => @point_min[0], :miny => @point_min[1])
-
+    xml.BoundingBox(:SRS => @crs, :maxx => @point_max[0], :maxy => @point_max[1], :minx => @point_min[0], :miny => @point_min[1])
     xml.Title @context.name
     xml.Extension do
-      @bounding_box = Geocms::ProjectionConverter.new(crs).bbox
       xml.tag!("ol:maxExtent", :minx => @bounding_box[0], :miny => @bounding_box[1], :maxx => @bounding_box[2], :maxy => @bounding_box[3], "xmlns:ol" => "http://openlayers.org/context")
     end
   end
   xml.LayerList do
       xml.Layer( :hidden => "0", :queryable => "0" ) do
-        if crs == "EPSG:2154"
+        if @crs == "EPSG:2154"
           xml.Server(:service => "OGC:WMS", :version => "1.1.1") do
             xml.OnlineResource("xlink:href" => "http://osm.geobretagne.fr/gwc01/service/wms", "xlink:type" => "simple", "xmlns:xlink" => "http://www.w3.org/1999/xlink")
           end
           xml.Name "osm:google"
-        elsif crs == "EPSG:3857"
+        elsif @crs == "EPSG:3857"
           xml.Server(:service => "OGC:WMS", :version => "1.1.1") do
               xml.OnlineResource("xlink:href" => "http://129.206.228.72/cached/osm", "xlink:type" => "simple", "xmlns:xlink" => "http://www.w3.org/1999/xlink")
           end
@@ -70,8 +65,8 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
             p_min = [bbox[0], bbox[1]]
             p_max = [bbox[2], bbox[3]]
           else
-            p_min = Geocms::ProjectionConverter.new(crs, [bbox[0], bbox[1]]).project
-            p_max = Geocms::ProjectionConverter.new(crs, [bbox[2], bbox[3]]).project
+            p_min = Geocms::ProjectionConverter.new(@crs, [bbox[0], bbox[1]]).project
+            p_max = Geocms::ProjectionConverter.new(@crs, [bbox[2], bbox[3]]).project
           end
 
           xml.tag!("ol:maxExtent", :maxx => p_max[0], :maxy => p_max[1], :minx => p_min[0], :miny => p_min[1], "xmlns:ol" => "http://openlayers.org/context")

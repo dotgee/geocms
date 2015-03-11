@@ -48,6 +48,10 @@ module Geocms
 
     def wmc
       @context = Geocms::Context.find(params[:id])
+      @crs = params[:crs] ? params[:crs] : current_tenant.crs.value
+      @bounding_box = Geocms::ProjectionConverter.new(@crs).bbox
+      @point_max = Geocms::ProjectionConverter.new(@crs, [@context.maxx, @context.maxy]).project
+      @point_min = Geocms::ProjectionConverter.new(@crs, [@context.minx, @context.miny]).project
       render(template: "geocms/api/v1/contexts/wmc", formats: [:xml], handlers: :builder, layout: false)
     end
 
