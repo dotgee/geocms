@@ -1,6 +1,4 @@
 - cache ["v1", "map"] do
   #map.map-container ng-class="{'map-fullscreen': mapService.fullscreen}"
   toaster-container
-  #folders-button ui-sref="folders.root"
-    i.carticon-folder
-    = t('contexts.header')
+  div ui-view="plugins"

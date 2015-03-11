@@ -1,11 +1,10 @@
-#folders-button {
+.button-plugins-right {
   width: 95px;
   height: 40px;
   background: white;
-  position: absolute;
-  top: 16px;
-  padding: 7px 5px;
   right: -52px;
+  position: absolute;
+  padding: 7px 5px;
   border-left: 3px solid rgb(41, 182, 246);
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -19,6 +18,10 @@
     margin-right: 5px;
     vertical-align: middle;
   }
+}
+
+#folders-button {
+  top: 16px;
 }
 
 .folder-display {

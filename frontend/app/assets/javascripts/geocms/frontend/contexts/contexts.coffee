@@ -74,6 +74,8 @@ contexts.config [
               $root.cart.addSeveral()
               $location.hash('project')
             ]
+          "plugins@contexts.show":
+            templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
         resolve:
           context: ["Restangular", "$stateParams", (Restangular, $stateParams) ->
             Restangular.one('contexts', $stateParams.uuid).get()
@@ -118,6 +120,8 @@ contexts.config [
               $root.cart.context = context
               $root.cart.addSeveral()
             ]
+          "plugins@contexts.show":
+            templateUrl: ""
 ]
 
 contexts.controller "ContextsController", [
