@@ -49,10 +49,10 @@ fr:
         tooltip: Temporalité
         header: Contrôle de la temporalité
       downloads:
-        tooltip: Télécharger
-        header: "Méta-données & Téléchargement"
-        metadata: Voir les méta-données
-        download: Télécharger
+        tooltip: Télécharger les données
+        header: "Métadonnées et téléchargement"
+        metadata: Consulter les métadonnées
+        download: Télécharger les données
       destroy:
         tooltip: Supprimer
 
