@@ -62,8 +62,8 @@ xml.ViewContext(:id => @context.uuid, :version => "1.1.0", "xmlns" => "http://ww
           bbox = layer.boundingbox
 
           if bbox.nil?
-            p_min = [bbox[0], bbox[1]]
-            p_max = [bbox[2], bbox[3]]
+            p_min = [@bounding_box[0], @bounding_box[1]]
+            p_max = [@bounding_box[2], @bounding_box[3]]
           else
             p_min = Geocms::ProjectionConverter.new(@crs, [bbox[0], bbox[1]]).project
             p_max = Geocms::ProjectionConverter.new(@crs, [bbox[2], bbox[3]]).project

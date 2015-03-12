@@ -7,7 +7,6 @@ module Geocms
     CRS_84 = RGeo::CoordSys::Proj4.new("+proj=longlat +datum=WGS84 +no_defs ")
 
     EPSG_3857 = RGeo::CoordSys::Proj4.new("+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs")
-
     # from CRS 84
     def initialize(proj, point = [])
       @new_proj = proj
@@ -32,7 +31,8 @@ module Geocms
     end
 
     def proj_to_2154
-      RGeo::CoordSys::Proj4.transform_coords(CRS_84, EPSG_2154, @point[0], @point[1])
+      p = RGeo::CoordSys::Proj4.transform_coords(CRS_84, EPSG_2154, @point[0], @point[1])
+      p.nil? ? RGeo::CoordSys::Proj4.transform_coords(EPSG_3857, EPSG_2154, @point[0], @point[1]) : p
     end
 
     def proj_to_3857
