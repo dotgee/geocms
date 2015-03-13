@@ -67,8 +67,9 @@ mapModule.service "mapService",
         @layerPoint = e.layerPoint
         @container.setView(@currentPosition)
         scope.ms = this
-        if scope.ms.numberOfLayer(scope, @layerPoint) == 1
-          scope.ms.chooseLayer(scope.cart.layers[0])
+        layers = scope.ms.interrogateLayers(scope, @layerPoint)
+        if layers.length == 1
+          scope.ms.chooseLayer(layers[0])
         else
           L.popup({ className: "query-layer-switcher geocms-popup"})
                   .setLatLng(@currentPosition)
@@ -78,15 +79,16 @@ mapModule.service "mapService",
         scope.$apply()
 
 
-      mapService.numberOfLayer = (scope, point) ->
+      mapService.interrogateLayers = (scope, point) ->
+        layers = []
         i = 0
-        n = 0
         while i < scope.cart.layers.length
           item = scope.cart.layers[i]
           bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
-          n += 1 if bounds.contains(scope.ms.currentPosition)
+          if bounds.contains(scope.ms.currentPosition)
+            layers.push(item)
           i++
-        return n
+        return layers
 
       mapService.chooseLayer = (layer) ->
         @currentLayer = layer
