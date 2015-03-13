@@ -57,6 +57,8 @@ contexts.config [
               $scope.mapService = mapService
               $location.hash('layers')
             ]
+          "plugins@contexts.new":
+            templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
 
       .state 'contexts.show',
         url: '/{uuid}'
