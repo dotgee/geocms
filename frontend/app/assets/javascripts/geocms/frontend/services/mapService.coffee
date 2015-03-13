@@ -6,7 +6,7 @@ mapModule.service "mapService",
     "$http",
     "projectionService",
     "baseLayerService",
-    "$rootScope"
+    "$rootScope",
     "$compile"
     (pluginService, $http, projections, baseLayerService, $root, $compile) ->
 
@@ -66,13 +66,27 @@ mapModule.service "mapService",
         @currentPosition = e.latlng
         @layerPoint = e.layerPoint
         @container.setView(@currentPosition)
-        L.popup({ className: "query-layer-switcher geocms-popup"})
-                .setLatLng(@currentPosition)
-                .setContent(linkFunction(scope)[0])
-                .openOn(@container)
-        @container.on('popupclose', (e) -> scope.$destroy())
         scope.ms = this
+        if scope.ms.numberOfLayer(scope, @layerPoint) == 1
+          scope.ms.chooseLayer(scope.cart.layers[0])
+        else
+          L.popup({ className: "query-layer-switcher geocms-popup"})
+                  .setLatLng(@currentPosition)
+                  .setContent(linkFunction(scope)[0])
+                  .openOn(@container)
+        @container.on('popupclose', (e) -> scope.$destroy())
         scope.$apply()
+
+
+      mapService.numberOfLayer = (scope, point) ->
+        i = 0
+        n = 0
+        while i < scope.cart.layers.length
+          item = scope.cart.layers[i]
+          bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
+          n += 1 if bounds.contains(scope.ms.currentPosition)
+          i++
+        return n
 
       mapService.chooseLayer = (layer) ->
         @currentLayer = layer
