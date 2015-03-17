@@ -5,12 +5,14 @@ module Geocms
 
     has_many :categorizations
     has_many :layers, through: :categorizations
+
     acts_as_tenant(:account)
 
     has_ancestry :cache_depth => true
+
     acts_as_list scope: [:account_id, :ancestry]
 
-    scope :ordered, -> { select([:name, :id, :slug, :ancestry]).ordered_by_ancestry.order("position asc") }
+    scope :ordered, -> {  order(:position) }
 
     before_save :cache_ancestry
 
@@ -26,7 +28,7 @@ module Geocms
     end
 
     def cache_ancestry
-      self.names_depth_cache = path.map(&:name).join('/')
+      self.names_depth_cache = path.map(&:slug).join('/')
     end
 
     def self.arrange_as_array(options={}, hash=nil)                                                                                                                                                            

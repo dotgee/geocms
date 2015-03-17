@@ -2,7 +2,7 @@ module Geocms
   class Api::V1::CategoriesController < Api::V1::BaseController
 
     def index
-      @categories = Category.roots
+      @categories = Category.roots.ordered
       render json: @categories, each_serializer: CategoryShortSerializer
     end
 

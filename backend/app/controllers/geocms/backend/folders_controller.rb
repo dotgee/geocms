@@ -4,7 +4,7 @@ module Geocms
       before_filter :set_folder, only: [:edit, :show, :update, :destroy]
 
       def index
-        @folders = Folder.all
+        @folders = Folder.ordered
       end
 
       def new

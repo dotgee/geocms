@@ -9,5 +9,7 @@ module Geocms
 
     validates :user, :name, presence: true
     validates :name, uniqueness: true
+
+    scope :ordered, -> { order(visibility: :desc).order(:name) }
   end
 end

@@ -3,7 +3,7 @@ module Geocms
     load_and_authorize_resource class: "Geocms::Folder", except: :writable
 
     def index
-      render json: @folders, each_serializer: FolderShortSerializer
+      render json: @folders.ordered, each_serializer: FolderShortSerializer
     end
 
     def show

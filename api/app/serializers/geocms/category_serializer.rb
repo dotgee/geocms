@@ -5,5 +5,9 @@ module Geocms
 
     attributes :id, :name
 
+    def children
+      object.children.ordered
+    end
+
   end
 end
