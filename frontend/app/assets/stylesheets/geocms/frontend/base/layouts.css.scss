@@ -1,20 +1,18 @@
 body, html {
   -webkit-font-smoothing: subpixel-antialiased;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  max-width: 1360px;
-  margin: 0 auto;
-  @include box-shadow(rgba(0,0,0,0.1) 0px 0 20px 10px);
   position: relative;
   font: normal 13px/25px Helvetica, Arial, sans-serif;
   font-weight: 300;
-  overflow: hidden;
 }
 
 // EXPLORE LAYOUT
 
-body.fullscreen{
+.wrapper {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -23,6 +21,7 @@ body.fullscreen{
   max-width: none;
   margin: 0px auto;
   box-shadow: none;
+  overflow: hidden;
 }
 
 body.login {
