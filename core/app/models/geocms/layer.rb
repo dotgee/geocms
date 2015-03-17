@@ -37,7 +37,7 @@ module Geocms
 
     def get_thumbnail 
       box = bounding_boxes.leafletable.first
-      LayerThumbnailWorker.perform_async(id, data_source_wms, box.crs, box.to_bbox)
+      LayerThumbnailWorker.perform_async(id, data_source_wms, box.crs, box.to_bbox) unless box.nil?
     end
   end
 end
