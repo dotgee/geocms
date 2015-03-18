@@ -33,6 +33,12 @@ module Geocms
       bbox.nil? ? [] : bbox.to_bbox
     end
 
+    def self.bulk_import(layers)
+      ActiveRecord::Base.transaction do
+        layers.each {|l| self.create!(l)}
+      end
+    end
+
     private
 
     def get_thumbnail 

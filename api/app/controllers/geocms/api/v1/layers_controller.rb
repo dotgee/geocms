@@ -32,9 +32,7 @@ module Geocms
         end
 
         def import
-          layers_params[:layers].each do |layer_param|
-            Layer.create!(layer_param)
-          end
+          Layer.bulk_import(layers_params[:layers])
           render json: {status: "ok"}
         end
 
