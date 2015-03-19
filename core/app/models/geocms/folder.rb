@@ -3,6 +3,8 @@ module Geocms
     extend FriendlyId
     friendly_id :name, use: [:slugged, :finders]
 
+    acts_as_tenant(:account)
+
     belongs_to :user
 
     has_many :contexts
