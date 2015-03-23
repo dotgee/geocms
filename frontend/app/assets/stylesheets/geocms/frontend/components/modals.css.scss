@@ -5,10 +5,6 @@
       background: white;
       @include box-shadow(0 0 0 4px rgba(0,0,0,0.15));
       @include border-radius(2px);
-      margin-left: 130px;
-    }
-    .leaflet-popup-tip-container {
-      margin: 0 155px;
     }
     .leaflet-popup-content {
       margin: 0;
@@ -63,12 +59,8 @@
   }
 }
 
-.leaflet-container .geocms-popup .geocms-popup-header h1 {
-  font-size: 16px;
-}
-
 .leaflet-popup.query-layer-switcher {
-  width: 350px;
+  width: 300px;
   .nav-pills > li.active > a {
     background-color: $color-panel-1;
     @include border-radius(2px);
