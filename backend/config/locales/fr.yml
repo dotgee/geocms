@@ -2,6 +2,7 @@ fr:
   access_denied: Accès refusé
   user: Utilisateur
   account: Compte
+  account_created: "Nouvelle instance créé avec succès"
 
   confirm_delete: Supprimer ?
 

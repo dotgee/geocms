@@ -15,8 +15,12 @@ module Geocms
 
       def create
         @account = Account.new(account_params)
-        @account.save
-        respond_with [:backend, :accounts]
+        if @account.save
+          flash[:success] = I18n.t('account_created')
+          respond_with [:backend, :accounts]
+        else
+          render :new
+        end
       end
 
       def update
