@@ -85,8 +85,11 @@ mapModule.service "mapService",
         while i < scope.cart.layers.length
           item = scope.cart.layers[i]
           if item.opacity != 0
-            bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
-            if bounds.contains(scope.ms.currentPosition)
+            if item.bbox == undefined || item.bbox == null
+              bounds = null
+            else
+              bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
+            if bounds == null || bounds.contains(scope.ms.currentPosition)
               layers.push(item)
           i++
         return layers
