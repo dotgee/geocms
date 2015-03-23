@@ -65,13 +65,13 @@ mapModule.service "mapService",
         linkFunction = $compile(html)
         @currentPosition = e.latlng
         @layerPoint = e.layerPoint
-        @container.setView(@currentPosition)
+        # @container.setView(@currentPosition)
         scope.ms = this
         layers = scope.ms.interrogateLayers(scope, @layerPoint)
         if layers.length == 1
           scope.ms.chooseLayer(layers[0])
         else
-          L.popup({ className: "query-layer-switcher geocms-popup"})
+          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: new L.Point(545,300)})
                   .setLatLng(@currentPosition)
                   .setContent(linkFunction(scope)[0])
                   .openOn(@container)
@@ -107,7 +107,7 @@ mapModule.service "mapService",
         url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
-          L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup" })
+          L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: new L.Point(545,300) })
                 .setLatLng(mapService.currentPosition)
                 .setContent(mapService.generateTemplate(data))
                 .openOn(mapService.container)
