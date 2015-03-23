@@ -10,7 +10,7 @@
           = t "contexts.actions.new"
     .row
       .col-sm-4.col-md-3 ng-repeat="folder in folders"
-        .thumbnail.thumbnail-folder ui-sref="folders.show(folder)"
+        .thumbnail.thumbnail-folder ui-sref="folders.show(folder)" title="{{folder.name}}"
           .carticon-folder.folder-display ng-class="(folder.visibility == false || folder.visibility == null) ? 'non-public-folder' : ''"
           h4
             |{{folder.name}}

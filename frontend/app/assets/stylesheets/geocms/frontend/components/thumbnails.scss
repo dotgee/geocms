@@ -6,6 +6,11 @@
     background: #f8f8f8;
     border: 1px solid #e7e7e7;
   }
+  h4 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 .thumbnail-layer {
