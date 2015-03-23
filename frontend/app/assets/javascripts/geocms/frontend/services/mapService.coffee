@@ -126,7 +126,7 @@ mapModule.service "mapService",
       mapService.generateTemplate = (data) ->
         wrapper = "<div class='geocms-popup-header'><h1>"+@currentLayer.title+"</h1></div>"
         wrapper += "<div class='geocms-popup-body'>"
-        if data == "null"
+        if data == "null" or data.status == "failed"
           body = "<p>Impossible d'obtenir les propriétés de cette couche.</p>"
         else if data.features.length > 0
           if mapService.currentLayer.template? and mapService.currentLayer.template != ""
