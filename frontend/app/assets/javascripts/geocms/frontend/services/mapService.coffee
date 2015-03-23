@@ -7,8 +7,9 @@ mapModule.service "mapService",
     "projectionService",
     "baseLayerService",
     "$rootScope",
-    "$compile"
-    (pluginService, $http, projections, baseLayerService, $root, $compile) ->
+    "$compile",
+    "$filter"
+    (pluginService, $http, projections, baseLayerService, $root, $compile, $filter) ->
 
       mapService = {}
 
@@ -67,9 +68,10 @@ mapModule.service "mapService",
         @layerPoint = e.layerPoint
         # @container.setView(@currentPosition)
         scope.ms = this
-        layers = scope.ms.interrogateLayers(scope, @layerPoint)
-        if layers.length == 1
-          scope.ms.chooseLayer(layers[0])
+        scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0.01))
+        scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.containsPoint())
+        if scope.filteredLayers.length == 1
+          scope.ms.chooseLayer(scope.filteredLayers[0])
         else
           L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: new L.Point(545,300)})
                   .setLatLng(@currentPosition)
@@ -78,30 +80,14 @@ mapModule.service "mapService",
         @container.on('popupclose', (e) -> scope.$destroy())
         scope.$apply()
 
-
-      mapService.interrogateLayers = (scope, point) ->
-        layers = []
-        i = 0
-        while i < scope.cart.layers.length
-          item = scope.cart.layers[i]
-          if item.opacity != 0
-            if item.bbox == undefined || item.bbox == null
-              bounds = null
-            else
-              bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
-            if bounds == null || bounds.contains(scope.ms.currentPosition)
-              layers.push(item)
-          i++
-        return layers
-
       mapService.chooseLayer = (layer) ->
         @currentLayer = layer
         @getFeatureWMS()
 
       mapService.containsPoint = ->
         (item) ->
-          bounds = L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100))
-          return bounds.contains(mapService.currentPosition)
+          bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100)) else null)
+          return if bounds? then bounds.contains(mapService.currentPosition) else false
 
       mapService.getFeatureWMS = ->
         url = mapService.getWMSFeatureURL()

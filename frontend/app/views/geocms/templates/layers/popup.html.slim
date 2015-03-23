@@ -2,7 +2,7 @@
   h1 = t("geocms.popup.query.header")
 .geocms-popup-body
   #popup-switch
-    ul.nav.nav-pills.nav-stacked 
-      li.active ng-repeat="layer in filteredLayers = (cart.layers | filter:ms.greaterThan('opacity', 0.01) | filter:ms.containsPoint())"
+    ul.nav.nav-pills.nav-stacked
+      li.active ng-repeat="layer in filteredLayers"
         a href="" ng-click="ms.chooseLayer(layer)" {{layer.title}}
     p ng-hide="filteredLayers.length" = t("geocms.popup.query.no_infos")
