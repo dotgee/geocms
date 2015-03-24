@@ -16,6 +16,7 @@ module Geocms
       def create
         @account = Account.new(account_params)
         if @account.save
+          @account.users.last.roles << Geocms::Role.where(name: "admin").first
           flash[:success] = I18n.t('account_created')
           respond_with [:backend, :accounts]
         else
