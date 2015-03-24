@@ -61,7 +61,7 @@ mapModule.service "mapService",
         @container.addEventListener('click', @queryLayer, mapService)
 
       mapService.queryLayer = (e) ->
-        html = '<div ng-include="\'/templates/layers/popup.html\'"></div>'
+        html = '<div ng-include="\''+config.prefix_uri+'/templates/layers/popup.html\'"></div>'
         scope = $root.$new()
         linkFunction = $compile(html)
         @currentPosition = e.latlng
@@ -103,6 +103,7 @@ mapModule.service "mapService",
         size = @container.getSize()
         position = @container.layerPointToContainerPoint(@layerPoint)
 
+        config.prefix_uri+
         '/api/v1/data_sources/get_feature_infos'+
         '?wms_url='+@currentLayer.data_source_wms+
         '&feature_name='+@currentLayer.name+
