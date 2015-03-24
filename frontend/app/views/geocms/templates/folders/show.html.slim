@@ -9,7 +9,7 @@
     .row masonry="" load-images="false" masonry-options="{isStill: true}"
       .masonry-brick.col-sm-4.col-md-3 ng-repeat="context in folder.contexts"
         .thumbnail.thumbnail-layer ui-sref="contexts.show(context)"
-          .placeholder style="{{context.preview_url ? 'background: url('+context.preview_url+') no-repeat;' : '' }}"
+          .placeholder ng-attr-style="{{context.preview_url ? 'background: url(\''+context.preview_url+'\') no-repeat;' : '' }}"
           h4
             |{{context.name}}
           p
