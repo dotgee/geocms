@@ -9,7 +9,7 @@ module Geocms
     end
 
     def direct_link
-      "http://#{scope[:account].host.value}#{scope[:account].prefix_uri.value}/maps/#{uuid}/share"
+      "#{scope[:account].host.value}#{scope[:account].prefix_uri.value}/maps/#{uuid}/share"
     end
 
     def embed_code
