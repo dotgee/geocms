@@ -114,6 +114,8 @@ mapModule.service "mapService",
         '&current_y='+position.y
 
       mapService.generateTemplate = (data) ->
+        _.templateSettings =
+          interpolate: /\{\{(.+?)\}\}/g
         wrapper = "<div class='geocms-popup-header'><h1>"+@currentLayer.title+"</h1></div>"
         wrapper += "<div class='geocms-popup-body'>"
         if data == "null" or data.status == "failed"
