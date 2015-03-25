@@ -5,7 +5,7 @@ Geocms::Core::Engine.add_routes do
   namespace :backend do
     root :to => "categories#index"
 
-    get "search", :to => "search#search"
+    get "search", :to => "search#search", as: :search
 
     resources :categories do
       member do
