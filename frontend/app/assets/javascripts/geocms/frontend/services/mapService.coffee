@@ -8,8 +8,9 @@ mapModule.service "mapService",
     "baseLayerService",
     "$rootScope",
     "$compile",
-    "$filter"
-    (pluginService, $http, projections, baseLayerService, $root, $compile, $filter) ->
+    "$filter",
+    "$state"
+    (pluginService, $http, projections, baseLayerService, $root, $compile, $filter, $state) ->
 
       mapService = {}
 
@@ -73,7 +74,7 @@ mapModule.service "mapService",
         if scope.filteredLayers.length == 1
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
-          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: new L.Point(545,200)})
+          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200)})
                   .setLatLng(@currentPosition)
                   .setContent(linkFunction(scope)[0])
                   .openOn(@container)
@@ -93,7 +94,7 @@ mapModule.service "mapService",
         url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
-          L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: new L.Point(545,200) })
+          L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200) })
                 .setLatLng(mapService.currentPosition)
                 .setContent(mapService.generateTemplate(data))
                 .openOn(mapService.container)
