@@ -18,6 +18,8 @@ You can see real-world applications built with GeoCMS at [indigeo.fr], check it 
 [OGC-compliant]: http://www.opengeospatial.org/standards/is
 [indigeo.fr]: http://portail.indigeo.fr
 
+![screenshot 2015-03-30 16 41 46](https://cloud.githubusercontent.com/assets/874392/6898676/c49d996e-d6fb-11e4-9e02-28560b958074.png)
+
 Features
 --------
 
@@ -25,6 +27,10 @@ With GeoCMS, you can define multiple data sources and pick the data you want to 
 You can then create maps using these data, combining them and using the multiple tools to manipulate them like opacity or timeline.
 
 Once you are done editing your map, you can save it to retrieve it later and share it with the world with a direct link or embedded in any site !
+
+![screenshot 2015-03-30 16 51 22](https://cloud.githubusercontent.com/assets/874392/6898879/04d812ba-d6fd-11e4-9298-8961490fc67d.png)
+
+![screenshot 2015-03-30 16 46 06](https://cloud.githubusercontent.com/assets/874392/6898775/49f62644-d6fc-11e4-998b-d59ccf99a38d.png)
 
 Installation guide
 ==================
