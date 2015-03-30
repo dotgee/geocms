@@ -16,7 +16,7 @@ All of the gems are designed to work together to provide a vizualisation platfor
 You can see real-world applications built with GeoCMS at [indigeo.fr], check it out !
 
 [OGC-compliant]: http://www.opengeospatial.org/standards/is
-[indigeo.fr]: http://indigeo.fr/visualiseur
+[indigeo.fr]: http://portail.indigeo.fr
 
 Features
 --------
@@ -58,14 +58,14 @@ Rails application. To use the 2-4-stable branch of GeoCMS, add this line to
 your Gemfile.
 
 ```ruby
-gem 'geocms', github: 'jchapron/geocms', branch: '2-0-stable'
+gem 'geocms', github: 'dotgee/geocms', branch: '2-0-stable'
 ```
 
 Alternatively, if you want to use the bleeding edge version of GeoCMS, use this
 line:
 
 ```ruby
-gem 'geocms', github: 'jchapron/geocms'
+gem 'geocms', github: 'dotgee/geocms'
 ```
 
 * Install GeoCMS migrations and data : 
@@ -100,10 +100,8 @@ Here are some ways **you** can contribute:
 * by using prerelease versions / master branch
 * by reporting [bugs](https://github.com/jchapron/geocms/issues/new)
 * by writing or editing documentation
-* by writing [specs](https://github.com/jchapron/geocms/labels/NeedSpecs)
-* by writing [needed code](https://github.com/jchapron/geocms/labels/NeedCode) or [finishing code](https://github.com/jchapron/geocms/labels/stalled)
+* by writing [specs](https://github.com/jchapron/geocms/labels/specs)
+* by writing [needed code](https://github.com/jchapron/geocms/labels/code) or [finishing code](https://github.com/jchapron/geocms/labels/stalled)
 * by [refactoring code](https://github.com/jchapron/geocms/labels/performance)
 * by resolving [issues](https://github.com/jchapron/geocms/issues)
 * by reviewing [pull requests](https://github.com/jchapron/geocms/pulls)
-
-
