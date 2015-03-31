@@ -2,7 +2,7 @@ CKEDITOR.plugins.add 'features', init: (editor) ->
   items = undefined
   layer = $('#layer').data('id')
   if layer
-    $.get '/backend/layers/' + layer + '/getfeatures.json', (data) ->
+    $.get config.prefix_uri + '/backend/layers/' + layer + '/getfeatures.json', (data) ->
       items = data.layers
       return
     editor.addCommand 'insertFeatures', new (CKEDITOR.dialogCommand)('featuresDialog')
