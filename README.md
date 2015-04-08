@@ -94,6 +94,13 @@ end
 This is it ! You can run your application and everything should "just work" ™
 If you run into issues, you should make sure you do have a Geocms::Account in your database, defined with "default: true".
 
+Authors
+-------
+
+* [@jchapron](https://github.com/jchapron)
+* [@almerino](https://github.com/almerino)
+* [@dotgee](https://github.com/dotgee)
+
 Contributing
 ------------
 
@@ -111,3 +118,8 @@ Here are some ways **you** can contribute:
 * by [refactoring code](https://github.com/jchapron/geocms/labels/performance)
 * by resolving [issues](https://github.com/jchapron/geocms/issues)
 * by reviewing [pull requests](https://github.com/jchapron/geocms/pulls)
+
+Licence
+-------
+
+`GeoCMS` is releasedd under the [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.html).  See the [`LICENSE.md`](https://github.com/dotgee/geocms/blob/master/LICENSE.md) file.
