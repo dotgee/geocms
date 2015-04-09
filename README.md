@@ -94,6 +94,14 @@ end
 This is it ! You can run your application and everything should "just work" ™
 If you run into issues, you should make sure you do have a Geocms::Account in your database, defined with "default: true".
 
+Roadmap
+-------
+
+* Support vector layers (GeoJSON)
+* Responsive layout
+* CQL Filters
+* Normalized plugin structure
+
 Authors
 -------
 
