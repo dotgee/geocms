@@ -5,7 +5,7 @@ module Geocms
     has_many :contexts_layers, serializer: ContextsLayerSerializer, embed: :objects
 
     def editable
-      Geocms::Ability.new(scope[:user]).can?(:update, object)
+      Geocms::Ability.new(scope[:user], scope[:account]).can?(:update, object)
     end
 
     def direct_link
