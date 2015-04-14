@@ -20,7 +20,8 @@ mapModule.service "mapService",
       mapService.fullscreen = false
 
       mapService.createMap = (id, lat, lng, zoom, pluginParams) ->
-        options = { zoomControl: false, crs: projections.getCRS(config.crs)}
+        maxZoom = if zoom > 18 then zoom else 18
+        options = { zoomControl: false, crs: projections.getCRS(config.crs), maxZoom: maxZoom }
         @container = new L.Map(id, options).setView([lat, lng], zoom)
         @container.attributionControl.setPrefix("Built with <a href='https://github.com/jchapron/geocms'>GeoCMS</a>")
         pluginService.addPlugins(@container, pluginParams)
