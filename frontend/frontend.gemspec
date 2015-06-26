@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails-assets-jquery', "> 2.0.0"
   s.add_dependency 'rails-assets-lodash', "2.4.1"
-  s.add_dependency 'rails-assets-angular', "~> 1.2.18"
+  s.add_dependency 'rails-assets-angularjs', "~> 1.2.18"
   s.add_dependency 'rails-assets-restangular', "1.4.0"
   s.add_dependency 'rails-assets-angular-ui-router', "0.2.10"
   s.add_dependency 'rails-assets-angular-animate', "1.2.19"
