@@ -1,6 +1,4 @@
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular', '~> 1.2.18'
-end
+source 'https://rails-assets.org'
 
 eval(File.read(File.dirname(__FILE__) + '/common_geocms_dependencies.rb'))
 
