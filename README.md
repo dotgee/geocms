@@ -53,8 +53,8 @@ The installation process should be straightforward once you make sure that all d
 
 * Create a new Rails application :
 ```bash
-$ gem install rails -v 4.1.8
-$ rails new myapp -D postgresql
+$ gem install rails -v 4.2.3
+$ rails new myapp -d postgresql
 ```
 
 * Install GeoCMS in your app :

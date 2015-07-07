@@ -1,0 +1,84 @@
+en:
+
+  geocms:
+    popup:
+      query:
+        header: Query
+        no_infos: No informations availables
+        error: Impossible d'obtenir les informations
+
+    login:
+      header: login
+      username_or_email: "Username or E-mail :"
+      password: "Password :"
+      submit: "Sign in"
+
+  contexts:
+    header: Projects
+    actions:
+      save: Save
+      saved: Saved
+      new: New project
+    attributes:
+      name: Name
+      description: Description
+      folder: Folder
+      center_lng: Longitude
+      center_lat: Latitude
+      zoom_level: Zoom
+
+  layers:
+    header: Layers
+    open_catalog: Add layer
+    back_to_list: Back to list
+    data_source: "Source :"
+    controls:
+      center:
+        tooltip: Center
+      query:
+        tooltip: Query
+      filters:
+        tooltip: Filters
+        header: Filter data
+        placeholder: Put your CQL filter
+        apply: Apply
+      opacity:
+        tooltip: Opacity
+        header: Opacity control
+      timeline:
+        tooltip: Temporalité
+        header: Contrôle de la temporalité
+      downloads:
+        tooltip: Download data
+        header: "Metadata and downloads"
+        metadata: Consulter les métadonnées
+        download: Télécharger les données
+      destroy:
+        tooltip: Supprimer
+
+  informations:
+    header: Project
+    features:
+      header: "Sauvegardez votre projet pour :"
+      f1: Share your project
+      f2: Collaborer sur l'édition du projet
+      f3: Y revenir ultérieurement
+      f4: ""
+    sharing:
+      header: Informations
+      map_id:
+        label: ID
+      direct_link:
+        label: Lien direct
+      embed:
+        label: HTML
+    settings:
+      header: Configuration
+      import_position: Position actuelle
+
+  legend:
+    header: Légende
+
+  modules:
+    layers:
+      catalog: Catalogue de données réferencées

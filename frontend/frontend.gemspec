@@ -15,21 +15,23 @@ Gem::Specification.new do |s|
   s.description = "Geocms'frontend"
   s.license     = "CECILL"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "CECILL-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.files        = Dir["{app,config,db,lib}/**/*", "CECILL-LICENSE", "Rakefile", "README.rdoc"]
+  s.test_files   = Dir["test/**/*"]
+  #s.files        = `git ls-files`.split("\n")
+  #s.test_files   = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.require_path = 'lib'
+  s.requirements << 'none'
 
   s.add_dependency 'geocms_core', version
   s.add_dependency 'geocms_api', version
 
-  s.add_dependency "sass-rails", '~> 5.0'
-  s.add_dependency "coffee-rails", '~> 4.1.0'
-  #s.add_dependency "compass-rails", "~> 1.1.2"
+  s.add_dependency "sass-rails", '>= 4.0'
+  s.add_dependency "coffee-rails"
   s.add_dependency "slim-rails"
-  #s.add_dependency 'bootstrap-sass', '~> 2.2.2.0'
 
   s.add_dependency 'rails-assets-jquery', "> 2.0.0"
   s.add_dependency 'rails-assets-lodash', "2.4.1"
-  s.add_dependency 'rails-assets-angularjs', "~> 1.2.18"
+  s.add_dependency 'rails-assets-angularjs', "~> 1.2"
   s.add_dependency 'rails-assets-restangular', "1.4.0"
   s.add_dependency 'rails-assets-angular-ui-router', "0.2.10"
   s.add_dependency 'rails-assets-angular-animate', "1.2.19"

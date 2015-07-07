@@ -1,6 +1,8 @@
 module Geocms
   class Api::V1::CategoriesController < Api::V1::BaseController
 
+    respond_to :json
+
     def index
       @categories = Category.roots.ordered
       render json: @categories, each_serializer: CategoryShortSerializer
@@ -13,7 +15,7 @@ module Geocms
 
     def ordered
       @categories = Category.arrange_as_array(order: :name)
-      respond_with @categories, each_serializer: CategoryShortSerializer
+      respond_with(@categories, each_serializer: CategoryShortSerializer)
     end
 
     private

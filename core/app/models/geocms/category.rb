@@ -31,7 +31,7 @@ module Geocms
       self.names_depth_cache = path.map(&:slug).join('/')
     end
 
-    def self.arrange_as_array(options={}, hash=nil)                                                                                                                                                            
+    def self.arrange_as_array(options={}, hash=nil)
       hash ||= arrange(options)
 
       arr = []
