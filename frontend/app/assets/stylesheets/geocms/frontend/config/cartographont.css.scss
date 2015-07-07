@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'entypo';
-  src: asset-url('geocms/entypo.eot?29412953', font);
-  src: asset-url('geocms/entypo.eot?29412953#iefix', font) format('embedded-opentype'),
-       asset-url('geocms/entypo.woff?29412953', font) format('woff'),
-       asset-url('geocms/entypo.ttf?29412953', font) format('truetype'),
-       asset-url('geocms/entypo.svg?29412953#entypo', font) format('svg');
+  src: font_path('geocms/entypo.eot?29412953');
+  src: font_path('geocms/entypo.eot?29412953#iefix') format('embedded-opentype'),
+       font_path('geocms/entypo.woff?29412953') format('woff'),
+       font_path('geocms/entypo.ttf?29412953') format('truetype'),
+       font_path('geocms/entypo.svg?29412953#entypo') format('svg');
   font-weight: normal;
   font-style: normal;
 }

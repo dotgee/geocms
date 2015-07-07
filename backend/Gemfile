@@ -1,5 +1,12 @@
 eval(File.read(File.dirname(__FILE__) + '/../common_geocms_dependencies.rb'))
 
+source 'https://rails-assets.org/' do
+  gem 'rails-assets-angularjs', "~> 1.2.18"
+  gem 'rails-assets-lodash', "2.4.1"
+  gem 'rails-assets-restangular', "1.4.0"
+  gem 'rails-assets-ng-table', "0.3.3"
+end
+
 gem 'geocms_core', :path => "../core"
 
 gemspec

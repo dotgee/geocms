@@ -9,9 +9,9 @@ version = File.read(File.expand_path("../../GEOCMS_VERSION", __FILE__)).strip
 Gem::Specification.new do |s|
   s.name        = "geocms_backend"
   s.version     = version
-  s.authors     = ["Jérôme CHAPRON", "dotgee"]
-  s.email       = ["jchapron@dotgee.fr", "contact@dotgee.fr"]
-  s.homepage    = "iuem.indigeo.fr"
+  s.authors     = ["Philippe HUET", "Jérôme CHAPRON", "dotgee"]
+  s.email       = ["philippe@dotgee.fr", "jchapron@dotgee.fr", "contact@dotgee.fr"]
+  s.homepage    = "http://mapsonic.dotgeeapp.com/backend"
   s.summary     = "Geocms'backend"
   s.description = "Geocms'backend"
   s.license     = "CECILL"
@@ -26,11 +26,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-assets-restangular', "1.4.0"
   s.add_dependency 'rails-assets-ng-table', "0.3.3"
 
-  s.add_dependency "sass-rails", '~> 4.0.0'
+  s.add_dependency "sass-rails", '~> 5.0'
   s.add_dependency "coffee-rails", '~> 4.1.0'
   s.add_dependency "slim-rails"
   s.add_dependency "simple_form", '>= 3.1.0.rc2'
-  s.add_dependency "responders", '~> 1.0.0'
+  s.add_dependency "responders", '~> 2.0'
   s.add_dependency "ckeditor"
   s.add_dependency 'rabl', '~> 0.7.9'
   s.add_dependency "gon"

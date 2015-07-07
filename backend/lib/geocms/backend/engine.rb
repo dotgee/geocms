@@ -3,6 +3,12 @@ module Geocms
     class Engine < ::Rails::Engine
       isolate_namespace Geocms
       engine_name "geocms_backend"
+      config.to_prepare do
+        Rails.application.config.assets.precompile += %w(
+          geocms/backend/backend.css
+          geocms/backend.js
+        )
+      end
     end
   end
 end

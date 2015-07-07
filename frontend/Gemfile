@@ -1,4 +1,20 @@
-source 'https://rails-assets.org/'
+source 'https://rails-assets.org/' do
+  gem 'rails-assets-angularjs', "~> 1.2.18"
+  gem 'rails-assets-jquery', "> 2.0.0"
+  gem 'rails-assets-lodash', "2.4.1"
+  gem 'rails-assets-restangular', "1.4.0"
+  gem 'rails-assets-angular-ui-router', "0.2.10"
+  gem 'rails-assets-angular-animate', "1.2.19"
+  gem 'rails-assets-angular-bootstrap', '~> 0.12.0'
+  # gem 'rails-assets-angular-ui-slider', '0.0.2'
+  gem 'rails-assets-masonry', '3.1.5'
+  gem 'rails-assets-angular-masonry', '0.9.1'
+  gem 'rails-assets-leaflet', "0.7.3"
+  gem 'rails-assets-proj4', "~> 1.3.4"
+  # Waiting for proj4leaflet to be compatible
+  # gem 'rails-assets-proj4leaflet', "0.7.0"
+  gem 'rails-assets-moment', "2.7.0"
+end
 
 eval(File.read(File.dirname(__FILE__) + '/../common_geocms_dependencies.rb'))
 

@@ -39,7 +39,7 @@ module Geocms
       end
 
       def eval_block(&block)
-        Geocms::Core::Engine.routes.eval_block(block)
+        Geocms::Core::Engine.routes.send :eval_block, block
       end
     end
   end

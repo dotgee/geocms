@@ -3,13 +3,13 @@ module Geocms
     class CategoriesController < Geocms::Backend::ApplicationController
       def index
         @categories = Category.arrange(:order => :position)
-        # respond_with([:backend, @categories])
+        # respond_with(:backend, @categories)
       end
 
       def show
         @category = Category.find(params[:id])
         @layers = @category.layers.page(params[:page])
-        respond_with([:backend, @category])
+        respond_with(:backend, @category)
       end
 
       def new
@@ -17,7 +17,7 @@ module Geocms
         if params[:parent_id]
           @category.parent_id = params[:parent_id]
         end
-        respond_with([:backend, @category])
+        respond_with(:backend, @category)
       end
 
       def edit
@@ -27,19 +27,19 @@ module Geocms
       def create
         @category = Category.new(category_params)
         @category.save
-        respond_with([:backend, @category])
+        respond_with(:backend, @category)
       end
 
       def update
         @category = Category.find(params[:id])
         @category.update_attributes(category_params)
-        respond_with([:backend, @category])
+        respond_with(:backend, @category)
       end
 
       def destroy
         @category = Category.find(params[:id])
         @category.destroy
-        respond_with([:backend, @category])
+        respond_with(:backend, @category)
       end
 
       def move

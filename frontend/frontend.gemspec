@@ -8,9 +8,9 @@ version = File.read(File.expand_path("../../GEOCMS_VERSION", __FILE__)).strip
 Gem::Specification.new do |s|
   s.name        = "geocms_frontend"
   s.version     = version
-  s.authors     = ["Jérôme CHAPRON", "dotgee"]
-  s.email       = ["jchapron@dotgee.fr", "contact@dotgee.fr"]
-  s.homepage    = "iuem.indigeo.fr"
+  s.authors     = ["Philippe HUET", "Jérôme CHAPRON", "dotgee"]
+  s.email       = ["philippe@dotgee.fr", "jchapron@dotgee.fr", "contact@dotgee.fr"]
+  s.homepage    = "http://mapsonic.dotgeeapp.com"
   s.summary     = "Geocms'frontend"
   s.description = "Geocms'frontend"
   s.license     = "CECILL"
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'geocms_core', version
   s.add_dependency 'geocms_api', version
 
-  s.add_dependency "sass-rails", '~> 4.0.0'
+  s.add_dependency "sass-rails", '~> 5.0'
   s.add_dependency "coffee-rails", '~> 4.1.0'
   #s.add_dependency "compass-rails", "~> 1.1.2"
   s.add_dependency "slim-rails"

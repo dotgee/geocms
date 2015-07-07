@@ -11,35 +11,35 @@ module Geocms
 
       def show
         @context = Context.find(params[:id])
-        respond_with([:backend, @folder, @context])
+        respond_with(:backend, @folder, @context)
       end
 
       def new
         @context = Context.new
-        respond_with([:backend, @folder, @context])
+        respond_with(:backend, @folder, @context)
       end
 
       def create
         @context = Context.new(context_params)
         @context.save
-        respond_with([:backend, @folder, @context])
+        respond_with(:backend, @folder, @context)
       end
 
       def edit
         @context = Context.find(params[:id])
-        respond_with [:backend, @folder, @context]
+        respond_with(:backend, @folder, @context)
       end
 
       def update
         @context = Context.find(params[:id])
         @context.update_attributes(context_params)
-        respond_with([:edit, :backend, @folder, @context])
+        respond_with(:edit, :backend, @folder, @context)
       end
 
       def destroy
         @context = Context.find(params[:id])
         @context.destroy
-        respond_with [:backend, @folder]
+        respond_with(:backend, @folder)
       end
 
       private

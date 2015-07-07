@@ -9,9 +9,9 @@ version = File.read(File.expand_path("../../GEOCMS_VERSION", __FILE__)).strip
 Gem::Specification.new do |s|
   s.name        = "geocms_api"
   s.version     = version
-  s.authors     = ["Jérôme CHAPRON", "dotgee"]
-  s.email       = ["jchapron@dotgee.fr", "contact@dotgee.fr"]
-  s.homepage    = "iuem.indigeo.fr"
+  s.authors     = ["Philippe HUET", "Jérôme CHAPRON", "dotgee"]
+  s.email       = ["philippe@dotgee.fr", "jchapron@dotgee.fr", "contact@dotgee.fr"]
+  s.homepage    = "http://mapsonic.dotgeeapp.comr"
   s.summary     = "Geocms'api"
   s.description = "Geocms'api"
   s.license     = "CECILL"

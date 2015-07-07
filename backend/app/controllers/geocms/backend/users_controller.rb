@@ -5,7 +5,7 @@ module Geocms
 
       def index
         @users = current_tenant.users
-        respond_with([:backend, @users])
+        respond_with(:backend, @users)
       end
 
       def network
@@ -23,7 +23,7 @@ module Geocms
 
       def new
         @user = User.new
-        respond_with [:backend, @user]
+        respond_with(:backend, @user)
       end
 
       def create
@@ -31,7 +31,7 @@ module Geocms
         @user.save
         current_tenant.users << @user
         current_tenant.save
-        respond_with [:backend, :users]
+        respond_with(:backend, :users)
       end
 
       def edit
@@ -41,13 +41,13 @@ module Geocms
       def update
         @user = User.find(params[:id])
         @user.update_attributes(user_params)
-        respond_with [:edit, :backend, @user]
+        respond_with(:edit, :backend, @user)
       end
 
       def destroy
         @user = User.find(params[:id])
         current_tenant.users.delete(@user)
-        respond_with [:backend, :users]
+        respond_with(:backend, :users)
       end
 
       private

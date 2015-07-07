@@ -5,13 +5,13 @@ module Geocms
 
       def index
         @layers = current_tenant.layers.page(params[:page]).per(params[:per_page])
-        respond_with([:backend, @layers])
+        respond_with(:backend, @layers)
       end
 
       def show
         @layer = @category.layers.find(params[:id])
 
-        respond_with([:backend, @category, @layer])
+        respond_with(:backend, @category, @layer)
       end
 
       def getfeatures
@@ -24,13 +24,13 @@ module Geocms
 
       def new
         @layer = Layer.new
-        respond_with([:backend, @layer])
+        respond_with(:backend, @layer)
       end
 
       def edit
         @layer = Layer.find(params[:id])
         @categories = Category.for_select
-        respond_with([:backend, @category, @layer])
+        respond_with(:backend, @category, @layer)
       end
 
       def create
@@ -57,7 +57,7 @@ module Geocms
       def update
         @layer = Layer.find(params[:id])
         @layer.update_attributes(layer_params)
-        respond_with [:edit, :backend, @layer]
+        respond_with(:edit, :backend, @layer)
       end
 
       def destroy
@@ -71,7 +71,7 @@ module Geocms
           else
             @layer.save
           end
-          respond_with([:backend, @category])
+          respond_with(:backend, @category)
         else
           @layer = Layer.find(params[:id])
           @layer.destroy

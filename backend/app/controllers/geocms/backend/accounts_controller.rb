@@ -10,7 +10,7 @@ module Geocms
       def new
         @account = Account.new
         user = @account.users.build
-        respond_with [:backend, @account]
+        respond_with(:backend, @account)
       end
 
       def create
@@ -18,7 +18,7 @@ module Geocms
         if @account.save
           @account.users.last.roles << Geocms::Role.where(name: "admin").first
           flash[:success] = I18n.t('account_created')
-          respond_with [:backend, :accounts]
+          respond_with(:backend, :accounts)
         else
           render :new
         end
@@ -27,13 +27,13 @@ module Geocms
       def update
         @account = Account.find(params[:id])
         @account.update_attributes(account_params)
-        respond_with [:edit, :backend, :preferences]
+        respond_with(:edit, :backend, :preferences)
       end
 
       def destroy
         @account = Account.find(params[:id])
         @account.destroy
-        respond_with [:backend, :accounts]
+        respond_with(:backend, :accounts)
       end
 
       private

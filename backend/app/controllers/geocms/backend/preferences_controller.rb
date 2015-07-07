@@ -12,7 +12,7 @@ module Geocms
 
         ActsAsTenant.current_tenant.update_attributes(params[:account]) if params[:account]
 
-        respond_with([:edit, :backend,  :preferences])
+        respond_with(:edit, :backend,  :preferences)
       end
 
       private
