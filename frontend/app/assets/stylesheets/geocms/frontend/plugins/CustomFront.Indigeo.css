@@ -1,0 +1,45 @@
+#mousemove {
+  width: 130px; }
+
+.leaflet-control-scale {
+  left: 210px;
+  bottom: 8px; }
+
+.leaflet-control-zoom.leaflet-bar {
+  bottom: 2px; }
+
+.leaflet-control-fullscreen {
+  left: 330px;
+  top: 105px; }
+  
+.cart-column-center {
+  vertical-align: middle;
+  width: 15px;
+  font: normal 15px/25px Helvetica, Arial, sans-serif; }
+
+.page-header.project-name h3 {
+    font-weight: bold; 
+}
+
+h5, .h5 {
+  font-weight: bold;
+  color: #546e7a;
+}
+
+textarea {
+  resize: vertical; 
+}
+
+.cart-column-grippy {
+  .grippy {
+    height: 0%;
+  }
+}
+
+.nav-filled {
+  > .nav.nav-tabs > li {
+    a {
+      border-right: 1px solid rgba(255, 255, 255, 0.25);
+    }
+  }
+}

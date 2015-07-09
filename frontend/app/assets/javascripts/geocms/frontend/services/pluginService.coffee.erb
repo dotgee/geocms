@@ -7,39 +7,67 @@ pluginModule.service "pluginService",
       plugins = {}
 
       plugins.addPlugins = (map, pluginsParams) ->
-        # scale on the map
-        # scale = new L.Control.Scale({ imperial: false, maxWidth: 100, minWidth: 100 })
-        # scale.addTo(map)
 
-        # # zoom control
-        # new L.Control.Zoom({ position: 'topleft' }).addTo(map)
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("scale") > -1
+          # scale on the map
+          scale = new L.Control.Scale({ imperial: false, maxWidth: 100, minWidth: 100 })
+          scale.addTo(map)
 
-        # # north arrow compass
-        # north = L.control(position: "bottomright")
-        # north.onAdd = (map) ->
-        #   div = L.DomUtil.create("div", "info legend")
-        #   div.innerHTML = "<img src=\"<%= asset_path('geocms/icon-compass.png') %>\">"
-        #   div
-        # north.addTo map
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("zoom") > -1
+          # zoom control
+          new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
 
-        # #coordinates
-        # coordinates = L.control(position: "topleft")
-        # coordinates.onAdd = (map) ->
-        #   div = L.DomUtil.create("div", "info legend")
-        #   div.innerHTML = "<div id='mousemove'><div/>"
-        #   div
-        # coordinates.addTo map
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("coordinates") > -1
+          # coordinates
+        #  L.control.coordinates({
+        #    position:"bottomleft",
+        #    useDMS:true,
+        #    labelTemplateLat:"N {y}",
+        #    labelTemplateLng:"E {x}",
+        #    useLatLngOrder:true
+        #  }).addTo(map);
+         
+          coordinates = L.control(position: "bottomleft")
+          coordinates.onAdd = (map) ->
+            div = L.DomUtil.create("div", "info legend")
+            div.innerHTML = "<div id='mousemove'><div/>"
+            div
+          coordinates.addTo map
 
-        # mousemove = $("#coordinates")
-        # map.on "mousemove", (e) ->
-        #   window[e.type].innerHTML = e.latlng.lat.toFixed(4) + ", " + e.latlng.lng.toFixed(4)
-        #   return
+          mousemove = $("#coordinates")
+          map.on "mousemove", (e) ->
+            window[e.type].innerHTML = "Lat: " + e.latlng.lat.toFixed(2) + ", Lng: " + e.latlng.lng.toFixed(2)
+            return
+        
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("compass") > -1
+          # north arrow compass
+          north = L.control(position: "bottomleft")
+          north.onAdd = (map) ->
+            div = L.DomUtil.create("div", "info legend")
+            div.innerHTML = "<img src=\"<%= asset_path('geocms/icon-compass.png') %>\">"
+            div
+          north.addTo map
 
-        # #Geosearch
-        # new L.Control.GeoSearch({
-        #     provider: new L.GeoSearch.Provider.Google(),
-        #     position: 'topright'
-        # }).addTo(map);
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("geosearch") > -1
+          #Geosearch
+            L.Icon.Default.imagePath = "<%= asset_path('/assets/leaflet/images') %>" 
+          new L.Control.GeoSearch({
+              provider: new L.GeoSearch.Provider.Google(),
+              position: 'topright',
+              searchLabel: 'Aller à ...',
+              notFoundMessage: "Désolé, l'adresse n'a pas été trouvé."
+          }).addTo(map);
+
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("minimap") > -1
+          #Minimap
+          osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          osmAttrib = 'Map data &copy; OpenStreetMap contributors'
+          osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib})
+          miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+
+        if pluginsParams == null || pluginsParams == undefined || pluginsParams.indexOf("fullscreen") > -1
+          #Fullscreen
+          new L.Control.Fullscreen(position: "bottomleft").addTo(map);
 
       plugins
   ]

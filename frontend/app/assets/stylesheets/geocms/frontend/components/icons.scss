@@ -2,7 +2,7 @@
   margin-top: 0;
   display: inline-block;
   &.icon-layer {
-    background: asset-url("geocms/layers.png") no-repeat;
+    background: image-url("geocms/layers.png") no-repeat;
     width: 12px;
     height: 10px;
     background-position: bottom;
@@ -11,24 +11,24 @@
     }
   }
   &.icon-layer-blue {
-    background: asset-url("geocms/icon-layer.png") no-repeat;
+    background: image-url("geocms/icon-layer.png") no-repeat;
     width: 14px;
     height: 10px;
   }
   &.icon-folder {
-    background: asset-url("geocms/icon-folder.png") no-repeat;
+    background: image-url("geocms/icon-folder.png") no-repeat;
     width: 14px;
     height: 13px;
   }
   &.icon-throbber {
-    background: asset-url("geocms/throbber.svg") no-repeat;
+    background: image-url("geocms/throbber.svg") no-repeat;
     width: 16px;
     height: 16px;
   }
   &.icon-geovisu {
-    background: asset-url("geocms/geovisu.png") no-repeat;
+    background: image-url("geocms/geovisu.png") no-repeat;
   }
   &.icon-clock {
-    background: asset-url("geocms/icon-clock.png") no-repeat;
+    background: image-url("geocms/icon-clock.png") no-repeat;
   }
 }
