@@ -1,10 +1,10 @@
-@import "vendor/vendor";
-
 @import "config/md-colors";
 @import "config/colors";
 @import "config/mixins";
 @import "config/cartographont";
 
+@import "vendor/vendor";
 @import "base/base";
 @import "components/components";
 @import "modules/modules";
+@import "plugins/plugins";

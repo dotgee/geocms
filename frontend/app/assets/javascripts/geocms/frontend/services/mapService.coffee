@@ -20,8 +20,7 @@ mapModule.service "mapService",
       mapService.fullscreen = false
 
       mapService.createMap = (id, lat, lng, zoom, pluginParams) ->
-        maxZoom = if zoom > 18 then zoom else 18
-        options = { zoomControl: false, crs: projections.getCRS(config.crs), maxZoom: maxZoom }
+        options = { zoomControl: false, crs: projections.getCRS(config.crs)}
         @container = new L.Map(id, options).setView([lat, lng], zoom)
         @container.attributionControl.setPrefix("Built with <a href='https://github.com/jchapron/geocms'>GeoCMS</a>")
         pluginService.addPlugins(@container, pluginParams)
@@ -75,7 +74,7 @@ mapModule.service "mapService",
         if scope.filteredLayers.length == 1
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
-          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200)})
+          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
                   .setLatLng(@currentPosition)
                   .setContent(linkFunction(scope)[0])
                   .openOn(@container)

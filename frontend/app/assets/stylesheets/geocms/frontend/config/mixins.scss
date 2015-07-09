@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 @mixin not-selectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

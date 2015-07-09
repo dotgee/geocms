@@ -1,1 +1,6 @@
 @import "frontend/frontend";
+@import "frontend/vendor/plugins";
+
+@import "frontend/plugins/Control.MiniMap.min";
+@import "frontend/plugins/Leaflet.Coordinates-0.1.4";
+@import "frontend/plugins/Leaflet.Fullscreen";

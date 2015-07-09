@@ -2,14 +2,17 @@
   .cart-item
     .cart-column.cart-column-grippy
       .grippy ui-tree-handle=""
-    .cart-column.cart-column-checkbox 
+    .cart-column.cart-column-checkbox
       input type="checkbox" class="layer-visibility" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
     .cart-column ng-click="cart.currentLayer = layer"
       a title="{{layer.title}}" class="unstyled"
         |{{layer.title}}
       p.source ng-if="layer.data_source_name"
-        |#{t("layers.data_source")}
+        |Source :
         a href="{{layer.data_source_ogc}}" target="_blank"
           '&nbsp;{{layer.data_source_name}}
+    .cart-column.cart-column-center
+      i.carticon-play ng-click="cart.currentLayer = layer" tooltip="Information temporelle" tooltip-append-to-body="true" ng-model="$parent.controls" btn-radio="'timeline'" uncheckable="" ng-if="layer.dimensions.length > 0"
+      i.carticon-target ng-click="cart.centerOn(layer)" tooltip="Centrer" tooltip-append-to-body="true"
     .cart-column.cart-column-details ng-click="cart.currentLayer = layer"
       span.glyphicon.glyphicon-chevron-right

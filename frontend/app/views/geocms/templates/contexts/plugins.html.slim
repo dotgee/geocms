@@ -1,3 +1,8 @@
 #folders-button.button-plugins-right ui-sref="folders.root"
   i.carticon-folder
   = t('contexts.header')
+
+#wmc-button.button-plugins-right ng-if="cart.context.id"
+  a ng-href="{{config.geovisu_url}}?wmc={{config.host}}/{{config.prefix_uri}}/api/v1/contexts/{{cart.context.id}}/wmc&lang=fr" target="geovisu"
+    i.carticon-export
+    = t('contexts.wmc')

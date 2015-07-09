@@ -43,6 +43,17 @@
   }
 }
 
+.cart-column-center {
+  vertical-align: middle;
+  width: 15px;
+  font: normal 15px/25px Helvetica, Arial, sans-serif; }
+
+.cart-column-grippy {
+  .grippy {
+    height: 0%;
+  }
+}
+
 .cart-column-image {
   width: 40px;
   vertical-align: top;
