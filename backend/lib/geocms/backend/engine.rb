@@ -7,6 +7,7 @@ module Geocms
         Rails.application.config.assets.precompile += %w(
           geocms/backend/backend.css
           geocms/backend.js
+          ckeditor/lang/fr.js
         )
       end
     end
