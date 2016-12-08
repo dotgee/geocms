@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'geocms_core', version
-  s.add_dependency "active_model_serializers", ">= 0.9"
+  s.add_dependency "active_model_serializers", "~> 0.9.0"
   
 end
