@@ -38,6 +38,7 @@ Geocms::Core::Engine.add_routes do
         get "network"
         post "add"
       end
+      resources :roles
     end
 
     resources :accounts

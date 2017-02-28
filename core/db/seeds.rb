@@ -1,3 +1,16 @@
+puts "###########################"
+puts "Create user roles :"
+puts "###########################"
+puts ""
+Geocms::Role.find_or_create_by!(name: "admin_instance")
+puts "admin_instance created"
+
+Geocms::Role.find_or_create_by!(name: "admin_data")
+puts "admin_data created"
+
+Geocms::Role.find_or_create_by!(name: "user")
+puts "Role user created"
+
 account = Geocms::Account.new(default: true)
 puts "Create default account :"
 puts "Account name (demo):"
@@ -28,3 +41,4 @@ user.accounts << account
 user.add_role :admin
 user.save
 puts "User created"
+

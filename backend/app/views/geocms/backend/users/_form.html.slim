@@ -5,4 +5,13 @@
   = f.input :email
   = f.input :password
   = f.input :password_confirmation
+
+  //= f.input :role, label_html: { style: 'display: block'}
+  label 
+    | Roles  
+  
+  div 
+    = f.collection_check_boxes :role_ids, Role.all, :id, :name
+
+
   = f.submit  :class => "btn btn-primary"

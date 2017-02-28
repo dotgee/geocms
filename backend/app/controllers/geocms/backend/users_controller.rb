@@ -2,7 +2,9 @@ module Geocms
   module Backend
     class UsersController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::User"
-
+      rescue_from CanCan::AccessDenied do |exception|
+        redirect_to root_url, :alert => exception.message
+      end
       def index
         @users = current_tenant.users
         respond_with(:backend, @users)
@@ -18,7 +20,7 @@ module Geocms
         @user = User.where(username: params[:username]).first
         current_tenant.users << @user
         current_tenant.save
-        render "_user", locals: { user: @user }, layout: false
+       # render "_user", locals: { user: @user }, layout: false
       end
 
       def new
@@ -27,10 +29,15 @@ module Geocms
       end
 
       def create
+        puts "create"
         @user = User.new(user_params)
+        puts "save"
         @user.save
-        current_tenant.users << @user
+        puts "add user to current_tenant"
+        current_tenant.users.create( user_params)
+        puts "save current_tenant"
         current_tenant.save
+        puts "end create"
         respond_with(:backend, :users)
       end
 
@@ -41,6 +48,9 @@ module Geocms
       def update
         @user = User.find(params[:id])
         @user.update_attributes(user_params)
+        puts "Param user : "
+        puts user_params
+        puts "--------------"
         respond_with(:edit, :backend, @user)
       end
 
@@ -52,7 +62,7 @@ module Geocms
 
       private
         def user_params
-          params.require(:user).permit(PermittedAttributes.user_attributes)
+          params.require(:user).permit(PermittedAttributes.user_attributes,:role_ids => [])
         end
 
     end

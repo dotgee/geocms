@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Bonjour, </p>
+    <p>Les données des layers on été mis à jour.</p>
+    <ul>
+      <li>Date : <%= @date %> </li>
+      <li><%= link_to "Cliquez sur ce lien pour voir les messages de log", @url %></li>
+    </ul>
+    <p>À bientôt sur <%= link_to @app_name, @app_url %>.</p>
+    <p style="font-size:11px"><i>ps: Ce message est généré puis envoyé automatiquement par <%= @app_name %>.</i></p>
+  </body>
+</html>

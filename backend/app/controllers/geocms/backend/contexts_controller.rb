@@ -3,7 +3,10 @@ module Geocms
   module Backend
     class ContextsController < Geocms::Backend::ApplicationController
       before_action :load_folder
-
+      load_and_authorize_resource class: "Geocms::Context"
+      rescue_from CanCan::AccessDenied do |exception|
+        redirect_to root_url, :alert => exception.message
+      end
       def index
         # @folders = Folder.all
         @contexts = Context.all

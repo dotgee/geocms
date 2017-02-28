@@ -1,5 +1,6 @@
 module Geocms
   class Api::V1::DataSourcesController < Api::V1::BaseController
+   
 
     def capabilities
       data_source = DataSource.find(params[:id])
@@ -14,6 +15,15 @@ module Geocms
     def get_feature_infos
       client = Geocms::OGC::Client.new(feature_infos_params.symbolize_keys)
       render json: client.get_feature_info
+    end
+
+    def get_log_file  
+      if params[:filename] && File.exist?(Rails.root.to_s+"/log/update/"+params[:filename] +".log")
+         file_path = File.join(Rails.root, "log", "update")
+        send_file(  File.join(file_path,  params[:filename]+".log"))
+      else 
+        respond_with "no file : "+ Rails.root.to_s+"log/update/"+params[:filename] +".log"
+      end
     end
 
     private

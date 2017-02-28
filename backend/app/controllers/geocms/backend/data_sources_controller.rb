@@ -1,6 +1,10 @@
 module Geocms
   module Backend
     class DataSourcesController < Geocms::Backend::ApplicationController
+      load_and_authorize_resource class: "Geocms::DataSource"
+      rescue_from CanCan::AccessDenied do |exception|
+        redirect_to root_url, :alert => exception.message
+      end
       def index
         @data_sources = DataSource.all.group_by(&:not_internal)
         respond_with(:backend, @data_sources)
@@ -29,7 +33,7 @@ module Geocms
       def update
         @data_source = DataSource.find(params[:id])
         @data_source.update_attributes(data_source_params)
-        respond_with(:import, :backend, @data_source)
+        respond_with(:import, :backend, @data_source,data_source_params)
       end
 
       def destroy

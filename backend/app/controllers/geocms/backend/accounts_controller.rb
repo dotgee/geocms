@@ -2,7 +2,9 @@ module Geocms
   module Backend
     class AccountsController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::Account"
-
+      rescue_from CanCan::AccessDenied do |exception|
+        redirect_to :back, :alert => exception.message
+      end
       def index
         @accounts = Account.all
       end
@@ -16,7 +18,7 @@ module Geocms
       def create
         @account = Account.new(account_params)
         if @account.save
-          @account.users.last.roles << Geocms::Role.where(name: "admin").first
+          @account.users.last.roles << Geocms::Role.where(name: "user").first
           flash[:success] = I18n.t('account_created')
           respond_with(:backend, :accounts)
         else

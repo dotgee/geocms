@@ -1,7 +1,10 @@
 module Geocms
   module Backend
     class PreferencesController < Geocms::Backend::ApplicationController
-
+      load_and_authorize_resource class: "Geocms::Preference"
+      rescue_from CanCan::AccessDenied do |exception|
+        redirect_to :back, :alert => exception.message
+      end
       def edit
       end
 
