@@ -3,9 +3,11 @@ module Geocms
     class LayersController < Geocms::Backend::ApplicationController
       #before_filter :require_category, :only => [:destroy]
       load_and_authorize_resource class: "Geocms::Layer"
+
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to root_url, :alert => exception.message
+        controle_access()
       end
+
       def index
         @layers = current_tenant.layers.page(params[:page]).per(params[:per_page])
         respond_with(:backend, @layers)

@@ -2,9 +2,11 @@ module Geocms
   module Backend
     class AccountsController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::Account"
+      
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to :back, :alert => exception.message
+        controle_access()
       end
+
       def index
         @accounts = Account.all
       end

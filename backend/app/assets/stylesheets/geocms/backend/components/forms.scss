@@ -7,3 +7,9 @@ label.boolean {
   @include box-shadow(none);
   padding-left: 0;
 }
+.role_checkboxes input{
+  margin-right: 1px;
+}
+.role_checkboxes label{
+  margin-left: 10px;
+}

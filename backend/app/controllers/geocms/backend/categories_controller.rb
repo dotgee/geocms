@@ -2,9 +2,11 @@ module Geocms
   module Backend
     class CategoriesController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::Category"
+
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to root_url, :alert => exception.message
+        controle_access()
       end
+
       def index
         @categories = Category.arrange(:order => :position)
         # respond_with(:backend, @categories)

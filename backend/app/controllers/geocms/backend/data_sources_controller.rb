@@ -2,9 +2,11 @@ module Geocms
   module Backend
     class DataSourcesController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::DataSource"
+
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to root_url, :alert => exception.message
+        controle_access()
       end
+
       def index
         @data_sources = DataSource.all.group_by(&:not_internal)
         respond_with(:backend, @data_sources)

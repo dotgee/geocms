@@ -101,7 +101,9 @@ en:
         first_name: Prénom
         last_name: Nom
         email: Email
-        password_confirmation: Confirmation du mot de passe
+        name: Confirmation du mot de passe
+        Roles: Rôles
+        
       account:
         subdomain: Sous Domaine
   views:

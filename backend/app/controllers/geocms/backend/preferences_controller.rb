@@ -4,8 +4,9 @@ module Geocms
       load_and_authorize_resource class: "Geocms::Preference"
       
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to :back, :alert => exception.message
+        controle_access()
       end
+      
       def edit
       end
 

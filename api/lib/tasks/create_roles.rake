@@ -17,6 +17,13 @@ namespace :geocms do
 
       Geocms::Role.find_or_create_by(name: "admin")
       puts "Role admin created"
+
+      Geocms::User.all.each do |user|
+        if user.roles.to_a.empty?
+          user.add_role :user
+        end 
+      end
+      puts "default role for user without role added"
     end
   end
 end

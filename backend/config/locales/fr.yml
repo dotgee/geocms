@@ -5,7 +5,10 @@ fr:
   account_created: "Nouvelle instance créé avec succès"
 
   confirm_delete: Supprimer ?
-
+  password_confirmation: Confirmation du mot de passe
+  admin_instance: Administrateur de l'instance
+  admin_data: Administrateur des données
+  admin: Administrateur 
   messages:
     loading: "Chargement en cours, merci de patienter..."
     comfirm: Êtes vous sur ?
@@ -101,7 +104,7 @@ fr:
         first_name: Prénom
         last_name: Nom
         email: Email
-        password_confirmation: Confirmation du mot de passe
+
       account:
         subdomain: Sous Domaine
   views:

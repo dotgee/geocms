@@ -13,6 +13,13 @@ module Geocms
       set_current_tenant_by_subdomain(Geocms::Account, :subdomain)
       before_filter :require_login
 
+      def controle_access
+        if current_user.has_any_role? :admin, :admin_instance
+          redirect_to edit_backend_preferences_url :alert => ""
+        else 
+          redirect_to root_url, :alert => exception.message
+        end
+      end
       private
       def not_authenticated
         redirect_to login_url, :alert => t('session.unauthorized')

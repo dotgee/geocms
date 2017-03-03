@@ -9,9 +9,14 @@
   //= f.input :role, label_html: { style: 'display: block'}
   - if @user.username != current_user.username  
     label 
-      | Roles  
+      | roles  
     div 
-      = f.collection_check_boxes :role_ids, Role.all, :id, :name, disabled: @disable_role
+      = f.collection_check_boxes :role_ids, Role.all, :id, :name, disabled: @disable_role do |b|
+        .role_checkboxes
+          = b.label do
+            = b.check_box
+            = t(b.text) 
+      end
 
 
   = f.submit  :class => "btn btn-primary"

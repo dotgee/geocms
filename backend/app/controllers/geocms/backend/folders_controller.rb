@@ -2,9 +2,11 @@ module Geocms
   module Backend
     class FoldersController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::Folder"
+
       rescue_from CanCan::AccessDenied do |exception|
-        redirect_to root_url, :alert => exception.message
+        controle_access()
       end
+
       before_filter :set_folder, only: [:edit, :show, :update, :destroy]
 
       def index

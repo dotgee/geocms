@@ -12,6 +12,7 @@ module Geocms
 
       @user.roles.each { |role| send(role.name.to_s) }
 
+      #  User without role (not connected)
       if @user.roles.size == 0
         can :read, Folder, visibility: true
         can [:read, :write], Folder, user: user
@@ -19,6 +20,7 @@ module Geocms
         can :create, Context, folder: { user: user }
         can :update, Context, folder: { user: user }
       end
+
       if @user.new_record?
         puts "User Role : new user"
         can :read, Folder, visibility: true
@@ -94,18 +96,15 @@ module Geocms
     end
 
     def admin_instance
-      admin_data
       can :manage, User
-      can :manage, Preference,visibility: true
-      can :update,  Account
-      cannot :create, Account
-      cannot :destroy, Account
+      can :read, Preference
+      can :read, Account
     end
 
     def admin
-      admin_instance
       can :manage, Preference
       can :manage, Account
+      can :manage, User
     end
   end
 end

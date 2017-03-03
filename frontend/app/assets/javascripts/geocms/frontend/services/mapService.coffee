@@ -13,7 +13,7 @@ mapModule.service "mapService",
     (pluginService, $http, projections, baseLayerService, $root, $compile, $filter, $state) ->
 
       mapService = {}
-
+     
       mapService.container = null
       mapService.layers = []
       mapService.crs = null
@@ -62,6 +62,7 @@ mapModule.service "mapService",
         @container.addEventListener('click', @queryLayer, mapService)
 
       mapService.queryLayer = (e) ->
+        
         html = '<div ng-include="\''+config.prefix_uri+'/templates/layers/popup.html\'"></div>'
         scope = $root.$new()
         linkFunction = $compile(html)
@@ -74,6 +75,7 @@ mapModule.service "mapService",
         if scope.filteredLayers.length == 1
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
+      
           L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
                   .setLatLng(@currentPosition)
                   .setContent(linkFunction(scope)[0])
