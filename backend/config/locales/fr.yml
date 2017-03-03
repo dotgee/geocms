@@ -9,6 +9,7 @@ fr:
   admin_instance: Administrateur de l'instance
   admin_data: Administrateur des données
   admin: Administrateur 
+
   messages:
     loading: "Chargement en cours, merci de patienter..."
     comfirm: Êtes vous sur ?
@@ -85,7 +86,9 @@ fr:
   result_search: Résultats de la recherche
 
   simple_form:
+   
     labels:
+     
       defaults:
         name: Nom
         description: Description
@@ -100,11 +103,12 @@ fr:
         preview: Aperçu
       folder:
         visibility: Public
+      
       user:
         first_name: Prénom
         last_name: Nom
         email: Email
-
+       
       account:
         subdomain: Sous Domaine
   views:
@@ -117,3 +121,4 @@ fr:
   session:
     invalid_credentials: "Mauvais email ou password"
     logged_in: "Authentification réussie"
+

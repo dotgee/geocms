@@ -5,7 +5,7 @@ module Geocms
       before_action :load_folder
       
       rescue_from CanCan::AccessDenied do |exception|
-        controle_access()
+        controle_access(exception)
       end
       
       def index

@@ -97,8 +97,8 @@ module Geocms
 
     def admin_instance
       can :manage, User
-      can :read, Preference
-      can :read, Account
+      can :manage, Preference,visibility: true
+      can :read, Account, visibility: true
     end
 
     def admin

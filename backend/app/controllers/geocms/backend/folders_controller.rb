@@ -4,7 +4,7 @@ module Geocms
       load_and_authorize_resource class: "Geocms::Folder"
 
       rescue_from CanCan::AccessDenied do |exception|
-        controle_access()
+        controle_access(exception)
       end
 
       before_filter :set_folder, only: [:edit, :show, :update, :destroy]
