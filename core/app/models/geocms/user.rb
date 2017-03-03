@@ -33,7 +33,7 @@ module Geocms
     private
     def define_role
       if account.users.empty?
-        self.add_role :admin, account
+        self.add_role :user, account
       end
     end
 
@@ -47,6 +47,8 @@ module Geocms
       "#{self.username}_" + (Folder.where("name like ?", "#{self.username}_%").count+1).to_s
     end
 
+  
+
     validates_confirmation_of :password
     validates_presence_of :password, on: :create
 
@@ -54,6 +56,6 @@ module Geocms
     validates_uniqueness_of :username
     validates_presence_of :email
     validates_uniqueness_of :email
-
+    validates_size_of :roles, :minimum => 1,:allow_nil => false,allow_blank: false
   end
 end

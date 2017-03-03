@@ -14,9 +14,6 @@ namespace :geocms do
 
       Geocms::Role.find_or_create_by(name: "user")
       puts "Role user created"
-      
-      Geocms::Role.find_or_create_by(name: "admin_appli")
-      puts "Role admin_appli created"
 
       Geocms::Role.find_or_create_by(name: "admin")
       puts "Role admin created"

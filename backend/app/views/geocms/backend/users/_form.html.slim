@@ -7,11 +7,11 @@
   = f.input :password_confirmation
 
   //= f.input :role, label_html: { style: 'display: block'}
-  label 
-    | Roles  
-  
-  div 
-    = f.collection_check_boxes :role_ids, Role.all, :id, :name
+  - if @user.username != current_user.username  
+    label 
+      | Roles  
+    div 
+      = f.collection_check_boxes :role_ids, Role.all, :id, :name, disabled: @disable_role
 
 
   = f.submit  :class => "btn btn-primary"

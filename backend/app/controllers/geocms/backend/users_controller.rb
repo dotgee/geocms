@@ -7,7 +7,12 @@ module Geocms
       end
       def index
         @users = current_tenant.users
+
+        @isAdmin = current_user.has_role? :admin 
+        @isAdmin_instance = current_user.has_role? :admin_instance 
+
         respond_with(:backend, @users)
+
       end
 
       def network
@@ -25,38 +30,65 @@ module Geocms
 
       def new
         @user = User.new
+        @user.add_role :user
         respond_with(:backend, @user)
       end
 
       def create
-        puts "create"
         @user = User.new(user_params)
-        puts "save"
+        
+        if @user.roles.to_a.empty?
+          @user.add_role :user
+        end
+
         @user.save
-        puts "add user to current_tenant"
-        current_tenant.users.create( user_params)
-        puts "save current_tenant"
-        current_tenant.save
-        puts "end create"
+
+        current_tenant.users << @user
+       
         respond_with(:backend, :users)
       end
 
       def edit
         @user = User.find(params[:id])
+        @disable_role = []
+        @isAdmin=true
+        if !current_user.has_role? :admin
+          if @user.has_role? :admin
+            redirect_to action: "index"
+          end 
+          role=Geocms::Role.where("name = ?", :admin).take
+          @disable_role << role.id
+          @isAdmin=false;
+        end
+
+        if !@isAdmin && !(current_user.has_role? :admin_instance)
+          if @user.has_role? :admin_instance
+            redirect_to action: "index"
+          end 
+          role=Geocms::Role.where("name = ?", :admin_instance).take
+          @disable_role << role.id
+        end
       end
 
       def update
         @user = User.find(params[:id])
         @user.update_attributes(user_params)
-        puts "Param user : "
-        puts user_params
-        puts "--------------"
+
         respond_with(:edit, :backend, @user)
       end
 
       def destroy
         @user = User.find(params[:id])
-        current_tenant.users.delete(@user)
+
+        if ( !@user.has_role? :admin ) && (can? :destroy, @user )
+          if (@user.has_role? :admin_instance )&& (current_user.has_role? :admin)
+            current_tenant.users.delete(@user)
+            @user.destroy
+          else
+            current_tenant.users.delete(@user)
+            @user.destroy
+          end 
+        end 
         respond_with(:backend, :users)
       end
 

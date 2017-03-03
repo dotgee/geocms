@@ -3,8 +3,10 @@ tr
   td= user.email
   td= user.created_at.strftime("%d/%m/%Y")
   td
-    = link_to [:edit, :backend, user], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
-      i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
+    - if !(user.has_role? :admin) && ( @isAdmin || @isAdmin_instance && ! (user.has_role? :admin_instance) )
+      = link_to [:edit, :backend, user], :class => "btn btn-xs btn-primary icn-only", :rel => "tooltip", "data-original-title" => t("actions.default.edit") do
+        i.glyphicon.glyphicon-pencil.glyphicon.glyphicon-white
   td
-    = link_to [:backend, user], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
-      i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
+    - if !(user.has_role? :admin) && ( @isAdmin || @isAdmin_instance && ! (user.has_role? :admin_instance) )
+      = link_to [:backend, user], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
+        i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white

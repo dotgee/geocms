@@ -87,13 +87,15 @@ mapModule.service "mapService",
 
       mapService.containsPoint = ->
         (item) ->
-          bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/100, Math.floor(item.bbox[0] *100)/100), L.latLng(Math.ceil(item.bbox[3] *100)/100, Math.ceil(item.bbox[2] *100)/100)) else null)
+          bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/ 100, Math.floor(item.bbox[0] *100) / 100), L.latLng(Math.ceil(item.bbox[3] *100)/ 100, Math.ceil(item.bbox[2] *100)/ 100)) else null)
           return if bounds? then bounds.contains(mapService.currentPosition) else false
 
       mapService.getFeatureWMS = ->
+      
         url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
+
           L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200) })
                 .setLatLng(mapService.currentPosition)
                 .setContent(mapService.generateTemplate(data))
@@ -115,6 +117,7 @@ mapModule.service "mapService",
         '&current_y='+position.y
 
       mapService.generateTemplate = (data) ->
+     
         _.templateSettings =
           interpolate: /\{\{(.+?)\}\}/g
         wrapper = "<div class='geocms-popup-header'><h1>"+@currentLayer.title+"</h1></div>"

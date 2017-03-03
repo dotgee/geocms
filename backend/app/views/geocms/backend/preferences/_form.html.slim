@@ -11,10 +11,12 @@
             = text_field_tag "preferences[#{p}]", ActsAsTenant.current_tenant.read_preference(p).value, class: "form-control"
       .form-group.hint
         = t("modules.preferences.maps_conseil")
-      .control-group
-        .controls
-          = submit_tag t("actions.default.update"), class: "btn btn-primary"
-  .col-md-6
+      - if can? :update, Geocms::Account
+        .control-group
+          .controls
+            = submit_tag t("actions.default.update"), class: "btn btn-primary" 
+
+  .col-md-6 
     .page-header
       h4
         = t(:account)
@@ -22,8 +24,10 @@
       = f.input :name
       .row
         .col-xs-6
-          = f.input :logo, hint: t("logo_hint")
+          - if can? :update, Geocms::Account
+            = f.input :logo, hint: t("logo_hint")
         .col-xs-6
           = image_tag f.object.logo if f.object.logo?
-      .control-group
-          = f.submit t("actions.default.update"), class: "btn btn-primary"
+      - if can? :update, Geocms::Account
+        .control-group
+            = f.submit t("actions.default.update"), class: "btn btn-primary"

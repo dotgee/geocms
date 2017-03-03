@@ -2,6 +2,7 @@ require "geocms/backend"
 require 'net/http'
 require 'open-uri'
 require 'fileutils'
+require 'rake'
 
 # integer for count news or/and updates layers
 $cpt_new=0;
@@ -73,6 +74,7 @@ def getLayerInfo(node,search,source_id)
     end
   end
 end
+
 ################################
 ##            TASK            ##
 ################################
@@ -80,15 +82,19 @@ namespace :geocms do
   namespace :synchro do
     desc "Synchronization source"
     task :wms => :environment  do
-      #init directory and log files
-      date=DateTime.now.strftime("%Y%m%d_%H%M");
+      # init date for log, mail and database
+      date=DateTime.now
+      date_file=date.strftime("%Y%m%d_%H%M");
+      date_email=date.strftime("%d/%m/%Y à %H:%M:%S ");
 
+
+      #init directory and log files
       if !File.directory?("log/update")
         FileUtils::mkdir_p 'log/update'
       end
 
       path="log/update/"
-      filename="data_update_"+date.to_s
+      filename="data_update_"+date_file
       logFile=filename+".log"
 
       #Open log file
@@ -99,19 +105,21 @@ namespace :geocms do
           f << "Nom de la source : " << source.name << "\n"
           print( "Nom de la source : ",source.name,"\n")
           begin
+            # get and parse xml from wms server
             xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"))
 
+            date=DateTime.now.strftime("%F %T UTC");
+            
             $cpt_update=0;
             $cpt_new=0;
-            date=DateTime.now.strftime("%F %T UTC");
-
+            
             # update layer
             getLayerInfo(xml_doc,"Capability > Layer",source.id);
             f << "Date de mise à jour : " << date << "\n"
             f << "Nombre de layer mis à jour : " << $cpt_update <<  "\n"
             f << "Nombre de nouveau layer : " << $cpt_new << "\n"
 
-            # delete layer not update
+            # search and delete layer not update and 
             compteur_delete=0
             sql = Geocms::Layer.where("updated_at < :updated_date and data_source_id = :data_source_id",{
               updated_date: date,
@@ -122,6 +130,8 @@ namespace :geocms do
             end
             f << "Nombre de layer suprimmé : "  << compteur_delete << "\n"
             compteur_delete=0;
+
+            # delete layer/category relation 
             sql2= Geocms::Categorization.joins("left join geocms_layers on geocms_layers.id = geocms_categorizations.layer_id ").where("geocms_layers.id is null").all.each do |result|
               Geocms::Categorization.delete_all(layer_id: result.layer_id)
               compteur_delete = compteur_delete + 1
@@ -133,11 +143,16 @@ namespace :geocms do
           end
         end
       end
+
       # send email to admins_data users
-      puts "search admin user : "
-      Geocms::User.joins(:roles).where(geocms_roles: { name: 'admin' }).all.each do |user|;
-        print("Send mail to : ", user.username ,"\n")
-        UserMailer.sendUpdateLog(filename,date,user)
+      puts "search admin user : " 
+      Geocms::User.joins(:roles).where(geocms_roles: { name: 'admin_data' }).all.each do |user|;
+        puts "Send mail to : #{ user.username } "
+        begin
+          UserMailer.sendUpdateLog(filename,date_email,user).deliver_now
+        rescue => e
+          puts  "Error :  #{e}"
+        end
       end
     end
   end

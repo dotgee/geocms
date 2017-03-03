@@ -22,6 +22,8 @@ table.table.table-striped
         td= account.subdomain
         td= account.created_at.strftime("%d/%m/%Y")
         td
-          = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
-            i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
-= link_to t("actions.default.add"), [:new, :backend, :account], class: "btn btn-primary"
+          - if can? :destroy, Geocms::Account
+            = link_to [:backend, account], :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger icn-only btn-xs" do
+              i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
+- if can? :create, Geocms::Account              
+  = link_to t("actions.default.add"), [:new, :backend, :account], class: "btn btn-primary"

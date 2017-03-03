@@ -6,12 +6,23 @@
   </head>
   <body>
     <p>Bonjour, </p>
-    <p>Les données des layers on été mis à jour.</p>
-    <ul>
-      <li>Date : <%= @date %> </li>
-      <li><%= link_to "Cliquez sur ce lien pour voir les messages de log", @url %></li>
-    </ul>
-    <p>À bientôt sur <%= link_to @app_name, @app_url %>.</p>
+    <p>Les couches ont été synchronisées le <%= @date %> </p>
+
+    <% if  @filename.nil? %>
+      <ul>
+        <li>erreur : Le fichier de log n'a pas été généré</li>
+      </ul>
+    <% elsif @url.nil? %>
+      <ul>
+        <li>erreur : l'url du portail par défaut (préférence => host) n'a pas été configuré</li>
+      </ul>
+    <% else %>
+      <ul>
+        <li><%= link_to "Cliquez sur ce lien pour voir les messages de log", @url %></li>
+      </ul>
+    <% end %>
+
+    <p>À bientôt sur <%= link_to @app_name, @app_url.value %>.</p>
     <p style="font-size:11px"><i>ps: Ce message est généré puis envoyé automatiquement par <%= @app_name %>.</i></p>
   </body>
 </html>

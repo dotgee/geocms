@@ -96,20 +96,16 @@ module Geocms
     def admin_instance
       admin_data
       can :manage, User
-      can :manage, Preference
-
-    end
-
-    def admin_appli
-      admin_instance
-      can :manage, Account
+      can :manage, Preference,visibility: true
+      can :update,  Account
       cannot :create, Account
       cannot :destroy, Account
     end
 
     def admin
-      can :manage, all
+      admin_instance
+      can :manage, Preference
+      can :manage, Account
     end
-    
   end
 end
