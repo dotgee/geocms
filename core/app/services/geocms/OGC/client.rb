@@ -32,12 +32,13 @@ module Geocms
           "&X=#{@current_x}&Y=#{@current_y}"\
           "&HEIGHT=#{@height}&WIDTH=#{@width}"\
           "&INFO_FORMAT=application/json&"\
-          "SRS=EPSG:4326&FEATURE_COUNT=500"\
-          "&TIME=#{@time}"
+          "SRS=EPSG:4326&FEATURE_COUNT=500"
+        if !@time.nil?
+          @request_url = @request_url + "&TIME=#{@time}"
+        end
       end
 
       def get_feature_info_response
-        print( "Requette : #{@request_url}")
         Curl::Easy.new(@request_url) do |curl|
           curl.on_success do |response|
             @response = JSON.parse(response.body_str)
