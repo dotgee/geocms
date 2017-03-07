@@ -2,9 +2,9 @@ module Geocms
   module OGC
     class Client
 
-      attr_accessor :wms_service, :feature_name, :width, :height, :bbox, :current_x, :current_y, :request_url, :response
+      attr_accessor :wms_service, :feature_name, :width, :height, :bbox, :current_x, :current_y, :time, :request_url, :response
 
-      def initialize(wms_url:, feature_name:, width: nil, height: nil, bbox: nil, current_x: nil, current_y: nil)
+      def initialize(wms_url:, feature_name:, width: nil, height: nil, bbox: nil, current_x: nil, current_y: nil, time: nil)
         @wms_service = wms_url
         @feature_name = feature_name
         @width = width
@@ -12,6 +12,7 @@ module Geocms
         @bbox = bbox
         @current_x = current_x
         @current_y = current_y
+        @time = time
       end
 
       def get_feature_info
@@ -31,10 +32,12 @@ module Geocms
           "&X=#{@current_x}&Y=#{@current_y}"\
           "&HEIGHT=#{@height}&WIDTH=#{@width}"\
           "&INFO_FORMAT=application/json&"\
-          "SRS=EPSG:4326&FEATURE_COUNT=500"
+          "SRS=EPSG:4326&FEATURE_COUNT=500"\
+          "&TIME=#{@time}"
       end
 
       def get_feature_info_response
+        print( "Requette : #{@request_url}")
         Curl::Easy.new(@request_url) do |curl|
           curl.on_success do |response|
             @response = JSON.parse(response.body_str)

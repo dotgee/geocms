@@ -21,7 +21,9 @@ module Geocms
         end
 
         def search
-          @layers = current_tenant.layers.search(params[:q])
+          puts("id : #{current_tenant.id}")
+
+          @layers =Geocms::Layer.joins(:categories).where("geocms_categories.account_id= ? ",current_tenant.id).search(params[:q])
           respond_with @layers
         end
 

@@ -117,6 +117,7 @@ mapModule.service "mapService",
         '&bbox='+@container.getBounds().toBBoxString()+
         '&current_x='+position.x+
         '&current_y='+position.y
+        console.log(config.prefix_uri)
 
       mapService.generateTemplate = (data) ->
      

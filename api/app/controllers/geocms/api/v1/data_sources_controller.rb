@@ -1,6 +1,7 @@
+require File.join(Rails.root, "../geocms/core/app/services/geocms/OGC/client.rb")
 module Geocms
   class Api::V1::DataSourcesController < Api::V1::BaseController
-   
+    
 
     def capabilities
       data_source = DataSource.find(params[:id])
@@ -13,6 +14,7 @@ module Geocms
     end
 
     def get_feature_infos
+
       client = Geocms::OGC::Client.new(feature_infos_params.symbolize_keys)
       render json: client.get_feature_info
     end
@@ -29,7 +31,7 @@ module Geocms
     private
 
     def feature_infos_params
-      params.permit(:wms_url, :feature_name, :width, :height, :bbox, :current_x, :current_y)
+      params.permit(:wms_url, :feature_name, :width, :height, :bbox, :current_x, :current_y, :time)
     end
   end
 end
