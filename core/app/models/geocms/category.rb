@@ -4,7 +4,7 @@ module Geocms
     friendly_id :name, :use => [:scoped, :finders], :scope => :account
 
     has_many :categorizations
-    has_many :layers, through: :categorizations
+    has_many :layers, -> { where queryable: true}, through: :categorizations
 
     acts_as_tenant(:account)
 

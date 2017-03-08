@@ -12,15 +12,6 @@ module Geocms
       #.where("geocms_categories.id = ?",params[:id]) 
      # @category = Category.includes(layers: [:data_source]).find params[:id]
       @category = Category.where("geocms_categories.id = ? ",params[:id])
-
-      if !@category.first.layers.nil?
-        @category.first.layers.each do |layer|
-          layerQueryable = Geocms::Layer.find(layer.id);
-          if layerQueryable.queryable.nil? || !layerQueryable.queryable
-      #      @category.first.layers.delete(layer)
-          end
-        end
-      end
       respond_with @category.first
     end
 
