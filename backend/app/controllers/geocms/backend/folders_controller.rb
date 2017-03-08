@@ -11,7 +11,7 @@ module Geocms
 
       def index
         @folders = Folder.ordered
-        @isAdmin = current_user.has_any_role? :admin, :admin_instance
+        @isAdmin = current_user.has_all_roles? :admin, :admin_instance
       end
 
       def new
