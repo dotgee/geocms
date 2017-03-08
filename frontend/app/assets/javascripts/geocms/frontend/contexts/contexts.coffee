@@ -30,10 +30,12 @@ contexts.config [
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["context", "$state", (context, $state) ->
+              
               if context != null && context != undefined && context != "null"
                 $state.transitionTo('contexts.show', {uuid: context.uuid})
               else
                 $state.transitionTo('contexts.new')
+
             ]
         resolve:
           context: ["Restangular", (Restangular) ->
@@ -47,6 +49,7 @@ contexts.config [
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location', (mapService, folders, $root, $scope, Restangular, $location) ->
+              console.log("test 123",config)
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
@@ -98,6 +101,13 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.context = context
               $root.cart.addSeveral()
+              console.log "test ? ", context
+              $root.cart.context.selected_folder=0
+
+              for value, index in folders
+                if value.id == context.folder_id
+                  $root.cart.context.selected_folder=value
+
               $root.cart.folders = folders
               $scope.mapService = mapService
               $location.hash('layers')

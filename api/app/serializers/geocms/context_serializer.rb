@@ -1,7 +1,7 @@
 module Geocms
   class ContextSerializer < ActiveModel::Serializer
     attributes :id, :uuid, :name, :center_lat, :center_lng, :zoom, :preview_url,
-               :description, :slug, :editable, :direct_link, :embed_code
+               :description, :slug, :editable, :direct_link, :embed_code, :folder_id
     has_many :contexts_layers, serializer: ContextsLayerSerializer, embed: :objects
 
     def editable

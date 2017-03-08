@@ -95,14 +95,17 @@ cartModule.service "cartService",
           that.layers.push ms.addLayer(cl)
 
       Cart::save = () ->
-        if(@context.folder)
-          @context.folder_id = @context.folder.id.id
-          delete @context.folder
+        if @context.selected_folder?
+          @context.folder_id = @context.selected_folder.id
+          
         delete @context.contexts_layers # BUG: circular dependency in json
+        
         that = this
+        
         @context.contexts_layers_attributes = _.map(@layers, (cl) ->
           { id: cl.id, layer_id: cl.layer_id, opacity: cl.opacity, position: cl.position }
         )
+       
         @context.save().then ((response)->
           $state.transitionTo("contexts.edit", {uuid: response.uuid}).then ->
             toaster.pop('success', "La sauvegarde a réussi", response.data)

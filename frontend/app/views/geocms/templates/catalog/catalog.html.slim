@@ -24,5 +24,5 @@
             |{{category.name}}
       .row-fluid#catalog-categories
         .media ng-repeat="category in catalog.categories" ng-include="config.prefix_uri+'/templates/catalog/category.html'")
-        .media ng-repeat="layer in catalog.layers" ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)"
+        .media ng-repeat="layer in catalog.layers" ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)" ng-if="layer.queryable"
           div ng-include="config.prefix_uri+'/templates/catalog/layer.html'"

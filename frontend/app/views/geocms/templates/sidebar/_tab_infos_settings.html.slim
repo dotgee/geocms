@@ -7,7 +7,8 @@ form.inside-tab-pane role="form"
     textarea#context_description.form-control name="description" type="text"  ng-model="cart.context.description" ng-readonly="!cart.context.editable"
   .form-group
     label for="context_folder" =t("contexts.attributes.folder")
-    select#context_folder.form-control name="folder" ng-model="cart.context.folder.id" ng-options="folder.name for folder in cart.folders" ng-readonly="!cart.context.editable"
+
+    select#context_folder.form-control name="folder" ng-model="cart.context.selected_folder" ng-options="folder.name for folder in cart.folders" ng-readonly="!cart.context.editable" 
   .row
     .form-group.col-md-3
       label for="context_center_lng" =t("contexts.attributes.center_lng")
