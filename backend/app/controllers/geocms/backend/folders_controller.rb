@@ -11,7 +11,16 @@ module Geocms
 
       def index
         @folders = Folder.ordered
-        @isAdmin = current_user.has_all_roles? :admin, :admin_instance
+        tab_roles = current_user.roles
+       
+        tab_user_role = []
+        tab_roles.each do |r|
+          tab_user_role << r.name
+        end
+
+        puts "tab :  #{tab_user_role}, #{tab_user_role.include? "admin_data"} &&  (( #{tab_user_role.include? "admin_instance"}) || (#{ tab_user_role.include? "admin"} ))"
+        @isAdmin = ( tab_user_role.include? "admin_data" )&&  (( tab_user_role.include? "admin_instance") || (tab_user_role.include? "admin" ))
+        puts "is admin ? #{@isAdmin}, ? #{(( tab_user_role.include? "admin_instance") || (tab_user_role.include? "admin" ))}"
       end
 
       def new

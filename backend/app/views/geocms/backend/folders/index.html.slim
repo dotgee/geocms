@@ -11,7 +11,7 @@ table.table.table-striped
       th
   tbody
     - @folders.each do |folder|
-      - if ( @isAdmin && @isAdminData) || folder.user_id == current_user.id 
+      - if @isAdmin  || folder.user_id == current_user.id 
         tr
           td
             = link_to folder.name, [:backend, folder]

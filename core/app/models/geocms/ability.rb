@@ -73,10 +73,13 @@ module Geocms
     def user
       can :read, Folder, visibility: true
       if !@user.nil?
-        can [:read, :write], Folder, user: @user
+        can :read, Folder, user: @user
         can [:new, :read, :share], Context
-        can :create, Context, folder: { user: @user }
-        can :update, Context, folder: { user: @user }
+        can :create, Context, folder: { visibility: true }
+        can :update, Context do |context|
+          context.new_record? or
+          context.folder.nil?
+        end
       end
     end
 
