@@ -45,5 +45,4 @@ folders.config [
           data: ['Restangular', '$stateParams', (Restangular, $stateParams) ->
             Restangular.one('folders', $stateParams.slug).get()
           ]
-
 ]

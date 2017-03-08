@@ -17,6 +17,7 @@ def getLayerInfo(node,search,source_id)
     layers=node.search(search)
     if !layers.empty?
       # for each layer in node_set
+
       layers.each do |layer|
         # search name, description, title and metadata_url
         name=layer.search("> Name").first
@@ -28,14 +29,15 @@ def getLayerInfo(node,search,source_id)
           description= !description.nil? ? description.content : nil
           title= !title.nil? ? title.content : nil
           metadataUrl= !metadataUrl.nil? ? metadataUrl["xlink:href"] : nil
+          isQueryable = layer["queryable"].nil? ? false : layer["queryable"]
 
           # searche layer if exist
           layerFromBdd=Geocms::Layer.where(name: name.content).take
           if !layerFromBdd.nil?
             update=false;
             if title != layerFromBdd.title
-            layerFromBdd.title=title;
-            update=true
+              layerFromBdd.title=title;
+              update=true
             end
             if description != layerFromBdd.description
               layerFromBdd.description=description;
@@ -45,6 +47,10 @@ def getLayerInfo(node,search,source_id)
               layerFromBdd.metadata_url=metadataUrl;
               update=true
             end
+            if isQueryable != layerFromBdd.queryable
+              layerFromBdd.queryable=isQueryable;
+              update=true
+            end 
             if update
               $cpt_update = $cpt_update+1
             end
@@ -61,7 +67,8 @@ def getLayerInfo(node,search,source_id)
               metadata_url: metadataUrl,
               updated_at: date,
               created_at: date,
-              data_source_id:source_id
+              data_source_id: source_id,
+              queryable: isQueryable.nil? ? false : isQueryable
             )
             #create layer
             newLayer.save!
@@ -79,6 +86,35 @@ end
 ##            TASK            ##
 ################################
 namespace :geocms do
+  namespace :synchro_dev do
+    desc "Donwnload a wms file for test devloppement"
+    task :download_wms => :environment do
+      puts "File donwnload"
+      content = Net::HTTP.get(URI("http://geobretagne.fr/geoserver/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
+      puts "write xml file"
+      File.open("content.xml","w+") do |f|
+        f << content.force_encoding('utf-8');
+      end
+      puts "END"
+    end
+    desc "Parse wms/xml file "
+    task :parse_wms => :environment do
+      puts "Parse wms/xml file "
+      xml_doc = File.open("content.xml") { |f| Nokogiri::XML(f) }
+      date=DateTime.now.strftime("%F %T UTC");
+      
+      $cpt_update=0;
+      $cpt_new=0;
+      
+      # update layer
+      getLayerInfo(xml_doc,"Capability > Layer",2);
+      puts "Date de mise à jour : #{ date } "
+      puts "Nombre de layer mis à jour :  #{ $cpt_update}"
+      puts "Nombre de nouveau layer :  #{ $cpt_new }"
+
+      puts "END"
+    end
+  end 
   namespace :synchro do
     desc "Synchronization source"
     task :wms => :environment  do
@@ -86,7 +122,6 @@ namespace :geocms do
       date=DateTime.now
       date_file=date.strftime("%Y%m%d_%H%M");
       date_email=date.strftime("%d/%m/%Y à %H:%M:%S ");
-
 
       #init directory and log files
       if !File.directory?("log/update")

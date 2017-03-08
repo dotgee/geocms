@@ -2,7 +2,8 @@
   .container
     .page-header.row
       .col-xs-10
-        h1= t "contexts.header"
+        h1= t "contexts.header" 
+      
       .col-xs-2
         a.btn.btn-primary ui-sref="contexts.new"
           span.glyphicon.glyphicon-plus
@@ -14,3 +15,5 @@
           .carticon-folder.folder-display ng-class="(folder.visibility == false || folder.visibility == null) ? 'non-public-folder' : ''"
           h4
             |{{folder.name}}
+
+

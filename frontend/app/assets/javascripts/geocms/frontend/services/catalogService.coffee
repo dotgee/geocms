@@ -56,6 +56,7 @@ catalogModule.service "catalogService",
     Catalog::search = ->
       that = this
       Restangular.all("layers").customGET("search", { q: @query }).then (response) ->
+        console.log "response : ",response
         that.layers = response.layers
         that.categories = []
 

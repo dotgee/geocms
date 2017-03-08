@@ -21,10 +21,9 @@ module Geocms
         end
 
         def search
-          puts("id : #{current_tenant.id}")
+          @layers =Geocms::Layer.joins(:categories).where("geocms_categories.account_id= ? and geocms_layers.queryable = true",current_tenant.id).search(params[:q])
 
-          @layers =Geocms::Layer.joins(:categories).where("geocms_categories.account_id= ? ",current_tenant.id).search(params[:q])
-          respond_with @layers
+          respond_with @layers.to_a.uniq
         end
 
         def bbox
