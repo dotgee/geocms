@@ -171,4 +171,5 @@ contexts.controller "ContextsController", [
 
     $scope.mapOptions = optionService
     $scope.mapService = mapService
+    $scope.showOption = false
 ]

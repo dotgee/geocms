@@ -277,7 +277,8 @@ en:
       update: Mise à jour
       delete: Supprimer
       search: Rechercher
-    
+      search_layers: Rechercher ou ajouter des couches d'information
+      
   footer:
     legal: "Mentions légales"
     copyright: "Copyright 2013 © Dotgee. Tous droits réservés."
