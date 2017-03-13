@@ -1,6 +1,8 @@
 - cache ["v1", "layer"] do
   a.pull-left.image-link
     img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64'
+  label.pull-right
+    input type="checkbox" ng-checked="catalog.isOnCart(layer.layer_id, cart)"
   .media-body
     h4.media-heading.layer-heading
       |{{layer.title}}

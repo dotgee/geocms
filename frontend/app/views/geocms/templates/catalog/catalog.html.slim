@@ -26,3 +26,8 @@
         .media ng-repeat="category in catalog.categories" ng-include="config.prefix_uri+'/templates/catalog/category.html'")
         .media ng-repeat="layer in catalog.layers" ng-class="{added: catalog.isOnCart(layer.layer_id, cart)}" ng-click="catalog.addToCart(layer.layer_id, cart)"
           div ng-include="config.prefix_uri+'/templates/catalog/layer.html'"
+      .small-space
+      .row 
+        .col-md-6 
+          button class="btn btn-primary btn-lg " type="button" ng-click="catalog.close()"
+            | valider

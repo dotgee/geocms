@@ -29,6 +29,7 @@ catalogModule.service "catalogService",
       return
 
     Catalog::isOnCart = (id, cart) ->
+      console.log "test : c'est pas bien"
       if _.findWhere(cart.layers, {layer_id: id}) then true else false
 
     Catalog::roots = ->
