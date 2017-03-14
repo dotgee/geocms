@@ -54,7 +54,9 @@
     cursor: pointer;
   }
 }
-
+.controls .carticon-download{
+  color:#767676;
+}
 .active-control {
   padding: 10px 10px 20px 10px;
   background: $active-control-background-color;
