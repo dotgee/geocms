@@ -67,6 +67,14 @@
 
 .cart-column-details {
   width: 40px;
-  color: $hud-layer-chevron;
   text-align: center;
+}
+.cart-column-blue {
+  color: $hud-layer-chevron;
+}
+.cart-column-description {
+  color: #333
+}
+.cart-column-icon-size{
+   font-size: 0.9em;
 }

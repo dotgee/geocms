@@ -1,14 +1,8 @@
 #layers
   div 
-    /!.add-layer ng-click=""
-      span = t "layers.open_catalog"
-      a.btn.btn-primary.btn-xs.pull-right.btn-add-layer
-        i.carticon-plus.icon-white
-        |&nbsp;
-        i.icon-layer
     .input-group
       input type="text" class="form-control" placeholder=t("actions.default.search_layers") ng-model="catalog.query" ng-enter="catalog.search()"
-      span class="input-group-btn" ng-click="openCatalog();catalog.search()"
+      span class="input-group-btn" ng-click="catalog.search();openCatalog();"
         button class="btn btn-primary" type="button"
           i.carticon-plus.icon-white
           |&nbsp;
@@ -16,4 +10,3 @@
     div.hud-panel ui-tree="treeOptions"
       ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
         li ng-repeat="layer in cart.layers | orderBy:position:false" ui-tree-node="" ng-include="config.prefix_uri+'/templates/layers/cart_item.html'"
-  /! div ng-show="cart.currentLayer" ng-include="config.prefix_uri+'/templates/layers/controls.html'"
