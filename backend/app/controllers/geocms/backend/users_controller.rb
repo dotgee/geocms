@@ -67,8 +67,8 @@ module Geocms
 
       def update
         @user = User.find(params[:id])
-        
-        if current_user.has_role? :admin_instance && !(@user.has_role? :admin)
+        puts current_user.has_role? :admin_instance
+        if ( current_user.has_role? :admin_instance ) && !(@user.has_role? :admin)
           @user.update_attributes(user_params)
         elsif current_user.has_role? :admin
           @user.update_attributes(user_params)

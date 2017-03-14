@@ -5,7 +5,11 @@
         h1= t "contexts.header" 
       
       .col-xs-2
-        a.btn.btn-primary ui-sref="contexts.new"
+        a.btn.btn-primary ui-sref="contexts.new" 
+          span.glyphicon.glyphicon-plus
+          '
+          = t "contexts.actions.new"
+        /!a.btn.btn-primary ng-href="/login" target="_self" ng-if="!cart.context.editable"
           span.glyphicon.glyphicon-plus
           '
           = t "contexts.actions.new"

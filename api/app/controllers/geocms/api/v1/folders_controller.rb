@@ -1,7 +1,11 @@
 module Geocms
   class Api::V1::FoldersController < Api::V1::BaseController
     load_and_authorize_resource class: "Geocms::Folder", except: :writable
-
+=begin
+    rescue_from CanCan::AccessDenied do |exception|
+      respond_with "not authorized"
+    end
+=end
     def index
       render json: @folders.ordered, each_serializer: FolderShortSerializer
     end

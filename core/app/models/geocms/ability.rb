@@ -73,13 +73,9 @@ module Geocms
     def user
       can :read, Folder, visibility: true
       if !@user.nil?
-        can [:read,:write], Folder, user: @user
-        can [:new, :read,:update, :share], Context
-        can :create, Context, folder: { visibility: true }
-        can :update, Context do |context|
-          context.new_record? or
-          context.folder.nil?
-        end
+        can [:read,:write], Folder, user: @user  
+        can :create, Context, folder: { user: @user }
+        can :update, Context, folder: { user: @user }
       end
     end
 
@@ -93,8 +89,8 @@ module Geocms
 
     def admin_instance
       can :manage, User
-      can :manage, Preference,visibility: true
-      can :read, Account, visibility: true
+      can :manage, Preference
+      can [:read, :update], Account
     end
 
     def admin

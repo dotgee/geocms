@@ -16,6 +16,7 @@ cartModule.service "cartService",
         @context = null
         @state = "saved"
         @folders = []
+        @search = ""
         return
 
       Cart::toggleVisibility = (layer) ->

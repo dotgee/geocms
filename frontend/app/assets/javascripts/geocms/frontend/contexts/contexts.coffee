@@ -17,6 +17,7 @@ contexts.config [
         abstract: true
         resolve:
           folders: ["Restangular", (Restangular) ->
+            console.log "test 84"
             Restangular.all('folders').customGETLIST("writable")
           ]
 
@@ -49,7 +50,7 @@ contexts.config [
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location', (mapService, folders, $root, $scope, Restangular, $location) ->
-              console.log("test 123",config)
+              console.log("test 123",folders.length)
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
@@ -59,6 +60,8 @@ contexts.config [
               $root.cart.state = "new"
               $scope.mapService = mapService
               $location.hash('layers')
+              if folders.length==0
+                window.location.href = '/login'
             ]
           "plugins@contexts.new":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
@@ -101,7 +104,6 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.context = context
               $root.cart.addSeveral()
-              console.log "test ? ", context
               $root.cart.context.selected_folder=0
 
               for value, index in folders
@@ -158,8 +160,11 @@ contexts.controller "ContextsController", [
       $root.cart.state = "unsaved" unless angular.equals(newValues, oldValues)
     , true
 
-    $scope.openCatalog = () ->
-      if $scope.catalogOpened() then $state.go "^" else $state.go ".catalog"
+    $scope.openCatalog = (with_search) ->
+      if $scope.catalogOpened()  
+        $state.go "^" 
+      else
+        $state.go ".catalog"
 
     $scope.catalogOpened = () ->
       $state.current.name.indexOf('catalog') > -1

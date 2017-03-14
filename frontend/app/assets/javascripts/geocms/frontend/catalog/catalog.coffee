@@ -40,4 +40,10 @@ catalog.controller "CatalogController", [
       $rootScope.catalog.getCategory($rootScope.catalog.currentCategory)
     else
       $rootScope.catalog.roots()
-]
+    
+    if $rootScope.cart.search != ""
+      console.log("Search : ",$rootScope.cart.search)
+      $rootScope.catalog.query=$rootScope.cart.search
+      $rootScope.catalog.search()
+      
+] 
