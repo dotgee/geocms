@@ -29,7 +29,9 @@
   vertical-align: middle;
   cursor: pointer;
 }
-
+.cart-column-time{
+  font-size: 0.8em;
+}
 .cart-column-grippy {
   width: 15px;
   vertical-align: middle;
@@ -61,8 +63,7 @@
 }
 
 .cart-column-checkbox {
-  vertical-align: top;
-  width: 15px;
+  width: 18px;
 }
 
 .cart-column-details {
@@ -73,7 +74,7 @@
   color: $hud-layer-chevron;
 }
 .cart-column-description {
-  color: #333
+  color: #777
 }
 .cart-column-icon-size{
    font-size: 0.9em;

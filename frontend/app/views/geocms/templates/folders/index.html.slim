@@ -9,10 +9,6 @@
           span.glyphicon.glyphicon-plus
           '
           = t "contexts.actions.new"
-        /!a.btn.btn-primary ng-href="/login" target="_self" ng-if="!cart.context.editable"
-          span.glyphicon.glyphicon-plus
-          '
-          = t "contexts.actions.new"
     .row
       .col-sm-4.col-md-3 ng-repeat="folder in folders"
         .thumbnail.thumbnail-folder ui-sref="folders.show(folder)" title="{{folder.name}}"

@@ -17,7 +17,6 @@ contexts.config [
         abstract: true
         resolve:
           folders: ["Restangular", (Restangular) ->
-            console.log "test 84"
             Restangular.all('folders').customGETLIST("writable")
           ]
 
@@ -50,7 +49,6 @@ contexts.config [
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
             controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location', (mapService, folders, $root, $scope, Restangular, $location) ->
-              console.log("test 123",folders.length)
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
@@ -112,7 +110,7 @@ contexts.config [
 
               $root.cart.folders = folders
               $scope.mapService = mapService
-              $location.hash('layers')
+              $location.hash('project')
             ]
           "plugins@contexts.edit":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
