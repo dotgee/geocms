@@ -68,11 +68,8 @@ contexts.config [
               $root.cart.state = "new"
               $scope.mapService = mapService
               
-              console.log("On passe vide ? " ,$stateParams.editable, $stateParams.editable?, $stateParams.editable != "" )
-
               # check if user can create a context
               if $stateParams.editable? && $stateParams.editable != ""
-                console.log("On passe ici ?")
                 $root.cart.context.editable= $stateParams.editable
               else
                 Restangular.one('users').customGET("index").then( 
@@ -81,7 +78,7 @@ contexts.config [
                         window.location.href = '/login'
                 )
               
-              $location.hash('layers')
+              $location.hash('project')
             ]
           "plugins@contexts.new":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
@@ -132,7 +129,7 @@ contexts.config [
 
               $root.cart.folders = folders
               $scope.mapService = mapService
-              $location.hash('layers')
+              $location.hash('project')
             ]
           "plugins@contexts.edit":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
