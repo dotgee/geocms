@@ -12,6 +12,7 @@ module Geocms
 
       set_current_tenant_by_subdomain(Geocms::Account, :subdomain)
       before_filter :require_login
+      before_filter :is_in_domain
 
       def controle_access(exception)
         message = exception.nil? ? "Unauthorized" : exception.message
@@ -38,6 +39,14 @@ module Geocms
         @current_ability ||= Geocms::Ability.new(current_user, current_tenant)
       end
 
+      def is_in_domain
+        if !(current_user.has_role? :admin) && !(current_tenant.users.find_by_username(current_user.username))
+          logout
+          redirect_to root_url, :alert => "Unauthorized"
+        end
+      end
+
+      
       rescue_from CanCan::AccessDenied do |exception|
         redirect_to backend_root_url, :alert => t("access_denied")
       end

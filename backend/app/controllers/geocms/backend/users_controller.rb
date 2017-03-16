@@ -9,6 +9,9 @@ module Geocms
 
       def index
         @users = current_tenant.users
+        @users += Geocms::User.joins(:roles).where("geocms_roles.name='admin'").all
+        
+        puts "#{@users}"
 
         @isAdmin = current_user.has_role? :admin 
         @isAdmin_instance = current_user.has_role? :admin_instance 

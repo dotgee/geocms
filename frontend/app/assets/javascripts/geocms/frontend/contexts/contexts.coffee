@@ -29,13 +29,18 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
-            controller: ["context", "$state", (context, $state) ->
+            controller: ["context", "$state","Restangular", (context, $state,Restangular) ->
               
               if context != null && context != undefined && context != "null"
                 $state.transitionTo('contexts.show', {uuid: context.uuid})
               else
-                $state.transitionTo('contexts.new')
-
+                Restangular.one('users').customGET("index").then( 
+                  (user) ->
+                    if user.create_context
+                      $state.transitionTo('contexts.new',{editable:true})
+                    else 
+                      $state.transitionTo('contexts.new',{editable:false})
+                )
             ]
         resolve:
           context: ["Restangular", (Restangular) ->
@@ -43,23 +48,40 @@ contexts.config [
           ]
 
       .state 'contexts.new',
-        url: '/new'
+        url: '/new/:editable'
         parent: 'contexts.root'
         views:
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
-            controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location', (mapService, folders, $root, $scope, Restangular, $location) ->
+            controller: ["mapService", "folders", "$rootScope", "$scope", "Restangular", '$location','$stateParams', (mapService, folders, $root, $scope, Restangular, $location,$stateParams) ->
+              
+              # create context
               context = { center_lat: config.latitude, center_lng: config.longitude, zoom: config.zoom }
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               $root.cart.context = Restangular.restangularizeElement(null, context, "contexts")
               mapService.addBaseLayer()
+              console.log("ProspectsCtrl StateParams: ", $stateParams.editable)
+              
+              # default config
               $root.cart.folders = folders
               $root.cart.context.editable = true
               $root.cart.state = "new"
               $scope.mapService = mapService
+              
+              console.log("On passe vide ? " ,$stateParams.editable, $stateParams.editable?, $stateParams.editable != "" )
+
+              # check if user can create a context
+              if $stateParams.editable? && $stateParams.editable != ""
+                console.log("On passe ici ?")
+                $root.cart.context.editable= $stateParams.editable
+              else
+                Restangular.one('users').customGET("index").then( 
+                  (user) ->
+                      if !user.create_context
+                        window.location.href = '/login'
+                )
+              
               $location.hash('layers')
-              if folders.length==0
-                window.location.href = '/login'
             ]
           "plugins@contexts.new":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
@@ -110,7 +132,7 @@ contexts.config [
 
               $root.cart.folders = folders
               $scope.mapService = mapService
-              $location.hash('project')
+              $location.hash('layers')
             ]
           "plugins@contexts.edit":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
