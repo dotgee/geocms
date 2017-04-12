@@ -1,11 +1,11 @@
 - cache ["v1", "cart-item"] do
-  .cart-item
+  .cart-item ng-mouseenter="setCurrenLayer(layer)"
     .cart-column.cart-column-grippy
       .grippy ui-tree-handle=""
     .cart-column.cart-column-checkbox
       input type="checkbox" class="layer-visibility" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
 
-    .cart-column ng-click="cart.currentLayer = layer"
+    .cart-column ng-click="setCurrenLayer(layer)"
       div ng-click="showOption=!showOption"
         i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0"
         |&nbsp;
@@ -26,11 +26,10 @@
     
     .cart-column.cart-column-center.cart-column-details
       i.carticon-target.cart-column-icon-size ng-click="cart.centerOn(layer)" tooltip="Centrer" tooltip-append-to-body="true"
-      i.glyphicon.glyphicon-cog.cart-column-blue.cart-column-icon-size  ng-click="cart.currentLayer = layer; showOption=!showOption"
+      i.glyphicon.glyphicon-cog.cart-column-blue.cart-column-icon-size  ng-click="setCurrenLayer(layer); showOption=!showOption"
     
-  div ng-show="showOption"
+  div ng-show="showOption" ng-mouseenter="setCurrenLayer(layer)"
     .cart-column.cart-column-description
-      | {{layer.description}}
     a ng-href="{{layer.metadata_url}}" target="geonetwork" ng-if="layer.metadata_url" =t "layers.controls.downloads.metadata_url"
     div ng-switch="" on="controls"
       .controls
@@ -46,8 +45,9 @@
           .row
             .col-xs-1.opacity-controler
               span.glyphicon class="carticon-adjust"
+    
             .col-xs-11.slider
-              div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="cart.currentLayer.options.opacity" use-decimals="" min="0" max="1" step="0.01"
+              div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="layer.options.opacity" use-decimals="" min="0" max="1" step="0.01"
       
       .active-control ng-switch-when="timeline"
         .timeline  ng-if="layer.dimensions.length > 0"

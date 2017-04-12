@@ -20,12 +20,19 @@ cartModule.service "cartService",
         return
 
       Cart::toggleVisibility = (layer) ->
+        console.log("layer : ",layer)
         if layer._tilelayer.options.opacity > 0
           layer._tilelayer.setOpacity(0)
           layer.opacity = 0
+        else if layer.options? && layer.options.opacity?
+          layer.opacity = layer.options.opacity*100.0;
+          layer._tilelayer.setOpacity(layer.options.opacity);
         else
-          layer._tilelayer.setOpacity(0.9)
-          layer.opacity = 90
+          layer.opacity = 90;
+          layer.options.opacity = 0.9
+          layer._tilelayer.setOpacity(0.9);
+
+        console.log(layer.opacity,layer.options.opacity);
 
         @state = "unsaved"
 

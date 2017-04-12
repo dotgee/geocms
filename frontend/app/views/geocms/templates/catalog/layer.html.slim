@@ -2,7 +2,8 @@
   a.pull-left.image-link
     img.media-object ng-src="{{layer.thumbnail_url}}" width='64' height='64'
   label.pull-right
-    input type="checkbox" ng-checked="catalog.isOnCart(layer.layer_id, cart)"
+    i class="glyphicon checkbox-big" ng-class="{ 'glyphicon-check' : catalog.isOnCart(layer.layer_id, cart), 'glyphicon-unchecked' : !catalog.isOnCart(layer.layer_id, cart) }"
+    
   .media-body
     h4.media-heading.layer-heading
       i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0" 
