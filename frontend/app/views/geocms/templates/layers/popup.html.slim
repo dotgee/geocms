@@ -3,6 +3,7 @@
 .geocms-popup-body
   #popup-switch
     ul.nav.nav-pills.nav-stacked
-      li.active ng-repeat="layer in filteredLayers"
-        a href="" ng-click="ms.chooseLayer(layer)" {{layer.title}} 
+      li.active ng-repeat="layer in filteredLayers" ng-if="layer.queryable"
+        a href="" ng-click="ms.chooseLayer(layer)" {{layer.title}}
     p ng-hide="filteredLayers.length" = t("geocms.popup.query.no_infos")
+    
