@@ -1,9 +1,11 @@
 .account-infos
-  .row
+  .row style="height: 90px"
     .col-xs-3
       a ui-sref="contexts.root" href="#" title="{{config.name}}"
         = image_tag current_tenant.logo, height: "50px"
     .col-xs-7
-      h1.context-title= current_tenant.name
+      h1.context-title = current_tenant.name
     .col-xs-2
-      = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
+      a href="#" ng-click="connexion()" title="{{$root.connexion.message}}"
+        = image_tag "http://www.gravatar.com/avatar/#{current_user.try(:email_md5)}?d=mm", class: "user-image pull-right"
+      | {{$root.cart.user.user_name}} 

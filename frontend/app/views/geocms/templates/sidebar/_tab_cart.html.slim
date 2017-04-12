@@ -1,12 +1,5 @@
 #layers
   div 
-    .input-group
-      input type="text" class="form-control" placeholder=t("actions.default.search_layers") ng-model="cart.search" ng-enter="openCatalog()"
-      span class="input-group-btn" ng-click="openCatalog();"
-        button class="btn btn-primary" type="button"
-          i.carticon-plus.icon-white
-          |&nbsp;
-          span.glyphicon.glyphicon-search
     div.hud-panel ui-tree="treeOptions"
       ul.nav.nav-list#layer-list ui-tree-nodes="" ng-model="cart.layers"
         li ng-repeat="layer in cart.layers | orderBy:position:false" ui-tree-node="" ng-include="config.prefix_uri+'/templates/layers/cart_item.html'"

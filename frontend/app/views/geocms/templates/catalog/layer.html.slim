@@ -5,6 +5,8 @@
     input type="checkbox" ng-checked="catalog.isOnCart(layer.layer_id, cart)"
   .media-body
     h4.media-heading.layer-heading
+      i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0" 
+      |&nbsp;
       |{{layer.title}}
     p.source ng-if="layer.data_source_name"
       |#{t(:source)} : {{layer.data_source_name}}

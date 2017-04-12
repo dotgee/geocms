@@ -29,14 +29,23 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
-            controller: ["context", "$state","Restangular", (context, $state,Restangular) ->
-              
+            controller: ["context", "$state","Restangular","$rootScope", (context, $state,Restangular,$root) ->
+
               if context != null && context != undefined && context != "null"
                 $state.transitionTo('contexts.show', {uuid: context.uuid})
               else
                 Restangular.one('users').customGET("index").then( 
                   (user) ->
-                    if user.create_context
+                    $root.connexion = {
+                      message: "connexion"
+                    }
+                    if user? && user.data? && user.data.user_id? && user.data.user_id != -1
+                      $root.cart.user = user.data;  
+                      $root.connexion.message = "déconexion";
+                    else
+                      $root.cart.user = null;
+
+                    if user.data.create_context
                       $state.transitionTo('contexts.new',{editable:true})
                     else 
                       $state.transitionTo('contexts.new',{editable:false})
@@ -70,12 +79,15 @@ contexts.config [
               
               # check if user can create a context
               if $stateParams.editable? && $stateParams.editable != ""
-                $root.cart.context.editable= $stateParams.editable
-              else
+                $root.cart.context.editable = $stateParams.editable
+              else if $root.cart.user?
+                $root.cart.context.editable = $root.cart.user.create_context
+              else 
                 Restangular.one('users').customGET("index").then( 
                   (user) ->
-                      if !user.create_context
+                      if !user.data.create_context
                         window.location.href = '/login'
+                      
                 )
               
               $location.hash('project')
@@ -92,12 +104,27 @@ contexts.config [
             controller: "ContextsController"
           "map@contexts":
             templateUrl: config.prefix_uri+"/templates/contexts/map.html"
-            controller: ["mapService", "context", "folders", "$rootScope", "$scope", '$location', (mapService, context, folders, $root, $scope, $location) ->
+            controller: ["mapService", "context", "folders", "$rootScope", "$scope", '$location','Restangular', (mapService, context, folders, $root, $scope, $location, Restangular) ->
               mapService.createMap("map", context.center_lat, context.center_lng, context.zoom)
               mapService.addBaseLayer()
               $root.cart.context = context
               $root.cart.addSeveral()
               $location.hash('project')
+
+              Restangular.one('users').customGET("index").then( 
+                (user) ->
+                  $root.connexion = {
+                    message: "connexion"
+                  }
+                  if user? && user.data? && user.data.user_id? && user.data.user_id != -1
+                    $root.cart.user = user.data;  
+                    $root.connexion.message = "déconexion";
+                  else
+                    $root.cart.user = null;
+                
+
+                    
+              )
             ]
           "plugins@contexts.show":
             templateUrl: config.prefix_uri+"/templates/contexts/plugins.html"
@@ -190,8 +217,17 @@ contexts.controller "ContextsController", [
       dropped: (event) ->
         $root.cart.recalculateLayerZIndex()
     }
+    $scope.connexion = () -> 
+      if( $root.cart.user? )
+        window.location.href = '/logout'
+      else
+        window.location.href = '/login'
 
     $scope.mapOptions = optionService
     $scope.mapService = mapService
     $scope.showOption = false
+    
+   
+
+    console.log("USER : ", $root.cart.user);
 ]

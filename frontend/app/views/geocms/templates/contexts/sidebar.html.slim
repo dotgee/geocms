@@ -1,6 +1,14 @@
 .hud ng-hide="catalogOpened()"
   == render "geocms/templates/sidebar/header"
+
   navtabset.nav-filled justified="true" hashAware="true"
+    .input-group 
+      input type="text" class="form-control" placeholder=t("actions.default.search_layers") ng-model="cart.search" ng-enter="openCatalog()"
+      span class="input-group-btn" ng-click="openCatalog();"
+        a class="btn btn-primary" type="button" 
+          i.carticon-plus.icon-white
+          |&nbsp;
+          span.glyphicon.glyphicon-search
     navtab heading=t("informations.header") uncheckable="" href="'#project'"
       == render "geocms/templates/sidebar/tab_infos"
     navtab heading=t("layers.header") uncheckable="" href="'#layers'"

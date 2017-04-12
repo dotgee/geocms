@@ -8,9 +8,9 @@ module Geocms
     end 
     def show
       if !current_user.nil?
-        render json: {:create_context=> (can? :create, Geocms::Context), :user_id => current_user.id}
+        render json: { :data => {:create_context=> (can? :create, Geocms::Context), :user_id => current_user.id, :user_name => current_user.username} }
       else 
-        render json: {:create_context=> false, :user_id => -1}
+        render json: { :data => {:create_context=> false, :user_id => -1} }
       end
     end 
   end
