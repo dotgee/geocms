@@ -229,14 +229,8 @@ contexts.controller "ContextsController", [
        $root.cart.currentLayer.options = {
           opacity : layer.opacity/100.0;
        } 
-       console.log( $root.cart.currentLayer);
 
     $scope.mapOptions = optionService
     $scope.mapService = mapService
     $scope.showOption = false
-    
-   
-   
-
-    console.log("USER : ", $root.cart.user);
 ]

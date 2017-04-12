@@ -65,7 +65,6 @@ app.controller "ImportCtrl",
       , true
 
       $scope.names = (column) ->
-        console.log column
         true
 
       $scope.import = () ->

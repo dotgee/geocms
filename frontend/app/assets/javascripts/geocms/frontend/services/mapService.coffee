@@ -73,7 +73,7 @@ mapModule.service "mapService",
         scope.ms = this
         scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0.01))
         scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.containsPoint())
-        console.log("filteredLayers : ",scope.filteredLayers);
+
         if scope.filteredLayers.length == 1
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
@@ -86,7 +86,6 @@ mapModule.service "mapService",
         scope.$apply()
 
       mapService.chooseLayer = (layer) ->
-        console.log("89",layer);
         @currentLayer = layer
         @getFeatureWMS()
 
@@ -120,7 +119,6 @@ mapModule.service "mapService",
         '&bbox='+@container.getBounds().toBBoxString()+
         '&current_x='+position.x+
         '&current_y='+position.y
-        console.log(config.prefix_uri)
 
       mapService.generateTemplate = (data) ->
      
@@ -133,7 +131,6 @@ mapModule.service "mapService",
         else if data.features.length > 0
           if mapService.currentLayer.template? and mapService.currentLayer.template != ""
             html = mapService.currentLayer.template
-            console.log("filteredLayers : ",mapService.currentLayer);
           else
             html = "<ul class='list-unstyled'>"
             _.each data.features[0].properties, (val, key) ->
