@@ -3,8 +3,8 @@
     .cart-column.cart-column-grippy
       .grippy ui-tree-handle=""
     .cart-column.cart-column-checkbox
-      input type="checkbox" class="layer-visibility" ng-checked="layer._tilelayer.options.opacity > 0" ng-click="cart.toggleVisibility(layer)"
-
+      i class="glyphicon checkbox-big" ng-click="cart.toggleVisibility(layer)" ng-class="{ 'glyphicon-check' : layer._tilelayer.options.opacity > 0, 'glyphicon-unchecked' : layer._tilelayer.options.opacity <= 0 }"
+  
     .cart-column ng-click="setCurrenLayer(layer)"
       div ng-click="showOption=!showOption"
         i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0"

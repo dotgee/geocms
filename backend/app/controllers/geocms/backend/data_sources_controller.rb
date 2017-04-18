@@ -2,6 +2,7 @@ module Geocms
   module Backend
     class DataSourcesController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::DataSource"
+      load_and_authorize_resource class: "Geocms::Category"
 
       rescue_from CanCan::AccessDenied do |exception|
         controle_access(exception)
@@ -9,7 +10,8 @@ module Geocms
 
       def index
         @data_sources = DataSource.all.group_by(&:not_internal)
-        respond_with(:backend, @data_sources)
+     
+        respond_with(:backend, @data_sources,@categories)
       end
 
       def show
@@ -19,23 +21,32 @@ module Geocms
 
       def new
         @data_source = DataSource.new
+        @categories = Category.all();
         respond_with(:backend, @data_source)
       end
 
       def edit
         @data_source = DataSource.find(params[:id])
+        @categories = Category.all();
       end
 
       def create
         @data_source = DataSource.new(data_source_params)
+        if !@data_source.synchro 
+          @data_source.update_attribute('geocms_category_id', nil );
+        end
         @data_source.save
         respond_with(:import, :backend, @data_source)
       end
 
       def update
+        print(params['geocms_category_id'])
         @data_source = DataSource.find(params[:id])
         @data_source.update_attributes(data_source_params)
         respond_with(:import, :backend, @data_source,data_source_params)
+        if !@data_source.synchro 
+          @data_source.update_attribute('geocms_category_id', nil );
+        end
       end
 
       def destroy
@@ -54,7 +65,7 @@ module Geocms
 
       private
         def data_source_params
-          params.require(:data_source).permit(PermittedAttributes.data_source_attributes)
+          params.require(:data_source).permit(PermittedAttributes.data_source_attributes,:geocms_category_id )
         end
 
     end

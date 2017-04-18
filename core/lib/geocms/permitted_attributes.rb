@@ -41,7 +41,7 @@ module Geocms
     ]
 
     @@data_source_attributes = [
-      :csw, :name, :ogc, :wfs, :wms, :rest, :not_internal, :wms_version, :synchro
+      :csw, :name, :ogc, :wfs, :wms, :rest, :not_internal, :wms_version, :geocms_category_id, :geocms_cateory_id
     ]
 
     @@dimension_attributes = [

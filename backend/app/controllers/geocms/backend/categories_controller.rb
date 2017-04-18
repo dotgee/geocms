@@ -2,6 +2,7 @@ module Geocms
   module Backend
     class CategoriesController < Geocms::Backend::ApplicationController
       load_and_authorize_resource class: "Geocms::Category"
+      load_and_authorize_resource class: "Geocms::DataSource"
 
       rescue_from CanCan::AccessDenied do |exception|
         controle_access(exception)
@@ -9,13 +10,26 @@ module Geocms
 
       def index
         @categories = Category.arrange(:order => :position)
+        @tabSynchro = []
         # respond_with(:backend, @categories)
+        
+        Category.all.each do |cat|
+          print("test ? #{cat.id}")
+
+          datasource = DataSource.where(geocms_category_id: cat.id).first
+          synchro = false
+          if !datasource.nil? 
+            synchro = datasource.synchro
+          end
+          @tabSynchro.insert(cat.id, synchro)
+        end
       end
 
       def show
         @category = Category.find(params[:id])
         @layers = @category.layers.page(params[:page])
-        respond_with(:backend, @category)
+
+        respond_with(:backend, @categorys)
       end
 
       def new
