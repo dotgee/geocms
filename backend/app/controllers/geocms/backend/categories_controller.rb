@@ -14,8 +14,6 @@ module Geocms
         # respond_with(:backend, @categories)
         
         Category.all.each do |cat|
-          print("test ? #{cat.id}")
-
           datasource = DataSource.where(geocms_category_id: cat.id).first
           synchro = false
           if !datasource.nil? 
@@ -27,6 +25,11 @@ module Geocms
 
       def show
         @category = Category.find(params[:id])
+        datasource = DataSource.where(geocms_category_id: @category.id).first
+        @synchro = false
+        if !datasource.nil? 
+          @synchro = datasource.synchro
+        end
         @layers = @category.layers.page(params[:page])
 
         respond_with(:backend, @categorys)
@@ -58,6 +61,14 @@ module Geocms
 
       def destroy
         @category = Category.find(params[:id])
+        @dataSource = DataSource.where(geocms_category_id: @category.id).first
+       
+        if !@dataSource.nil?
+          @dataSource.geocms_category_id = nil;
+          @dataSource.synchro = false;
+          @dataSource.save;
+        end
+
         @category.destroy
         respond_with(:backend, @category)
       end
