@@ -17,13 +17,21 @@ cartModule.service "cartService",
         @state = "saved"
         @folders = []
         @search = ""
+        @player = []
         return
+      
+      Cart::init = () -> 
+        _.each @layers, (layer, index) ->
+          layer.opacity = 90
+          layer.options = {
+            opacity : layer.opacity/100.0;
+          } 
 
       Cart::toggleVisibility = (layer) ->
         if layer._tilelayer.options.opacity > 0
           layer._tilelayer.setOpacity(0)
           layer.opacity = 0
-        else if layer.options? && layer.options.opacity?
+        else if layer.options? && layer.options.opacity? && layer.options.opacity > 0
           layer.opacity = layer.options.opacity*100.0;
           layer._tilelayer.setOpacity(layer.options.opacity);
         else
@@ -48,38 +56,58 @@ cartModule.service "cartService",
         else
           ms.addEventListener(@currentLayer)
 
-      Cart::setOpacity = (ev, ui) ->
-        $root.cart.currentLayer._tilelayer.setOpacity(ui.value)
-        $root.cart.currentLayer.opacity = ui.value * 100
+      Cart::setOpacity = (ev, ui,layer) ->
+        layer._tilelayer.setOpacity(ui.value)
+        layer.opacity = ui.value * 100
         $root.cart.state = "unsaved"
 
-      Cart::toggleTimeline = () ->
-        diff = @currentLayer.dimensions.length - @currentLayer.timelineIndex - 1
+      Cart::optionSliderOpacity = (layer) -> 
         that = this
-        if @player? or diff == 0
-          @stopTimeline()
+        return {
+          orientation: 'horizontal',
+          slide: (ev,ui) ->
+            that.setOpacity(ev,ui,layer)
+        }
+      Cart::optionSliderTimeline = (layer) ->
+        that = this
+        return {
+          orientation: 'horizontal', 
+          slide:  (ev,ui) -> 
+            that.slideTimeline(ev,ui,layer)
+          ,range: 'min'}
+
+      Cart::toggleTimeline = (layer) ->
+        layer_id = layer.layer_id
+        diff = layer.dimensions.length - layer.timelineIndex - 1
+        that = this
+        if @player[layer_id]? or diff == 0
+          @stopTimeline(layer_id)
         else
-          @player = $interval(@playTimeline, 2000, diff)
-          @player.then ->
-            that.stopTimeline()
+          @player[layer_id] = $interval( (() ->
+            thatInterval = $root.cart
+            layer.timelineIndex += 1
+            layer._tilelayer.setParams({time: layer.dimensions[layer.timelineIndex]})
+          ) , 2000, diff)
 
-      Cart::stopTimeline = () ->
-        $interval.cancel($root.cart.player)
-        @player = null
+          @player[layer_id].then ->
+            that.stopTimeline(layer_id)
 
-      Cart::playTimeline = () ->
+      Cart::stopTimeline = (layer_id) ->
+        $interval.cancel($root.cart.player[layer_id])
+        @player[layer_id] = null
+
+      Cart::playTimeline = (layer) ->
         that = $root.cart
-        that.currentLayer.timelineIndex += 1
-        that.currentLayer._tilelayer.setParams({time: that.currentLayer.dimensions[that.currentLayer.timelineIndex]})
+        layer.timelineIndex += 1
+        layer._tilelayer.setParams({time: layer.dimensions[layer.timelineIndex]})
 
-      Cart::slideTimeline = (ev, ui) ->
-        currentTime = $root.cart.currentLayer.dimensions[$root.cart.currentLayer.timelineIndex]
-        $root.cart.currentLayer._tilelayer.setParams({time: currentTime})
+      Cart::slideTimeline = (ev, ui, layer) ->
+        currentTime = layer.dimensions[layer.timelineIndex]
+        layer._tilelayer.setParams({time: currentTime})
 
       Cart::remove = (layer) ->
         ms.container.removeLayer(layer._tilelayer)
         @layers.splice(@layers.indexOf(layer), 1)
-        @currentLayer = null
         @recalculateLayerZIndex()
         @state = "unsaved"
 

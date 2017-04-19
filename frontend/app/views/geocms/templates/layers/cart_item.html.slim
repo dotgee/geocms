@@ -1,11 +1,11 @@
 - cache ["v1", "cart-item"] do
-  .cart-item ng-mouseenter="setCurrenLayer(layer)"
+  .cart-item ng-init="cart.init()"
     .cart-column.cart-column-grippy
       .grippy ui-tree-handle=""
     .cart-column.cart-column-checkbox
-      i class="glyphicon checkbox-big" ng-click="cart.toggleVisibility(layer)" ng-class="{ 'glyphicon-check' : layer._tilelayer.options.opacity > 0, 'glyphicon-unchecked' : layer._tilelayer.options.opacity <= 0 }"
+      i class="glyphicon checkbox-cart-item" ng-click="cart.toggleVisibility(layer)" ng-class="{ 'glyphicon-check' : layer._tilelayer.options.opacity > 0, 'glyphicon-unchecked' : layer._tilelayer.options.opacity <= 0 }"
   
-    .cart-column ng-click="setCurrenLayer(layer)"
+    .cart-column 
       div ng-click="showOption=!showOption"
         i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0"
         |&nbsp;
@@ -17,20 +17,25 @@
             '&nbsp;{{layer.data_source_name}}
       .timeline  ng-if="layer.dimensions.length > 0"
         .row
-          .col-xs-1.timeline-control ng-click="cart.toggleTimeline()"
-            span.glyphicon ng-class="{'glyphicon-play': !cart.player, 'glyphicon-pause': cart.player}"
+          .col-xs-1.timeline-control ng-click="cart.toggleTimeline(layer)"  tooltip="Lecture/Pause" tooltip-append-to-body="true"
+            span.glyphicon ng-class="{'glyphicon-play': !cart.player[layer.layer_id], 'glyphicon-pause': cart.player[layer.layer_id]}"
           .col-xs-3.date ng-init="layer.timelineIndex = layer.timelineIndex || 0"
             |{{layer.dimensions[layer.timelineIndex] | date : 'dd/MM/yyyy'}}
           .col-xs-8.slider
-            div ui-slider="{orientation: 'horizontal', slide: cart.slideTimeline, range: 'min'}" min="0" max="{{layer.dimensions.length-1}}" step="1" ng-model="layer.timelineIndex"
+            div ui-slider="cart.optionSliderTimeline(layer)" min="0" max="{{layer.dimensions.length-1}}" step="1" ng-model="layer.timelineIndex"
     
     .cart-column.cart-column-center.cart-column-details
       i.carticon-target.cart-column-icon-size ng-click="cart.centerOn(layer)" tooltip="Centrer" tooltip-append-to-body="true"
-      i.glyphicon.glyphicon-cog.cart-column-blue.cart-column-icon-size  ng-click="setCurrenLayer(layer); showOption=!showOption"
+      i.glyphicon.glyphicon-cog.cart-column-blue.cart-column-icon-size tooltip="Outils" tooltip-append-to-body="true" ng-click="showOption=!showOption"
     
-  div ng-show="showOption" ng-mouseenter="setCurrenLayer(layer)"
+  div ng-show="showOption"
+    .cart-column.cart-column-grippy
+    .cart-column.cart-column-checkbox
     .cart-column.cart-column-description
-    a ng-href="{{layer.metadata_url}}" target="geonetwork" ng-if="layer.metadata_url" =t "layers.controls.downloads.metadata_url"
+      |{{layer.description}}
+      br
+      a ng-href="{{layer.metadata_url}}" target="geonetwork" ng-if="layer.metadata_url" =t "layers.controls.downloads.metadata_url"
+    .cart-column.cart-column-center.cart-column-details
     div ng-switch="" on="controls"
       .controls
         i.carticon-adjust tooltip='#{t("layers.controls.opacity.tooltip")}' tooltip-append-to-body="true" ng-model="controls" btn-radio="'opacity'" uncheckable=""
@@ -47,12 +52,12 @@
               span.glyphicon class="carticon-adjust"
     
             .col-xs-11.slider
-              div ui-slider="{orientation: 'horizontal', slide: cart.setOpacity}"  ng-model="layer.options.opacity" use-decimals="" min="0" max="1" step="0.01"
+              div ui-slider="cart.optionSliderOpacity(layer)" ng-model="layer.options.opacity" use-decimals="" min="0" max="1" step="0.01" test="34"
       
       .active-control ng-switch-when="timeline"
         .timeline  ng-if="layer.dimensions.length > 0"
           .row
-            .col-xs-1.timeline-control ng-click="cart.toggleTimeline()"
+            .col-xs-1.timeline-control ng-click="cart.toggleTimeline(layer)"
               span.glyphicon ng-class="{'glyphicon-play': !cart.player, 'glyphicon-pause': cart.player}"
             .col-xs-3.date ng-init="layer.timelineIndex = layer.timelineIndex || 0"
               |{{layer.dimensions[layer.timelineIndex] | date : 'dd/MM/yyyy'}}
@@ -64,3 +69,4 @@
           .controls
             input type="text" ng-model="layer.cql_filter" placeholder=t("layers.controls.filters.placeholder")
         a.btn.btn-default.btn-xs.from-map= t "layers.controls.filters.apply"
+    

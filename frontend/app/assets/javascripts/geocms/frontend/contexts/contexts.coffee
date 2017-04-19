@@ -196,6 +196,7 @@ contexts.controller "ContextsController", [
   ($scope, $root, $state, mapService, Cart, optionService) ->
 
     $root.cart = new Cart()
+    
 
     $scope.state = $state.current.name
 
@@ -216,6 +217,7 @@ contexts.controller "ContextsController", [
     $scope.treeOptions = {
       dropped: (event) ->
         $root.cart.recalculateLayerZIndex()
+        $root.cart.init();
     }
     $scope.connexion = () -> 
       if( $root.cart.user? )
