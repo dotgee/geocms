@@ -14,7 +14,8 @@ require "pg_search"
 require "rolify"
 require "interactor"
 require "sidekiq"
-require "sorcery"
+require "devise"
+require "omniauth"
 require "cancancan"
 
 require 'geocms/core/version'

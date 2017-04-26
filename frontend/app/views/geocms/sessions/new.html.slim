@@ -1,4 +1,4 @@
-= form_tag sessions_path, method: :post, class: "form-signin #{"with-errors" if flash.any?}" do
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin #{"with-errors" if flash.any?}" }) do |f|
   .page-header
     h1.lightweight= t('geocms.login.header')
   - flash.each do |name, msg|
@@ -6,11 +6,11 @@
       = content_tag :div, msg, :id => "flash_#{name}"
   .form-group
     = label_tag :username, t('geocms.login.username_or_email')
-    = text_field_tag :username, params[:username], class: "form-control "
+    = f.email_field :email, autofocus: true, class: 'form-control'
 
   .form-group
     = label_tag :password, t('geocms.login.password')
-    = password_field_tag :password, nil, class: "form-control"
+    = f.password_field :password, autocomplete: 'off', class: 'form-control'
   .form-actions
     .row
       .col-xs-6

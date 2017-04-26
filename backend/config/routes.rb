@@ -1,5 +1,15 @@
 Geocms::Core::Engine.add_routes do
 
+  devise_for :users, {
+    controllers: {
+      sessions: "geocms/sessions",
+      registrations: "backend/devise/registrations",
+      confirmations: "backend/devise/confirmations",
+    },
+    class_name: "Geocms::User",
+    module: :devise
+  }
+
   resources :users, :only => [:new, :create]
 
   namespace :backend do

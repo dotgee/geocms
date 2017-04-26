@@ -3,7 +3,15 @@ require 'digest/md5'
 module Geocms
   class User < ActiveRecord::Base
     rolify
-    authenticates_with_sorcery!
+
+    # Include default devise modules. Others available are:
+    # :token_authenticatable, :confirmable,
+    # :lockable, :timeoutable and :omniauthable
+    devise :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :trackable, :validatable,
+           :omniauthable
+           # ,
+           # :encryptable, :encryptor => :byte_digester_encryptor
 
     has_many :memberships
     has_many :accounts, through: :memberships
