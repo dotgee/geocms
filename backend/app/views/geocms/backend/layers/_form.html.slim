@@ -6,6 +6,24 @@
   = f.input :description
   = f.input :max_zoom
   = f.input :tiled, wrapper: :inline_checkbox
+  .bouding_boxes
+    h3 Bounding boxes
+    table.table
+      thead
+        th CRS
+        th minx
+        th miny
+        th maxx
+        th maxy
+      tbody
+        - @layer.bounding_boxes.each do |bb|
+          tr
+            td= bb.crs
+            td= bb.minx
+            td= bb.miny
+            td= bb.maxx
+            td= bb.maxy
+      
   = f.input :template, :as => :ckeditor
   - unless @layer.new_record?
     legend Move to

@@ -46,6 +46,12 @@ In order for GeoCMS to work properly, you will need the following installed :
 * NodeJS
 * ImageMagick
 
+## Debian dependencies
+
+Install the following debian packages :
+* libcurl4-openssl-dev
+* 
+
 Guide
 -----
 
@@ -72,6 +78,18 @@ line:
 
 ```ruby
 gem 'geocms', github: 'dotgee/geocms'
+```
+
+To meet dependencies about rails-assets, add the following line to the end of Gemfile :
+
+```
+source 'https://rails-assets.org'
+```
+
+Then run bundle update to update your dependencies :
+
+```
+bundle update
 ```
 
 * Install GeoCMS migrations and data : 

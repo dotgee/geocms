@@ -37,6 +37,7 @@ geocms.config [
 
     $urlRouterProvider.when(config.prefix_uri+'', config.prefix_uri+'/maps');
     $urlRouterProvider.when(config.prefix_uri+'/', config.prefix_uri+'/maps');
+    $urlRouterProvider.otherwise('/maps');
 
     _.templateSettings =
       interpolate: /\{\{(.+?)\}\}/g

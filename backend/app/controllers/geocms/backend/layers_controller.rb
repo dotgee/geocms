@@ -16,7 +16,7 @@ module Geocms
 
       def getfeatures
         layer = Layer.find(params[:id])
-        @features = OGC::DescribeFeatureType.new(layer.data_source_wms, layer.name).properties
+        @features = Geocms::OGC::DescribeFeatureType.new(layer.data_source_wms, layer.name).properties
         respond_to do |format|
           format.json { render json: @features }
         end
@@ -28,7 +28,7 @@ module Geocms
       end
 
       def edit
-        @layer = Layer.find(params[:id])
+        @layer = Layer.includes(:bounding_boxes).find(params[:id])
         @categories = Category.for_select
         respond_with(:backend, @category, @layer)
       end
