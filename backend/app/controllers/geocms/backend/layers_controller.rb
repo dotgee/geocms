@@ -41,8 +41,10 @@ module Geocms
       def create
         dimension_values = params.delete(:dimension_values)
         bbox = params.delete(:bbox)
+
         @layer = Layer.new(layer_params.reject{ |p| p == "category_id" })
         @layer.crs = params.delete(:srs).first.to_s if params[:srs].present?
+
         if @layer.save
           if dimension_values && dimension_values.any?
             Dimension.create_dimension_values(@layer, dimension_values)
@@ -94,7 +96,7 @@ module Geocms
         end
 
         def layer_params
-          params.require(:layer).permit(PermittedAttributes.layer_attributes)
+          params.require(:layer).permit(PermittedAttributes.layer_attributes,:queryable)
         end
     end
   end

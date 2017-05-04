@@ -9,6 +9,7 @@ fr:
   admin_instance: Administrateur de l'instance
   admin_data: Administrateur des données
   admin: Administrateur 
+  queryable: Consultable
 
   messages:
     loading: "Chargement en cours, merci de patienter..."

@@ -21,9 +21,15 @@ table.table.table-striped.table-backend
           = link_to [:backend, category], :confirm => 'Are you sure?', :method => :delete , :class => "btn btn-danger icn-only btn-xs" do
             i.glyphicon.glyphicon-trash.glyphicon.glyphicon-white
     - @layers.page(params[:page]).each do |layer|
-      == render "geocms/backend/layers/layer", layer: layer
+      - if !@synchro
+        == render "geocms/backend/layers/layer", layer: layer
+      - if @synchro 
+        tr
+          td = layer.title
+          td
+          td
     = paginate @layers
-- if !@synchro
-  = link_to t("modules.layers.new"), [:new, :backend, @category, :layer], :class => "btn btn-primary"
-  '
-  = link_to t("modules.categories.sub_category.add"), new_backend_category_path(:parent_id => @category.id), :class => "btn btn-primary"
+
+= link_to t("modules.layers.new"), [:new, :backend, @category, :layer], :class => "btn btn-primary"
+'
+= link_to t("modules.categories.sub_category.add"), new_backend_category_path(:parent_id => @category.id), :class => "btn btn-primary"

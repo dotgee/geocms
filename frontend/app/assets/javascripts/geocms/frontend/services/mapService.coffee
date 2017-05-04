@@ -62,7 +62,6 @@ mapModule.service "mapService",
         @container.addEventListener('click', @queryLayer, mapService)
 
       mapService.queryLayer = (e) ->
-        
         html = '<div ng-include="\''+config.prefix_uri+'/templates/layers/popup.html\'"></div>'
         scope = $root.$new()
         linkFunction = $compile(html)
@@ -74,13 +73,16 @@ mapModule.service "mapService",
         scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0.01))
         scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.containsPoint())
 
-        if scope.filteredLayers.length == 1 && scope.filteredLayers[0].
+       
+        if scope.filteredLayers.length == 1 && scope.filteredLayers[0].queryable
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
           canDisplay = false;
-          for layer, index in filteredLayers
-            if layer.layer.queryable
+        
+          for layer, index in scope.filteredLayers
+            if layer.queryable != false
               canDisplay = true
+
           if canDisplay    
             L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
                     .setLatLng(@currentPosition)
@@ -102,7 +104,7 @@ mapModule.service "mapService",
         ).error (data, status, headers, config) ->
           console.error("error in mapService.chooseLayer()")
 
-          
+
       mapService.containsPoint = ->
         (item) ->
           bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/ 100, Math.floor(item.bbox[0] *100) / 100), L.latLng(Math.ceil(item.bbox[3] *100)/ 100, Math.ceil(item.bbox[2] *100)/ 100)) else null)

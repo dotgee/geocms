@@ -5,6 +5,8 @@ en:
   account_created: "Nouvelle instance créé avec succès"
 
   confirm_delete: Supprimer ?
+  
+  queryable: Consultable
 
   messages:
     loading: "Chargement en cours, merci de patienter..."
@@ -84,6 +86,7 @@ en:
   simple_form:
     labels:
       defaults:
+        
         name: Nom
         description: Description
         folder: Dossier

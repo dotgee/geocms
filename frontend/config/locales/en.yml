@@ -54,6 +54,7 @@ en:
         metadata: Consulter les métadonnées
         download: Télécharger les données
         metadata_url: En savoir plus
+
       destroy:
         tooltip: Supprimer
 

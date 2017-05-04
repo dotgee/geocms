@@ -12,15 +12,16 @@ $cpt_update=0;
 # @param node <Nokogiri::XML::NodeSet>
 # @param search <string>
 # @param source_id <integer> id of data_source
-def getLayerInfo(node,search,source_id)
+# @parm category_id <integer> id of category synchronize
+def getLayerInfo(node,search,source_id,category_id)
   if !node.nil?
-    layers=node.search(search)
+    layers = node.search(search)
     if !layers.empty?
       # for each layer in node_set
 
       layers.each do |layer|
         # search name, description, title and metadata_url
-        name=layer.search("> Name").first
+        name = layer.search("> Name").first
         if !name.nil?
           description = layer.search("> Abstract").first;
           title = layer.search("> Title").first;
@@ -47,9 +48,18 @@ def getLayerInfo(node,search,source_id)
           end
         
           # searche layer if exist  
-          layerFromDb = Geocms::Layer.where(name: name.content).take
-       
-       #38091
+          
+          layerFromDb = Geocms::Layer.joins(:categorizations).where("
+            geocms_layers.name =  :name and 
+            geocms_layers.data_source_id = :source_id and 
+            geocms_categorizations.category_id = :category_id ",{
+            name: name.content,
+            source_id: source_id,
+            category_id: category_id
+            }
+          ).first
+
+         
 
           if !layerFromDb.nil?
             bboxFromLayer = layerFromDb.boundingbox
@@ -147,6 +157,18 @@ def getLayerInfo(node,search,source_id)
               data_source_id: source_id,
               queryable: isQueryable.nil? ? false : isQueryable
             )
+
+             # add / delete layer for synchro categorie
+            categorie = Geocms::Category.find(category_id)
+          
+            if !categorie.nil?
+              categorization = Geocms::Categorization.find_or_create_by(
+                layer_id: newLayer.id,
+                category_id: categorie.id
+              )
+              categorization.save!
+            end
+
             #create layer
             newLayer.save!
             if !bboxArray.empty?
@@ -166,7 +188,7 @@ def getLayerInfo(node,search,source_id)
           end
         end
         # for other layer in layer
-        getLayerInfo(layer," > Layer",source_id)
+        getLayerInfo(layer," > Layer",source_id,category_id)
       end
     end
   end
@@ -197,7 +219,7 @@ namespace :geocms do
       $cpt_new=0;
       
       # update layer
-      getLayerInfo(xml_doc,"Capability > Layer",2);
+     # getLayerInfo(xml_doc,"Capability > Layer",2,);
       puts "Date de mise à jour : #{ date } "
       puts "Nombre de layer mis à jour :  #{ $cpt_update}"
       puts "Nombre de nouveau layer :  #{ $cpt_new }"
@@ -237,54 +259,54 @@ namespace :geocms do
             
             $cpt_update=0;
             $cpt_new=0;
+
+            # Compteur de categorie
+            categorizationCountNew = 0;
             
+            print ("Categorization : #{Geocms::Categorization.count}\n");
+            categorizationCountBefore = Geocms::Categorization.count;
+
             # update layer
-            getLayerInfo(xml_doc,"Capability > Layer",source.id);
+            getLayerInfo(xml_doc,"Capability > Layer",source.id, source.geocms_category_id);
             f << "Date de mise à jour : " << date << "\n"
             f << "Nombre de layer mis à jour : " << $cpt_update <<  "\n"
             f << "Nombre de nouveau layer : " << $cpt_new << "\n"
 
             # search and delete layer not update and 
             compteur_delete=0
-            Geocms::Layer.where("updated_at < :updated_date and data_source_id = :data_source_id",{
+            
+            Geocms::Layer.joins(:categorizations).where("geocms_layers.updated_at < :updated_date and geocms_layers.data_source_id = :data_source_id and geocms_categorizations.category_id = :category_id ",{
               updated_date: date,
-              data_source_id: source.id
+              data_source_id: source.id,
+              category_id: source.geocms_category_id
             }).all.each  do |layer|
+              Geocms::Categorization.delete_all(layer_id: layer.id)
               layer.destroy
               compteur_delete = compteur_delete + 1
             end
+
             f << "Nombre de layer suprimmé : "  << compteur_delete << "\n"
             puts  "Nombre de layer suprimmé : #{ compteur_delete } "
-            compteur_delete=0;
-
-            # delete layer/category relation 
-            Geocms::Categorization.joins("left join geocms_layers on geocms_layers.id = geocms_categorizations.layer_id ").where("geocms_layers.id is null").all.each do |result|
-              Geocms::Categorization.delete_all(layer_id: result.layer_id)
-              compteur_delete = compteur_delete + 1
-            end
-
-            # add / delete layer for synchro categorie
-            categorie = Geocms::Category.find(source.geocms_category_id)
-            f << "Nombre de relation layer/catégorie suprimmé : "  << compteur_delete  << "\n"
-          
-           # compteur_link_layer = 0;
-            categorizationCountNew = 0;
            
-            if !categorie.nil?
-              print ("Categorization : #{Geocms::Categorization.count}\n");
-              categorizationCountBefore = Geocms::Categorization.count;
-              Geocms::Layer.where(data_source_id: source.id).all.each do |layer|
-                categorization = Geocms::Categorization.find_or_create_by(
-                  layer_id: layer.id,
-                  category_id: categorie.id
-                )
-                categorization.save!
-              end
-              categorizationCountAfter = Geocms::Categorization.count;
-              categorizationCountNew = categorizationCountAfter - categorizationCountBefore;
-              print ("Categorization new : #{categorizationCountNew}\n");
-              f << "Nombre de relation layer ajouté à la catégorie "<< categorie.name << " : " << categorizationCountNew  << "\n"
-            end
+            categorizationCountAfter = Geocms::Categorization.count;
+            categorizationCountNew = categorizationCountAfter - categorizationCountBefore;
+            print ("Categorization new : #{categorizationCountNew}\n");
+            categorizationCountNew = categorizationCountNew < 0 ? 0 : categorizationCountNew
+
+            categorie = Geocms::Category.find(source.geocms_category_id)
+            f << "Nombre de layer ajouté à la catégorie "<< categorie.name << " : " << categorizationCountNew  << "\n"
+
+            # clear layer categorie 
+            compteur_clear = 0
+            Geocms::Layer.joins("left join geocms_categorizations as cat on geocms_layers.id = cat.layer_id")
+            .joins("left join geocms_categories as cat2 on cat.category_id = cat2.id")
+            .where("cat2 is null").all.each do |layer|
+              Geocms::Categorization.delete_all(layer_id: layer.id)
+              layer.destroy
+              compteur_clear = compteur_clear + 1
+            end 
+            puts "compteur_clear #{compteur_clear}"
+
           rescue => e
             f  << "Error : "  << e  << "\n"
             print("Error :  #{e}")
@@ -297,7 +319,7 @@ namespace :geocms do
       Geocms::User.joins(:roles).where(geocms_roles: { name: 'admin_data' }).all.each do |user|;
         puts "Send mail to : #{ user.username } "
         begin
-         UserMailer.sendUpdateLog(filename,date_email,user).deliver_now
+          UserMailer.sendUpdateLog(filename,date_email,user).deliver_now
         rescue => e
           puts  "Error :  #{e}"
         end
