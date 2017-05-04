@@ -27,7 +27,7 @@ module Geocms
         @category = Category.find(params[:id])
         datasource = DataSource.where(geocms_category_id: @category.id).first
         @synchro = false
-        if !datasource.nil? 
+        if !(datasource.nil? )
           @synchro = datasource.synchro
         end
         @layers = @category.layers.page(params[:page])
@@ -63,10 +63,10 @@ module Geocms
         @category = Category.find(params[:id])
         @dataSource = DataSource.where(geocms_category_id: @category.id).first
        
-        if !@dataSource.nil?
+        if !(@dataSource.nil?)
           @dataSource.geocms_category_id = nil;
           @dataSource.synchro = false;
-          @dataSource.save;
+          @dataSource.save!;
         end
 
         @category.destroy

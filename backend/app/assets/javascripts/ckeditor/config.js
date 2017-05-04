@@ -52,8 +52,7 @@ CKEDITOR.editorConfig = function( config )
           continue;
       }
     }
-
-    console.log("qzd");
+    
     if (csrf_param !== undefined && csrf_token !== undefined) {
       params[csrf_param] = csrf_token;
     }

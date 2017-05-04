@@ -74,32 +74,44 @@ mapModule.service "mapService",
         scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0.01))
         scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.containsPoint())
 
-        if scope.filteredLayers.length == 1
+        if scope.filteredLayers.length == 1 && scope.filteredLayers[0].
           scope.ms.chooseLayer(scope.filteredLayers[0])
         else
-      
-          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
-                  .setLatLng(@currentPosition)
-                  .setContent(linkFunction(scope)[0])
-                  .openOn(@container)
+          canDisplay = false;
+          for layer, index in filteredLayers
+            if layer.layer.queryable
+              canDisplay = true
+          if canDisplay    
+            L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
+                    .setLatLng(@currentPosition)
+                    .setContent(linkFunction(scope)[0])
+                    .openOn(@container)
         @container.on('popupclose', (e) -> scope.$destroy())
         scope.$apply()
 
       mapService.chooseLayer = (layer) ->
-        @currentLayer = layer
-        @getFeatureWMS()
+        url = config.prefix_uri+"/api/v1/layers/"+layer.layer_id+"/queryable"
 
+        that = this
+
+        $http.get(url)
+        .success((data, status, headers, config) ->
+          if data.queryable
+            that.currentLayer = layer
+            that.getFeatureWMS()
+        ).error (data, status, headers, config) ->
+          console.error("error in mapService.chooseLayer()")
+
+          
       mapService.containsPoint = ->
         (item) ->
           bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/ 100, Math.floor(item.bbox[0] *100) / 100), L.latLng(Math.ceil(item.bbox[3] *100)/ 100, Math.ceil(item.bbox[2] *100)/ 100)) else null)
           return if bounds? then bounds.contains(mapService.currentPosition) else false
 
       mapService.getFeatureWMS = ->
-      
         url = mapService.getWMSFeatureURL()
         $http.get(url
         ).success((data, status, headers, config) ->
-
           L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200) })
                 .setLatLng(mapService.currentPosition)
                 .setContent(mapService.generateTemplate(data))

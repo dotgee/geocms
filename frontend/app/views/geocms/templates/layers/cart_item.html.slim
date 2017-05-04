@@ -6,7 +6,7 @@
       i class="glyphicon checkbox-cart-item" ng-click="cart.toggleVisibility(layer)" ng-class="{ 'glyphicon-check' : layer._tilelayer.options.opacity > 0, 'glyphicon-unchecked' : layer._tilelayer.options.opacity <= 0 }"
   
     .cart-column 
-      div ng-click="showOption=!showOption"
+      div ng-click="showOption =! showOption"
         i.glyphicon.glyphicon-time aria-hidden="true" ng-if="layer.dimensions.length > 0"
         |&nbsp;
         a title="{{layer.title}}" class="unstyled"

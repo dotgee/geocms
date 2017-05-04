@@ -24,40 +24,117 @@ def getLayerInfo(node,search,source_id)
         if !name.nil?
           description = layer.search("> Abstract").first;
           title = layer.search("> Title").first;
-          metadataUrl=layer.search("> MetadataURL > OnlineResource").first
+          metadataUrl = layer.search("> MetadataURL > OnlineResource").first
+          bbox = layer.search("> BoundingBox").first;
 
-          description= !description.nil? ? description.content : nil
-          title= !title.nil? ? title.content : nil
-          metadataUrl= !metadataUrl.nil? ? metadataUrl["xlink:href"] : nil
-          isQueryable = layer["queryable"].nil? ? false : layer["queryable"]
+          description = !description.nil? ? description.content : nil
+          title = !title.nil? ? title.content : nil
+          
+          metadataUrl = !metadataUrl.nil? ? metadataUrl["xlink:href"] : nil
+          isQueryable = layer["queryable"].nil? ? 0 : layer["queryable"].to_i
+          isQueryable = isQueryable == 0 ? false : true
 
-          # searche layer if exist
-          layerFromBdd=Geocms::Layer.where(name: name.content).take
-          if !layerFromBdd.nil?
-            update=false;
-            if title != layerFromBdd.title
-              layerFromBdd.title=title;
-              update=true
+          crs  = nil
+          bboxArray  = Array.new 
+
+          # get bounding box 
+          if !bbox.nil? 
+            crs = !bbox["SRS"].nil? ?  bbox["SRS"] : nil
+            bboxArray.insert(0,( bbox["minx"].nil? ? nil : bbox["minx"].to_f  ))
+            bboxArray.insert(1,( bbox["miny"].nil? ? nil : bbox["miny"].to_f  ))
+            bboxArray.insert(2,( bbox["maxx"].nil? ? nil : bbox["maxx"].to_f  ))
+            bboxArray.insert(3,( bbox["maxy"].nil? ? nil : bbox["maxy"].to_f  ))
+          end
+        
+          # searche layer if exist  
+          layerFromDb = Geocms::Layer.where(name: name.content).take
+       
+       #38091
+
+          if !layerFromDb.nil?
+            bboxFromLayer = layerFromDb.boundingbox
+            update = false;
+
+            if title != layerFromDb.title
+              layerFromDb.title = title;
+              update = true
             end
-            if description != layerFromBdd.description
-              layerFromBdd.description=description;
-              update=true
+            if description != layerFromDb.description
+              layerFromDb.description = description;
+              update = true
             end
-            if metadataUrl != layerFromBdd.metadata_url
-              layerFromBdd.metadata_url=metadataUrl;
-              update=true
+            if metadataUrl != layerFromDb.metadata_url
+              layerFromDb.metadata_url = metadataUrl;
+              update = true
             end
-            if isQueryable != layerFromBdd.queryable
-              layerFromBdd.queryable=isQueryable;
-              update=true
+            
+            if isQueryable != layerFromDb.queryable
+              layerFromDb.queryable = isQueryable;
+              update = true
             end 
+            
+            # create or update bouding box 
+            if !bboxArray.empty?
+           
+
+              bboxFromDb = Geocms::BoundingBox.where("layer_id = ?",layerFromDb.id).first;
+              date = DateTime.now.strftime("%F %T UTC")
+              if bboxFromDb.nil? 
+                newBbox = Geocms::BoundingBox.create(
+                  crs: crs,
+                  minx: bboxArray[0],
+                  miny: bboxArray[1],
+                  maxx: bboxArray[2],
+                  maxy: bboxArray[3],
+                  layer_id: layerFromDb.id,
+                  created_at: date,
+                  updated_at: date
+                )
+                newBbox.save!
+              else 
+                
+                updateBbox = false
+                  
+                if crs !=  bboxFromDb.crs
+                  bboxFromDb.crs = crs
+                  updateBbox = true
+                end 
+
+                if bboxFromDb.minx != bboxArray[0]
+                  bboxFromDb.minx = bboxArray[0]
+                  updateBbox = true
+                end
+
+                if bboxFromDb.miny != bboxArray[1]
+                  bboxFromDb.miny = bboxArray[1]
+                  updateBbox = true
+                end
+
+                if bboxFromDb.maxx != bboxArray[2]
+                  bboxFromDb.maxx = bboxArray[2]
+                  updateBbox = true
+                end
+              
+                if bboxFromDb.maxy != bboxArray[3]
+                  bboxFromDb.maxy = bboxArray[3]
+                  updateBbox = true
+                end
+
+                if updateBbox
+                  bboxFromDb.updated_at = date
+                  bboxFromDb.save!
+                end
+              end 
+            end
+
             if update
               $cpt_update = $cpt_update+1
             end
-            # update layer
-            date=DateTime.now.strftime("%F %T UTC")
-            layerFromBdd.updated_at = date
-            layerFromBdd.save
+            
+            # update date for not delete
+            date = DateTime.now.strftime("%F %T UTC")
+            layerFromDb.updated_at = date
+            layerFromDb.save!
           elsif !title.nil? && title!=""
             date=DateTime.now.strftime("%F %T UTC")
             newLayer = Geocms::Layer.create(
@@ -72,6 +149,19 @@ def getLayerInfo(node,search,source_id)
             )
             #create layer
             newLayer.save!
+            if !bboxArray.empty?
+               newBbox = Geocms::BoundingBox.create(
+                crs: crs,
+                minx: bboxArray[0],
+                miny: bboxArray[1],
+                maxx: bboxArray[2],
+                maxy: bboxArray[3],
+                layer_id: newLayer.id,
+                created_at: date,
+                updated_at: date
+              )  
+            end
+           
             $cpt_new = $cpt_new+1
           end
         end
@@ -90,7 +180,7 @@ namespace :geocms do
     desc "Donwnload a wms file for test devloppement"
     task :download_wms => :environment do
       puts "File donwnload"
-      content = Net::HTTP.get(URI("http://geobretagne.fr/geoserver/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
+      content = Net::HTTP.get(URI("https://portail.indigeo.fr/geoserver/LETG-BREST/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
       puts "write xml file"
       File.open("content.xml","w+") do |f|
         f << content.force_encoding('utf-8');
@@ -143,7 +233,7 @@ namespace :geocms do
             # get and parse xml from wms server
             xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"))
 
-            date=DateTime.now.strftime("%F %T UTC");
+            date = DateTime.now.strftime("%F %T UTC");
             
             $cpt_update=0;
             $cpt_new=0;
@@ -164,6 +254,7 @@ namespace :geocms do
               compteur_delete = compteur_delete + 1
             end
             f << "Nombre de layer suprimmé : "  << compteur_delete << "\n"
+            puts  "Nombre de layer suprimmé : #{ compteur_delete } "
             compteur_delete=0;
 
             # delete layer/category relation 
@@ -175,6 +266,7 @@ namespace :geocms do
             # add / delete layer for synchro categorie
             categorie = Geocms::Category.find(source.geocms_category_id)
             f << "Nombre de relation layer/catégorie suprimmé : "  << compteur_delete  << "\n"
+          
            # compteur_link_layer = 0;
             categorizationCountNew = 0;
            
@@ -185,7 +277,8 @@ namespace :geocms do
                 categorization = Geocms::Categorization.find_or_create_by(
                   layer_id: layer.id,
                   category_id: categorie.id
-                  )
+                )
+                categorization.save!
               end
               categorizationCountAfter = Geocms::Categorization.count;
               categorizationCountNew = categorizationCountAfter - categorizationCountBefore;
@@ -195,7 +288,7 @@ namespace :geocms do
           rescue => e
             f  << "Error : "  << e  << "\n"
             print("Error :  #{e}")
-          end
+          end # 145
         end
       end
 

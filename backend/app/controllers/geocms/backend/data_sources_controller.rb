@@ -65,7 +65,7 @@ module Geocms
 
       private
         def data_source_params
-          params.require(:data_source).permit(PermittedAttributes.data_source_attributes,:geocms_category_id )
+          params.require(:data_source).permit(PermittedAttributes.data_source_attributes,:synchro,:geocms_category_id )
         end
 
     end

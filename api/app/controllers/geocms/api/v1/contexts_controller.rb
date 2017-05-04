@@ -33,9 +33,7 @@ module Geocms
     end
 
     def create
-      puts "Create context ?"
       if can? :create, Geocms::Context
-        puts "oui, context created"
         @context = Geocms::Context.new(context_params)
         if @context.save
           Geocms::ContextPreviewWorker.perform_async(@context.id, current_tenant.id)
@@ -44,7 +42,6 @@ module Geocms
           render json: {message: @context.errors.full_messages.join(" ")}, status: 400
         end
       else
-        puts "non, context not created"
         render json: "Vous n'avez pas les droits pour créer cette carte.", status: :forbidden
       end
     end

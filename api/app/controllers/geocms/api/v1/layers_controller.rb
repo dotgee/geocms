@@ -15,22 +15,34 @@ module Geocms
         end
 
         def show
-          @layer = current_tenant.layers.find(params[:id])
+          @layer = Geocms::Layer.find(params[:id])
           expires_in 15.minutes, :public => true
           respond_with @layer
         end
 
         def search
-          @layers =Geocms::Layer.joins(:categories).where("geocms_categories.account_id= ? and geocms_layers.queryable = true",current_tenant.id).search(params[:q])
+          @layers = Geocms::Layer.joins(:categories).where("geocms_categories.account_id= ?",current_tenant.id).search(params[:q])
 
           respond_with @layers.to_a.uniq
         end
 
         def bbox
-          layer = current_tenant.layers.find(params[:id])
+          layer = Geocms::Layer.find(params[:id])
           @bbox = layer.boundingbox(current_tenant)
           respond_with @bbox
         end
+
+        def queryable
+          layer = Geocms::Layer.find(params[:id])
+
+          queryable = false
+          if !layer.nil?
+            queryable = layer.queryable
+            queryable = queryable.nil? ? false : queryable
+          end
+
+          render json: {queryable: queryable}
+        end 
 
         def import
           Layer.bulk_import(layers_params[:layers])

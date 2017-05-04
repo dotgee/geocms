@@ -3,12 +3,13 @@ Geocms::Core::Engine.add_routes do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       
-      resources :layers, only: [:index, :show] do
+      resources :layers, only: [:index, :show, :queryable] do
         get "search", on: :collection
         get "bbox", on: :member
         post "import", on: :collection
+        get :queryable, on: :member
       end
-      
+
       resources :contexts do
         get :default, on: :collection
         get :wmc, on: :member
