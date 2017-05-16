@@ -26,7 +26,20 @@ def getLayerInfo(node,search,source_id,category_id)
           description = layer.search("> Abstract").first;
           title = layer.search("> Title").first;
           metadataUrl = layer.search("> MetadataURL > OnlineResource").first
-          bbox = layer.search("> BoundingBox").first;
+
+          dimension = layer.search("> Extent").first
+
+          timeArray = !dimension.nil? && !dimension["name"].nil? && dimension["name"] === "time" ?  dimension.content.split(",") : nil
+
+          bbox = nil
+          layer.search("> BoundingBox").each do |bboxFromXml|
+            if bboxFromXml["SRS"] === 'CRS:84' 
+              bbox = bboxFromXml;
+            end
+            if bboxFromXml["SRS"] === 'EPSG:4326' 
+              bbox = bboxFromXml;
+            end
+          end
 
           description = !description.nil? ? description.content : nil
           title = !title.nil? ? title.content : nil
@@ -37,6 +50,8 @@ def getLayerInfo(node,search,source_id,category_id)
 
           crs  = nil
           bboxArray  = Array.new 
+
+          layer_id =  nil
 
           # get bounding box 
           if !bbox.nil? 
@@ -60,11 +75,12 @@ def getLayerInfo(node,search,source_id,category_id)
           ).first
 
          
-
+          # if layer exist
           if !layerFromDb.nil?
             bboxFromLayer = layerFromDb.boundingbox
             update = false;
-
+            layer_id = layerFromDb.id
+            # Update layers values
             if title != layerFromDb.title
               layerFromDb.title = title;
               update = true
@@ -85,11 +101,12 @@ def getLayerInfo(node,search,source_id,category_id)
             
             # create or update bouding box 
             if !bboxArray.empty?
-           
-
-              bboxFromDb = Geocms::BoundingBox.where("layer_id = ?",layerFromDb.id).first;
+              bboxFromDb = Geocms::BoundingBox.where("layer_id = ?",layerFromDb.id).first; 
               date = DateTime.now.strftime("%F %T UTC")
+
+              # New Bbox
               if bboxFromDb.nil? 
+
                 newBbox = Geocms::BoundingBox.create(
                   crs: crs,
                   minx: bboxArray[0],
@@ -101,40 +118,22 @@ def getLayerInfo(node,search,source_id,category_id)
                   updated_at: date
                 )
                 newBbox.save!
-              else 
-                
-                updateBbox = false
-                  
-                if crs !=  bboxFromDb.crs
-                  bboxFromDb.crs = crs
-                  updateBbox = true
-                end 
-
-                if bboxFromDb.minx != bboxArray[0]
-                  bboxFromDb.minx = bboxArray[0]
-                  updateBbox = true
-                end
-
-                if bboxFromDb.miny != bboxArray[1]
-                  bboxFromDb.miny = bboxArray[1]
-                  updateBbox = true
-                end
-
-                if bboxFromDb.maxx != bboxArray[2]
-                  bboxFromDb.maxx = bboxArray[2]
-                  updateBbox = true
-                end
-              
-                if bboxFromDb.maxy != bboxArray[3]
-                  bboxFromDb.maxy = bboxArray[3]
-                  updateBbox = true
-                end
-
-                if updateBbox
-                  bboxFromDb.updated_at = date
-                  bboxFromDb.save!
-                end
+              # Update bbox
+              elsif bboxFromLayer != bboxArray
+                bboxFromDb.minx = bboxArray[0]
+                bboxFromDb.miny = bboxArray[1]
+                bboxFromDb.maxx = bboxArray[2]
+                bboxFromDb.maxy = bboxArray[3]
+                updateBbox = true
+                bboxFromDb.crs = crs
+                bboxFromDb.updated_at = date
+                bboxFromDb.save!
               end 
+            end
+
+            # update dimension
+            Geocms::Dimension.where(layer_id: layerFromDb.id).all.each do |d|
+              d.destroy
             end
 
             if update
@@ -145,6 +144,7 @@ def getLayerInfo(node,search,source_id,category_id)
             date = DateTime.now.strftime("%F %T UTC")
             layerFromDb.updated_at = date
             layerFromDb.save!
+
           elsif !title.nil? && title!=""
             date=DateTime.now.strftime("%F %T UTC")
             newLayer = Geocms::Layer.create(
@@ -171,6 +171,9 @@ def getLayerInfo(node,search,source_id,category_id)
 
             #create layer
             newLayer.save!
+
+            layer_id = newLayer.id
+
             if !bboxArray.empty?
                newBbox = Geocms::BoundingBox.create(
                 crs: crs,
@@ -187,6 +190,22 @@ def getLayerInfo(node,search,source_id,category_id)
             $cpt_new = $cpt_new+1
           end
         end
+        date = DateTime.now.strftime("%F %T UTC")
+        time_cpt = 0
+        if !timeArray.nil? && !timeArray.empty?
+          puts "time Arrat #{timeArray}"
+          timeArray.each do |time|
+            newTime = Geocms::Dimension.create(
+              value: time,
+              created_at: date,
+              updated_at: date,
+              layer_id: layer_id
+            )
+            newTime.save!
+            time_cpt = time_cpt + 1
+          end
+          puts "new dimensions : #{time_cpt}"
+        end
         # for other layer in layer
         getLayerInfo(layer," > Layer",source_id,category_id)
       end
@@ -202,7 +221,7 @@ namespace :geocms do
     desc "Donwnload a wms file for test devloppement"
     task :download_wms => :environment do
       puts "File donwnload"
-      content = Net::HTTP.get(URI("https://portail.indigeo.fr/geoserver/LETG-BREST/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
+      content = Net::HTTP.get(URI("https://portail.indigeo.fr/geoserver/CARTAHU/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
       puts "write xml file"
       File.open("content.xml","w+") do |f|
         f << content.force_encoding('utf-8');
@@ -248,10 +267,13 @@ namespace :geocms do
       File.open(path+logFile, "w+") do |f|
         # for each datas sources
         Geocms::DataSource.where("synchro = true and geocms_category_id is not null").all.each do |source|
+          categorie = Geocms::Category.find(source.geocms_category_id)
+          
           f << "-------------------------------------------------------------------------------\n"
           f << "Nom de la source : " << source.name << "\n"
+          f << "Nom de la categorie : " <<  categorie.name  << "\n"
           print( "Nom de la source : ",source.name,"\n")
-          begin
+          #begin
             # get and parse xml from wms server
             xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"))
 
@@ -270,8 +292,7 @@ namespace :geocms do
             getLayerInfo(xml_doc,"Capability > Layer",source.id, source.geocms_category_id);
             f << "Date de mise à jour : " << date << "\n"
             f << "Nombre de layer mis à jour : " << $cpt_update <<  "\n"
-            f << "Nombre de nouveau layer : " << $cpt_new << "\n"
-
+            
             # search and delete layer not update and 
             compteur_delete=0
             
@@ -293,8 +314,7 @@ namespace :geocms do
             print ("Categorization new : #{categorizationCountNew}\n");
             categorizationCountNew = categorizationCountNew < 0 ? 0 : categorizationCountNew
 
-            categorie = Geocms::Category.find(source.geocms_category_id)
-            f << "Nombre de layer ajouté à la catégorie "<< categorie.name << " : " << categorizationCountNew  << "\n"
+            f << "Nombre de layer ajouté " << " : " << categorizationCountNew  << "\n"
 
             # clear layer categorie 
             compteur_clear = 0
@@ -305,12 +325,28 @@ namespace :geocms do
               layer.destroy
               compteur_clear = compteur_clear + 1
             end 
+
+            # clear bbox
+            Geocms::BoundingBox.joins("left join geocms_layers as l on geocms_bounding_boxes.layer_id = l.id")
+            .where("l.id is null").all.each do |bbox|
+              Geocms::BoundingBox.delete_all(id: bbox.id)
+              bbox.destroy
+              compteur_clear = compteur_clear + 1
+            end 
             puts "compteur_clear #{compteur_clear}"
 
-          rescue => e
-            f  << "Error : "  << e  << "\n"
-            print("Error :  #{e}")
-          end # 145
+            # clear dimension
+            Geocms::Dimension.joins("left join geocms_layers as l on geocms_dimensions.layer_id = l.id")
+            .where("l.id is null").all.each do |d|
+              Geocms::Dimension.delete_all(id: d.id)
+              d.destroy
+              compteur_clear = compteur_clear + 1
+            end 
+            puts "compteur_clear #{compteur_clear}"
+         # rescue => e
+         #   f  << "Error : "  << e  << "\n"
+         #   print("Error :  #{e}")
+         # end
         end
       end
 

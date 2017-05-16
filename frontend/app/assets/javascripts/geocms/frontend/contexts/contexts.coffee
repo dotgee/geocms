@@ -110,6 +110,7 @@ contexts.config [
               $root.cart.context = context
               $root.cart.addSeveral()
               $location.hash('project')
+              console.log($root.cart.context);
 
               Restangular.one('users').customGET("index").then( 
                 (user) ->
@@ -148,11 +149,11 @@ contexts.config [
               mapService.addBaseLayer()
               $root.cart.context = context
               $root.cart.addSeveral()
-              $root.cart.context.selected_folder=0
+              $root.cart.context.selected_folder = 0
 
               for value, index in folders
                 if value.id == context.folder_id
-                  $root.cart.context.selected_folder=value
+                  $root.cart.context.selected_folder = value
 
               $root.cart.folders = folders
               $scope.mapService = mapService
@@ -196,8 +197,7 @@ contexts.controller "ContextsController", [
   ($scope, $root, $state, mapService, Cart, optionService) ->
 
     $root.cart = new Cart()
-    
-
+   
     $scope.state = $state.current.name
 
     watchers = '[cart.context.name, cart.context.description, cart.context.folder_id, cart.context.center_lng, cart.context.center_lat, cart.context.zoom]'

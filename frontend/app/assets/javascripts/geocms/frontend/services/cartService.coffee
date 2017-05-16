@@ -22,7 +22,9 @@ cartModule.service "cartService",
       
       Cart::init = () -> 
         _.each @layers, (layer, index) ->
-          layer.opacity = 90
+          if !(layer.opacity?)
+            layer.opacity = 90
+
           layer.options = {
             opacity : layer.opacity/100.0;
           } 
@@ -125,6 +127,7 @@ cartModule.service "cartService",
       Cart::addSeveral = () ->
         that = this
         _.each @context.contexts_layers, (cl) ->
+
           that.layers.push ms.addLayer(cl)
 
       Cart::save = () ->
