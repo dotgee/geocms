@@ -5,8 +5,9 @@ require 'fileutils'
 require 'rake'
 
 # integer for count news or/and updates layers
-$cpt_new=0;
-$cpt_update=0;
+$cpt_new = 0
+$cpt_update = 0
+$time_cpt = 0
 
 # search layer info
 # @param node <Nokogiri::XML::NodeSet>
@@ -32,6 +33,7 @@ def getLayerInfo(node,search,source_id,category_id)
           timeArray = !dimension.nil? && !dimension["name"].nil? && dimension["name"] === "time" ?  dimension.content.split(",") : nil
 
           bbox = nil
+
           layer.search("> BoundingBox").each do |bboxFromXml|
             if bboxFromXml["SRS"] === 'CRS:84' 
               bbox = bboxFromXml;
@@ -191,9 +193,8 @@ def getLayerInfo(node,search,source_id,category_id)
           end
         end
         date = DateTime.now.strftime("%F %T UTC")
-        time_cpt = 0
+       
         if !timeArray.nil? && !timeArray.empty?
-          puts "time Arrat #{timeArray}"
           timeArray.each do |time|
             newTime = Geocms::Dimension.create(
               value: time,
@@ -202,9 +203,8 @@ def getLayerInfo(node,search,source_id,category_id)
               layer_id: layer_id
             )
             newTime.save!
-            time_cpt = time_cpt + 1
+            $time_cpt = $time_cpt + 1
           end
-          puts "new dimensions : #{time_cpt}"
         end
         # for other layer in layer
         getLayerInfo(layer," > Layer",source_id,category_id)
@@ -268,22 +268,23 @@ namespace :geocms do
         # for each datas sources
         Geocms::DataSource.where("synchro = true and geocms_category_id is not null").all.each do |source|
           categorie = Geocms::Category.find(source.geocms_category_id)
-          
+
           f << "-------------------------------------------------------------------------------\n"
           f << "Nom de la source : " << source.name << "\n"
           f << "Nom de la categorie : " <<  categorie.name  << "\n"
           print( "Nom de la source : ",source.name,"\n")
-          #begin
+          begin
             # get and parse xml from wms server
             xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"))
 
             date = DateTime.now.strftime("%F %T UTC");
             
-            $cpt_update=0;
-            $cpt_new=0;
+            $cpt_update=0
+            $cpt_new=0
+            time_cpt = 0
 
             # Compteur de categorie
-            categorizationCountNew = 0;
+            categorizationCountNew = 0
             
             print ("Categorization : #{Geocms::Categorization.count}\n");
             categorizationCountBefore = Geocms::Categorization.count;
@@ -293,6 +294,8 @@ namespace :geocms do
             f << "Date de mise à jour : " << date << "\n"
             f << "Nombre de layer mis à jour : " << $cpt_update <<  "\n"
             
+            puts "new dimensions : #{$time_cpt}"
+
             # search and delete layer not update and 
             compteur_delete=0
             
@@ -316,37 +319,43 @@ namespace :geocms do
 
             f << "Nombre de layer ajouté " << " : " << categorizationCountNew  << "\n"
 
-            # clear layer categorie 
-            compteur_clear = 0
-            Geocms::Layer.joins("left join geocms_categorizations as cat on geocms_layers.id = cat.layer_id")
-            .joins("left join geocms_categories as cat2 on cat.category_id = cat2.id")
-            .where("cat2 is null").all.each do |layer|
-              Geocms::Categorization.delete_all(layer_id: layer.id)
-              layer.destroy
-              compteur_clear = compteur_clear + 1
-            end 
 
-            # clear bbox
-            Geocms::BoundingBox.joins("left join geocms_layers as l on geocms_bounding_boxes.layer_id = l.id")
-            .where("l.id is null").all.each do |bbox|
-              Geocms::BoundingBox.delete_all(id: bbox.id)
-              bbox.destroy
-              compteur_clear = compteur_clear + 1
-            end 
-            puts "compteur_clear #{compteur_clear}"
+          rescue => e
+           f  << "Error : "  << e  << "\n"
+           print("Error :  #{e}")
+          end
+        end
+        begin
+          puts "clear database"
+          # clear layer categorie 
+          compteur_clear = 0
+          Geocms::Layer.joins("left join geocms_categorizations as cat on geocms_layers.id = cat.layer_id")
+          .joins("left join geocms_categories as cat2 on cat.category_id = cat2.id")
+          .where("cat2 is null").all.each do |layer|
+            Geocms::Categorization.delete_all(layer_id: layer.id)
+            layer.destroy
+            compteur_clear = compteur_clear + 1
+          end 
 
-            # clear dimension
-            Geocms::Dimension.joins("left join geocms_layers as l on geocms_dimensions.layer_id = l.id")
-            .where("l.id is null").all.each do |d|
-              Geocms::Dimension.delete_all(id: d.id)
-              d.destroy
-              compteur_clear = compteur_clear + 1
-            end 
-            puts "compteur_clear #{compteur_clear}"
-         # rescue => e
-         #   f  << "Error : "  << e  << "\n"
-         #   print("Error :  #{e}")
-         # end
+          # clear bbox
+          Geocms::BoundingBox.joins("left join geocms_layers as l on geocms_bounding_boxes.layer_id = l.id")
+          .where("l.id is null").all.each do |bbox|
+            Geocms::BoundingBox.delete_all(id: bbox.id)
+            bbox.destroy
+            compteur_clear = compteur_clear + 1
+          end 
+          puts "compteur_clear #{compteur_clear}"
+
+          # clear dimension
+          Geocms::Dimension.joins("left join geocms_layers as l on geocms_dimensions.layer_id = l.id")
+          .where("l.id is null").all.each do |d|
+            Geocms::Dimension.delete_all(id: d.id)
+            d.destroy
+            compteur_clear = compteur_clear + 1
+          end 
+          puts "compteur_clear #{compteur_clear}"
+        rescue => e
+         puts  "Error :  #{e}"
         end
       end
 

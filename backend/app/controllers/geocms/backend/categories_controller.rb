@@ -59,8 +59,25 @@ module Geocms
         respond_with(:backend, @category)
       end
 
+      def _destroy_recurcive(ancestry)
+        Category.where(ancestry: ancestry).all.each do |cat|
+          puts "ok cool #{cat.id} #{cat.name}"
+          _destroy_recurcive("#{ancestry}/#{cat.id}")
+          @dataSource = DataSource.where(geocms_category_id: cat.id).first
+   
+          if !(@dataSource.nil?)
+            @dataSource.geocms_category_id = nil;
+            @dataSource.synchro = false;
+            @dataSource.save!;
+          end
+        end 
+      end 
       def destroy
         @category = Category.find(params[:id])
+
+
+        _destroy_recurcive( "#{ @category.ancestry}/#{@category.id}");
+
         @dataSource = DataSource.where(geocms_category_id: @category.id).first
        
         if !(@dataSource.nil?)
