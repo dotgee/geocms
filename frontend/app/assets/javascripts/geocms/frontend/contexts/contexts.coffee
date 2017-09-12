@@ -41,7 +41,7 @@ contexts.config [
                     }
                     if user? && user.data? && user.data.user_id? && user.data.user_id != -1
                       $root.cart.user = user.data;  
-                      $root.connexion.message = "déconexion";
+                      $root.connexion.message = "déconnexion";
                     else
                       $root.cart.user = null;
 
@@ -119,7 +119,7 @@ contexts.config [
                   }
                   if user? && user.data? && user.data.user_id? && user.data.user_id != -1
                     $root.cart.user = user.data;  
-                    $root.connexion.message = "déconexion";
+                    $root.connexion.message = "déconnexion";
                   else
                     $root.cart.user = null;
                 
@@ -221,7 +221,7 @@ contexts.controller "ContextsController", [
     }
     $scope.connexion = () -> 
       if( $root.cart.user? )
-        window.location.href = '/logout'
+        window.location.href = '/geocms/logout'
       else
         window.location.href = '/geocms/login'
 
