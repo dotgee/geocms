@@ -11,7 +11,9 @@ module Geocms
 
     private
       def decorate_tenant
-        @current_tenant = current_tenant.decorate
+	if !current_tenant.nil?        
+          @current_tenant = current_tenant.decorate
+        end
       end
     #   def not_authenticated
     #     redirect_to login_url, :alert => "First log in to view this page."

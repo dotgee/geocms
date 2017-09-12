@@ -13,7 +13,7 @@ mapModule.service "mapService",
     (pluginService, $http, projections, baseLayerService, $root, $compile, $filter, $state) ->
 
       mapService = {}
-     
+
       mapService.container = null
       mapService.layers = []
       mapService.crs = null
@@ -70,27 +70,23 @@ mapModule.service "mapService",
      
         # @container.setView(@currentPosition)
         scope.ms = this
-        scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0.01))
+        scope.filteredLayers = $filter('filter')(scope.cart.layers, scope.ms.greaterThan('opacity', 0))
         scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.containsPoint())
-
-       
-        if scope.filteredLayers.length == 1 && scope.filteredLayers[0].queryable
+        scope.filteredLayers = $filter('filter')(scope.filteredLayers, scope.ms.queryableLayer())
+        if scope.filteredLayers.length == 1
           scope.ms.chooseLayer(scope.filteredLayers[0])
-        else
-          canDisplay = false;
-        
-          for layer, index in scope.filteredLayers
-            if layer.queryable != false
-              canDisplay = true
-
-          if canDisplay    
-            L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
+        else if scope.filteredLayers.length > 1
+          L.popup({ className: "query-layer-switcher geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(Math.round(@container.getSize().x*0.34),200)})
                     .setLatLng(@currentPosition)
                     .setContent(linkFunction(scope)[0])
                     .openOn(@container)
         @container.on('popupclose', (e) -> scope.$destroy())
         scope.$apply()
 
+      mapService.queryableLayer = ->
+        (item) ->
+          return item.queryable
+        
       mapService.chooseLayer = (layer) ->
         url = config.prefix_uri+"/api/v1/layers/"+layer.layer_id+"/queryable"
 
@@ -104,14 +100,14 @@ mapModule.service "mapService",
         ).error (data, status, headers, config) ->
           console.error("error in mapService.chooseLayer()")
 
-
       mapService.containsPoint = ->
         (item) ->
-          bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100)/ 100, Math.floor(item.bbox[0] *100) / 100), L.latLng(Math.ceil(item.bbox[3] *100)/ 100, Math.ceil(item.bbox[2] *100)/ 100)) else null)
+          bounds = (if (item.bbox? && item.bbox.length > 0) then L.latLngBounds(L.latLng(Math.floor(item.bbox[1] *100) / 100, Math.floor(item.bbox[0] *100) / 100), L.latLng(Math.ceil(item.bbox[3] *100) / 100, Math.ceil(item.bbox[2] *100)/ 100)) else null)
           return if bounds? then bounds.contains(mapService.currentPosition) else false
 
       mapService.getFeatureWMS = ->
         url = mapService.getWMSFeatureURL()
+
         $http.get(url
         ).success((data, status, headers, config) ->
           L.popup({ maxWidth: 820, maxHeight: 620, className: "geocms-popup",autoPanPaddingTopLeft: if $state.is("contexts.show.share") then new L.Point(0,0) else new L.Point(545,200) })
@@ -123,6 +119,14 @@ mapModule.service "mapService",
       mapService.getWMSFeatureURL = () ->
         size = @container.getSize()
         position = @container.layerPointToContainerPoint(@layerPoint)
+        
+        time_str=""
+
+        if @currentLayer.timelineIndex? 
+          time_str = '&time='+@currentLayer.dimensions[@currentLayer.timelineIndex]
+
+        console.log "time_str : ", time_str
+
 
         config.prefix_uri+
         '/api/v1/data_sources/get_feature_infos'+
@@ -132,10 +136,13 @@ mapModule.service "mapService",
         '&height='+size.y+
         '&bbox='+@container.getBounds().toBBoxString()+
         '&current_x='+position.x+
-        '&current_y='+position.y
+        '&current_y='+position.y+
+        time_str
+
+
+        
 
       mapService.generateTemplate = (data) ->
-     
         _.templateSettings =
           interpolate: /\{\{(.+?)\}\}/g
         wrapper = "<div class='geocms-popup-header'><h1>"+@currentLayer.title+"</h1></div>"

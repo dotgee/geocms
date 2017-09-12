@@ -24,10 +24,11 @@ module Geocms
     def get_log_file  
       if params[:filename] && File.exist?(Rails.root.to_s+"/log/update/"+params[:filename] +".log")
          file_path = File.join(Rails.root, "log", "update")
-        send_file(  File.join(file_path,  params[:filename]+".log"))
+         send_file(  File.join(file_path,  params[:filename]+".log"))
       else 
-        respond_with "no file : "+ Rails.root.to_s+"log/update/"+params[:filename] +".log"
+        respond_with "no file : "+ Rails.root.to_s+"/log/update/"+params[:filename] +".log"
       end
+#       respond_with "no file : "+ Rails.root.to_s+"log/update/"+params[:filename] +".log"
     end
 
     private

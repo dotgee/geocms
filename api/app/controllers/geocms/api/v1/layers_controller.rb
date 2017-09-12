@@ -45,8 +45,10 @@ module Geocms
         end 
 
         def import
+          logger.info  "toto"
           Layer.bulk_import(layers_params[:layers])
-          render json: {status: "ok"}
+          
+	  render json: {status: "ok"}
         end
 
         private

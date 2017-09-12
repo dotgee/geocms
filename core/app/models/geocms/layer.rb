@@ -33,7 +33,13 @@ module Geocms
       bbox.nil? ? [] : bbox.to_bbox
     end
 
+    def bboxCrs
+      bbox = bounding_boxes.leafletable.first
+      return bbox.crs
+    end
+    
     def self.bulk_import(layers)
+      logger.info "simple test"
       ActiveRecord::Base.transaction do
         layers.each {|l| self.create!(l)}
       end

@@ -3,7 +3,8 @@ require 'net/http'
 require 'open-uri'
 require 'fileutils'
 require 'rake'
-
+require 'geocms/core'
+require 'geocms/core'
 # integer for count news or/and updates layers
 $cpt_new = 0
 $cpt_update = 0
@@ -14,7 +15,7 @@ $time_cpt = 0
 # @param search <string>
 # @param source_id <integer> id of data_source
 # @parm category_id <integer> id of category synchronize
-def getLayerInfo(node,search,source_id,category_id)
+def getLayerInfo(node,search,source_id,category_id,source)
   if !node.nil?
     layers = node.search(search)
     if !layers.empty?
@@ -131,6 +132,7 @@ def getLayerInfo(node,search,source_id,category_id)
                 bboxFromDb.updated_at = date
                 bboxFromDb.save!
               end 
+
             end
 
             # update dimension
@@ -141,6 +143,14 @@ def getLayerInfo(node,search,source_id,category_id)
             if update
               $cpt_update = $cpt_update+1
             end
+            
+            img = ROGC::WMSClient.get_map(source.wms, layerFromDb.name,  layerFromDb.boundingbox, 64, 64, layerFromDb.bboxCrs);
+         #   puts "--------------------------------------"
+         #   puts "#{img}"
+            img = img .gsub('styles=&', '');
+            img = img .gsub('1.3.0', '1.1.0');
+         #   puts "#{img}"
+            layerFromDb.remote_thumbnail_url = img;
             
             # update date for not delete
             date = DateTime.now.strftime("%F %T UTC")
@@ -170,7 +180,13 @@ def getLayerInfo(node,search,source_id,category_id)
               )
               categorization.save!
             end
-
+            img = ROGC::WMSClient.get_map(source.wms, newLayer.name,  newLayer.boundingbox, 64, 64, crs);
+            #   puts "--------------------------------------"
+            #   puts "#{img}"
+            img = img .gsub('styles=&', '');
+            img = img .gsub('1.3.0', '1.1.0');
+            newLayer.remote_thumbnail_url = img;
+           
             #create layer
             newLayer.save!
 
@@ -187,8 +203,10 @@ def getLayerInfo(node,search,source_id,category_id)
                 created_at: date,
                 updated_at: date
               )  
+              newBbox.save
             end
-           
+          
+
             $cpt_new = $cpt_new+1
           end
         end
@@ -207,7 +225,7 @@ def getLayerInfo(node,search,source_id,category_id)
           end
         end
         # for other layer in layer
-        getLayerInfo(layer," > Layer",source_id,category_id)
+        getLayerInfo(layer," > Layer",source_id,category_id,source)
       end
     end
   end
@@ -221,7 +239,7 @@ namespace :geocms do
     desc "Donwnload a wms file for test devloppement"
     task :download_wms => :environment do
       puts "File donwnload"
-      content = Net::HTTP.get(URI("https://portail.indigeo.fr/geoserver/CARTAHU/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
+      content = Net::HTTP.get(URI("https://portail.indigeo.fr/geoserver/CBNB/wms"+"?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities"))
       puts "write xml file"
       File.open("content.xml","w+") do |f|
         f << content.force_encoding('utf-8');
@@ -268,16 +286,16 @@ namespace :geocms do
         # for each datas sources
         Geocms::DataSource.where("synchro = true and geocms_category_id is not null").all.each do |source|
           categorie = Geocms::Category.find(source.geocms_category_id)
-
+          date = DateTime.now.in_time_zone
           f << "-------------------------------------------------------------------------------\n"
           f << "Nom de la source : " << source.name << "\n"
           f << "Nom de la categorie : " <<  categorie.name  << "\n"
           print( "Nom de la source : ",source.name,"\n")
           begin
             # get and parse xml from wms server
-            xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"))
+            xml_doc  = Nokogiri::XML(open(source.wms+"?SERVICE=WMS&VERSION="+source.wms_version+"&REQUEST=GetCapabilities"),nil, Encoding::UTF_8.to_s)
 
-            date = DateTime.now.strftime("%F %T UTC");
+           
             
             $cpt_update=0
             $cpt_new=0
@@ -290,7 +308,7 @@ namespace :geocms do
             categorizationCountBefore = Geocms::Categorization.count;
 
             # update layer
-            getLayerInfo(xml_doc,"Capability > Layer",source.id, source.geocms_category_id);
+            getLayerInfo(xml_doc,"Capability > Layer",source.id, source.geocms_category_id,source);
             f << "Date de mise à jour : " << date << "\n"
             f << "Nombre de layer mis à jour : " << $cpt_update <<  "\n"
             
@@ -372,3 +390,4 @@ namespace :geocms do
     end
   end
 end
+
