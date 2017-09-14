@@ -1,5 +1,7 @@
 module Geocms
   class DataSource < ActiveRecord::Base
+    acts_as_tenant(:account)
+
     has_many :layers
 
     default_scope -> { order("name ASC") }
