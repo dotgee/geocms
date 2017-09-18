@@ -1,5 +1,5 @@
-require File.join(Rails.root, "../geocms/core/app/services/geocms/OGC/client.rb")
 module Geocms
+  require "#{File.dirname(__FILE__)}/../../../../../../core/app/services/geocms/OGC/client"
   class Api::V1::DataSourcesController < Api::V1::BaseController
     
 
