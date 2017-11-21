@@ -1,4 +1,4 @@
 
 class ApplicationMailer < ActionMailer::Base
-  default from: "admin@indigeo.fr"
+  default from: "noreply@localhost"
 end
