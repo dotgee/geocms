@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave', '~> 0.10.0'
   s.add_dependency "cancancan"
   s.add_dependency "rolify"
-  s.add_dependency "rgeo"
+  s.add_dependency "rgeo", '~> 0.6.0'
   s.add_dependency "curb"
   s.add_dependency "pg_search"
   s.add_dependency "sorcery"
